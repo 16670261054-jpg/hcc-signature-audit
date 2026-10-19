@@ -68,6 +68,9 @@ add("S2a_search", SL, "Supplementary Table S2a. PubMed queries (searched 15 Octo
 add("S2b_corpus_keywords", MF, "Supplementary Table S2b. Keyword patterns used to record downstream analyses in the main text of the 149 source articles (case-insensitive; references excluded).")
 add("S2c_modules", S2c, "Supplementary Table S2c. Template downstream modules and positivity criteria.")
 add("S2d_gene_sets", S2d, "Supplementary Table S2d. Cell-death gene sets (genes in the sampling pool).")
+CK <- fread(file.path(OUT, "hiend_m13_m15/checkpoint_genes.tsv"))[, .(gene)]   # the 47 checkpoint genes actually used by M13
+stopifnot(nrow(CK) == 47, !anyDuplicated(CK$gene))
+add("S2e_checkpoint_genes", CK, "Supplementary Table S2e. Immune checkpoint genes tested in the immune-checkpoint module (M13; n = 47).")
 saveWorkbook(wb, file.path(SUP, "Supplementary_Table_S2.xlsx"), overwrite = TRUE)
 wb <- createWorkbook(); add("S3_numbers", S3, "Supplementary Table S3. Every quantity reported in the text and figures, with source file and extraction rule.")
 saveWorkbook(wb, file.path(SUP, "Supplementary_Table_S3.xlsx"), overwrite = TRUE)

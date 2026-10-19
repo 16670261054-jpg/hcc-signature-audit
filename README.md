@@ -61,7 +61,7 @@ Gene sets included in this repository (`data/genesets/`):
 | File | Content |
 |---|---|
 | `immune29_ssgsea.gmt` | the 29 immune signatures (immune cell types and immune functions) commonly used for ssGSEA immune-infiltration scoring, from He et al. 2018, *J Exp Clin Cancer Res* 37:327, "Classification of triple-negative breast cancers based on immunogenomic profiling" (PMID 30594216; doi:10.1186/s13046-018-1002-1); used by module M2 |
-| `immune_checkpoint_genes.txt` | 47 immune checkpoint genes, one symbol per line, used by module M13 (C10orf54 recorded under its current HGNC symbol VSIR) |
+| `immune_checkpoint_genes.txt` | 47 immune checkpoint genes, one symbol per line, used by module M13 (C10orf54 recorded under its current HGNC symbol VSIR); also listed in Supplementary Table S2e |
 
 ## Software
 
