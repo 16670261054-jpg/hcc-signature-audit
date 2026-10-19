@@ -3,7 +3,7 @@
 # Reads: N11_out/ring4v2/sim_power.tsv, N11_out/n2_gates/published_gates_summary.tsv
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 SP <- fread(file.path(OUT, "ring4v2/sim_power.tsv")); PG <- fread(file.path(OUT, "n2_gates/published_gates_summary.tsv"))
-SV <- fread(file.path(OUT, "ring4/sim_verdict.tsv"))
+A2 <- fread(file.path(OUT, "ring2/ring2_HR_attenuation.tsv"))[comparison == "A_vs_fitsig_k" & group == "real"]   # median adjusted HR of published signatures, read directly from the proxy analysis
 write_sd(SP, "Fig7bc_selected_sim_power"); write_sd(PG, "Fig7d_published_gates")
 
 ## a schematic
@@ -37,7 +37,7 @@ pb <- ggplot(nb, aes(rate, crit, colour = scen_l)) +
 ## c power
 COL_CR <- c("Template criterion" = "grey60", "Both gates" = RDBU[["r2"]], "Both gates,\ncohorts separately" = RDBU[["b1"]])
 pw <- SP[scen == "selected" & criterion %in% c("T0", "FWp", "FW")][, crit := factor(CRL[criterion], levels = names(COL_CR))]
-adj <- c(SV$published_adjHR_median_GSE, SV$published_adjHR_median_LIRI)
+adj <- exp(c(A2[cohort == "GSE14520"]$median_abslogHR_adj, A2[cohort == "LIRI"]$median_abslogHR_adj))
 pc <- ggplot(pw, aes(HR_per_SD, rate, colour = crit, fill = crit)) +
   annotate("rect", xmin = min(adj), xmax = max(adj), ymin = -Inf, ymax = Inf, fill = "#FDDBC7", alpha = 0.8) +
   geom_ref_h(0.8) +
