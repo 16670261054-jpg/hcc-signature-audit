@@ -85,7 +85,7 @@ M4 <- rd("Fig4a_module_rates.tsv")
 for (i in seq_len(nrow(M4))) { r <- M4[i]
   add(paste0("C3_", r$module, "_rand"), "C3", "Fig4a", paste("Size-matched random positive rate,", r$label), r$rate_null, sprintf("%s (95%% CI %s-%s)", pct(r$rate_null), pct(r$lo), pct(r$hi)), "Fig4a_module_rates.tsv", "rate_null; lo; hi")
   add(paste0("C3_", r$module, "_pub"), "C3", "Fig4a", paste("Published positive rate,", r$label), r$rate_real, pct(r$rate_real), "Fig4a_module_rates.tsv", "rate_real")
-  add(paste0("C3_", r$module, "_P"), "C3", "Fig4a", paste("Fisher P published vs size-matched,", r$label), r$P, pfmt(r$P), "Fig4a_module_rates.tsv", "P") }
+  add(paste0("C3_", r$module, "_P"), "C3", "Fig4a", paste("Holm-adjusted stratified CMH P, published vs size-matched,", r$label), r$P, pfmt(r$P), "Fig4a_module_rates.tsv", "P") }
 add("C3_n_modules_over_bradley", "C3", "Fig4a", "Modules whose random positive-rate CI lower bound exceeds 7.5%", sum(M4$lo > BRADLEY), sprintf("%d/%d", sum(M4$lo > BRADLEY), nrow(M4)), "Fig4a_module_rates.tsv", "sum(lo > 0.075)")
 add("C3_n_modules_pub_higher", "C3", "Fig4a", "Modules where published > random (P<0.05)", sum(M4$P < 0.05 & M4$rate_real > M4$rate_null), sum(M4$P < 0.05 & M4$rate_real > M4$rate_null), "Fig4a_module_rates.tsv", "P<0.05 & rate_real>rate_null")
 add("C3_n_modules_pub_lower", "C3", "Fig4a", "Modules where published < random (P<0.05)", sum(M4$P < 0.05 & M4$rate_real < M4$rate_null), sum(M4$P < 0.05 & M4$rate_real < M4$rate_null), "Fig4a_module_rates.tsv", "P<0.05 & rate_real<rate_null")
@@ -208,6 +208,18 @@ GF4 <- rd("FigS4a_gene_frequency.tsv")[order(-n_sig)][1:25]
 add("S4_top25_prolif", "Sens", "FigS4a", "Hallmark E2F/G2M genes among 25 most reused", sum(GF4$prolif), sprintf("%d/25", sum(GF4$prolif)), "FigS4a_gene_frequency.tsv", "top 25 by n_sig")
 add("S4_top_gene_n", "Sens", "FigS4a", paste("Signatures containing", GF4$gene[1]), GF4$n_sig[1], sprintf("%s: %d signatures, %d death types", GF4$gene[1], GF4$n_sig[1], GF4$n_mech[1]), "FigS4a_gene_frequency.tsv", "top 1")
 
+## Sample sizes for supplementary figure legends (read from disk)
+S1A <- rd("FigS1a_fullcoverage_module_rates.tsv")
+add("S1_n_null_default", "Sens", "FigS1a", "Size-matched random signatures per module, full-coverage subset", as.numeric(names(which.max(table(S1A$n_null)))), format(as.numeric(names(which.max(table(S1A$n_null)))), big.mark = ","), "FigS1a_fullcoverage_module_rates.tsv", "modal n_null")
+add("S1_n_null_M7", "Sens", "FigS1a", "Size-matched random signatures, multi-algorithm module, full-coverage subset", S1A[module == "M7"]$n_null, format(S1A[module == "M7"]$n_null, big.mark = ","), "FigS1a_fullcoverage_module_rates.tsv", "M7 n_null")
+add("S1_n_null_M14", "Sens", "FigS1a", "Size-matched random signatures, consensus clustering, full-coverage subset", S1A[module == "M14"]$n_null, format(S1A[module == "M14"]$n_null, big.mark = ","), "FigS1a_fullcoverage_module_rates.tsv", "M14 n_null")
+add("S2_n_pub", "Sens", "FigS2", "Published signatures in M14 proliferation check", D14$n_pub, D14$n_pub, "FigS2b_m14_prolif_decision.tsv", "n_pub")
+add("S2_n_Ak", "Sens", "FigS2", "Size-matched random signatures in M14 proliferation check", D14$n_Ak, D14$n_Ak, "FigS2b_m14_prolif_decision.tsv", "n_Ak")
+add("S2_raw_P", "Sens", "FigS2b", "Fisher P before proliferation adjustment", D14$raw_fisher_P, pfmt(D14$raw_fisher_P), "FigS2b_m14_prolif_decision.tsv", "raw_fisher_P")
+add("S2_sep_P", "Sens", "FigS2a", "Mann-Whitney P, subtype separation by proliferation", D14$MWU_P, pfmt(D14$MWU_P), "FigS2b_m14_prolif_decision.tsv", "MWU_P")
+S3O <- rd("FigS3_m8_rate_by_k_observed.tsv")
+add("S3_min_n_per_k", "Sens", "FigS3", "Minimum random signatures per k shown", min(S3O$n), min(S3O$n), "FigS3_m8_rate_by_k_observed.tsv", "min n (k <= 12, n >= 20)")
+
 ## ---- Methods: corpus flow (parsed row by row from the count table in N12_signatures/README.md) and cohorts ----
 CORP_EN <- list(corp_dedup = "Unique PMIDs after deduplication", corp_title = "Records after title screening", corp_cand = "Candidate articles",
                 corp_rescue_total = "Candidates after manual review", corp_pmcid = "Articles with a PMCID", corp_abs_only = "PMC abstract only",
@@ -256,6 +268,7 @@ add("n_gf_matched", "N", "Fig6g", "Abundance-matched random signatures", GM[grp 
 add("n_sim_runs", "N", "Fig7b", "Simulation runs per effect size", SP$n[1], SP$n[1], "Fig7b_sim_power.tsv", "n")
 T3 <- rbindlist(N)
 stopifnot(!anyDuplicated(T3$id))
+T3[, fig := ifelse(startsWith(fig, "FigS4"), sub("^FigS4", "FigS1", fig), ifelse(startsWith(fig, "FigS1"), sub("^FigS1", "FigS4", fig), fig))]   # supplementary figures renumbered by first citation in the text (internal file names unchanged)
 T3[, source := gsub("N28_fig/data/", "figures/data/", gsub("N11_scripts/", "analysis/", source, fixed = TRUE), fixed = TRUE)]
 fwrite(T3, file.path(FDIR, "TableS3_numbers.tsv"), sep = "\t")
 back <- fread(file.path(FDIR, "TableS3_numbers.tsv"), sep = "\t")

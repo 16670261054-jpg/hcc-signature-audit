@@ -20,6 +20,10 @@ M95 <- rbind(r3, pick(file.path(OUT, "hiend_m3_m12/m3_m12_decision.tsv"), c("M3_
                .(module = "M10", rate_real, n_real, rate_null = FPR_null, n_null, P = fisher_P)])
 M95[module == "DCA", module := "M15"]
 M95 <- merge(M95, lab, by = "module"); stopifnot(nrow(M95) == 16, all(M95$n_real == 95))
+## Between-group test as in Fig 4a (CMH stratified by matched group + Holm), restricted to the 95 fully covered signatures (analysis/cmh_modules_fullcov95.R)
+C95 <- fread(file.path(OUT, "cmh_modules_fullcoverage95.tsv"))[, .(module, P_cmh = CMH_P_holm, rate_chk = rate_pub)]
+M95 <- merge(M95, C95, by = "module"); stopifnot(nrow(M95) == 16, max(abs(M95$rate_chk - M95$rate_real)) < 1e-9)
+M95[, P := P_cmh][, c("P_cmh", "rate_chk") := NULL]
 M95[, c("lo", "hi") := as.list(cp(round(rate_null * n_null), n_null)), by = module][, star := stars(P)]
 write_sd(M95, "FigS1a_fullcoverage_module_rates")
 M95[, label := factor(label, levels = M95[order(rate_null)]$label)]

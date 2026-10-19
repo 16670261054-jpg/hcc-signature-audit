@@ -109,6 +109,7 @@ Scripts are listed in the order of the Methods sections. Each script header stat
 - `analysis/hiend_m3_m12.R` - drug sensitivity (M3) and DSigDB enrichment (M12)
 - `analysis/hiend_m13_m15.R` - immune checkpoints (M13), consensus clustering (M14), calibration and decision curves (M15)
 - `analysis/cmh_modules.R` - Cochran-Mantel-Haenszel tests across the 16 modules
+- `analysis/cmh_modules_fullcov95.R` - the same tests restricted to the 95 signatures fully covered in all three cohorts (sensitivity analysis; read by `figures/figS_supp.R`)
 - `analysis/n3_cohort_use_strata.R` - external validation stratified by external-cohort use in the source article (descriptive)
 
 ### 6. Single-cell and in silico perturbation modules (Fig. 6)
@@ -152,6 +153,20 @@ Intermediate tables in `figures/data/` (written by the preparation scripts, incl
 R objects (`*.rds`) are not included. `fig5_singlecell.R` and `figCD_sc_extra.R` also need `figures/data/sc_sigscore.rds`, so run `prep_sc_embedding.R` (requires GSE149614) first. `assemble_main.R` needs the panel objects saved by `fig4_modules.R`, `fig5_singlecell.R`, `figX_landscape.R`, `figA_funnel.R` and `figCD_sc_extra.R`, and `figS_supp.R` needs the object saved by `figX_landscape.R`; run those scripts first.
 
 Script names follow the order in which panels were drafted, not the final figure numbers; the header of each script names the panels it produces. `fig6_framework.R` is an earlier version of `fig7_framework_v2.R`.
+
+### Supplementary figure numbering
+
+Supplementary figure files and Source Data keep their internal names; the numbering in the manuscript follows the order of first citation:
+
+| Manuscript | Output name in this repository (`figS_supp.R`, `figS5_showcase_typicality.R`) | Source Data prefix |
+|---|---|---|
+| Supplementary Fig. S1 | `FigS4_gene_reuse` | `FigS4*` |
+| Supplementary Fig. S2 | `FigS2_consensus_proliferation` | `FigS2*` |
+| Supplementary Fig. S3 | `FigS3_singlecell_k_dependence` | `FigS3*` |
+| Supplementary Fig. S4 | `FigS1_fullcoverage_sensitivity` | `FigS1*` |
+| Supplementary Fig. S5 | `FigS5_showcase_typicality` | `FigS5*` |
+
+The `fig` column of `source_data/TableS3_numbers.tsv` uses the manuscript numbering.
 
 ### Exploratory scripts (not used for reported results)
 

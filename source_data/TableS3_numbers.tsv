@@ -82,52 +82,52 @@ C2_attenuation_real_LIRI	C2	Fig3d	Median per-signature attenuation of |log HR|, 
 C2_attenuation_null_LIRI	C2	Fig3d	Median per-signature attenuation of |log HR|, size-matched random, LIRI	0.49825772	50%	N11_out/ring2/ring2_HR_attenuation.tsv	median_attenuation
 C3_M13_rand	C3	Fig4a	Size-matched random positive rate, Immune checkpoint expression differs	1	100.0% (95% CI 99.9%-100.0%)	Fig4a_module_rates.tsv	rate_null; lo; hi
 C3_M13_pub	C3	Fig4a	Published positive rate, Immune checkpoint expression differs	1	100.0%	Fig4a_module_rates.tsv	rate_real
-C3_M13_P	C3	Fig4a	Fisher P published vs size-matched, Immune checkpoint expression differs	1	1	Fig4a_module_rates.tsv	P
+C3_M13_P	C3	Fig4a	Holm-adjusted stratified CMH P, published vs size-matched, Immune checkpoint expression differs	1	1	Fig4a_module_rates.tsv	P
 C3_M15_rand	C3	Fig4a	Size-matched random positive rate, Decision curve shows net benefit	1	100.0% (95% CI 99.9%-100.0%)	Fig4a_module_rates.tsv	rate_null; lo; hi
 C3_M15_pub	C3	Fig4a	Published positive rate, Decision curve shows net benefit	1	100.0%	Fig4a_module_rates.tsv	rate_real
-C3_M15_P	C3	Fig4a	Fisher P published vs size-matched, Decision curve shows net benefit	1	1	Fig4a_module_rates.tsv	P
+C3_M15_P	C3	Fig4a	Holm-adjusted stratified CMH P, published vs size-matched, Decision curve shows net benefit	1	1	Fig4a_module_rates.tsv	P
 C3_M3_rand	C3	Fig4a	Size-matched random positive rate, Drug sensitivity differs (oncoPredict)	1	100.0% (95% CI 99.9%-100.0%)	Fig4a_module_rates.tsv	rate_null; lo; hi
 C3_M3_pub	C3	Fig4a	Published positive rate, Drug sensitivity differs (oncoPredict)	0.99324324	99.3%	Fig4a_module_rates.tsv	rate_real
-C3_M3_P	C3	Fig4a	Fisher P published vs size-matched, Drug sensitivity differs (oncoPredict)	1	1	Fig4a_module_rates.tsv	P
+C3_M3_P	C3	Fig4a	Holm-adjusted stratified CMH P, published vs size-matched, Drug sensitivity differs (oncoPredict)	1	1	Fig4a_module_rates.tsv	P
 C3_M4_rand	C3	Fig4a	Size-matched random positive rate, GSEA Hallmark pathways enriched	1	100.0% (95% CI 99.9%-100.0%)	Fig4a_module_rates.tsv	rate_null; lo; hi
 C3_M4_pub	C3	Fig4a	Published positive rate, GSEA Hallmark pathways enriched	1	100.0%	Fig4a_module_rates.tsv	rate_real
-C3_M4_P	C3	Fig4a	Fisher P published vs size-matched, GSEA Hallmark pathways enriched	1	1	Fig4a_module_rates.tsv	P
+C3_M4_P	C3	Fig4a	Holm-adjusted stratified CMH P, published vs size-matched, GSEA Hallmark pathways enriched	1	1	Fig4a_module_rates.tsv	P
 C3_M2_rand	C3	Fig4a	Size-matched random positive rate, Immune infiltration differs by risk group	0.99972973	100.0% (95% CI 99.8%-100.0%)	Fig4a_module_rates.tsv	rate_null; lo; hi
 C3_M2_pub	C3	Fig4a	Published positive rate, Immune infiltration differs by risk group	1	100.0%	Fig4a_module_rates.tsv	rate_real
-C3_M2_P	C3	Fig4a	Fisher P published vs size-matched, Immune infiltration differs by risk group	1	1	Fig4a_module_rates.tsv	P
+C3_M2_P	C3	Fig4a	Holm-adjusted stratified CMH P, published vs size-matched, Immune infiltration differs by risk group	1	1	Fig4a_module_rates.tsv	P
 C3_M1_rand	C3	Fig4a	Size-matched random positive rate, Independent prognostic factor (multivariable Cox)	0.98432432	98.4% (95% CI 98.0%-98.8%)	Fig4a_module_rates.tsv	rate_null; lo; hi
 C3_M1_pub	C3	Fig4a	Published positive rate, Independent prognostic factor (multivariable Cox)	0.97972973	98.0%	Fig4a_module_rates.tsv	rate_real
-C3_M1_P	C3	Fig4a	Fisher P published vs size-matched, Independent prognostic factor (multivariable Cox)	1	1	Fig4a_module_rates.tsv	P
+C3_M1_P	C3	Fig4a	Holm-adjusted stratified CMH P, published vs size-matched, Independent prognostic factor (multivariable Cox)	1	1	Fig4a_module_rates.tsv	P
 C3_M5b_rand	C3	Fig4a	Size-matched random positive rate, TMB x risk groups separate survival	0.98243243	98.2% (95% CI 97.8%-98.6%)	Fig4a_module_rates.tsv	rate_null; lo; hi
 C3_M5b_pub	C3	Fig4a	Published positive rate, TMB x risk groups separate survival	0.83108108	83.1%	Fig4a_module_rates.tsv	rate_real
-C3_M5b_P	C3	Fig4a	Fisher P published vs size-matched, TMB x risk groups separate survival	4.3720683e-31	4.4e-31	Fig4a_module_rates.tsv	P
+C3_M5b_P	C3	Fig4a	Holm-adjusted stratified CMH P, published vs size-matched, TMB x risk groups separate survival	4.3720683e-31	4.4e-31	Fig4a_module_rates.tsv	P
 C3_M8b_rand	C3	Fig4a	Size-matched random positive rate, Signature genes differ tumour vs normal (scRNA)	0.9672973	96.7% (95% CI 96.1%-97.3%)	Fig4a_module_rates.tsv	rate_null; lo; hi
 C3_M8b_pub	C3	Fig4a	Published positive rate, Signature genes differ tumour vs normal (scRNA)	0.9527027	95.3%	Fig4a_module_rates.tsv	rate_real
-C3_M8b_P	C3	Fig4a	Fisher P published vs size-matched, Signature genes differ tumour vs normal (scRNA)	1	1	Fig4a_module_rates.tsv	P
+C3_M8b_P	C3	Fig4a	Holm-adjusted stratified CMH P, published vs size-matched, Signature genes differ tumour vs normal (scRNA)	1	1	Fig4a_module_rates.tsv	P
 C3_M14_rand	C3	Fig4a	Size-matched random positive rate, Consensus-clustering subtypes differ in survival	0.93974895	94.0% (95% CI 93.1%-94.7%)	Fig4a_module_rates.tsv	rate_null; lo; hi
 C3_M14_pub	C3	Fig4a	Published positive rate, Consensus-clustering subtypes differ in survival	0.76351351	76.4%	Fig4a_module_rates.tsv	rate_real
-C3_M14_P	C3	Fig4a	Fisher P published vs size-matched, Consensus-clustering subtypes differ in survival	2.7441942e-15	2.7e-15	Fig4a_module_rates.tsv	P
+C3_M14_P	C3	Fig4a	Holm-adjusted stratified CMH P, published vs size-matched, Consensus-clustering subtypes differ in survival	2.7441942e-15	2.7e-15	Fig4a_module_rates.tsv	P
 C3_M7_rand	C3	Fig4a	Size-matched random positive rate, Multi-algorithm model selection	0.83716216	83.7% (95% CI 81.7%-85.6%)	Fig4a_module_rates.tsv	rate_null; lo; hi
 C3_M7_pub	C3	Fig4a	Published positive rate, Multi-algorithm model selection	0.68918919	68.9%	Fig4a_module_rates.tsv	rate_real
-C3_M7_P	C3	Fig4a	Fisher P published vs size-matched, Multi-algorithm model selection	0.00011171018	1.1e-04	Fig4a_module_rates.tsv	P
+C3_M7_P	C3	Fig4a	Holm-adjusted stratified CMH P, published vs size-matched, Multi-algorithm model selection	0.00011171018	1.1e-04	Fig4a_module_rates.tsv	P
 C3_M8a_rand	C3	Fig4a	Size-matched random positive rate, Signature genes mark a cell type (scRNA)	0.76459459	76.5% (95% CI 75.1%-77.8%)	Fig4a_module_rates.tsv	rate_null; lo; hi
 C3_M8a_pub	C3	Fig4a	Published positive rate, Signature genes mark a cell type (scRNA)	0.87162162	87.2%	Fig4a_module_rates.tsv	rate_real
-C3_M8a_P	C3	Fig4a	Fisher P published vs size-matched, Signature genes mark a cell type (scRNA)	0.020980671	0.021	Fig4a_module_rates.tsv	P
+C3_M8a_P	C3	Fig4a	Holm-adjusted stratified CMH P, published vs size-matched, Signature genes mark a cell type (scRNA)	0.020980671	0.021	Fig4a_module_rates.tsv	P
 C3_M0_rand	C3	Fig4a	Size-matched random positive rate, External validation (C > 0.5, both cohorts)	0.70648649	70.6% (95% CI 69.2%-72.1%)	Fig4a_module_rates.tsv	rate_null; lo; hi
 C3_M0_pub	C3	Fig4a	Published positive rate, External validation (C > 0.5, both cohorts)	0.55405405	55.4%	Fig4a_module_rates.tsv	rate_real
-C3_M0_P	C3	Fig4a	Fisher P published vs size-matched, External validation (C > 0.5, both cohorts)	0.00081397079	8.1e-04	Fig4a_module_rates.tsv	P
+C3_M0_P	C3	Fig4a	Holm-adjusted stratified CMH P, published vs size-matched, External validation (C > 0.5, both cohorts)	0.00081397079	8.1e-04	Fig4a_module_rates.tsv	P
 C3_M12_rand	C3	Fig4a	Size-matched random positive rate, Drugs enriched (DSigDB)	0.40702703	40.7% (95% CI 39.1%-42.3%)	Fig4a_module_rates.tsv	rate_null; lo; hi
 C3_M12_pub	C3	Fig4a	Published positive rate, Drugs enriched (DSigDB)	0.60810811	60.8%	Fig4a_module_rates.tsv	rate_real
-C3_M12_P	C3	Fig4a	Fisher P published vs size-matched, Drugs enriched (DSigDB)	1.0017438e-05	1.0e-05	Fig4a_module_rates.tsv	P
+C3_M12_P	C3	Fig4a	Holm-adjusted stratified CMH P, published vs size-matched, Drugs enriched (DSigDB)	1.0017438e-05	1.0e-05	Fig4a_module_rates.tsv	P
 C3_M6_rand	C3	Fig4a	Size-matched random positive rate, Nomogram adds to stage (nested LRT)	0.32891892	32.9% (95% CI 31.4%-34.4%)	Fig4a_module_rates.tsv	rate_null; lo; hi
 C3_M6_pub	C3	Fig4a	Published positive rate, Nomogram adds to stage (nested LRT)	0.29054054	29.1%	Fig4a_module_rates.tsv	rate_real
-C3_M6_P	C3	Fig4a	Fisher P published vs size-matched, Nomogram adds to stage (nested LRT)	1	1	Fig4a_module_rates.tsv	P
+C3_M6_P	C3	Fig4a	Holm-adjusted stratified CMH P, published vs size-matched, Nomogram adds to stage (nested LRT)	1	1	Fig4a_module_rates.tsv	P
 C3_M5a_rand	C3	Fig4a	Size-matched random positive rate, TMB differs by risk group	0.16378378	16.4% (95% CI 15.2%-17.6%)	Fig4a_module_rates.tsv	rate_null; lo; hi
 C3_M5a_pub	C3	Fig4a	Published positive rate, TMB differs by risk group	0.26351351	26.4%	Fig4a_module_rates.tsv	rate_real
-C3_M5a_P	C3	Fig4a	Fisher P published vs size-matched, TMB differs by risk group	0.021390065	0.021	Fig4a_module_rates.tsv	P
+C3_M5a_P	C3	Fig4a	Holm-adjusted stratified CMH P, published vs size-matched, TMB differs by risk group	0.021390065	0.021	Fig4a_module_rates.tsv	P
 C3_M10_rand	C3	Fig4a	Size-matched random positive rate, Geneformer in silico deletion	0.022972973	2.3% (95% CI 1.8%-2.8%)	Fig4a_module_rates.tsv	rate_null; lo; hi
 C3_M10_pub	C3	Fig4a	Published positive rate, Geneformer in silico deletion	0.047297297	4.7%	Fig4a_module_rates.tsv	rate_real
-C3_M10_P	C3	Fig4a	Fisher P published vs size-matched, Geneformer in silico deletion	0.92544832	0.93	Fig4a_module_rates.tsv	P
+C3_M10_P	C3	Fig4a	Holm-adjusted stratified CMH P, published vs size-matched, Geneformer in silico deletion	0.92544832	0.93	Fig4a_module_rates.tsv	P
 C3_n_modules_over_bradley	C3	Fig4a	Modules whose random positive-rate CI lower bound exceeds 7.5%	15	15/16	Fig4a_module_rates.tsv	sum(lo > 0.075)
 C3_n_modules_pub_higher	C3	Fig4a	Modules where published > random (P<0.05)	3	3	Fig4a_module_rates.tsv	P<0.05 & rate_real>rate_null
 C3_n_modules_pub_lower	C3	Fig4a	Modules where published < random (P<0.05)	4	4	Fig4a_module_rates.tsv	P<0.05 & rate_real<rate_null
@@ -236,14 +236,22 @@ C6_example_empP_GSE	C6	Fig7c	Worked example, empP_GSE	0.14685315	0.15	Fig7c_exam
 C6_example_empP_LIRI	C6	Fig7c	Worked example, empP_LIRI	0.008991009	0.009	Fig7c_example_5gene.tsv	empP_LIRI
 C6_example_lrt_GSE	C6	Fig7c	Worked example, lrt_GSE	0.037543644	0.038	Fig7c_example_5gene.tsv	lrt_GSE
 C6_example_lrt_LIRI	C6	Fig7c	Worked example, lrt_LIRI	0.028836874	0.029	Fig7c_example_5gene.tsv	lrt_LIRI
-S1_n_same_verdict	Sens	FigS1b	Modules with same verdict at n = 148 and n = 95	15	15/16	FigS1b_148_vs_95_consistency.tsv	agree
+S1_n_same_verdict	Sens	FigS4b	Modules with same verdict at n = 148 and n = 95	15	15/16	FigS1b_148_vs_95_consistency.tsv	agree
 S2_raw_pub	Sens	FigS2b	Consensus subtypes positive, published, unadjusted	0.76351351	76.4%	FigS2b_m14_prolif_decision.tsv	raw_rate_pub
 S2_raw_Ak	Sens	FigS2b	Consensus subtypes positive, size-matched, unadjusted	0.93194444	93.2%	FigS2b_m14_prolif_decision.tsv	raw_rate_Ak
 S2_adj_pub	Sens	FigS2b	Consensus subtypes positive, published, proliferation-adjusted	0.5	50.0%	FigS2b_m14_prolif_decision.tsv	adj_rate_pub
 S2_adj_Ak	Sens	FigS2b	Consensus subtypes positive, size-matched, proliferation-adjusted	0.54583333	54.6%	FigS2b_m14_prolif_decision.tsv	adj_rate_Ak
 S2_adj_P	Sens	FigS2b	Fisher P after proliferation adjustment	0.32041732	0.32	FigS2b_m14_prolif_decision.tsv	adj_fisher_P
-S4_top25_prolif	Sens	FigS4a	Hallmark E2F/G2M genes among 25 most reused	5	5/25	FigS4a_gene_frequency.tsv	top 25 by n_sig
-S4_top_gene_n	Sens	FigS4a	Signatures containing G6PD	19	G6PD: 19 signatures, 5 death types	FigS4a_gene_frequency.tsv	top 1
+S4_top25_prolif	Sens	FigS1a	Hallmark E2F/G2M genes among 25 most reused	5	5/25	FigS4a_gene_frequency.tsv	top 25 by n_sig
+S4_top_gene_n	Sens	FigS1a	Signatures containing G6PD	19	G6PD: 19 signatures, 5 death types	FigS4a_gene_frequency.tsv	top 1
+S1_n_null_default	Sens	FigS4a	Size-matched random signatures per module, full-coverage subset	2375	2,375	FigS1a_fullcoverage_module_rates.tsv	modal n_null
+S1_n_null_M7	Sens	FigS4a	Size-matched random signatures, multi-algorithm module, full-coverage subset	950	950	FigS1a_fullcoverage_module_rates.tsv	M7 n_null
+S1_n_null_M14	Sens	FigS4a	Size-matched random signatures, consensus clustering, full-coverage subset	2308	2,308	FigS1a_fullcoverage_module_rates.tsv	M14 n_null
+S2_n_pub	Sens	FigS2	Published signatures in M14 proliferation check	148	148	FigS2b_m14_prolif_decision.tsv	n_pub
+S2_n_Ak	Sens	FigS2	Size-matched random signatures in M14 proliferation check	720	720	FigS2b_m14_prolif_decision.tsv	n_Ak
+S2_raw_P	Sens	FigS2b	Fisher P before proliferation adjustment	1.3890692e-08	1.4e-08	FigS2b_m14_prolif_decision.tsv	raw_fisher_P
+S2_sep_P	Sens	FigS2a	Mann-Whitney P, subtype separation by proliferation	3.1086245e-15	3.1e-15	FigS2b_m14_prolif_decision.tsv	MWU_P
+S3_min_n_per_k	Sens	FigS3	Minimum random signatures per k shown	21	21	FigS3_m8_rate_by_k_observed.tsv	min n (k <= 12, n >= 20)
 corp_dedup	Methods	Methods corpus	Unique PMIDs after deduplication	575	575	N12_signatures/README.md	flow-count row: Unique PMIDs after deduplication
 corp_title	Methods	Methods corpus	Records after title screening	473	473	N12_signatures/README.md	flow-count row: Records after title screening
 corp_cand	Methods	Methods corpus	Candidate articles	281	281	N12_signatures/README.md	flow-count row: Candidate articles
