@@ -1,0 +1,149 @@
+src	k	M0_pos	M1_pos	M2_pos	M4_pos	M5a_pos	M5b_pos	M6_pos	M7_pos	M3_pos	M12_pos	M8a_pos	M8b_pos	M10_pos	M13_pos	M14_pos	M15_pos	mech	year	n_pos
+S001	8	1	1	1	1	1	1	1	1	1	0	1	1	0	1	1	1	Cuproptosis	2025	14
+S002	3	1	1	1	1	0	1	1	1	1	0	1	0	0	1	1	1	Cuproptosis	2025	12
+S003	6	0	1	1	1	1	1	0	1	1	0	1	1	0	1	1	1	Cuproptosis	2025	12
+S004	5	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Disulfidptosis	2024	14
+S005	8	0	1	1	1	1	1	0	0	1	0	1	1	0	1	1	1	Cuproptosis	2024	11
+S006	6	1	0	1	1	0	0	0	1	1	0	1	1	0	1	0	1	Cuproptosis	2024	9
+S007	4	0	1	1	1	0	0	0	0	0	1	1	1	0	1	1	1	Cuproptosis	2024	9
+S008	3	0	1	1	1	0	0	0	0	1	0	1	1	0	1	0	1	Cuproptosis	2024	8
+S009	8	1	1	1	1	1	1	1	1	1	1	1	1	0	1	1	1	Cuproptosis	2024	15
+S011	6	1	1	1	1	0	1	0	1	1	1	1	1	0	1	1	1	Cuproptosis	2023	13
+S012	3	0	1	1	1	0	1	0	0	1	1	1	1	0	1	0	1	Cuproptosis	2023	10
+S013	4	0	1	1	1	0	1	0	0	1	0	1	1	0	1	0	1	Cuproptosis	2023	9
+S014	6	1	1	1	1	0	1	1	1	1	0	1	1	0	1	0	1	Multiple / other	2023	12
+S015	6	1	1	1	1	1	1	1	1	1	0	1	1	0	1	1	1	Multiple / other	2023	14
+S016	5	0	1	1	1	0	1	0	0	1	0	1	1	0	1	0	1	Cuproptosis	2023	9
+S017	3	0	1	1	1	0	1	0	0	1	1	1	1	0	1	0	1	Cuproptosis	2023	10
+S018	5	0	1	1	1	0	1	0	0	1	0	1	1	0	1	0	1	Cuproptosis	2023	9
+S019	9	0	1	1	1	1	1	0	0	1	0	1	1	1	1	1	1	Multiple / other	2023	12
+S020	5	0	1	1	1	0	1	0	1	1	0	1	1	0	1	1	1	Cuproptosis	2023	11
+S021	5	0	1	1	1	0	1	0	0	1	0	1	1	0	1	0	1	Cuproptosis	2022	9
+S022	5	0	1	1	1	0	1	0	0	1	0	1	1	0	1	0	1	Cuproptosis	2022	9
+S023	4	0	1	1	1	0	1	0	0	1	0	1	1	0	1	0	1	Cuproptosis	2022	9
+S024	4	0	1	1	1	0	1	0	0	1	0	1	1	0	1	0	1	Cuproptosis	2022	9
+S025	8	0	1	1	1	0	1	0	0	1	0	1	1	0	1	1	1	Cuproptosis	2022	10
+S026	4	0	1	1	1	1	1	0	0	1	0	0	1	0	1	0	1	Cuproptosis	2022	9
+S027	6	0	1	1	1	0	0	0	1	1	1	1	1	0	1	1	1	Multiple / other	2022	11
+S028	4	1	1	1	1	0	1	0	1	1	0	1	1	0	1	1	1	Cuproptosis	2022	12
+S029	4	1	1	1	1	0	1	0	1	1	0	1	1	0	1	1	1	Cuproptosis	2022	12
+S030	5	1	1	1	1	0	1	0	1	1	1	1	1	0	1	1	1	Disulfidptosis	2025	13
+S031	13	0	1	1	1	1	1	0	1	1	1	1	1	0	1	1	1	Disulfidptosis	2024	13
+S032	6	1	1	1	1	1	1	0	1	1	1	1	1	0	1	1	1	Multiple / other	2024	14
+S033	13	1	1	1	1	0	1	1	1	1	0	1	1	0	1	1	1	Disulfidptosis	2024	13
+S034	7	1	1	1	1	0	1	1	1	1	1	1	1	0	1	0	1	Disulfidptosis	2023	13
+S035	4	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Disulfidptosis	2023	14
+S036	5	0	1	1	1	0	0	0	0	1	0	1	1	0	1	0	1	Disulfidptosis	2023	8
+S037	4	1	1	1	1	0	1	0	1	1	1	1	1	0	1	1	1	Ferroptosis	2026	13
+S038	5	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Ferroptosis	2025	14
+S039	4	1	1	1	1	0	1	0	1	1	1	1	1	0	1	1	1	Ferroptosis	2025	13
+S040	4	1	1	1	1	0	1	0	1	1	1	1	1	0	1	1	1	Ferroptosis	2025	13
+S041	5	1	1	1	1	0	1	0	1	1	1	1	1	0	1	1	1	Ferroptosis	2024	13
+S042	11	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Ferroptosis	2024	14
+S043	4	0	1	1	1	1	1	0	0	1	1	1	1	0	1	1	1	Multiple / other	2023	12
+S044	4	1	1	1	1	0	1	0	1	1	1	1	1	0	1	1	1	Ferroptosis	2023	13
+S045	3	0	1	1	1	0	1	0	0	1	1	1	1	0	1	1	1	Ferroptosis	2023	11
+S046	11	1	1	1	1	1	1	0	1	1	0	1	1	0	1	1	1	Ferroptosis	2023	13
+S047	7	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Ferroptosis	2022	14
+S048	3	0	1	1	1	0	0	0	1	1	1	1	1	0	1	1	1	Ferroptosis	2022	11
+S049	5	1	1	1	1	0	1	0	1	1	1	1	1	0	1	1	1	Ferroptosis	2022	13
+S050	5	1	1	1	1	0	1	0	1	1	1	1	1	1	1	1	1	Ferroptosis	2022	14
+S051	4	1	1	1	1	1	1	0	1	1	1	1	1	0	1	1	1	Ferroptosis	2023	14
+S052	10	1	1	1	1	0	1	1	1	1	0	1	1	0	1	1	1	Multiple / other	2022	13
+S053	13	1	1	1	1	1	1	1	1	1	1	1	1	0	1	1	1	Multiple / other	2022	15
+S054	5	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Ferroptosis	2022	14
+S055	12	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Multiple / other	2021	14
+S056	2	0	1	1	1	0	1	0	0	1	1	1	1	0	1	1	1	Ferroptosis	2021	11
+S057	7	0	1	1	1	0	1	0	1	1	0	1	1	0	1	1	1	Pyroptosis	2025	11
+S058	4	0	1	1	1	1	0	0	0	1	1	1	1	0	1	1	1	Pyroptosis	2025	11
+S059	15	1	1	1	1	0	1	1	1	1	1	0	1	0	1	1	1	Pyroptosis	2024	13
+S060	3	0	1	1	1	0	0	0	0	1	1	0	1	0	1	1	1	Pyroptosis	2023	9
+S061	24	1	1	1	1	1	1	1	1	1	0	1	1	1	1	1	1	Pyroptosis	2023	15
+S062	2	0	1	1	1	1	1	0	0	1	1	0	1	0	1	1	1	Pyroptosis	2023	11
+S063	5	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Pyroptosis	2023	14
+S064	5	0	1	1	1	0	0	0	0	1	1	1	1	0	1	1	1	Pyroptosis	2023	10
+S065	5	0	1	1	1	0	1	0	0	1	1	1	1	0	1	1	1	Pyroptosis	2022	11
+S066	3	0	1	1	1	0	1	0	0	1	1	0	1	0	1	1	1	Pyroptosis	2022	10
+S067	6	0	1	1	1	1	1	0	0	1	1	1	1	0	1	1	1	Pyroptosis	2022	12
+S068	3	0	1	1	1	0	1	0	0	1	1	0	1	0	1	1	1	Pyroptosis	2022	10
+S069	9	1	1	1	1	0	1	1	0	1	1	1	1	0	1	1	1	Pyroptosis	2022	13
+S070	4	0	1	1	1	1	1	0	1	1	1	0	1	0	1	1	1	Pyroptosis	2022	12
+S071	4	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Pyroptosis	2022	14
+S072	2	0	1	1	1	0	0	0	0	1	1	0	0	0	1	0	1	Pyroptosis	2022	7
+S073	4	1	1	1	1	0	1	0	1	1	1	0	1	0	1	1	1	Pyroptosis	2022	12
+S074	3	0	1	1	1	0	0	0	0	1	1	1	0	0	1	0	1	Pyroptosis	2022	8
+S076	3	0	1	1	1	1	0	0	0	1	1	1	1	0	1	0	1	Pyroptosis	2022	10
+S078	2	1	1	1	1	0	1	0	1	1	1	0	1	0	1	1	1	Pyroptosis	2022	12
+S079	5	0	1	1	1	0	0	0	0	1	1	1	0	0	1	0	1	Pyroptosis	2022	8
+S080	6	0	1	1	1	1	0	0	0	1	1	1	1	0	1	0	1	Pyroptosis	2022	10
+S081	5	0	1	1	1	0	0	0	1	1	1	1	1	0	1	1	1	Pyroptosis	2022	11
+S083	2	0	1	1	1	0	1	0	0	1	1	0	0	0	1	0	1	Pyroptosis	2021	8
+S084	4	0	1	1	1	1	1	0	1	1	1	1	1	0	1	1	1	Pyroptosis	2022	13
+S085	4	0	1	1	1	1	1	0	0	1	1	0	1	0	1	1	1	Pyroptosis	2021	11
+S086	2	1	1	1	1	0	1	1	0	1	1	0	1	0	1	1	1	Pyroptosis	2021	12
+S087	2	0	1	1	1	1	1	0	1	1	0	1	1	0	1	1	1	Pyroptosis	2021	12
+S088	6	0	1	1	1	0	0	0	1	1	1	1	1	0	1	0	1	Pyroptosis	2021	10
+S089	6	0	1	1	1	1	0	0	1	1	1	1	1	0	1	1	1	Necroptosis	2024	12
+S090	6	0	1	1	1	1	1	0	0	1	1	1	1	1	1	1	1	Necroptosis	2023	13
+S091	6	1	1	1	1	0	1	0	1	1	0	1	1	0	1	1	1	Necroptosis	2023	12
+S092	5	1	1	1	1	1	1	0	1	1	1	1	1	0	1	0	1	Necroptosis	2023	13
+S093	4	1	1	1	1	0	1	0	1	1	1	1	1	0	1	1	1	Necroptosis	2023	13
+S094	4	0	1	1	1	0	0	0	1	1	0	1	1	1	1	1	1	Necroptosis	2023	11
+S095	8	0	1	1	1	0	0	0	1	1	1	1	1	0	1	1	1	Necroptosis	2022	11
+S096	7	1	1	1	1	1	1	0	1	1	0	1	1	1	1	1	1	Necroptosis	2022	14
+S097	9	1	1	1	1	0	1	0	1	1	0	1	1	0	1	0	1	Necroptosis	2022	11
+S098	7	1	1	1	1	0	1	0	1	1	0	1	1	0	1	0	1	Necroptosis	2022	11
+S099	3	1	1	1	1	0	1	0	1	1	0	1	1	0	1	1	1	Necroptosis	2022	12
+S100	9	1	1	1	1	1	1	0	1	1	1	1	1	0	1	1	1	Necroptosis	2022	14
+S101	10	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Necroptosis	2022	14
+S102	6	1	1	1	1	0	1	1	1	1	0	1	1	0	1	1	1	Necroptosis	2022	13
+S103	6	0	1	1	1	1	0	0	0	1	1	1	0	0	1	0	1	Necroptosis	2022	9
+S104	4	1	1	1	1	1	1	0	1	1	0	1	1	0	1	0	1	Multiple / other	2025	12
+S105	4	1	1	1	1	0	1	1	1	1	0	1	1	0	1	1	1	Multiple / other	2024	13
+S106	2	1	1	1	1	0	1	0	1	1	0	0	1	0	1	1	1	Multiple / other	2023	11
+S107	3	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Multiple / other	2023	14
+S108	6	0	1	1	1	0	1	0	1	1	1	1	1	0	1	1	1	Anoikis	2025	12
+S109	5	1	1	1	1	0	1	1	1	1	0	1	1	0	1	1	1	Anoikis	2025	13
+S110	7	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Anoikis	2023	14
+S111	3	1	1	1	1	0	1	1	1	1	0	1	1	0	1	1	1	Anoikis	2023	13
+S112	9	1	1	1	1	0	1	0	1	1	0	1	1	0	1	0	1	Anoikis	2023	11
+S113	8	1	1	1	1	0	1	1	1	1	0	1	1	0	1	1	1	Anoikis	2023	13
+S114	5	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Anoikis	2023	14
+S115	3	0	1	1	1	0	1	0	1	1	1	1	1	0	1	1	1	Anoikis	2023	12
+S116	5	1	1	1	1	0	1	1	1	1	0	1	1	0	1	1	1	Anoikis	2023	13
+S117	9	1	1	1	1	0	1	1	1	1	0	1	1	0	1	1	1	Anoikis	2022	13
+S118	9	1	1	1	1	1	1	0	1	1	0	1	1	0	1	1	1	Autophagy	2026	13
+S119	3	0	1	1	1	1	1	0	0	1	0	0	1	0	1	1	1	Autophagy	2024	10
+S120	13	0	1	1	1	0	0	0	1	1	0	1	1	0	1	1	1	Autophagy	2023	10
+S121	5	1	1	1	1	0	1	1	1	1	1	0	1	0	1	1	1	Autophagy	2023	13
+S122	2	0	1	1	1	1	1	0	0	1	1	0	1	0	1	0	1	Autophagy	2022	10
+S123	2	0	1	1	1	0	1	0	0	1	0	1	1	0	1	1	1	Autophagy	2022	10
+S124	5	0	1	1	1	0	1	0	1	1	1	1	1	0	1	1	1	Autophagy	2022	12
+S125	2	1	1	1	1	0	1	0	1	1	0	1	1	0	1	1	1	Autophagy	2021	12
+S126	10	1	1	1	1	1	1	0	1	1	1	1	1	0	1	1	1	Autophagy	2021	14
+S127	3	1	1	1	1	1	1	0	1	1	1	1	1	0	1	1	1	Autophagy	2021	14
+S128	2	1	1	1	1	0	1	0	0	1	1	1	0	0	1	0	1	Autophagy	2021	10
+S129	3	1	1	1	1	0	1	0	1	1	1	1	1	0	1	1	1	Autophagy	2021	13
+S130	8	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Autophagy	2021	14
+S131	8	1	1	1	1	0	1	0	1	1	0	1	1	0	1	1	1	Multiple / other	2026	12
+S132	4	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Multiple / other	2025	14
+S133	9	0	1	1	1	1	1	0	1	1	1	1	1	0	1	1	1	Multiple / other	2025	13
+S134	3	0	1	1	1	0	0	0	0	1	0	1	1	0	1	1	1	Multiple / other	2025	9
+S135	5	0	0	1	1	1	0	0	0	1	1	1	1	0	1	0	1	Multiple / other	2024	9
+S136	5	0	1	1	1	0	1	0	1	1	1	1	1	0	1	1	1	Multiple / other	2024	12
+S137	5	1	1	1	1	0	1	0	1	1	1	0	1	0	1	1	1	Multiple / other	2024	12
+S138	8	0	1	1	1	0	0	0	0	1	1	1	1	0	1	0	1	Multiple / other	2024	9
+S139	9	1	1	1	1	0	1	0	1	1	1	1	1	0	1	1	1	Multiple / other	2024	13
+S140	5	1	1	1	1	0	1	1	1	1	0	1	1	0	1	1	1	Multiple / other	2024	13
+S141	11	1	1	1	1	1	1	1	1	1	0	1	1	0	1	1	1	Multiple / other	2023	14
+S142	3	1	1	1	1	0	1	1	1	1	0	1	1	0	1	1	1	Multiple / other	2023	13
+S143	6	0	1	1	1	0	1	0	0	1	0	1	1	0	1	0	1	Multiple / other	2023	9
+S144	7	1	1	1	1	0	1	1	1	1	0	1	1	0	1	1	1	Anoikis	2024	13
+S145	5	1	1	1	1	0	1	0	1	1	1	0	1	0	1	1	1	Cuproptosis	2022	12
+S146	3	0	1	1	1	0	1	0	1	1	1	1	1	0	1	1	1	Cuproptosis	2022	12
+S147	3	1	1	1	1	0	1	0	1	1	1	1	1	0	1	0	1	Cuproptosis	2023	12
+S148	3	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Multiple / other	2024	14
+S149	5	0	0	1	1	1	0	0	1	1	0	1	1	0	1	0	1	Autophagy	2023	9
+S150	5	0	1	1	1	0	1	0	1	1	0	1	1	1	1	1	1	Multiple / other	2024	12
+S151	4	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Multiple / other	2025	14
+S152	5	1	1	1	1	0	1	1	1	1	1	1	1	0	1	1	1	Multiple / other	2025	14

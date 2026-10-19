@@ -1,0 +1,13 @@
+metric	cohort	grp2	P	median_pub	median_null	test	star
+R2_proxy	TCGA	Input-matched random	0.000116012453081016	0.320335123813815	0.259933931428941	Mann-Whitney U, two-sided, Published vs group	***
+R2_proxy	GSE14520	Input-matched random	1.03444786070384e-09	0.281702379132671	0.197232334169646	Mann-Whitney U, two-sided, Published vs group	****
+R2_proxy	LIRI	Input-matched random	7.48978656872623e-12	0.470629710354013	0.363681643082813	Mann-Whitney U, two-sided, Published vs group	****
+R2_proxy	TCGA	Size-matched random	3.005793786108e-27	0.320335123813815	0.512560921365594	Mann-Whitney U, two-sided, Published vs group	****
+R2_proxy	GSE14520	Size-matched random	6.08018923996497e-16	0.281702379132671	0.428816294423755	Mann-Whitney U, two-sided, Published vs group	****
+R2_proxy	LIRI	Size-matched random	9.87992447254979e-20	0.470629710354013	0.632928731237063	Mann-Whitney U, two-sided, Published vs group	****
+rho_prolif	GSE14520	Input-matched random	2.28705943072782e-14	0.45755889579419	0.290912749860307	Mann-Whitney U, two-sided, Published vs group	****
+rho_prolif	GSE14520	Size-matched random	1.7940711393334e-16	0.45755889579419	0.605781182251771	Mann-Whitney U, two-sided, Published vs group	****
+rho_prolif	LIRI	Input-matched random	6.43929354282591e-15	0.574230170046851	0.449865183751211	Mann-Whitney U, two-sided, Published vs group	****
+rho_prolif	LIRI	Size-matched random	3.44212551752785e-24	0.574230170046851	0.749480707270959	Mann-Whitney U, two-sided, Published vs group	****
+rho_prolif	TCGA	Input-matched random	3.16581427739493e-09	0.433650730585381	0.328067385118812	Mann-Whitney U, two-sided, Published vs group	****
+rho_prolif	TCGA	Size-matched random	6.60260087495456e-31	0.433650730585381	0.657185056129588	Mann-Whitney U, two-sided, Published vs group	****

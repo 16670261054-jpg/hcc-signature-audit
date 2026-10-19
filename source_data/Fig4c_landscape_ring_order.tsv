@@ -1,0 +1,17 @@
+module	label	rate_null
+M13	Immune checkpoint expression differs	1
+M15	Decision curve shows net benefit	1
+M3	Drug sensitivity differs (oncoPredict)	1
+M4	GSEA Hallmark pathways enriched	1
+M2	Immune infiltration differs by risk group	0.99972972972973
+M1	Independent prognostic factor (multivariable Cox)	0.984324324324324
+M5b	TMB x risk groups separate survival	0.982432432432432
+M8b	Signature genes differ tumour vs normal (scRNA)	0.967297297297297
+M14	Consensus-clustering subtypes differ in survival	0.939748953974896
+M7	Multi-algorithm model selection	0.837162162162162
+M8a	Signature genes mark a cell type (scRNA)	0.764594594594595
+M0	External validation (C > 0.5, both cohorts)	0.706486486486487
+M12	Drugs enriched (DSigDB)	0.407027027027027
+M6	Nomogram adds to stage (nested LRT)	0.328918918918919
+M5a	TMB differs by risk group	0.163783783783784
+M10	Geneformer in silico deletion	0.022972972972973

@@ -1,0 +1,62 @@
+mech	gene	N
+Cuproptosis	LIPT1	10
+Cuproptosis	CDKN2A	14
+Cuproptosis	DLAT	14
+Cuproptosis	GLS	11
+Cuproptosis	SPP1	1
+Cuproptosis	G6PD	2
+Multiple / other	GLS	1
+Multiple / other	CDKN2A	1
+Multiple / other	BAK1	2
+Multiple / other	NLRP6	1
+Multiple / other	SPP1	6
+Multiple / other	GPX4	1
+Multiple / other	SLC1A5	5
+Multiple / other	G6PD	10
+Multiple / other	SQSTM1	4
+Disulfidptosis	SLC7A11	2
+Multiple / other	SLC7A11	3
+Disulfidptosis	MMP1	1
+Disulfidptosis	SLC1A5	1
+Ferroptosis	SPP1	2
+Ferroptosis	SLC7A11	8
+Ferroptosis	G6PD	5
+Ferroptosis	SQSTM1	1
+Multiple / other	GSDME	2
+Ferroptosis	SLC1A5	3
+Multiple / other	BIRC5	1
+Multiple / other	ATIC	2
+Pyroptosis	GPX4	8
+Pyroptosis	CASP8	8
+Pyroptosis	NOD2	10
+Pyroptosis	GSDME	13
+Pyroptosis	NLRP6	8
+Pyroptosis	BAK1	7
+Pyroptosis	G6PD	1
+Pyroptosis	SPP1	1
+Pyroptosis	SQSTM1	1
+Pyroptosis	PLK1	2
+Pyroptosis	MMP1	2
+Necroptosis	SQSTM1	6
+Necroptosis	HSP90AA1	6
+Necroptosis	CASP8	1
+Necroptosis	GPX4	1
+Necroptosis	CDKN2A	2
+Necroptosis	PLK1	3
+Necroptosis	SLC1A5	1
+Necroptosis	G6PD	1
+Necroptosis	MMP1	1
+Necroptosis	SPP1	1
+Anoikis	BIRC5	3
+Anoikis	SPP1	4
+Anoikis	PLK1	3
+Anoikis	BAK1	1
+Autophagy	BIRC5	8
+Autophagy	ATIC	5
+Autophagy	BAK1	1
+Autophagy	SQSTM1	1
+Multiple / other	MMP1	3
+Multiple / other	CASP8	3
+Multiple / other	HSP90AA1	2
+Cuproptosis	MMP1	1
+Multiple / other	DLAT	1

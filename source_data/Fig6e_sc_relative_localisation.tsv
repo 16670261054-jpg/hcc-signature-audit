@@ -1,0 +1,1777 @@
+celltype	sid	z	grp
+Hepatocyte	A|S001|real|0	1.34236305104297	Published
+Endothelial	A|S001|real|0	-0.779510825171836	Published
+Myeloid	A|S001|real|0	0.803627700123361	Published
+T/NK	A|S001|real|0	0.482033739662774	Published
+Fibroblast	A|S001|real|0	-0.880961798501021	Published
+B	A|S001|real|0	-0.967551867156246	Published
+Hepatocyte	A|S002|real|0	1.53743788754793	Published
+Endothelial	A|S002|real|0	-0.71978525802262	Published
+Myeloid	A|S002|real|0	-1.02174197381996	Published
+T/NK	A|S002|real|0	0.49969778216884	Published
+Fibroblast	A|S002|real|0	0.477034646461138	Published
+B	A|S002|real|0	-0.77264308433533	Published
+Hepatocyte	A|S003|real|0	1.60052096941732	Published
+Endothelial	A|S003|real|0	0.0867799075922901	Published
+Myeloid	A|S003|real|0	0.165284578362017	Published
+T/NK	A|S003|real|0	-0.985339163036568	Published
+Fibroblast	A|S003|real|0	0.293195796297295	Published
+B	A|S003|real|0	-1.16044208863235	Published
+Hepatocyte	A|S004|real|0	0.980458028418292	Published
+Endothelial	A|S004|real|0	0.377472303185195	Published
+Myeloid	A|S004|real|0	-0.83654119996338	Published
+T/NK	A|S004|real|0	-0.888002216689769	Published
+Fibroblast	A|S004|real|0	1.26512561743783	Published
+B	A|S004|real|0	-0.898512532388172	Published
+Hepatocyte	A|S005|real|0	0.511825991559745	Published
+Endothelial	A|S005|real|0	0.303003555832003	Published
+Myeloid	A|S005|real|0	-0.678442403834207	Published
+T/NK	A|S005|real|0	-0.633606259120208	Published
+Fibroblast	A|S005|real|0	1.60154499381661	Published
+B	A|S005|real|0	-1.10432587825395	Published
+Hepatocyte	A|S006|real|0	0.402648993224587	Published
+Endothelial	A|S006|real|0	1.6410998913395	Published
+Myeloid	A|S006|real|0	-0.573349321385642	Published
+T/NK	A|S006|real|0	-0.95100679340007	Published
+Fibroblast	A|S006|real|0	0.363455741330901	Published
+B	A|S006|real|0	-0.882848511109275	Published
+Hepatocyte	A|S007|real|0	1.79063715410456	Published
+Endothelial	A|S007|real|0	-0.175255829429517	Published
+Myeloid	A|S007|real|0	-0.44504294087803	Published
+T/NK	A|S007|real|0	-0.68400609793052	Published
+Fibroblast	A|S007|real|0	0.456375445973997	Published
+B	A|S007|real|0	-0.942707731840488	Published
+Hepatocyte	A|S008|real|0	1.81949007224175	Published
+Endothelial	A|S008|real|0	-0.0997822095944	Published
+Myeloid	A|S008|real|0	-0.731783322066852	Published
+T/NK	A|S008|real|0	-0.537733266756843	Published
+Fibroblast	A|S008|real|0	0.388703760088732	Published
+B	A|S008|real|0	-0.838895033912387	Published
+Hepatocyte	A|S009|real|0	1.1656391991925	Published
+Endothelial	A|S009|real|0	0.91050288001815	Published
+Myeloid	A|S009|real|0	0.592169529366876	Published
+T/NK	A|S009|real|0	-0.971194614068943	Published
+Fibroblast	A|S009|real|0	-0.650716405736194	Published
+B	A|S009|real|0	-1.04640058877238	Published
+Hepatocyte	A|S011|real|0	1.85822226913874	Published
+Endothelial	A|S011|real|0	-0.192702573034167	Published
+Myeloid	A|S011|real|0	-0.148330007460866	Published
+T/NK	A|S011|real|0	-0.833620403287618	Published
+Fibroblast	A|S011|real|0	0.18704305373687	Published
+B	A|S011|real|0	-0.870612339092959	Published
+Hepatocyte	A|S012|real|0	1.04600127740466	Published
+Endothelial	A|S012|real|0	1.00051051642835	Published
+Myeloid	A|S012|real|0	-0.577315930819934	Published
+T/NK	A|S012|real|0	-0.712094505602227	Published
+Fibroblast	A|S012|real|0	0.564287200412732	Published
+B	A|S012|real|0	-1.32138855782358	Published
+Hepatocyte	A|S013|real|0	0.215619863897563	Published
+Endothelial	A|S013|real|0	1.55661520936419	Published
+Myeloid	A|S013|real|0	-0.108892105796747	Published
+T/NK	A|S013|real|0	-0.523082562008662	Published
+Fibroblast	A|S013|real|0	0.322866832754236	Published
+B	A|S013|real|0	-1.46312723821058	Published
+Hepatocyte	A|S014|real|0	-0.412669358069172	Published
+Endothelial	A|S014|real|0	-0.129112030393881	Published
+Myeloid	A|S014|real|0	-0.468877868204672	Published
+T/NK	A|S014|real|0	2.01841642222531	Published
+Fibroblast	A|S014|real|0	-0.428395063547603	Published
+B	A|S014|real|0	-0.57936210200998	Published
+Hepatocyte	A|S015|real|0	1.07956617604529	Published
+Endothelial	A|S015|real|0	-1.1117434348645	Published
+Myeloid	A|S015|real|0	0.653789721511908	Published
+T/NK	A|S015|real|0	0.581515504569161	Published
+Fibroblast	A|S015|real|0	0.143151959451358	Published
+B	A|S015|real|0	-1.34627992671321	Published
+Hepatocyte	A|S016|real|0	0.838455187794071	Published
+Endothelial	A|S016|real|0	1.08545269350622	Published
+Myeloid	A|S016|real|0	-0.424812358751504	Published
+T/NK	A|S016|real|0	-0.698340300578384	Published
+Fibroblast	A|S016|real|0	0.631619523193222	Published
+B	A|S016|real|0	-1.43237474516362	Published
+Hepatocyte	A|S017|real|0	1.04600127740466	Published
+Endothelial	A|S017|real|0	1.00051051642835	Published
+Myeloid	A|S017|real|0	-0.577315930819934	Published
+T/NK	A|S017|real|0	-0.712094505602227	Published
+Fibroblast	A|S017|real|0	0.564287200412732	Published
+B	A|S017|real|0	-1.32138855782358	Published
+Hepatocyte	A|S018|real|0	1.53440853347207	Published
+Endothelial	A|S018|real|0	0.603106761925968	Published
+Myeloid	A|S018|real|0	-0.211508709794663	Published
+T/NK	A|S018|real|0	-0.839079179141855	Published
+Fibroblast	A|S018|real|0	0.14296083358312	Published
+B	A|S018|real|0	-1.22988824004464	Published
+Hepatocyte	A|S019|real|0	1.46386797616396	Published
+Endothelial	A|S019|real|0	-0.238564740537003	Published
+Myeloid	A|S019|real|0	0.926416782637481	Published
+T/NK	A|S019|real|0	-0.862458490498818	Published
+Fibroblast	A|S019|real|0	-0.21626347611449	Published
+B	A|S019|real|0	-1.07299805165113	Published
+Hepatocyte	A|S020|real|0	0.974041594856337	Published
+Endothelial	A|S020|real|0	1.43460401393075	Published
+Myeloid	A|S020|real|0	-0.0248882618826733	Published
+T/NK	A|S020|real|0	-1.02755552618498	Published
+Fibroblast	A|S020|real|0	-0.585843605853959	Published
+B	A|S020|real|0	-0.770358214865472	Published
+Hepatocyte	A|S021|real|0	0.838455187794071	Published
+Endothelial	A|S021|real|0	1.08545269350622	Published
+Myeloid	A|S021|real|0	-0.424812358751505	Published
+T/NK	A|S021|real|0	-0.698340300578385	Published
+Fibroblast	A|S021|real|0	0.631619523193221	Published
+B	A|S021|real|0	-1.43237474516362	Published
+Hepatocyte	A|S022|real|0	1.64983994795398	Published
+Endothelial	A|S022|real|0	0.277244291649399	Published
+Myeloid	A|S022|real|0	-0.635321007112602	Published
+T/NK	A|S022|real|0	-0.639319692190082	Published
+Fibroblast	A|S022|real|0	0.440576772930689	Published
+B	A|S022|real|0	-1.09302031323138	Published
+Hepatocyte	A|S023|real|0	0.9508388250106	Published
+Endothelial	A|S023|real|0	1.03895795246603	Published
+Myeloid	A|S023|real|0	-0.53562110764758	Published
+T/NK	A|S023|real|0	-0.697495077459852	Published
+Fibroblast	A|S023|real|0	0.610800691841779	Published
+B	A|S023|real|0	-1.36748128421098	Published
+Hepatocyte	A|S024|real|0	0.9508388250106	Published
+Endothelial	A|S024|real|0	1.03895795246603	Published
+Myeloid	A|S024|real|0	-0.53562110764758	Published
+T/NK	A|S024|real|0	-0.697495077459852	Published
+Fibroblast	A|S024|real|0	0.610800691841779	Published
+B	A|S024|real|0	-1.36748128421098	Published
+Hepatocyte	A|S025|real|0	1.78438216438318	Published
+Endothelial	A|S025|real|0	-0.113525441740292	Published
+Myeloid	A|S025|real|0	0.132933380294554	Published
+T/NK	A|S025|real|0	-0.777683090142735	Published
+Fibroblast	A|S025|real|0	0.0588652782063397	Published
+B	A|S025|real|0	-1.08497229100105	Published
+Hepatocyte	A|S026|real|0	-0.925490669315843	Published
+Endothelial	A|S026|real|0	1.19432555508698	Published
+Myeloid	A|S026|real|0	0.470070771927888	Published
+T/NK	A|S026|real|0	0.982154006298988	Published
+Fibroblast	A|S026|real|0	-0.70172604859794	Published
+B	A|S026|real|0	-1.01933361540007	Published
+Hepatocyte	A|S027|real|0	1.94604203754034	Published
+Endothelial	A|S027|real|0	-0.21599578229762	Published
+Myeloid	A|S027|real|0	-0.0492899798028017	Published
+T/NK	A|S027|real|0	-0.434151681264504	Published
+Fibroblast	A|S027|real|0	-0.308391580699647	Published
+B	A|S027|real|0	-0.938213013475771	Published
+Hepatocyte	A|S028|real|0	-0.0564648958944227	Published
+Endothelial	A|S028|real|0	2.00304726126479	Published
+Myeloid	A|S028|real|0	-0.367743094645694	Published
+T/NK	A|S028|real|0	-0.535151791011271	Published
+Fibroblast	A|S028|real|0	-0.426059649492354	Published
+B	A|S028|real|0	-0.617627830221046	Published
+Hepatocyte	A|S029|real|0	1.89504158059086	Published
+Endothelial	A|S029|real|0	-0.151155170418114	Published
+Myeloid	A|S029|real|0	0.0264267132866884	Published
+T/NK	A|S029|real|0	-0.824013840781641	Published
+Fibroblast	A|S029|real|0	-0.113614403069782	Published
+B	A|S029|real|0	-0.832684879608013	Published
+Hepatocyte	A|S030|real|0	1.2295115232126	Published
+Endothelial	A|S030|real|0	1.33861860471309	Published
+Myeloid	A|S030|real|0	-0.599746371611525	Published
+T/NK	A|S030|real|0	-0.744149617025864	Published
+Fibroblast	A|S030|real|0	-0.482554982745613	Published
+B	A|S030|real|0	-0.741679156542685	Published
+Hepatocyte	A|S031|real|0	1.28983769077819	Published
+Endothelial	A|S031|real|0	0.265271072439048	Published
+Myeloid	A|S031|real|0	0.0468989863223049	Published
+T/NK	A|S031|real|0	-1.02399767160387	Published
+Fibroblast	A|S031|real|0	0.722956278995753	Published
+B	A|S031|real|0	-1.30096635693143	Published
+Hepatocyte	A|S032|real|0	1.05647158892773	Published
+Endothelial	A|S032|real|0	0.0260950370329968	Published
+Myeloid	A|S032|real|0	1.16699265279427	Published
+T/NK	A|S032|real|0	-0.673136815790869	Published
+Fibroblast	A|S032|real|0	-0.145697451274616	Published
+B	A|S032|real|0	-1.43072501168952	Published
+Hepatocyte	A|S033|real|0	-0.427068018045409	Published
+Endothelial	A|S033|real|0	1.2560208912381	Published
+Myeloid	A|S033|real|0	1.2726532595095	Published
+T/NK	A|S033|real|0	-0.779415722821794	Published
+Fibroblast	A|S033|real|0	-0.397660677187701	Published
+B	A|S033|real|0	-0.924529732692703	Published
+Hepatocyte	A|S034|real|0	-0.053400295801374	Published
+Endothelial	A|S034|real|0	-0.51899472877133	Published
+Myeloid	A|S034|real|0	-0.462147034481087	Published
+T/NK	A|S034|real|0	-0.522396545981442	Published
+Fibroblast	A|S034|real|0	-0.452239017365362	Published
+B	A|S034|real|0	2.0091776224006	Published
+Hepatocyte	A|S035|real|0	-0.536751497568213	Published
+Endothelial	A|S035|real|0	-0.463682236066371	Published
+Myeloid	A|S035|real|0	-0.787125469257581	Published
+T/NK	A|S035|real|0	1.88313261184633	Published
+Fibroblast	A|S035|real|0	0.356301489740498	Published
+B	A|S035|real|0	-0.451874898694666	Published
+Hepatocyte	A|S036|real|0	-1.13673686247129	Published
+Endothelial	A|S036|real|0	1.37864197679589	Published
+Myeloid	A|S036|real|0	0.373884400654881	Published
+T/NK	A|S036|real|0	0.795232019497676	Published
+Fibroblast	A|S036|real|0	-0.846047613027697	Published
+B	A|S036|real|0	-0.564973921449463	Published
+Hepatocyte	A|S037|real|0	1.38550588881209	Published
+Endothelial	A|S037|real|0	-0.827941803795975	Published
+Myeloid	A|S037|real|0	1.1659883669964	Published
+T/NK	A|S037|real|0	-0.681019032880234	Published
+Fibroblast	A|S037|real|0	-0.402666453507775	Published
+B	A|S037|real|0	-0.639866965624504	Published
+Hepatocyte	A|S038|real|0	1.7372192910529	Published
+Endothelial	A|S038|real|0	-0.981430902658388	Published
+Myeloid	A|S038|real|0	-0.297158508307247	Published
+T/NK	A|S038|real|0	-0.125401278705317	Published
+Fibroblast	A|S038|real|0	0.488867662428906	Published
+B	A|S038|real|0	-0.822096263810857	Published
+Hepatocyte	A|S039|real|0	1.02270757249122	Published
+Endothelial	A|S039|real|0	-0.255346450319775	Published
+Myeloid	A|S039|real|0	1.29502614757891	Published
+T/NK	A|S039|real|0	-1.00409290385756	Published
+Fibroblast	A|S039|real|0	0.0381175905711407	Published
+B	A|S039|real|0	-1.09641195646394	Published
+Hepatocyte	A|S040|real|0	1.94445127492064	Published
+Endothelial	A|S040|real|0	-0.777117253753206	Published
+Myeloid	A|S040|real|0	-0.0235764152484328	Published
+T/NK	A|S040|real|0	-0.0367068694374399	Published
+Fibroblast	A|S040|real|0	-0.53749250844399	Published
+B	A|S040|real|0	-0.569558228037572	Published
+Hepatocyte	A|S041|real|0	1.93130943258584	Published
+Endothelial	A|S041|real|0	0.0245327062043173	Published
+Myeloid	A|S041|real|0	-0.599087268797129	Published
+T/NK	A|S041|real|0	-0.65121016725859	Published
+Fibroblast	A|S041|real|0	-0.00812389237083497	Published
+B	A|S041|real|0	-0.697420810363606	Published
+Hepatocyte	A|S042|real|0	1.21233735912633	Published
+Endothelial	A|S042|real|0	-0.0904941608455561	Published
+Myeloid	A|S042|real|0	0.884250728361508	Published
+T/NK	A|S042|real|0	-0.431637866504441	Published
+Fibroblast	A|S042|real|0	0.0234452683252865	Published
+B	A|S042|real|0	-1.59790132846313	Published
+Hepatocyte	A|S043|real|0	-0.727743765397402	Published
+Endothelial	A|S043|real|0	1.68501601450824	Published
+Myeloid	A|S043|real|0	0.304984777106512	Published
+T/NK	A|S043|real|0	-0.017533526627245	Published
+Fibroblast	A|S043|real|0	-0.00465688145686802	Published
+B	A|S043|real|0	-1.24006661813323	Published
+Hepatocyte	A|S044|real|0	1.11321694897623	Published
+Endothelial	A|S044|real|0	-0.525609450543933	Published
+Myeloid	A|S044|real|0	1.44665626910325	Published
+T/NK	A|S044|real|0	-0.634847652018944	Published
+Fibroblast	A|S044|real|0	-0.630954528330804	Published
+B	A|S044|real|0	-0.768461587185797	Published
+Hepatocyte	A|S045|real|0	1.86923124980931	Published
+Endothelial	A|S045|real|0	0.190515170676268	Published
+Myeloid	A|S045|real|0	-0.0976276008013982	Published
+T/NK	A|S045|real|0	-0.572820340302931	Published
+Fibroblast	A|S045|real|0	-0.405729630309413	Published
+B	A|S045|real|0	-0.983568849071837	Published
+Hepatocyte	A|S046|real|0	1.81830467820301	Published
+Endothelial	A|S046|real|0	0.125019389561925	Published
+Myeloid	A|S046|real|0	-0.447947523581587	Published
+T/NK	A|S046|real|0	-0.505655367588728	Published
+Fibroblast	A|S046|real|0	0.110126978147051	Published
+B	A|S046|real|0	-1.09984815474167	Published
+Hepatocyte	A|S047|real|0	1.9410193473567	Published
+Endothelial	A|S047|real|0	0.0351953569014289	Published
+Myeloid	A|S047|real|0	-0.365416248745037	Published
+T/NK	A|S047|real|0	-0.579063170063574	Published
+Fibroblast	A|S047|real|0	-0.176660375226134	Published
+B	A|S047|real|0	-0.855074910223387	Published
+Hepatocyte	A|S048|real|0	-0.20672029739282	Published
+Endothelial	A|S048|real|0	1.63615338040072	Published
+Myeloid	A|S048|real|0	-0.88547407308914	Published
+T/NK	A|S048|real|0	-0.585257146146191	Published
+Fibroblast	A|S048|real|0	0.779867681292068	Published
+B	A|S048|real|0	-0.738569545064639	Published
+Hepatocyte	A|S049|real|0	0.76531800521092	Published
+Endothelial	A|S049|real|0	1.53790173370303	Published
+Myeloid	A|S049|real|0	-0.340540266845528	Published
+T/NK	A|S049|real|0	-0.885594098278743	Published
+Fibroblast	A|S049|real|0	-0.00522965643899029	Published
+B	A|S049|real|0	-1.07185571735069	Published
+Hepatocyte	A|S050|real|0	1.74094610502914	Published
+Endothelial	A|S050|real|0	-1.00746411550205	Published
+Myeloid	A|S050|real|0	0.140894019772659	Published
+T/NK	A|S050|real|0	0.225981476729023	Published
+Fibroblast	A|S050|real|0	-0.177478686536376	Published
+B	A|S050|real|0	-0.922878799492402	Published
+Hepatocyte	A|S051|real|0	-0.846477890433293	Published
+Endothelial	A|S051|real|0	0.577668204143154	Published
+Myeloid	A|S051|real|0	1.77639047940582	Published
+T/NK	A|S051|real|0	-0.350870809622869	Published
+Fibroblast	A|S051|real|0	-0.545857502577181	Published
+B	A|S051|real|0	-0.610852480915632	Published
+Hepatocyte	A|S052|real|0	1.90552717517857	Published
+Endothelial	A|S052|real|0	-0.227382507093194	Published
+Myeloid	A|S052|real|0	-0.202739411446461	Published
+T/NK	A|S052|real|0	-0.457347595951632	Published
+Fibroblast	A|S052|real|0	0.0147901209198608	Published
+B	A|S052|real|0	-1.03284778160714	Published
+Hepatocyte	A|S053|real|0	1.79112488021117	Published
+Endothelial	A|S053|real|0	-0.0483843522289889	Published
+Myeloid	A|S053|real|0	-0.104180612632955	Published
+T/NK	A|S053|real|0	-0.572582534683286	Published
+Fibroblast	A|S053|real|0	0.131342691896296	Published
+B	A|S053|real|0	-1.19732007256223	Published
+Hepatocyte	A|S054|real|0	1.24192912604262	Published
+Endothelial	A|S054|real|0	-0.960445079716044	Published
+Myeloid	A|S054|real|0	1.25932281114925	Published
+T/NK	A|S054|real|0	-0.708784948229444	Published
+Fibroblast	A|S054|real|0	-0.191559378012775	Published
+B	A|S054|real|0	-0.640462531233605	Published
+Hepatocyte	A|S055|real|0	1.61700013485092	Published
+Endothelial	A|S055|real|0	-0.891719300885131	Published
+Myeloid	A|S055|real|0	0.43275078007156	Published
+T/NK	A|S055|real|0	0.193322662887493	Published
+Fibroblast	A|S055|real|0	-0.200061131687485	Published
+B	A|S055|real|0	-1.15129314523735	Published
+Hepatocyte	A|S056|real|0	1.3515671606781	Published
+Endothelial	A|S056|real|0	-0.770114109351467	Published
+Myeloid	A|S056|real|0	1.14530355829779	Published
+T/NK	A|S056|real|0	-0.156624306184001	Published
+Fibroblast	A|S056|real|0	-0.70996179211437	Published
+B	A|S056|real|0	-0.860170511326045	Published
+Hepatocyte	A|S057|real|0	0.114175836065112	Published
+Endothelial	A|S057|real|0	1.26871271880391	Published
+Myeloid	A|S057|real|0	0.472869134819943	Published
+T/NK	A|S057|real|0	-0.57757494928569	Published
+Fibroblast	A|S057|real|0	0.36172287728984	Published
+B	A|S057|real|0	-1.63990561769312	Published
+Hepatocyte	A|S058|real|0	1.61203713115592	Published
+Endothelial	A|S058|real|0	-0.217918930001017	Published
+Myeloid	A|S058|real|0	0.651608491351918	Published
+T/NK	A|S058|real|0	-0.656222165001555	Published
+Fibroblast	A|S058|real|0	-0.178387539985721	Published
+B	A|S058|real|0	-1.21111698751954	Published
+Hepatocyte	A|S059|real|0	1.87914804892044	Published
+Endothelial	A|S059|real|0	-0.389738438462715	Published
+Myeloid	A|S059|real|0	-0.461826499862141	Published
+T/NK	A|S059|real|0	-0.162423608272498	Published
+Fibroblast	A|S059|real|0	0.160290779854299	Published
+B	A|S059|real|0	-1.02545028217739	Published
+Hepatocyte	A|S060|real|0	1.41207780307769	Published
+Endothelial	A|S060|real|0	-1.44411187105264	Published
+Myeloid	A|S060|real|0	0.537926110115524	Published
+T/NK	A|S060|real|0	0.400389111270048	Published
+Fibroblast	A|S060|real|0	-0.279606031068366	Published
+B	A|S060|real|0	-0.626675122342257	Published
+Hepatocyte	A|S061|real|0	0.135953643451302	Published
+Endothelial	A|S061|real|0	-0.0842628996358867	Published
+Myeloid	A|S061|real|0	1.51032467641429	Published
+T/NK	A|S061|real|0	0.466185207631231	Published
+Fibroblast	A|S061|real|0	-0.556274909901038	Published
+B	A|S061|real|0	-1.4719257179599	Published
+Hepatocyte	A|S062|real|0	0.691449910561293	Published
+Endothelial	A|S062|real|0	0.67814188845068	Published
+Myeloid	A|S062|real|0	0.380152009839398	Published
+T/NK	A|S062|real|0	-1.14950336564908	Published
+Fibroblast	A|S062|real|0	0.798970940964997	Published
+B	A|S062|real|0	-1.39921138416729	Published
+Hepatocyte	A|S063|real|0	1.14579914149356	Published
+Endothelial	A|S063|real|0	-0.912818164467575	Published
+Myeloid	A|S063|real|0	1.35313202651457	Published
+T/NK	A|S063|real|0	-0.793274742156436	Published
+Fibroblast	A|S063|real|0	-0.197220769892348	Published
+B	A|S063|real|0	-0.595617491491772	Published
+Hepatocyte	A|S064|real|0	-0.293984247507447	Published
+Endothelial	A|S064|real|0	1.36236338884987	Published
+Myeloid	A|S064|real|0	0.166766094056674	Published
+T/NK	A|S064|real|0	0.501467655115045	Published
+Fibroblast	A|S064|real|0	-0.0713289192453543	Published
+B	A|S064|real|0	-1.66528397126879	Published
+Hepatocyte	A|S065|real|0	1.49610229086491	Published
+Endothelial	A|S065|real|0	-0.213471719352392	Published
+Myeloid	A|S065|real|0	0.749939410879188	Published
+T/NK	A|S065|real|0	-0.545311628073977	Published
+Fibroblast	A|S065|real|0	-0.131107682695589	Published
+B	A|S065|real|0	-1.35615067162214	Published
+Hepatocyte	A|S066|real|0	0.324083293260662	Published
+Endothelial	A|S066|real|0	0.869873212659619	Published
+Myeloid	A|S066|real|0	-0.922885999881613	Published
+T/NK	A|S066|real|0	0.43899785056518	Published
+Fibroblast	A|S066|real|0	0.836971357721962	Published
+B	A|S066|real|0	-1.54703971432581	Published
+Hepatocyte	A|S067|real|0	1.79939313837538	Published
+Endothelial	A|S067|real|0	-0.0440598769215193	Published
+Myeloid	A|S067|real|0	-0.148986458807319	Published
+T/NK	A|S067|real|0	-0.704676014576971	Published
+Fibroblast	A|S067|real|0	0.195296444430174	Published
+B	A|S067|real|0	-1.09696723249975	Published
+Hepatocyte	A|S068|real|0	0.173493820805528	Published
+Endothelial	A|S068|real|0	-1.02564983670175	Published
+Myeloid	A|S068|real|0	0.154273967450447	Published
+T/NK	A|S068|real|0	1.79581901949005	Published
+Fibroblast	A|S068|real|0	-0.731236286611543	Published
+B	A|S068|real|0	-0.36670068443273	Published
+Hepatocyte	A|S069|real|0	1.30456359945321	Published
+Endothelial	A|S069|real|0	0.396697851816014	Published
+Myeloid	A|S069|real|0	0.449393498791175	Published
+T/NK	A|S069|real|0	-0.92875145110685	Published
+Fibroblast	A|S069|real|0	0.204427540878309	Published
+B	A|S069|real|0	-1.42633103983186	Published
+Hepatocyte	A|S070|real|0	0.818784049684187	Published
+Endothelial	A|S070|real|0	-0.177871032997355	Published
+Myeloid	A|S070|real|0	-0.108182068335616	Published
+T/NK	A|S070|real|0	0.952244861629782	Published
+Fibroblast	A|S070|real|0	0.324494841139719	Published
+B	A|S070|real|0	-1.80947065112072	Published
+Hepatocyte	A|S071|real|0	-0.373931168934896	Published
+Endothelial	A|S071|real|0	-0.58153314048984	Published
+Myeloid	A|S071|real|0	1.70792481650325	Published
+T/NK	A|S071|real|0	0.720460052522135	Published
+Fibroblast	A|S071|real|0	-0.712197820568004	Published
+B	A|S071|real|0	-0.760722739032645	Published
+Hepatocyte	A|S072|real|0	-0.253721984138088	Published
+Endothelial	A|S072|real|0	-0.640334806112538	Published
+Myeloid	A|S072|real|0	-0.114995171793802	Published
+T/NK	A|S072|real|0	1.91669204007461	Published
+Fibroblast	A|S072|real|0	-0.915750211877448	Published
+B	A|S072|real|0	0.00811013384727048	Published
+Hepatocyte	A|S073|real|0	0.173420088798038	Published
+Endothelial	A|S073|real|0	-0.845840683324276	Published
+Myeloid	A|S073|real|0	-0.405144076543823	Published
+T/NK	A|S073|real|0	1.68096403207809	Published
+Fibroblast	A|S073|real|0	-1.03744821665736	Published
+B	A|S073|real|0	0.434048855649328	Published
+Hepatocyte	A|S074|real|0	1.62254686934279	Published
+Endothelial	A|S074|real|0	-0.179212626099624	Published
+Myeloid	A|S074|real|0	0.639259746549779	Published
+T/NK	A|S074|real|0	-0.628573184917352	Published
+Fibroblast	A|S074|real|0	-0.239989371798026	Published
+B	A|S074|real|0	-1.21403143307756	Published
+Hepatocyte	A|S076|real|0	1.61470585146252	Published
+Endothelial	A|S076|real|0	-0.0615653927243853	Published
+Myeloid	A|S076|real|0	0.545108564001988	Published
+T/NK	A|S076|real|0	-0.854295359663205	Published
+Fibroblast	A|S076|real|0	-0.0796390909930781	Published
+B	A|S076|real|0	-1.16431457208384	Published
+Hepatocyte	A|S078|real|0	2.00311835503186	Published
+Endothelial	A|S078|real|0	-0.341545368199719	Published
+Myeloid	A|S078|real|0	-0.0747349959517944	Published
+T/NK	A|S078|real|0	-0.407810902463527	Published
+Fibroblast	A|S078|real|0	-0.633763560013028	Published
+B	A|S078|real|0	-0.545263528403793	Published
+Hepatocyte	A|S079|real|0	1.29794671821614	Published
+Endothelial	A|S079|real|0	0.344772999352324	Published
+Myeloid	A|S079|real|0	0.708938909697522	Published
+T/NK	A|S079|real|0	-0.818063050641052	Published
+Fibroblast	A|S079|real|0	-0.115381382792731	Published
+B	A|S079|real|0	-1.4182141938322	Published
+Hepatocyte	A|S080|real|0	1.7149551713537	Published
+Endothelial	A|S080|real|0	-0.637204746235185	Published
+Myeloid	A|S080|real|0	0.260440833556736	Published
+T/NK	A|S080|real|0	0.0107599313724174	Published
+Fibroblast	A|S080|real|0	-0.0934768811052072	Published
+B	A|S080|real|0	-1.25547430894246	Published
+Hepatocyte	A|S081|real|0	1.65955028689176	Published
+Endothelial	A|S081|real|0	-0.222790579931891	Published
+Myeloid	A|S081|real|0	0.571158025234371	Published
+T/NK	A|S081|real|0	-0.622169351082513	Published
+Fibroblast	A|S081|real|0	-0.181605316245034	Published
+B	A|S081|real|0	-1.2041430648667	Published
+Hepatocyte	A|S083|real|0	0.76411030560361	Published
+Endothelial	A|S083|real|0	-1.17471206764607	Published
+Myeloid	A|S083|real|0	0.041472854095632	Published
+T/NK	A|S083|real|0	1.37897252108413	Published
+Fibroblast	A|S083|real|0	-1.06304801360788	Published
+B	A|S083|real|0	0.0532044004705844	Published
+Hepatocyte	A|S084|real|0	0.19740053099292	Published
+Endothelial	A|S084|real|0	-0.604063732991175	Published
+Myeloid	A|S084|real|0	1.90669845124886	Published
+T/NK	A|S084|real|0	-0.289024966248694	Published
+Fibroblast	A|S084|real|0	-0.337332930999521	Published
+B	A|S084|real|0	-0.873677352002387	Published
+Hepatocyte	A|S085|real|0	1.00440525509213	Published
+Endothelial	A|S085|real|0	-0.960544016033406	Published
+Myeloid	A|S085|real|0	-0.0783069183020721	Published
+T/NK	A|S085|real|0	1.44017772176346	Published
+Fibroblast	A|S085|real|0	-0.691908252233235	Published
+B	A|S085|real|0	-0.713823790286875	Published
+Hepatocyte	A|S086|real|0	1.77302698357088	Published
+Endothelial	A|S086|real|0	-0.912677260729671	Published
+Myeloid	A|S086|real|0	0.176113278524337	Published
+T/NK	A|S086|real|0	-0.668019758327867	Published
+Fibroblast	A|S086|real|0	0.304784532439103	Published
+B	A|S086|real|0	-0.673227775476778	Published
+Hepatocyte	A|S087|real|0	1.55421541934736	Published
+Endothelial	A|S087|real|0	-0.0953082670113078	Published
+Myeloid	A|S087|real|0	0.630352399804265	Published
+T/NK	A|S087|real|0	-0.941249885138443	Published
+Fibroblast	A|S087|real|0	-0.0113894353268409	Published
+B	A|S087|real|0	-1.13662023167504	Published
+Hepatocyte	A|S088|real|0	-0.755391203661508	Published
+Endothelial	A|S088|real|0	0.00154132274148338	Published
+Myeloid	A|S088|real|0	0.264688811752712	Published
+T/NK	A|S088|real|0	1.84731492994278	Published
+Fibroblast	A|S088|real|0	-0.568491710921442	Published
+B	A|S088|real|0	-0.789662149854025	Published
+Hepatocyte	A|S089|real|0	1.28974230221612	Published
+Endothelial	A|S089|real|0	0.0879902220484314	Published
+Myeloid	A|S089|real|0	0.568739324381177	Published
+T/NK	A|S089|real|0	-0.949335159261171	Published
+Fibroblast	A|S089|real|0	0.397807709855348	Published
+B	A|S089|real|0	-1.39494439923991	Published
+Hepatocyte	A|S090|real|0	1.0601379621816	Published
+Endothelial	A|S090|real|0	0.383591603857654	Published
+Myeloid	A|S090|real|0	0.26573246353399	Published
+T/NK	A|S090|real|0	-0.231626129344106	Published
+Fibroblast	A|S090|real|0	0.381952493473263	Published
+B	A|S090|real|0	-1.8597883937024	Published
+Hepatocyte	A|S091|real|0	-0.582960647688744	Published
+Endothelial	A|S091|real|0	0.332411866948895	Published
+Myeloid	A|S091|real|0	-1.24173010574609	Published
+T/NK	A|S091|real|0	1.65532612444751	Published
+Fibroblast	A|S091|real|0	0.275105599718288	Published
+B	A|S091|real|0	-0.438152837679853	Published
+Hepatocyte	A|S092|real|0	-0.801428665786263	Published
+Endothelial	A|S092|real|0	-0.16347761455617	Published
+Myeloid	A|S092|real|0	1.26472458033835	Published
+T/NK	A|S092|real|0	1.18560855306439	Published
+Fibroblast	A|S092|real|0	-0.409138255026549	Published
+B	A|S092|real|0	-1.07628859803375	Published
+Hepatocyte	A|S093|real|0	1.31839803556101	Published
+Endothelial	A|S093|real|0	-0.111801879662657	Published
+Myeloid	A|S093|real|0	0.382254028623327	Published
+T/NK	A|S093|real|0	-1.10139542254257	Published
+Fibroblast	A|S093|real|0	0.697370612804992	Published
+B	A|S093|real|0	-1.1848253747841	Published
+Hepatocyte	A|S094|real|0	1.02097182111691	Published
+Endothelial	A|S094|real|0	0.354244379492368	Published
+Myeloid	A|S094|real|0	0.501967219667451	Published
+T/NK	A|S094|real|0	-0.245515147081337	Published
+Fibroblast	A|S094|real|0	0.230279625413873	Published
+B	A|S094|real|0	-1.86194789860927	Published
+Hepatocyte	A|S095|real|0	1.57635533390719	Published
+Endothelial	A|S095|real|0	-0.0744481391430528	Published
+Myeloid	A|S095|real|0	0.558857447503491	Published
+T/NK	A|S095|real|0	-0.743109182569769	Published
+Fibroblast	A|S095|real|0	-0.0355619451490574	Published
+B	A|S095|real|0	-1.2820935145488	Published
+Hepatocyte	A|S096|real|0	0.754820322320263	Published
+Endothelial	A|S096|real|0	0.681906873876989	Published
+Myeloid	A|S096|real|0	0.370319142091134	Published
+T/NK	A|S096|real|0	-0.356150386782084	Published
+Fibroblast	A|S096|real|0	0.425360522720601	Published
+B	A|S096|real|0	-1.8762564742269	Published
+Hepatocyte	A|S097|real|0	0.727533757611781	Published
+Endothelial	A|S097|real|0	0.594480629502166	Published
+Myeloid	A|S097|real|0	-0.0707075190213618	Published
+T/NK	A|S097|real|0	-0.543236946885456	Published
+Fibroblast	A|S097|real|0	0.981348874163665	Published
+B	A|S097|real|0	-1.6894187953708	Published
+Hepatocyte	A|S098|real|0	1.20473382148229	Published
+Endothelial	A|S098|real|0	-0.0508905801800058	Published
+Myeloid	A|S098|real|0	0.482152527211864	Published
+T/NK	A|S098|real|0	-0.111615230401182	Published
+Fibroblast	A|S098|real|0	0.272031548684406	Published
+B	A|S098|real|0	-1.79641208679737	Published
+Hepatocyte	A|S099|real|0	1.27293838553155	Published
+Endothelial	A|S099|real|0	-0.0205746398395027	Published
+Myeloid	A|S099|real|0	0.0769669307774082	Published
+T/NK	A|S099|real|0	-1.09088898478642	Published
+Fibroblast	A|S099|real|0	0.918761486644881	Published
+B	A|S099|real|0	-1.15720317832792	Published
+Hepatocyte	A|S100|real|0	0.688554716252885	Published
+Endothelial	A|S100|real|0	0.736262290671901	Published
+Myeloid	A|S100|real|0	0.150863082728187	Published
+T/NK	A|S100|real|0	-0.408920203150117	Published
+Fibroblast	A|S100|real|0	0.664251918198457	Published
+B	A|S100|real|0	-1.83101180470131	Published
+Hepatocyte	A|S101|real|0	0.881017097436645	Published
+Endothelial	A|S101|real|0	-0.821437301666088	Published
+Myeloid	A|S101|real|0	1.53508831741371	Published
+T/NK	A|S101|real|0	-0.673098071472388	Published
+Fibroblast	A|S101|real|0	-0.0640188387754098	Published
+B	A|S101|real|0	-0.857551202936471	Published
+Hepatocyte	A|S102|real|0	1.96803130584595	Published
+Endothelial	A|S102|real|0	-0.067518794775635	Published
+Myeloid	A|S102|real|0	-0.420975693169324	Published
+T/NK	A|S102|real|0	-0.635641313479898	Published
+Fibroblast	A|S102|real|0	-0.117847631584617	Published
+B	A|S102|real|0	-0.726047872836479	Published
+Hepatocyte	A|S103|real|0	0.220115029072315	Published
+Endothelial	A|S103|real|0	-0.338244816326087	Published
+Myeloid	A|S103|real|0	1.87535740572452	Published
+T/NK	A|S103|real|0	-0.321824628319897	Published
+Fibroblast	A|S103|real|0	-0.412404544927743	Published
+B	A|S103|real|0	-1.02299844522311	Published
+Hepatocyte	A|S104|real|0	-0.655541038800767	Published
+Endothelial	A|S104|real|0	-0.563490654383475	Published
+Myeloid	A|S104|real|0	1.00185138997497	Published
+T/NK	A|S104|real|0	1.54021591724884	Published
+Fibroblast	A|S104|real|0	-0.689458203585509	Published
+B	A|S104|real|0	-0.63357741045406	Published
+Hepatocyte	A|S105|real|0	-0.082544813600655	Published
+Endothelial	A|S105|real|0	-0.933601972185415	Published
+Myeloid	A|S105|real|0	1.81620230394813	Published
+T/NK	A|S105|real|0	0.1171510420054	Published
+Fibroblast	A|S105|real|0	-0.0177945921234145	Published
+B	A|S105|real|0	-0.899411968044043	Published
+Hepatocyte	A|S106|real|0	0.170422237687475	Published
+Endothelial	A|S106|real|0	-0.306638215104825	Published
+Myeloid	A|S106|real|0	1.28079523221172	Published
+T/NK	A|S106|real|0	0.903831613657287	Published
+Fibroblast	A|S106|real|0	-1.42519652529948	Published
+B	A|S106|real|0	-0.623214343152176	Published
+Hepatocyte	A|S107|real|0	1.87327871505329	Published
+Endothelial	A|S107|real|0	0.00171224491038396	Published
+Myeloid	A|S107|real|0	-0.265990775904801	Published
+T/NK	A|S107|real|0	-0.525976613046733	Published
+Fibroblast	A|S107|real|0	-0.0138038142174261	Published
+B	A|S107|real|0	-1.06921975679472	Published
+Hepatocyte	A|S108|real|0	0.837615163462174	Published
+Endothelial	A|S108|real|0	0.0938567371077305	Published
+Myeloid	A|S108|real|0	0.198717105076557	Published
+T/NK	A|S108|real|0	-1.07943243380489	Published
+Fibroblast	A|S108|real|0	1.2163223158841	Published
+B	A|S108|real|0	-1.26707888772567	Published
+Hepatocyte	A|S109|real|0	0.96989879814071	Published
+Endothelial	A|S109|real|0	-0.980578013953016	Published
+Myeloid	A|S109|real|0	1.46590660134033	Published
+T/NK	A|S109|real|0	-0.704142729793453	Published
+Fibroblast	A|S109|real|0	-0.0831386239722311	Published
+B	A|S109|real|0	-0.667946031762335	Published
+Hepatocyte	A|S110|real|0	1.62591518966444	Published
+Endothelial	A|S110|real|0	-0.424980297661489	Published
+Myeloid	A|S110|real|0	0.400697101242774	Published
+T/NK	A|S110|real|0	-0.915395408762889	Published
+Fibroblast	A|S110|real|0	0.343112097769159	Published
+B	A|S110|real|0	-1.02934868225199	Published
+Hepatocyte	A|S111|real|0	-0.114541698093513	Published
+Endothelial	A|S111|real|0	1.30674770487856	Published
+Myeloid	A|S111|real|0	0.541673890208867	Published
+T/NK	A|S111|real|0	-1.0973410229116	Published
+Fibroblast	A|S111|real|0	0.570305782674321	Published
+B	A|S111|real|0	-1.20684465675663	Published
+Hepatocyte	A|S112|real|0	0.702002226144931	Published
+Endothelial	A|S112|real|0	0.156038140561959	Published
+Myeloid	A|S112|real|0	0.19318415738274	Published
+T/NK	A|S112|real|0	-1.08089649756504	Published
+Fibroblast	A|S112|real|0	1.29482571385674	Published
+B	A|S112|real|0	-1.26515374038133	Published
+Hepatocyte	A|S113|real|0	1.41928331496242	Published
+Endothelial	A|S113|real|0	0.98290836416339	Published
+Myeloid	A|S113|real|0	-0.474216915752073	Published
+T/NK	A|S113|real|0	-0.973472518538148	Published
+Fibroblast	A|S113|real|0	-0.0348382359110612	Published
+B	A|S113|real|0	-0.919664008924526	Published
+Hepatocyte	A|S114|real|0	1.57550092632315	Published
+Endothelial	A|S114|real|0	-0.401361865091977	Published
+Myeloid	A|S114|real|0	0.431932634691282	Published
+T/NK	A|S114|real|0	-0.968584974303414	Published
+Fibroblast	A|S114|real|0	0.398469359004765	Published
+B	A|S114|real|0	-1.0359560806238	Published
+Hepatocyte	A|S115|real|0	1.95821673151439	Published
+Endothelial	A|S115|real|0	0.127442618853243	Published
+Myeloid	A|S115|real|0	-0.542610719493134	Published
+T/NK	A|S115|real|0	-0.511704854664033	Published
+Fibroblast	A|S115|real|0	-0.340968757398716	Published
+B	A|S115|real|0	-0.690375018811746	Published
+Hepatocyte	A|S116|real|0	1.30268874607957	Published
+Endothelial	A|S116|real|0	-0.694396160682593	Published
+Myeloid	A|S116|real|0	0.774555720363599	Published
+T/NK	A|S116|real|0	-0.876992115689089	Published
+Fibroblast	A|S116|real|0	0.560650120448572	Published
+B	A|S116|real|0	-1.06650631052006	Published
+Hepatocyte	A|S117|real|0	1.93284810304223	Published
+Endothelial	A|S117|real|0	-0.229325889118198	Published
+Myeloid	A|S117|real|0	-0.484892115407556	Published
+T/NK	A|S117|real|0	-0.623094190853052	Published
+Fibroblast	A|S117|real|0	0.155448111764336	Published
+B	A|S117|real|0	-0.750984019427759	Published
+Hepatocyte	A|S118|real|0	1.36055786737214	Published
+Endothelial	A|S118|real|0	-0.179123143036015	Published
+Myeloid	A|S118|real|0	-0.364860048708839	Published
+T/NK	A|S118|real|0	-1.47787758189956	Published
+Fibroblast	A|S118|real|0	0.869581606316245	Published
+B	A|S118|real|0	-0.208278700043969	Published
+Hepatocyte	A|S119|real|0	2.03766292530226	Published
+Endothelial	A|S119|real|0	-0.505306243607125	Published
+Myeloid	A|S119|real|0	-0.331702135756883	Published
+T/NK	A|S119|real|0	-0.429075772942071	Published
+Fibroblast	A|S119|real|0	-0.365837246767969	Published
+B	A|S119|real|0	-0.405741526228215	Published
+Hepatocyte	A|S120|real|0	0.47902317580625	Published
+Endothelial	A|S120|real|0	1.19860183594874	Published
+Myeloid	A|S120|real|0	0.305019022949937	Published
+T/NK	A|S120|real|0	-0.98437091956649	Published
+Fibroblast	A|S120|real|0	0.4425622047872	Published
+B	A|S120|real|0	-1.44083531992563	Published
+Hepatocyte	A|S121|real|0	1.23575810854487	Published
+Endothelial	A|S121|real|0	0.915225190877592	Published
+Myeloid	A|S121|real|0	-1.05268049199761	Published
+T/NK	A|S121|real|0	-0.297512051400322	Published
+Fibroblast	A|S121|real|0	0.347261692682838	Published
+B	A|S121|real|0	-1.14805244870737	Published
+Hepatocyte	A|S122|real|0	0.725220753453123	Published
+Endothelial	A|S122|real|0	0.536801499214452	Published
+Myeloid	A|S122|real|0	1.22957327142197	Published
+T/NK	A|S122|real|0	-1.02397370704665	Published
+Fibroblast	A|S122|real|0	-0.210088879314311	Published
+B	A|S122|real|0	-1.25753293772858	Published
+Hepatocyte	A|S123|real|0	1.90900527057343	Published
+Endothelial	A|S123|real|0	-0.892407207208347	Published
+Myeloid	A|S123|real|0	-0.492316961364209	Published
+T/NK	A|S123|real|0	0.140640286325647	Published
+Fibroblast	A|S123|real|0	-0.527514977035703	Published
+B	A|S123|real|0	-0.137406411290822	Published
+Hepatocyte	A|S124|real|0	0.390330601084994	Published
+Endothelial	A|S124|real|0	1.47758425026339	Published
+Myeloid	A|S124|real|0	0.11445719049946	Published
+T/NK	A|S124|real|0	-0.913555277030852	Published
+Fibroblast	A|S124|real|0	0.254742577232735	Published
+B	A|S124|real|0	-1.32355934204972	Published
+Hepatocyte	A|S125|real|0	1.98430090785988	Published
+Endothelial	A|S125|real|0	-0.844520416081591	Published
+Myeloid	A|S125|real|0	-0.387606581604896	Published
+T/NK	A|S125|real|0	-0.304011258051031	Published
+Fibroblast	A|S125|real|0	-0.16818595333705	Published
+B	A|S125|real|0	-0.279976698785316	Published
+Hepatocyte	A|S126|real|0	1.36706515149149	Published
+Endothelial	A|S126|real|0	0.576671532040631	Published
+Myeloid	A|S126|real|0	-0.0392082221757879	Published
+T/NK	A|S126|real|0	-0.739700948832726	Published
+Fibroblast	A|S126|real|0	0.304005013382455	Published
+B	A|S126|real|0	-1.46883252590606	Published
+Hepatocyte	A|S127|real|0	1.6386034327489	Published
+Endothelial	A|S127|real|0	-0.185174733614604	Published
+Myeloid	A|S127|real|0	-0.0691239546037778	Published
+T/NK	A|S127|real|0	-0.335891496900259	Published
+Fibroblast	A|S127|real|0	0.373986763079095	Published
+B	A|S127|real|0	-1.42240001070935	Published
+Hepatocyte	A|S128|real|0	1.58269562968823	Published
+Endothelial	A|S128|real|0	0.60454938438506	Published
+Myeloid	A|S128|real|0	-0.00813473466227232	Published
+T/NK	A|S128|real|0	-0.976076656451309	Published
+Fibroblast	A|S128|real|0	-0.125513752958994	Published
+B	A|S128|real|0	-1.07751987000072	Published
+Hepatocyte	A|S129|real|0	1.93298547021728	Published
+Endothelial	A|S129|real|0	-1.00654232470859	Published
+Myeloid	A|S129|real|0	-0.114608538789598	Published
+T/NK	A|S129|real|0	-0.370995918650812	Published
+Fibroblast	A|S129|real|0	-0.185083404601589	Published
+B	A|S129|real|0	-0.255755283466694	Published
+Hepatocyte	A|S130|real|0	0.266195728666585	Published
+Endothelial	A|S130|real|0	0.162702895950087	Published
+Myeloid	A|S130|real|0	1.69662651422163	Published
+T/NK	A|S130|real|0	-0.86628505215079	Published
+Fibroblast	A|S130|real|0	-0.139296944056666	Published
+B	A|S130|real|0	-1.11994314263085	Published
+Hepatocyte	A|S131|real|0	0.801336438422226	Published
+Endothelial	A|S131|real|0	-0.924782696149727	Published
+Myeloid	A|S131|real|0	1.6075159562501	Published
+T/NK	A|S131|real|0	-0.647122214170354	Published
+Fibroblast	A|S131|real|0	-0.145049509612851	Published
+B	A|S131|real|0	-0.691897974739394	Published
+Hepatocyte	A|S132|real|0	1.93757184084689	Published
+Endothelial	A|S132|real|0	-0.521507812198014	Published
+Myeloid	A|S132|real|0	-0.508032999738442	Published
+T/NK	A|S132|real|0	-0.164942368342258	Published
+Fibroblast	A|S132|real|0	0.0825762874726711	Published
+B	A|S132|real|0	-0.825664948040844	Published
+Hepatocyte	A|S133|real|0	1.40740096692568	Published
+Endothelial	A|S133|real|0	0.548718339078311	Published
+Myeloid	A|S133|real|0	0.339012767168148	Published
+T/NK	A|S133|real|0	-1.1795944677251	Published
+Fibroblast	A|S133|real|0	-0.0148388516792425	Published
+B	A|S133|real|0	-1.10069875376779	Published
+Hepatocyte	A|S134|real|0	-0.114066566172798	Published
+Endothelial	A|S134|real|0	1.0847397165707	Published
+Myeloid	A|S134|real|0	1.36143653986636	Published
+T/NK	A|S134|real|0	-0.738326282441085	Published
+Fibroblast	A|S134|real|0	-0.530789619343571	Published
+B	A|S134|real|0	-1.0629937884796	Published
+Hepatocyte	A|S135|real|0	-0.058522127953424	Published
+Endothelial	A|S135|real|0	0.786036466292128	Published
+Myeloid	A|S135|real|0	0.135029806371642	Published
+T/NK	A|S135|real|0	0.446324518520306	Published
+Fibroblast	A|S135|real|0	0.631006180614632	Published
+B	A|S135|real|0	-1.93987484384529	Published
+Hepatocyte	A|S136|real|0	1.94711515158882	Published
+Endothelial	A|S136|real|0	-0.0949797476481934	Published
+Myeloid	A|S136|real|0	-0.219242986181658	Published
+T/NK	A|S136|real|0	-0.588358662265012	Published
+Fibroblast	A|S136|real|0	-0.161737649837064	Published
+B	A|S136|real|0	-0.882796105656896	Published
+Hepatocyte	A|S137|real|0	2.02633366185353	Published
+Endothelial	A|S137|real|0	-0.357731827030294	Published
+Myeloid	A|S137|real|0	-0.189325965197921	Published
+T/NK	A|S137|real|0	-0.512328807494537	Published
+Fibroblast	A|S137|real|0	-0.473950081053821	Published
+B	A|S137|real|0	-0.49299698107696	Published
+Hepatocyte	A|S138|real|0	-0.281199459149733	Published
+Endothelial	A|S138|real|0	0.558366092215887	Published
+Myeloid	A|S138|real|0	1.55749649358333	Published
+T/NK	A|S138|real|0	-0.230517210538648	Published
+Fibroblast	A|S138|real|0	-0.152619880739185	Published
+B	A|S138|real|0	-1.45152603537165	Published
+Hepatocyte	A|S139|real|0	2.00904036575029	Published
+Endothelial	A|S139|real|0	-0.169681389930895	Published
+Myeloid	A|S139|real|0	-0.465880471719775	Published
+T/NK	A|S139|real|0	-0.462201388211478	Published
+Fibroblast	A|S139|real|0	-0.244596729706302	Published
+B	A|S139|real|0	-0.666680386181843	Published
+Hepatocyte	A|S140|real|0	0.358802634352287	Published
+Endothelial	A|S140|real|0	-0.857529706367488	Published
+Myeloid	A|S140|real|0	1.83616908217407	Published
+T/NK	A|S140|real|0	-0.602615304462133	Published
+Fibroblast	A|S140|real|0	-0.111233508722579	Published
+B	A|S140|real|0	-0.623593196974158	Published
+Hepatocyte	A|S141|real|0	1.49456764653972	Published
+Endothelial	A|S141|real|0	0.40567984691932	Published
+Myeloid	A|S141|real|0	0.202742336332588	Published
+T/NK	A|S141|real|0	-0.921188260065688	Published
+Fibroblast	A|S141|real|0	0.121023252936161	Published
+B	A|S141|real|0	-1.3028248226621	Published
+Hepatocyte	A|S142|real|0	0.97401380587864	Published
+Endothelial	A|S142|real|0	0.277455647209075	Published
+Myeloid	A|S142|real|0	1.31301618639775	Published
+T/NK	A|S142|real|0	-0.90019614541401	Published
+Fibroblast	A|S142|real|0	-0.666281695407942	Published
+B	A|S142|real|0	-0.998007798663512	Published
+Hepatocyte	A|S143|real|0	-0.447344535550572	Published
+Endothelial	A|S143|real|0	0.985687662972252	Published
+Myeloid	A|S143|real|0	1.46229181659492	Published
+T/NK	A|S143|real|0	-0.740022484361691	Published
+Fibroblast	A|S143|real|0	-0.213292934705196	Published
+B	A|S143|real|0	-1.04731952494971	Published
+Hepatocyte	A|S144|real|0	2.03455777103862	Published
+Endothelial	A|S144|real|0	-0.508015109272231	Published
+Myeloid	A|S144|real|0	-0.355077786024306	Published
+T/NK	A|S144|real|0	-0.490542399774287	Published
+Fibroblast	A|S144|real|0	-0.384933340554987	Published
+B	A|S144|real|0	-0.295989135412809	Published
+Hepatocyte	A|S145|real|0	1.79420006775091	Published
+Endothelial	A|S145|real|0	-0.417879700902905	Published
+Myeloid	A|S145|real|0	-0.645149235960463	Published
+T/NK	A|S145|real|0	-0.678841294753279	Published
+Fibroblast	A|S145|real|0	0.577080648206816	Published
+B	A|S145|real|0	-0.629410484341075	Published
+Hepatocyte	A|S146|real|0	1.96796050485244	Published
+Endothelial	A|S146|real|0	-0.790247687032391	Published
+Myeloid	A|S146|real|0	-0.188591305193621	Published
+T/NK	A|S146|real|0	-0.0240216621948113	Published
+Fibroblast	A|S146|real|0	-0.502392596156298	Published
+B	A|S146|real|0	-0.462707254275315	Published
+Hepatocyte	A|S147|real|0	0.154404576171453	Published
+Endothelial	A|S147|real|0	1.46829940474297	Published
+Myeloid	A|S147|real|0	-0.70600449815335	Published
+T/NK	A|S147|real|0	-0.794457541501426	Published
+Fibroblast	A|S147|real|0	0.856261011459976	Published
+B	A|S147|real|0	-0.978502952719626	Published
+Hepatocyte	A|S148|real|0	1.98143599977126	Published
+Endothelial	A|S148|real|0	-0.318771003371026	Published
+Myeloid	A|S148|real|0	-0.413730267489288	Published
+T/NK	A|S148|real|0	-0.531400743363847	Published
+Fibroblast	A|S148|real|0	0.00269492204484248	Published
+B	A|S148|real|0	-0.720228907591938	Published
+Hepatocyte	A|S149|real|0	1.68792010086013	Published
+Endothelial	A|S149|real|0	-0.0687234806696946	Published
+Myeloid	A|S149|real|0	-0.141572493043249	Published
+T/NK	A|S149|real|0	-0.715931097345373	Published
+Fibroblast	A|S149|real|0	0.432638141856679	Published
+B	A|S149|real|0	-1.19433117165849	Published
+Hepatocyte	A|S150|real|0	1.21106740649389	Published
+Endothelial	A|S150|real|0	-0.523188302903629	Published
+Myeloid	A|S150|real|0	1.33420098855107	Published
+T/NK	A|S150|real|0	-0.768643163067919	Published
+Fibroblast	A|S150|real|0	-0.399635793391605	Published
+B	A|S150|real|0	-0.853801135681807	Published
+Hepatocyte	A|S151|real|0	1.01723534164102	Published
+Endothelial	A|S151|real|0	-0.915293664122594	Published
+Myeloid	A|S151|real|0	1.44332849050552	Published
+T/NK	A|S151|real|0	-0.748688746751187	Published
+Fibroblast	A|S151|real|0	-0.109788703053898	Published
+B	A|S151|real|0	-0.686792718218861	Published
+Hepatocyte	A|S152|real|0	1.38149321326165	Published
+Endothelial	A|S152|real|0	-0.821297324078751	Published
+Myeloid	A|S152|real|0	0.796799123036838	Published
+T/NK	A|S152|real|0	-0.491714951767939	Published
+Fibroblast	A|S152|real|0	0.330878135701059	Published
+B	A|S152|real|0	-1.19615819615286	Published
+Hepatocyte	Ak|S001|null|1	0.241791826636137	Size-matched random
+Endothelial	Ak|S001|null|1	1.80669701361948	Size-matched random
+Myeloid	Ak|S001|null|1	-0.617215727429932	Size-matched random
+T/NK	Ak|S001|null|1	-0.531996980572095	Size-matched random
+Fibroblast	Ak|S001|null|1	0.102203301933477	Size-matched random
+B	Ak|S001|null|1	-1.00147943418706	Size-matched random
+Hepatocyte	Ak|S002|null|1	2.01246252142	Size-matched random
+Endothelial	Ak|S002|null|1	-0.206636939273956	Size-matched random
+Myeloid	Ak|S002|null|1	-0.406647511258141	Size-matched random
+T/NK	Ak|S002|null|1	-0.435198986023496	Size-matched random
+Fibroblast	Ak|S002|null|1	-0.272337948912151	Size-matched random
+B	Ak|S002|null|1	-0.69164113595226	Size-matched random
+Hepatocyte	Ak|S003|null|1	0.0793216440793338	Size-matched random
+Endothelial	Ak|S003|null|1	-0.266819688941993	Size-matched random
+Myeloid	Ak|S003|null|1	-0.299830542462017	Size-matched random
+T/NK	Ak|S003|null|1	1.90350846791989	Size-matched random
+Fibroblast	Ak|S003|null|1	-0.386772525864231	Size-matched random
+B	Ak|S003|null|1	-1.02940735473099	Size-matched random
+Hepatocyte	Ak|S004|null|1	-0.360042801421311	Size-matched random
+Endothelial	Ak|S004|null|1	2.02997540419806	Size-matched random
+Myeloid	Ak|S004|null|1	-0.440793367182087	Size-matched random
+T/NK	Ak|S004|null|1	-0.468203580412781	Size-matched random
+Fibroblast	Ak|S004|null|1	-0.227916002677263	Size-matched random
+B	Ak|S004|null|1	-0.533019652504622	Size-matched random
+Hepatocyte	Ak|S005|null|1	0.356347255749774	Size-matched random
+Endothelial	Ak|S005|null|1	0.946101683968922	Size-matched random
+Myeloid	Ak|S005|null|1	-0.883313313365962	Size-matched random
+T/NK	Ak|S005|null|1	0.640435400986314	Size-matched random
+Fibroblast	Ak|S005|null|1	0.525241249857486	Size-matched random
+B	Ak|S005|null|1	-1.58481227719654	Size-matched random
+Hepatocyte	Ak|S006|null|1	0.0987624158020695	Size-matched random
+Endothelial	Ak|S006|null|1	0.29327504315187	Size-matched random
+Myeloid	Ak|S006|null|1	-0.33381799567725	Size-matched random
+T/NK	Ak|S006|null|1	1.51961835261169	Size-matched random
+Fibroblast	Ak|S006|null|1	-0.00190707327039308	Size-matched random
+B	Ak|S006|null|1	-1.57593074261799	Size-matched random
+Hepatocyte	Ak|S007|null|1	0.699605867882795	Size-matched random
+Endothelial	Ak|S007|null|1	-0.302091200537978	Size-matched random
+Myeloid	Ak|S007|null|1	-0.910674949807788	Size-matched random
+T/NK	Ak|S007|null|1	1.64997651218922	Size-matched random
+Fibroblast	Ak|S007|null|1	-0.901098369539647	Size-matched random
+B	Ak|S007|null|1	-0.235717860186603	Size-matched random
+Hepatocyte	Ak|S008|null|1	-0.147786839739146	Size-matched random
+Endothelial	Ak|S008|null|1	1.88103334863176	Size-matched random
+Myeloid	Ak|S008|null|1	-0.693417320098082	Size-matched random
+T/NK	Ak|S008|null|1	-0.865623331017787	Size-matched random
+Fibroblast	Ak|S008|null|1	0.224800437459998	Size-matched random
+B	Ak|S008|null|1	-0.399006295236745	Size-matched random
+Hepatocyte	Ak|S009|null|1	0.847883378664425	Size-matched random
+Endothelial	Ak|S009|null|1	-0.374421332429898	Size-matched random
+Myeloid	Ak|S009|null|1	1.37583958722349	Size-matched random
+T/NK	Ak|S009|null|1	-0.00719819955664227	Size-matched random
+Fibroblast	Ak|S009|null|1	-0.39605479907294	Size-matched random
+B	Ak|S009|null|1	-1.44604863482843	Size-matched random
+Hepatocyte	Ak|S011|null|1	0.0188040017396276	Size-matched random
+Endothelial	Ak|S011|null|1	1.64226134987645	Size-matched random
+Myeloid	Ak|S011|null|1	0.550783412140703	Size-matched random
+T/NK	Ak|S011|null|1	-0.910741325734635	Size-matched random
+Fibroblast	Ak|S011|null|1	-0.248451955714738	Size-matched random
+B	Ak|S011|null|1	-1.05265548230741	Size-matched random
+Hepatocyte	Ak|S012|null|1	2.01824846801186	Size-matched random
+Endothelial	Ak|S012|null|1	-0.447432433015896	Size-matched random
+Myeloid	Ak|S012|null|1	-0.374999063876554	Size-matched random
+T/NK	Ak|S012|null|1	-0.665760119517171	Size-matched random
+Fibroblast	Ak|S012|null|1	-0.23234531364666	Size-matched random
+B	Ak|S012|null|1	-0.29771153795558	Size-matched random
+Hepatocyte	Ak|S013|null|1	1.82511758268688	Size-matched random
+Endothelial	Ak|S013|null|1	-0.190015365153051	Size-matched random
+Myeloid	Ak|S013|null|1	-0.367587607328241	Size-matched random
+T/NK	Ak|S013|null|1	-0.505343525293901	Size-matched random
+Fibroblast	Ak|S013|null|1	0.308803891228075	Size-matched random
+B	Ak|S013|null|1	-1.07097497613976	Size-matched random
+Hepatocyte	Ak|S014|null|1	2.03341305701616	Size-matched random
+Endothelial	Ak|S014|null|1	-0.301355480731252	Size-matched random
+Myeloid	Ak|S014|null|1	-0.392173579817181	Size-matched random
+T/NK	Ak|S014|null|1	-0.515167068225428	Size-matched random
+Fibroblast	Ak|S014|null|1	-0.499364162308508	Size-matched random
+B	Ak|S014|null|1	-0.325352765933787	Size-matched random
+Hepatocyte	Ak|S015|null|1	1.32188250619266	Size-matched random
+Endothelial	Ak|S015|null|1	0.0180845523546116	Size-matched random
+Myeloid	Ak|S015|null|1	-0.302980172796388	Size-matched random
+T/NK	Ak|S015|null|1	0.311096506495513	Size-matched random
+Fibroblast	Ak|S015|null|1	0.363999042745279	Size-matched random
+B	Ak|S015|null|1	-1.71208243499167	Size-matched random
+Hepatocyte	Ak|S016|null|1	2.03165632494151	Size-matched random
+Endothelial	Ak|S016|null|1	-0.441030708197712	Size-matched random
+Myeloid	Ak|S016|null|1	-0.269762019984802	Size-matched random
+T/NK	Ak|S016|null|1	-0.500522541831043	Size-matched random
+Fibroblast	Ak|S016|null|1	-0.315064254683575	Size-matched random
+B	Ak|S016|null|1	-0.505276800244375	Size-matched random
+Hepatocyte	Ak|S017|null|1	0.81633429247803	Size-matched random
+Endothelial	Ak|S017|null|1	1.1203745692502	Size-matched random
+Myeloid	Ak|S017|null|1	-0.600409956459334	Size-matched random
+T/NK	Ak|S017|null|1	-0.667305076519369	Size-matched random
+Fibroblast	Ak|S017|null|1	0.677628224895402	Size-matched random
+B	Ak|S017|null|1	-1.34662205364493	Size-matched random
+Hepatocyte	Ak|S018|null|1	0.718187128438228	Size-matched random
+Endothelial	Ak|S018|null|1	-0.26728227576361	Size-matched random
+Myeloid	Ak|S018|null|1	-0.169646147795167	Size-matched random
+T/NK	Ak|S018|null|1	1.25259469591414	Size-matched random
+Fibroblast	Ak|S018|null|1	0.138236549617045	Size-matched random
+B	Ak|S018|null|1	-1.67208995041064	Size-matched random
+Hepatocyte	Ak|S019|null|1	0.491293732495222	Size-matched random
+Endothelial	Ak|S019|null|1	1.32065186940309	Size-matched random
+Myeloid	Ak|S019|null|1	0.187841290937117	Size-matched random
+T/NK	Ak|S019|null|1	-0.960422736058286	Size-matched random
+Fibroblast	Ak|S019|null|1	0.351143392224777	Size-matched random
+B	Ak|S019|null|1	-1.39050754900192	Size-matched random
+Hepatocyte	Ak|S020|null|1	1.76287523538624	Size-matched random
+Endothelial	Ak|S020|null|1	-0.483481058431815	Size-matched random
+Myeloid	Ak|S020|null|1	0.600223364212161	Size-matched random
+T/NK	Ak|S020|null|1	-0.75945740303286	Size-matched random
+Fibroblast	Ak|S020|null|1	-0.343176900463793	Size-matched random
+B	Ak|S020|null|1	-0.77698323766993	Size-matched random
+Hepatocyte	Ak|S021|null|1	-0.238829232245687	Size-matched random
+Endothelial	Ak|S021|null|1	0.275135432144223	Size-matched random
+Myeloid	Ak|S021|null|1	0.752331060437679	Size-matched random
+T/NK	Ak|S021|null|1	-0.756939162426951	Size-matched random
+Fibroblast	Ak|S021|null|1	1.34939814239632	Size-matched random
+B	Ak|S021|null|1	-1.38109624030558	Size-matched random
+Hepatocyte	Ak|S022|null|1	1.63208198075951	Size-matched random
+Endothelial	Ak|S022|null|1	-0.477824273856672	Size-matched random
+Myeloid	Ak|S022|null|1	0.54040275383581	Size-matched random
+T/NK	Ak|S022|null|1	-1.14260207003589	Size-matched random
+Fibroblast	Ak|S022|null|1	0.147074521966949	Size-matched random
+B	Ak|S022|null|1	-0.699132912669706	Size-matched random
+Hepatocyte	Ak|S023|null|1	1.61284127920213	Size-matched random
+Endothelial	Ak|S023|null|1	-0.192660384861939	Size-matched random
+Myeloid	Ak|S023|null|1	0.0740076246879347	Size-matched random
+T/NK	Ak|S023|null|1	-0.868200043551359	Size-matched random
+Fibroblast	Ak|S023|null|1	0.525589614466366	Size-matched random
+B	Ak|S023|null|1	-1.15157808994313	Size-matched random
+Hepatocyte	Ak|S024|null|1	-0.656042346907788	Size-matched random
+Endothelial	Ak|S024|null|1	0.686354356011717	Size-matched random
+Myeloid	Ak|S024|null|1	1.40778862171982	Size-matched random
+T/NK	Ak|S024|null|1	0.443956496816453	Size-matched random
+Fibroblast	Ak|S024|null|1	-0.66854879696807	Size-matched random
+B	Ak|S024|null|1	-1.21350833067213	Size-matched random
+Hepatocyte	Ak|S025|null|1	1.47636408277287	Size-matched random
+Endothelial	Ak|S025|null|1	0.00670258627121197	Size-matched random
+Myeloid	Ak|S025|null|1	-0.497752676000288	Size-matched random
+T/NK	Ak|S025|null|1	-0.540434998062571	Size-matched random
+Fibroblast	Ak|S025|null|1	0.821954536567277	Size-matched random
+B	Ak|S025|null|1	-1.2668335315485	Size-matched random
+Hepatocyte	Ak|S026|null|1	1.56983226081263	Size-matched random
+Endothelial	Ak|S026|null|1	0.93660801416993	Size-matched random
+Myeloid	Ak|S026|null|1	-0.652168622272583	Size-matched random
+T/NK	Ak|S026|null|1	-0.742557592206912	Size-matched random
+Fibroblast	Ak|S026|null|1	-0.377360062597415	Size-matched random
+B	Ak|S026|null|1	-0.734353997905647	Size-matched random
+Hepatocyte	Ak|S027|null|1	-0.29492967834362	Size-matched random
+Endothelial	Ak|S027|null|1	-0.464058273124157	Size-matched random
+Myeloid	Ak|S027|null|1	-0.456015612073282	Size-matched random
+T/NK	Ak|S027|null|1	2.03646625212335	Size-matched random
+Fibroblast	Ak|S027|null|1	-0.360130479086997	Size-matched random
+B	Ak|S027|null|1	-0.461332209495298	Size-matched random
+Hepatocyte	Ak|S028|null|1	1.76598348252465	Size-matched random
+Endothelial	Ak|S028|null|1	-0.36470386218396	Size-matched random
+Myeloid	Ak|S028|null|1	-0.147307934541232	Size-matched random
+T/NK	Ak|S028|null|1	-0.0265212013092327	Size-matched random
+Fibroblast	Ak|S028|null|1	0.0836172434542942	Size-matched random
+B	Ak|S028|null|1	-1.31106772794452	Size-matched random
+Hepatocyte	Ak|S029|null|1	2.01135798612924	Size-matched random
+Endothelial	Ak|S029|null|1	-0.547676728979372	Size-matched random
+Myeloid	Ak|S029|null|1	-0.467929720247583	Size-matched random
+T/NK	Ak|S029|null|1	-0.55996513381854	Size-matched random
+Fibroblast	Ak|S029|null|1	-0.101671036209978	Size-matched random
+B	Ak|S029|null|1	-0.334115366873763	Size-matched random
+Hepatocyte	Ak|S030|null|1	0.16294066030675	Size-matched random
+Endothelial	Ak|S030|null|1	-0.63060114655411	Size-matched random
+Myeloid	Ak|S030|null|1	-0.408389779514289	Size-matched random
+T/NK	Ak|S030|null|1	1.81865944227658	Size-matched random
+Fibroblast	Ak|S030|null|1	0.1019458484475	Size-matched random
+B	Ak|S030|null|1	-1.04455502496243	Size-matched random
+Hepatocyte	Ak|S031|null|1	0.894058871627502	Size-matched random
+Endothelial	Ak|S031|null|1	0.877395444087992	Size-matched random
+Myeloid	Ak|S031|null|1	0.421006148137763	Size-matched random
+T/NK	Ak|S031|null|1	-1.27461084509779	Size-matched random
+Fibroblast	Ak|S031|null|1	0.318163674716041	Size-matched random
+B	Ak|S031|null|1	-1.23601329347151	Size-matched random
+Hepatocyte	Ak|S032|null|1	1.54006881401697	Size-matched random
+Endothelial	Ak|S032|null|1	0.833429600164844	Size-matched random
+Myeloid	Ak|S032|null|1	-0.336183297926605	Size-matched random
+T/NK	Ak|S032|null|1	-0.873484554219417	Size-matched random
+Fibroblast	Ak|S032|null|1	-0.145831639480835	Size-matched random
+B	Ak|S032|null|1	-1.01799892255496	Size-matched random
+Hepatocyte	Ak|S033|null|1	0.988343102561592	Size-matched random
+Endothelial	Ak|S033|null|1	0.72881807719423	Size-matched random
+Myeloid	Ak|S033|null|1	-0.590564712953981	Size-matched random
+T/NK	Ak|S033|null|1	-1.00334734592055	Size-matched random
+Fibroblast	Ak|S033|null|1	0.970105630142774	Size-matched random
+B	Ak|S033|null|1	-1.09335475102406	Size-matched random
+Hepatocyte	Ak|S034|null|1	0.256517515175434	Size-matched random
+Endothelial	Ak|S034|null|1	-0.231684078168758	Size-matched random
+Myeloid	Ak|S034|null|1	1.89684410321796	Size-matched random
+T/NK	Ak|S034|null|1	-0.531205231582504	Size-matched random
+Fibroblast	Ak|S034|null|1	-0.565586469000109	Size-matched random
+B	Ak|S034|null|1	-0.824885839642026	Size-matched random
+Hepatocyte	Ak|S035|null|1	1.23358160964446	Size-matched random
+Endothelial	Ak|S035|null|1	0.0161215468689545	Size-matched random
+Myeloid	Ak|S035|null|1	-0.700770076506292	Size-matched random
+T/NK	Ak|S035|null|1	0.516798735801409	Size-matched random
+Fibroblast	Ak|S035|null|1	0.504429788367459	Size-matched random
+B	Ak|S035|null|1	-1.57016160417599	Size-matched random
+Hepatocyte	Ak|S036|null|1	0.795284002758514	Size-matched random
+Endothelial	Ak|S036|null|1	-1.02049395308543	Size-matched random
+Myeloid	Ak|S036|null|1	0.637402866426655	Size-matched random
+T/NK	Ak|S036|null|1	1.19652439772924	Size-matched random
+Fibroblast	Ak|S036|null|1	-1.11594869227799	Size-matched random
+B	Ak|S036|null|1	-0.492768621550984	Size-matched random
+Hepatocyte	Ak|S037|null|1	0.262560384210884	Size-matched random
+Endothelial	Ak|S037|null|1	1.30546364881783	Size-matched random
+Myeloid	Ak|S037|null|1	0.78485931557065	Size-matched random
+T/NK	Ak|S037|null|1	-1.02667234463682	Size-matched random
+Fibroblast	Ak|S037|null|1	-0.0811481821276084	Size-matched random
+B	Ak|S037|null|1	-1.24506282183493	Size-matched random
+Hepatocyte	Ak|S038|null|1	0.857695296573647	Size-matched random
+Endothelial	Ak|S038|null|1	0.505951245266199	Size-matched random
+Myeloid	Ak|S038|null|1	-0.634021574644932	Size-matched random
+T/NK	Ak|S038|null|1	-0.905218409555443	Size-matched random
+Fibroblast	Ak|S038|null|1	1.26498656590279	Size-matched random
+B	Ak|S038|null|1	-1.08939312354226	Size-matched random
+Hepatocyte	Ak|S039|null|1	-0.323004130003268	Size-matched random
+Endothelial	Ak|S039|null|1	1.84977554474624	Size-matched random
+Myeloid	Ak|S039|null|1	-0.648370057711024	Size-matched random
+T/NK	Ak|S039|null|1	-0.624940965823933	Size-matched random
+Fibroblast	Ak|S039|null|1	0.434938184582548	Size-matched random
+B	Ak|S039|null|1	-0.688398575790562	Size-matched random
+Hepatocyte	Ak|S040|null|1	0.993723697250455	Size-matched random
+Endothelial	Ak|S040|null|1	0.991384863277372	Size-matched random
+Myeloid	Ak|S040|null|1	0.303574455504424	Size-matched random
+T/NK	Ak|S040|null|1	-0.892688094294478	Size-matched random
+Fibroblast	Ak|S040|null|1	0.065618565645307	Size-matched random
+B	Ak|S040|null|1	-1.46161348738308	Size-matched random
+Hepatocyte	Ak|S041|null|1	1.87209098444578	Size-matched random
+Endothelial	Ak|S041|null|1	-0.125269759117311	Size-matched random
+Myeloid	Ak|S041|null|1	-0.534388160165843	Size-matched random
+T/NK	Ak|S041|null|1	-0.667177352400058	Size-matched random
+Fibroblast	Ak|S041|null|1	0.275201775884262	Size-matched random
+B	Ak|S041|null|1	-0.820457488646834	Size-matched random
+Hepatocyte	Ak|S042|null|1	1.94240796800274	Size-matched random
+Endothelial	Ak|S042|null|1	-0.146615440780468	Size-matched random
+Myeloid	Ak|S042|null|1	-0.550058196677073	Size-matched random
+T/NK	Ak|S042|null|1	-0.242263115266541	Size-matched random
+Fibroblast	Ak|S042|null|1	-0.0889266193241993	Size-matched random
+B	Ak|S042|null|1	-0.914544595954458	Size-matched random
+Hepatocyte	Ak|S043|null|1	1.94367508146078	Size-matched random
+Endothelial	Ak|S043|null|1	-0.0610586094397549	Size-matched random
+Myeloid	Ak|S043|null|1	-0.822426627951991	Size-matched random
+T/NK	Ak|S043|null|1	-0.0505371890396948	Size-matched random
+Fibroblast	Ak|S043|null|1	-0.382842279013825	Size-matched random
+B	Ak|S043|null|1	-0.626810376015512	Size-matched random
+Hepatocyte	Ak|S044|null|1	0.621087633252168	Size-matched random
+Endothelial	Ak|S044|null|1	0.0359724828018799	Size-matched random
+Myeloid	Ak|S044|null|1	-1.47697417257728	Size-matched random
+T/NK	Ak|S044|null|1	-0.764017391207162	Size-matched random
+Fibroblast	Ak|S044|null|1	0.247281670390015	Size-matched random
+B	Ak|S044|null|1	1.33664977734038	Size-matched random
+Hepatocyte	Ak|S045|null|1	0.806180955902307	Size-matched random
+Endothelial	Ak|S045|null|1	-0.848617967957224	Size-matched random
+Myeloid	Ak|S045|null|1	-0.389204858392069	Size-matched random
+T/NK	Ak|S045|null|1	1.61734377249593	Size-matched random
+Fibroblast	Ak|S045|null|1	-0.875423074837125	Size-matched random
+B	Ak|S045|null|1	-0.310278827211823	Size-matched random
+Hepatocyte	Ak|S046|null|1	0.838315949073671	Size-matched random
+Endothelial	Ak|S046|null|1	0.835876863775355	Size-matched random
+Myeloid	Ak|S046|null|1	-0.210208786400844	Size-matched random
+T/NK	Ak|S046|null|1	-1.06794440428308	Size-matched random
+Fibroblast	Ak|S046|null|1	0.882586398980068	Size-matched random
+B	Ak|S046|null|1	-1.27862602114517	Size-matched random
+Hepatocyte	Ak|S047|null|1	0.833353472047093	Size-matched random
+Endothelial	Ak|S047|null|1	1.22167128338465	Size-matched random
+Myeloid	Ak|S047|null|1	-0.57775382567275	Size-matched random
+T/NK	Ak|S047|null|1	-0.897433861564584	Size-matched random
+Fibroblast	Ak|S047|null|1	0.577764799323468	Size-matched random
+B	Ak|S047|null|1	-1.15760186751787	Size-matched random
+Hepatocyte	Ak|S048|null|1	-0.412413419658874	Size-matched random
+Endothelial	Ak|S048|null|1	2.03993560702164	Size-matched random
+Myeloid	Ak|S048|null|1	-0.404003844872263	Size-matched random
+T/NK	Ak|S048|null|1	-0.354327484533048	Size-matched random
+Fibroblast	Ak|S048|null|1	-0.402467219060874	Size-matched random
+B	Ak|S048|null|1	-0.466723638896578	Size-matched random
+Hepatocyte	Ak|S049|null|1	1.54353911482745	Size-matched random
+Endothelial	Ak|S049|null|1	0.294182044439146	Size-matched random
+Myeloid	Ak|S049|null|1	-0.655393640275662	Size-matched random
+T/NK	Ak|S049|null|1	-0.37852099982619	Size-matched random
+Fibroblast	Ak|S049|null|1	0.502273850993383	Size-matched random
+B	Ak|S049|null|1	-1.30608037015812	Size-matched random
+Hepatocyte	Ak|S050|null|1	0.295727023959458	Size-matched random
+Endothelial	Ak|S050|null|1	-0.614320017082311	Size-matched random
+Myeloid	Ak|S050|null|1	-0.175737999249735	Size-matched random
+T/NK	Ak|S050|null|1	1.86911825002983	Size-matched random
+Fibroblast	Ak|S050|null|1	-0.506217519712641	Size-matched random
+B	Ak|S050|null|1	-0.868569737944606	Size-matched random
+Hepatocyte	Ak|S051|null|1	1.92397267126099	Size-matched random
+Endothelial	Ak|S051|null|1	-0.202384261497444	Size-matched random
+Myeloid	Ak|S051|null|1	-0.325609615678108	Size-matched random
+T/NK	Ak|S051|null|1	-0.537767236504283	Size-matched random
+Fibroblast	Ak|S051|null|1	0.0678303386714811	Size-matched random
+B	Ak|S051|null|1	-0.926041896252639	Size-matched random
+Hepatocyte	Ak|S052|null|1	1.20461372621861	Size-matched random
+Endothelial	Ak|S052|null|1	0.806779120963565	Size-matched random
+Myeloid	Ak|S052|null|1	0.0764489660338193	Size-matched random
+T/NK	Ak|S052|null|1	-0.678349902193122	Size-matched random
+Fibroblast	Ak|S052|null|1	0.143392141366206	Size-matched random
+B	Ak|S052|null|1	-1.55288405238908	Size-matched random
+Hepatocyte	Ak|S053|null|1	1.39567786870102	Size-matched random
+Endothelial	Ak|S053|null|1	-0.167694514742058	Size-matched random
+Myeloid	Ak|S053|null|1	-0.567403576755775	Size-matched random
+T/NK	Ak|S053|null|1	-0.753873695936422	Size-matched random
+Fibroblast	Ak|S053|null|1	1.07847484970668	Size-matched random
+B	Ak|S053|null|1	-0.985180930973438	Size-matched random
+Hepatocyte	Ak|S054|null|1	1.9405686985741	Size-matched random
+Endothelial	Ak|S054|null|1	-0.721770450233755	Size-matched random
+Myeloid	Ak|S054|null|1	-0.362429583885838	Size-matched random
+T/NK	Ak|S054|null|1	0.175604503041212	Size-matched random
+Fibroblast	Ak|S054|null|1	-0.612329952238325	Size-matched random
+B	Ak|S054|null|1	-0.419643215257399	Size-matched random
+Hepatocyte	Ak|S055|null|1	1.07836831379634	Size-matched random
+Endothelial	Ak|S055|null|1	-0.270317252294849	Size-matched random
+Myeloid	Ak|S055|null|1	-0.436278285676069	Size-matched random
+T/NK	Ak|S055|null|1	-0.955114862300658	Size-matched random
+Fibroblast	Ak|S055|null|1	1.4077631597865	Size-matched random
+B	Ak|S055|null|1	-0.824421073311258	Size-matched random
+Hepatocyte	Ak|S056|null|1	1.07523526763127	Size-matched random
+Endothelial	Ak|S056|null|1	0.850995503784013	Size-matched random
+Myeloid	Ak|S056|null|1	-0.710314830527302	Size-matched random
+T/NK	Ak|S056|null|1	-0.748671498318916	Size-matched random
+Fibroblast	Ak|S056|null|1	0.752648764896078	Size-matched random
+B	Ak|S056|null|1	-1.21989320746514	Size-matched random
+Hepatocyte	Ak|S057|null|1	1.9944438242659	Size-matched random
+Endothelial	Ak|S057|null|1	-0.148071607962	Size-matched random
+Myeloid	Ak|S057|null|1	-0.522114536334976	Size-matched random
+T/NK	Ak|S057|null|1	-0.572859011462455	Size-matched random
+Fibroblast	Ak|S057|null|1	-0.133627428427233	Size-matched random
+B	Ak|S057|null|1	-0.61777124007924	Size-matched random
+Hepatocyte	Ak|S058|null|1	1.9527669612618	Size-matched random
+Endothelial	Ak|S058|null|1	-0.278816843201748	Size-matched random
+Myeloid	Ak|S058|null|1	-0.242638544796777	Size-matched random
+T/NK	Ak|S058|null|1	-0.631136423073234	Size-matched random
+Fibroblast	Ak|S058|null|1	0.00710745158738548	Size-matched random
+B	Ak|S058|null|1	-0.807282601777427	Size-matched random
+Hepatocyte	Ak|S059|null|1	1.66578519438353	Size-matched random
+Endothelial	Ak|S059|null|1	0.153898533517018	Size-matched random
+Myeloid	Ak|S059|null|1	-0.509031316205754	Size-matched random
+T/NK	Ak|S059|null|1	-0.732887331665016	Size-matched random
+Fibroblast	Ak|S059|null|1	0.497988466538846	Size-matched random
+B	Ak|S059|null|1	-1.07575354656863	Size-matched random
+Hepatocyte	Ak|S060|null|1	2.0270301604648	Size-matched random
+Endothelial	Ak|S060|null|1	-0.590074695872088	Size-matched random
+Myeloid	Ak|S060|null|1	-0.437502008800309	Size-matched random
+T/NK	Ak|S060|null|1	-0.247805382722185	Size-matched random
+Fibroblast	Ak|S060|null|1	-0.437701550916526	Size-matched random
+B	Ak|S060|null|1	-0.313946522153689	Size-matched random
+Hepatocyte	Ak|S061|null|1	1.43479867760777	Size-matched random
+Endothelial	Ak|S061|null|1	0.140109863456479	Size-matched random
+Myeloid	Ak|S061|null|1	-0.717943589190649	Size-matched random
+T/NK	Ak|S061|null|1	-1.42822655721297	Size-matched random
+Fibroblast	Ak|S061|null|1	-0.0331778970558456	Size-matched random
+B	Ak|S061|null|1	0.604439502395215	Size-matched random
+Hepatocyte	Ak|S062|null|1	0.206560305272172	Size-matched random
+Endothelial	Ak|S062|null|1	0.265797959052675	Size-matched random
+Myeloid	Ak|S062|null|1	-1.43810422735491	Size-matched random
+T/NK	Ak|S062|null|1	1.28239878600692	Size-matched random
+Fibroblast	Ak|S062|null|1	0.591293280425949	Size-matched random
+B	Ak|S062|null|1	-0.907946103402806	Size-matched random
+Hepatocyte	Ak|S063|null|1	1.61950346069546	Size-matched random
+Endothelial	Ak|S063|null|1	-0.290830672141864	Size-matched random
+Myeloid	Ak|S063|null|1	0.771546150641956	Size-matched random
+T/NK	Ak|S063|null|1	-0.562820266332449	Size-matched random
+Fibroblast	Ak|S063|null|1	-0.453438645485665	Size-matched random
+B	Ak|S063|null|1	-1.08396002737744	Size-matched random
+Hepatocyte	Ak|S064|null|1	0.377225153064533	Size-matched random
+Endothelial	Ak|S064|null|1	1.66779244159501	Size-matched random
+Myeloid	Ak|S064|null|1	-0.603580460251892	Size-matched random
+T/NK	Ak|S064|null|1	-0.88314135653326	Size-matched random
+Fibroblast	Ak|S064|null|1	0.343778447093205	Size-matched random
+B	Ak|S064|null|1	-0.902074224967597	Size-matched random
+Hepatocyte	Ak|S065|null|1	0.991524329009253	Size-matched random
+Endothelial	Ak|S065|null|1	1.251998668396	Size-matched random
+Myeloid	Ak|S065|null|1	-0.372402481910413	Size-matched random
+T/NK	Ak|S065|null|1	-0.771796297466035	Size-matched random
+Fibroblast	Ak|S065|null|1	0.195579072694505	Size-matched random
+B	Ak|S065|null|1	-1.29490329072331	Size-matched random
+Hepatocyte	Ak|S066|null|1	1.55730665506307	Size-matched random
+Endothelial	Ak|S066|null|1	-1.12432653019434	Size-matched random
+Myeloid	Ak|S066|null|1	-0.553104189134209	Size-matched random
+T/NK	Ak|S066|null|1	0.508849260459895	Size-matched random
+Fibroblast	Ak|S066|null|1	-0.773275537411431	Size-matched random
+B	Ak|S066|null|1	0.384550341217016	Size-matched random
+Hepatocyte	Ak|S067|null|1	1.85609415275355	Size-matched random
+Endothelial	Ak|S067|null|1	0.0684383974951568	Size-matched random
+Myeloid	Ak|S067|null|1	-0.576638765806688	Size-matched random
+T/NK	Ak|S067|null|1	-0.812766731276085	Size-matched random
+Fibroblast	Ak|S067|null|1	0.187380521980735	Size-matched random
+B	Ak|S067|null|1	-0.722507575146672	Size-matched random
+Hepatocyte	Ak|S068|null|1	0.295806276096091	Size-matched random
+Endothelial	Ak|S068|null|1	1.76013676675337	Size-matched random
+Myeloid	Ak|S068|null|1	-0.596314657827795	Size-matched random
+T/NK	Ak|S068|null|1	-0.78155662235541	Size-matched random
+Fibroblast	Ak|S068|null|1	0.216888855746728	Size-matched random
+B	Ak|S068|null|1	-0.894960618412985	Size-matched random
+Hepatocyte	Ak|S069|null|1	1.79809565204678	Size-matched random
+Endothelial	Ak|S069|null|1	-0.583281498971999	Size-matched random
+Myeloid	Ak|S069|null|1	-0.058577711188397	Size-matched random
+T/NK	Ak|S069|null|1	-0.148478830271329	Size-matched random
+Fibroblast	Ak|S069|null|1	0.1644660549779	Size-matched random
+B	Ak|S069|null|1	-1.17222366659295	Size-matched random
+Hepatocyte	Ak|S070|null|1	1.9911158261479	Size-matched random
+Endothelial	Ak|S070|null|1	-0.14565653260798	Size-matched random
+Myeloid	Ak|S070|null|1	-0.45191621167577	Size-matched random
+T/NK	Ak|S070|null|1	-0.176371868815232	Size-matched random
+Fibroblast	Ak|S070|null|1	-0.470466523936743	Size-matched random
+B	Ak|S070|null|1	-0.746704689112175	Size-matched random
+Hepatocyte	Ak|S071|null|1	1.38225172118431	Size-matched random
+Endothelial	Ak|S071|null|1	0.66159111016779	Size-matched random
+Myeloid	Ak|S071|null|1	-0.949262765082879	Size-matched random
+T/NK	Ak|S071|null|1	-0.810420223267009	Size-matched random
+Fibroblast	Ak|S071|null|1	0.583669084212819	Size-matched random
+B	Ak|S071|null|1	-0.86782892721503	Size-matched random
+Hepatocyte	Ak|S072|null|1	1.86302318547433	Size-matched random
+Endothelial	Ak|S072|null|1	-0.227483257465598	Size-matched random
+Myeloid	Ak|S072|null|1	-0.238850830074705	Size-matched random
+T/NK	Ak|S072|null|1	-0.717877485314433	Size-matched random
+Fibroblast	Ak|S072|null|1	0.241371936159539	Size-matched random
+B	Ak|S072|null|1	-0.920183548779134	Size-matched random
+Hepatocyte	Ak|S073|null|1	1.01943448301153	Size-matched random
+Endothelial	Ak|S073|null|1	-0.0345099020730867	Size-matched random
+Myeloid	Ak|S073|null|1	0.0799825808822384	Size-matched random
+T/NK	Ak|S073|null|1	0.744376949211677	Size-matched random
+Fibroblast	Ak|S073|null|1	0.0340574833477163	Size-matched random
+B	Ak|S073|null|1	-1.84334159438007	Size-matched random
+Hepatocyte	Ak|S074|null|1	1.78165606792243	Size-matched random
+Endothelial	Ak|S074|null|1	0.0807570147303491	Size-matched random
+Myeloid	Ak|S074|null|1	-0.757341095077398	Size-matched random
+T/NK	Ak|S074|null|1	-0.0890715651697166	Size-matched random
+Fibroblast	Ak|S074|null|1	0.0926462126723042	Size-matched random
+B	Ak|S074|null|1	-1.10864663507797	Size-matched random
+Hepatocyte	Ak|S076|null|1	1.94495199427506	Size-matched random
+Endothelial	Ak|S076|null|1	-0.946499125929092	Size-matched random
+Myeloid	Ak|S076|null|1	-0.194915888693429	Size-matched random
+T/NK	Ak|S076|null|1	-0.0580900615161237	Size-matched random
+Fibroblast	Ak|S076|null|1	-0.405041656645379	Size-matched random
+B	Ak|S076|null|1	-0.340405261491041	Size-matched random
+Hepatocyte	Ak|S078|null|1	1.36809395887696	Size-matched random
+Endothelial	Ak|S078|null|1	0.0451308760289926	Size-matched random
+Myeloid	Ak|S078|null|1	-0.317585156035493	Size-matched random
+T/NK	Ak|S078|null|1	-0.977769376037656	Size-matched random
+Fibroblast	Ak|S078|null|1	0.95655540381223	Size-matched random
+B	Ak|S078|null|1	-1.07442570664504	Size-matched random
+Hepatocyte	Ak|S079|null|1	1.99215955765023	Size-matched random
+Endothelial	Ak|S079|null|1	-0.31600436402562	Size-matched random
+Myeloid	Ak|S079|null|1	-0.650790731736435	Size-matched random
+T/NK	Ak|S079|null|1	-0.416939866257835	Size-matched random
+Fibroblast	Ak|S079|null|1	-0.031280194622393	Size-matched random
+B	Ak|S079|null|1	-0.577144401007952	Size-matched random
+Hepatocyte	Ak|S080|null|1	1.85123789966177	Size-matched random
+Endothelial	Ak|S080|null|1	-0.191165770805907	Size-matched random
+Myeloid	Ak|S080|null|1	-0.261867658677856	Size-matched random
+T/NK	Ak|S080|null|1	-0.377713422075445	Size-matched random
+Fibroblast	Ak|S080|null|1	0.123959016070423	Size-matched random
+B	Ak|S080|null|1	-1.14445006417299	Size-matched random
+Hepatocyte	Ak|S081|null|1	-0.534853624937888	Size-matched random
+Endothelial	Ak|S081|null|1	1.36039720022679	Size-matched random
+Myeloid	Ak|S081|null|1	1.0527764921887	Size-matched random
+T/NK	Ak|S081|null|1	-0.00502354031253586	Size-matched random
+Fibroblast	Ak|S081|null|1	-0.948214155229144	Size-matched random
+B	Ak|S081|null|1	-0.925082371935919	Size-matched random
+Hepatocyte	Ak|S083|null|1	1.91477303720149	Size-matched random
+Endothelial	Ak|S083|null|1	-0.830231967416468	Size-matched random
+Myeloid	Ak|S083|null|1	-0.029902011348595	Size-matched random
+T/NK	Ak|S083|null|1	0.0744426628038327	Size-matched random
+Fibroblast	Ak|S083|null|1	-0.54856448214263	Size-matched random
+B	Ak|S083|null|1	-0.580517239097631	Size-matched random
+Hepatocyte	Ak|S084|null|1	1.16942116125476	Size-matched random
+Endothelial	Ak|S084|null|1	0.369615476191797	Size-matched random
+Myeloid	Ak|S084|null|1	-0.87137414778362	Size-matched random
+T/NK	Ak|S084|null|1	1.03178149226335	Size-matched random
+Fibroblast	Ak|S084|null|1	-1.18729988591002	Size-matched random
+B	Ak|S084|null|1	-0.512144096016265	Size-matched random
+Hepatocyte	Ak|S085|null|1	1.75015048789942	Size-matched random
+Endothelial	Ak|S085|null|1	-0.268388212923316	Size-matched random
+Myeloid	Ak|S085|null|1	-0.805245654595843	Size-matched random
+T/NK	Ak|S085|null|1	0.201690590978779	Size-matched random
+Fibroblast	Ak|S085|null|1	0.18947312992754	Size-matched random
+B	Ak|S085|null|1	-1.06768034128659	Size-matched random
+Hepatocyte	Ak|S086|null|1	1.14603879828256	Size-matched random
+Endothelial	Ak|S086|null|1	-0.678077447448786	Size-matched random
+Myeloid	Ak|S086|null|1	-0.79538655544417	Size-matched random
+T/NK	Ak|S086|null|1	1.41187378409325	Size-matched random
+Fibroblast	Ak|S086|null|1	-0.462335828340284	Size-matched random
+B	Ak|S086|null|1	-0.622112751142569	Size-matched random
+Hepatocyte	Ak|S087|null|1	-0.160851596041491	Size-matched random
+Endothelial	Ak|S087|null|1	-0.0303147819969861	Size-matched random
+Myeloid	Ak|S087|null|1	-0.260625320242037	Size-matched random
+T/NK	Ak|S087|null|1	1.70260681586114	Size-matched random
+Fibroblast	Ak|S087|null|1	0.156942433825276	Size-matched random
+B	Ak|S087|null|1	-1.4077575514059	Size-matched random
+Hepatocyte	Ak|S088|null|1	0.602501436337601	Size-matched random
+Endothelial	Ak|S088|null|1	1.67012241731405	Size-matched random
+Myeloid	Ak|S088|null|1	-0.568126503212229	Size-matched random
+T/NK	Ak|S088|null|1	-0.818198970975498	Size-matched random
+Fibroblast	Ak|S088|null|1	0.0378411645988297	Size-matched random
+B	Ak|S088|null|1	-0.924139544062748	Size-matched random
+Hepatocyte	Ak|S089|null|1	1.68363551032088	Size-matched random
+Endothelial	Ak|S089|null|1	-0.349874922334212	Size-matched random
+Myeloid	Ak|S089|null|1	0.631601738017587	Size-matched random
+T/NK	Ak|S089|null|1	-0.791629920172198	Size-matched random
+Fibroblast	Ak|S089|null|1	-0.181566041998636	Size-matched random
+B	Ak|S089|null|1	-0.992166363833424	Size-matched random
+Hepatocyte	Ak|S090|null|1	0.572591728299408	Size-matched random
+Endothelial	Ak|S090|null|1	0.269644014540848	Size-matched random
+Myeloid	Ak|S090|null|1	-0.576177162618378	Size-matched random
+T/NK	Ak|S090|null|1	1.59057276915955	Size-matched random
+Fibroblast	Ak|S090|null|1	-0.84468261412967	Size-matched random
+B	Ak|S090|null|1	-1.01194873525175	Size-matched random
+Hepatocyte	Ak|S091|null|1	1.25606536692731	Size-matched random
+Endothelial	Ak|S091|null|1	-0.370186111182452	Size-matched random
+Myeloid	Ak|S091|null|1	-0.560498748644896	Size-matched random
+T/NK	Ak|S091|null|1	-0.619068979118018	Size-matched random
+Fibroblast	Ak|S091|null|1	1.27483588705448	Size-matched random
+B	Ak|S091|null|1	-0.981147415036428	Size-matched random
+Hepatocyte	Ak|S092|null|1	1.82390298442487	Size-matched random
+Endothelial	Ak|S092|null|1	-0.0845330081356532	Size-matched random
+Myeloid	Ak|S092|null|1	0.317752648577372	Size-matched random
+T/NK	Ak|S092|null|1	-0.615402521705094	Size-matched random
+Fibroblast	Ak|S092|null|1	-0.449505452750487	Size-matched random
+B	Ak|S092|null|1	-0.992214650411008	Size-matched random
+Hepatocyte	Ak|S093|null|1	1.93320944665964	Size-matched random
+Endothelial	Ak|S093|null|1	-0.188436859177251	Size-matched random
+Myeloid	Ak|S093|null|1	-0.426128419061072	Size-matched random
+T/NK	Ak|S093|null|1	-0.470118986254187	Size-matched random
+Fibroblast	Ak|S093|null|1	0.0577114757993414	Size-matched random
+B	Ak|S093|null|1	-0.906236657966472	Size-matched random
+Hepatocyte	Ak|S094|null|1	2.01284465250701	Size-matched random
+Endothelial	Ak|S094|null|1	-0.321847633618829	Size-matched random
+Myeloid	Ak|S094|null|1	-0.655759533781339	Size-matched random
+T/NK	Ak|S094|null|1	-0.153580232211413	Size-matched random
+Fibroblast	Ak|S094|null|1	-0.404750267663538	Size-matched random
+B	Ak|S094|null|1	-0.476906985231889	Size-matched random
+Hepatocyte	Ak|S095|null|1	1.61909827005742	Size-matched random
+Endothelial	Ak|S095|null|1	0.106834655100558	Size-matched random
+Myeloid	Ak|S095|null|1	0.528681423600671	Size-matched random
+T/NK	Ak|S095|null|1	-0.980468169731843	Size-matched random
+Fibroblast	Ak|S095|null|1	-0.240487016835236	Size-matched random
+B	Ak|S095|null|1	-1.03365916219157	Size-matched random
+Hepatocyte	Ak|S096|null|1	1.06564190862103	Size-matched random
+Endothelial	Ak|S096|null|1	1.34182751643022	Size-matched random
+Myeloid	Ak|S096|null|1	-0.69533271167706	Size-matched random
+T/NK	Ak|S096|null|1	-0.853971370059386	Size-matched random
+Fibroblast	Ak|S096|null|1	-0.920472374285893	Size-matched random
+B	Ak|S096|null|1	0.0623070309710849	Size-matched random
+Hepatocyte	Ak|S097|null|1	0.0513056417333324	Size-matched random
+Endothelial	Ak|S097|null|1	0.289422354002659	Size-matched random
+Myeloid	Ak|S097|null|1	0.082772499791472	Size-matched random
+T/NK	Ak|S097|null|1	1.65641141232795	Size-matched random
+Fibroblast	Ak|S097|null|1	-1.04417533175517	Size-matched random
+B	Ak|S097|null|1	-1.03573657610025	Size-matched random
+Hepatocyte	Ak|S098|null|1	1.95781451365527	Size-matched random
+Endothelial	Ak|S098|null|1	-0.33451794109702	Size-matched random
+Myeloid	Ak|S098|null|1	-0.175742229514977	Size-matched random
+T/NK	Ak|S098|null|1	-0.734842923376142	Size-matched random
+Fibroblast	Ak|S098|null|1	-0.0170904448327598	Size-matched random
+B	Ak|S098|null|1	-0.69562097483437	Size-matched random
+Hepatocyte	Ak|S099|null|1	0.919286259527289	Size-matched random
+Endothelial	Ak|S099|null|1	-0.962151788679641	Size-matched random
+Myeloid	Ak|S099|null|1	1.50166586320479	Size-matched random
+T/NK	Ak|S099|null|1	-0.726061761559234	Size-matched random
+Fibroblast	Ak|S099|null|1	-0.0675735747126886	Size-matched random
+B	Ak|S099|null|1	-0.665164997780517	Size-matched random
+Hepatocyte	Ak|S100|null|1	1.37198650034584	Size-matched random
+Endothelial	Ak|S100|null|1	-0.0873991035353108	Size-matched random
+Myeloid	Ak|S100|null|1	-0.0797034907862231	Size-matched random
+T/NK	Ak|S100|null|1	-0.27477796068133	Size-matched random
+Fibroblast	Ak|S100|null|1	0.67415954715726	Size-matched random
+B	Ak|S100|null|1	-1.60426549250023	Size-matched random
+Hepatocyte	Ak|S101|null|1	-0.4759533140962	Size-matched random
+Endothelial	Ak|S101|null|1	0.73293819143644	Size-matched random
+Myeloid	Ak|S101|null|1	1.3808725784777	Size-matched random
+T/NK	Ak|S101|null|1	-0.711891201447397	Size-matched random
+Fibroblast	Ak|S101|null|1	0.37187169178876	Size-matched random
+B	Ak|S101|null|1	-1.29783794615931	Size-matched random
+Hepatocyte	Ak|S102|null|1	1.64600119217173	Size-matched random
+Endothelial	Ak|S102|null|1	0.0417579874634621	Size-matched random
+Myeloid	Ak|S102|null|1	-1.11018235100451	Size-matched random
+T/NK	Ak|S102|null|1	0.338595952885769	Size-matched random
+Fibroblast	Ak|S102|null|1	0.0528431500122842	Size-matched random
+B	Ak|S102|null|1	-0.969015931528732	Size-matched random
+Hepatocyte	Ak|S103|null|1	0.653795746953201	Size-matched random
+Endothelial	Ak|S103|null|1	1.49964520249764	Size-matched random
+Myeloid	Ak|S103|null|1	0.234104949351853	Size-matched random
+T/NK	Ak|S103|null|1	-0.845287891251982	Size-matched random
+Fibroblast	Ak|S103|null|1	-0.343917837865394	Size-matched random
+B	Ak|S103|null|1	-1.19834016968532	Size-matched random
+Hepatocyte	Ak|S104|null|1	0.329564743400319	Size-matched random
+Endothelial	Ak|S104|null|1	-0.168882881196672	Size-matched random
+Myeloid	Ak|S104|null|1	1.83386961506004	Size-matched random
+T/NK	Ak|S104|null|1	-0.711954010885112	Size-matched random
+Fibroblast	Ak|S104|null|1	-0.349424408085168	Size-matched random
+B	Ak|S104|null|1	-0.933173058293406	Size-matched random
+Hepatocyte	Ak|S105|null|1	1.28598849549032	Size-matched random
+Endothelial	Ak|S105|null|1	0.67589915419307	Size-matched random
+Myeloid	Ak|S105|null|1	-0.874760086200529	Size-matched random
+T/NK	Ak|S105|null|1	-0.584562697635252	Size-matched random
+Fibroblast	Ak|S105|null|1	0.658714667280164	Size-matched random
+B	Ak|S105|null|1	-1.16127953312777	Size-matched random
+Hepatocyte	Ak|S106|null|1	0.192446126460323	Size-matched random
+Endothelial	Ak|S106|null|1	1.79279483134493	Size-matched random
+Myeloid	Ak|S106|null|1	-0.56827112847832	Size-matched random
+T/NK	Ak|S106|null|1	-0.775426683301227	Size-matched random
+Fibroblast	Ak|S106|null|1	0.235485454075103	Size-matched random
+B	Ak|S106|null|1	-0.877028600100812	Size-matched random
+Hepatocyte	Ak|S107|null|1	1.7811668317433	Size-matched random
+Endothelial	Ak|S107|null|1	0.302627081409131	Size-matched random
+Myeloid	Ak|S107|null|1	-0.988886058561649	Size-matched random
+T/NK	Ak|S107|null|1	-0.590157320020094	Size-matched random
+Fibroblast	Ak|S107|null|1	0.123319899591839	Size-matched random
+B	Ak|S107|null|1	-0.628070434162524	Size-matched random
+Hepatocyte	Ak|S108|null|1	-0.180129456105011	Size-matched random
+Endothelial	Ak|S108|null|1	0.706837837953309	Size-matched random
+Myeloid	Ak|S108|null|1	-0.167629070255945	Size-matched random
+T/NK	Ak|S108|null|1	-0.802448912266005	Size-matched random
+Fibroblast	Ak|S108|null|1	1.58139461983661	Size-matched random
+B	Ak|S108|null|1	-1.13802501916296	Size-matched random
+Hepatocyte	Ak|S109|null|1	1.82472518659864	Size-matched random
+Endothelial	Ak|S109|null|1	-0.240932265015998	Size-matched random
+Myeloid	Ak|S109|null|1	0.143225126818597	Size-matched random
+T/NK	Ak|S109|null|1	-0.755131431185671	Size-matched random
+Fibroblast	Ak|S109|null|1	0.038132508134768	Size-matched random
+B	Ak|S109|null|1	-1.01001912535033	Size-matched random
+Hepatocyte	Ak|S110|null|1	-0.0441772930076092	Size-matched random
+Endothelial	Ak|S110|null|1	1.87328647938135	Size-matched random
+Myeloid	Ak|S110|null|1	-0.591792001455764	Size-matched random
+T/NK	Ak|S110|null|1	-0.623172147911257	Size-matched random
+Fibroblast	Ak|S110|null|1	0.222879257977389	Size-matched random
+B	Ak|S110|null|1	-0.83702429498411	Size-matched random
+Hepatocyte	Ak|S111|null|1	-0.150834304387827	Size-matched random
+Endothelial	Ak|S111|null|1	2.02376182494357	Size-matched random
+Myeloid	Ak|S111|null|1	-0.413740454475602	Size-matched random
+T/NK	Ak|S111|null|1	-0.474914950621074	Size-matched random
+Fibroblast	Ak|S111|null|1	-0.47607498845214	Size-matched random
+B	Ak|S111|null|1	-0.50819712700693	Size-matched random
+Hepatocyte	Ak|S112|null|1	1.94823470644297	Size-matched random
+Endothelial	Ak|S112|null|1	-0.429369415425693	Size-matched random
+Myeloid	Ak|S112|null|1	-0.283169568727107	Size-matched random
+T/NK	Ak|S112|null|1	-0.191347162985238	Size-matched random
+Fibroblast	Ak|S112|null|1	-0.0991537508294937	Size-matched random
+B	Ak|S112|null|1	-0.945194808475439	Size-matched random
+Hepatocyte	Ak|S113|null|1	1.47578625697606	Size-matched random
+Endothelial	Ak|S113|null|1	0.13594254235949	Size-matched random
+Myeloid	Ak|S113|null|1	-1.03725692409531	Size-matched random
+T/NK	Ak|S113|null|1	0.731869048720743	Size-matched random
+Fibroblast	Ak|S113|null|1	-0.241602112231185	Size-matched random
+B	Ak|S113|null|1	-1.0647388117298	Size-matched random
+Hepatocyte	Ak|S114|null|1	1.5771078366614	Size-matched random
+Endothelial	Ak|S114|null|1	0.0688153605685763	Size-matched random
+Myeloid	Ak|S114|null|1	-0.328141224955218	Size-matched random
+T/NK	Ak|S114|null|1	-0.847447669345519	Size-matched random
+Fibroblast	Ak|S114|null|1	0.651270642077826	Size-matched random
+B	Ak|S114|null|1	-1.12160494500706	Size-matched random
+Hepatocyte	Ak|S115|null|1	1.8612476964472	Size-matched random
+Endothelial	Ak|S115|null|1	-0.0181361518740195	Size-matched random
+Myeloid	Ak|S115|null|1	-0.228987977608248	Size-matched random
+T/NK	Ak|S115|null|1	-0.832470057632698	Size-matched random
+Fibroblast	Ak|S115|null|1	0.10135974321625	Size-matched random
+B	Ak|S115|null|1	-0.883013252548478	Size-matched random
+Hepatocyte	Ak|S116|null|1	-0.0735331144382081	Size-matched random
+Endothelial	Ak|S116|null|1	0.897708946870208	Size-matched random
+Myeloid	Ak|S116|null|1	0.886279773088529	Size-matched random
+T/NK	Ak|S116|null|1	0.0173623188319195	Size-matched random
+Fibroblast	Ak|S116|null|1	0.11339366537379	Size-matched random
+B	Ak|S116|null|1	-1.84121158972624	Size-matched random
+Hepatocyte	Ak|S117|null|1	0.755527349471103	Size-matched random
+Endothelial	Ak|S117|null|1	0.195233841933965	Size-matched random
+Myeloid	Ak|S117|null|1	1.44586656412966	Size-matched random
+T/NK	Ak|S117|null|1	-0.913621190651836	Size-matched random
+Fibroblast	Ak|S117|null|1	-0.313616536826558	Size-matched random
+B	Ak|S117|null|1	-1.16939002805634	Size-matched random
+Hepatocyte	Ak|S118|null|1	-0.514581553677143	Size-matched random
+Endothelial	Ak|S118|null|1	0.060117472456429	Size-matched random
+Myeloid	Ak|S118|null|1	-0.161771707031437	Size-matched random
+T/NK	Ak|S118|null|1	0.400571889363939	Size-matched random
+Fibroblast	Ak|S118|null|1	1.61144565178496	Size-matched random
+B	Ak|S118|null|1	-1.39578175289676	Size-matched random
+Hepatocyte	Ak|S119|null|1	-0.514174277886184	Size-matched random
+Endothelial	Ak|S119|null|1	1.93276821636156	Size-matched random
+Myeloid	Ak|S119|null|1	-0.56511742149824	Size-matched random
+T/NK	Ak|S119|null|1	-0.583487160234009	Size-matched random
+Fibroblast	Ak|S119|null|1	0.254729417090041	Size-matched random
+B	Ak|S119|null|1	-0.524718773833168	Size-matched random
+Hepatocyte	Ak|S120|null|1	1.36880170107468	Size-matched random
+Endothelial	Ak|S120|null|1	0.417080334319889	Size-matched random
+Myeloid	Ak|S120|null|1	0.0852784589209588	Size-matched random
+T/NK	Ak|S120|null|1	-0.628858235388319	Size-matched random
+Fibroblast	Ak|S120|null|1	0.321725678719517	Size-matched random
+B	Ak|S120|null|1	-1.56402793764673	Size-matched random
+Hepatocyte	Ak|S121|null|1	0.0934066796357406	Size-matched random
+Endothelial	Ak|S121|null|1	1.29625119362795	Size-matched random
+Myeloid	Ak|S121|null|1	-0.260714165168813	Size-matched random
+T/NK	Ak|S121|null|1	-0.974444723203078	Size-matched random
+Fibroblast	Ak|S121|null|1	0.990823228054269	Size-matched random
+B	Ak|S121|null|1	-1.14532221294607	Size-matched random
+Hepatocyte	Ak|S122|null|1	1.98800036555463	Size-matched random
+Endothelial	Ak|S122|null|1	-0.757576890465498	Size-matched random
+Myeloid	Ak|S122|null|1	-0.536834034234608	Size-matched random
+T/NK	Ak|S122|null|1	-0.292612847667944	Size-matched random
+Fibroblast	Ak|S122|null|1	-0.299805033633425	Size-matched random
+B	Ak|S122|null|1	-0.10117155955315	Size-matched random
+Hepatocyte	Ak|S123|null|1	-0.532378195332018	Size-matched random
+Endothelial	Ak|S123|null|1	2.03101425982196	Size-matched random
+Myeloid	Ak|S123|null|1	-0.232109909589975	Size-matched random
+T/NK	Ak|S123|null|1	-0.397153624231258	Size-matched random
+Fibroblast	Ak|S123|null|1	-0.402715781882056	Size-matched random
+B	Ak|S123|null|1	-0.46665674878665	Size-matched random
+Hepatocyte	Ak|S124|null|1	1.60066952960224	Size-matched random
+Endothelial	Ak|S124|null|1	-0.103355205973592	Size-matched random
+Myeloid	Ak|S124|null|1	-0.340685200503439	Size-matched random
+T/NK	Ak|S124|null|1	-0.961101939000031	Size-matched random
+Fibroblast	Ak|S124|null|1	0.729362751231908	Size-matched random
+B	Ak|S124|null|1	-0.924889935357086	Size-matched random
+Hepatocyte	Ak|S125|null|1	0.642490586309839	Size-matched random
+Endothelial	Ak|S125|null|1	-0.791023499766791	Size-matched random
+Myeloid	Ak|S125|null|1	-0.644572123190438	Size-matched random
+T/NK	Ak|S125|null|1	-0.477897605469188	Size-matched random
+Fibroblast	Ak|S125|null|1	1.75574782693967	Size-matched random
+B	Ak|S125|null|1	-0.484745184823087	Size-matched random
+Hepatocyte	Ak|S126|null|1	-0.595623447400057	Size-matched random
+Endothelial	Ak|S126|null|1	1.08406226106242	Size-matched random
+Myeloid	Ak|S126|null|1	-0.124361306093478	Size-matched random
+T/NK	Ak|S126|null|1	0.150646916201274	Size-matched random
+Fibroblast	Ak|S126|null|1	1.02704638334864	Size-matched random
+B	Ak|S126|null|1	-1.5417708071188	Size-matched random
+Hepatocyte	Ak|S127|null|1	1.54171369754814	Size-matched random
+Endothelial	Ak|S127|null|1	-0.862018590800636	Size-matched random
+Myeloid	Ak|S127|null|1	-0.373290049351696	Size-matched random
+T/NK	Ak|S127|null|1	0.963362552460105	Size-matched random
+Fibroblast	Ak|S127|null|1	-0.577984490523089	Size-matched random
+B	Ak|S127|null|1	-0.691783119332825	Size-matched random
+Hepatocyte	Ak|S128|null|1	1.35576177324327	Size-matched random
+Endothelial	Ak|S128|null|1	0.78687781927437	Size-matched random
+Myeloid	Ak|S128|null|1	-0.164895133621061	Size-matched random
+T/NK	Ak|S128|null|1	-0.806310206864106	Size-matched random
+Fibroblast	Ak|S128|null|1	0.182162309033205	Size-matched random
+B	Ak|S128|null|1	-1.35359656106568	Size-matched random
+Hepatocyte	Ak|S129|null|1	1.5764657672174	Size-matched random
+Endothelial	Ak|S129|null|1	-1.51931725241505	Size-matched random
+Myeloid	Ak|S129|null|1	0.317284639847934	Size-matched random
+T/NK	Ak|S129|null|1	0.0234936822952755	Size-matched random
+Fibroblast	Ak|S129|null|1	-0.0848661097102857	Size-matched random
+B	Ak|S129|null|1	-0.313060727235272	Size-matched random
+Hepatocyte	Ak|S130|null|1	1.88984579382096	Size-matched random
+Endothelial	Ak|S130|null|1	0.153158759031134	Size-matched random
+Myeloid	Ak|S130|null|1	-0.557524259678406	Size-matched random
+T/NK	Ak|S130|null|1	-0.0577626790860364	Size-matched random
+Fibroblast	Ak|S130|null|1	-0.524561884068206	Size-matched random
+B	Ak|S130|null|1	-0.903155730019441	Size-matched random
+Hepatocyte	Ak|S131|null|1	0.233546837850806	Size-matched random
+Endothelial	Ak|S131|null|1	-0.548848510047765	Size-matched random
+Myeloid	Ak|S131|null|1	0.459820591557873	Size-matched random
+T/NK	Ak|S131|null|1	-0.721900705252387	Size-matched random
+Fibroblast	Ak|S131|null|1	-1.07969514899274	Size-matched random
+B	Ak|S131|null|1	1.65707693488421	Size-matched random
+Hepatocyte	Ak|S132|null|1	1.48843536623608	Size-matched random
+Endothelial	Ak|S132|null|1	-0.039902306310271	Size-matched random
+Myeloid	Ak|S132|null|1	-0.747505618630382	Size-matched random
+T/NK	Ak|S132|null|1	0.0136034874964881	Size-matched random
+Fibroblast	Ak|S132|null|1	0.63482101299506	Size-matched random
+B	Ak|S132|null|1	-1.34945194178698	Size-matched random
+Hepatocyte	Ak|S133|null|1	-0.24115691123633	Size-matched random
+Endothelial	Ak|S133|null|1	1.85466094344625	Size-matched random
+Myeloid	Ak|S133|null|1	-0.849579603752406	Size-matched random
+T/NK	Ak|S133|null|1	0.332570630831651	Size-matched random
+Fibroblast	Ak|S133|null|1	-0.363130412808497	Size-matched random
+B	Ak|S133|null|1	-0.733364646480663	Size-matched random
+Hepatocyte	Ak|S134|null|1	-0.0234925848966331	Size-matched random
+Endothelial	Ak|S134|null|1	-0.582509600845028	Size-matched random
+Myeloid	Ak|S134|null|1	2.00113014172307	Size-matched random
+T/NK	Ak|S134|null|1	-0.39785494524734	Size-matched random
+Fibroblast	Ak|S134|null|1	-0.503301954894888	Size-matched random
+B	Ak|S134|null|1	-0.493971055839179	Size-matched random
+Hepatocyte	Ak|S135|null|1	0.512757965906077	Size-matched random
+Endothelial	Ak|S135|null|1	-0.579654427212974	Size-matched random
+Myeloid	Ak|S135|null|1	1.63406063615308	Size-matched random
+T/NK	Ak|S135|null|1	-1.02178088850589	Size-matched random
+Fibroblast	Ak|S135|null|1	0.246041526273298	Size-matched random
+B	Ak|S135|null|1	-0.791424812613592	Size-matched random
+Hepatocyte	Ak|S136|null|1	1.93516409593885	Size-matched random
+Endothelial	Ak|S136|null|1	-0.0933483856011958	Size-matched random
+Myeloid	Ak|S136|null|1	-0.454064562511635	Size-matched random
+T/NK	Ak|S136|null|1	-0.622852676312863	Size-matched random
+Fibroblast	Ak|S136|null|1	0.0416799199933196	Size-matched random
+B	Ak|S136|null|1	-0.80657839150648	Size-matched random
+Hepatocyte	Ak|S137|null|1	-0.0738410410449861	Size-matched random
+Endothelial	Ak|S137|null|1	-0.419171554242395	Size-matched random
+Myeloid	Ak|S137|null|1	-0.527717733946124	Size-matched random
+T/NK	Ak|S137|null|1	2.00794811248506	Size-matched random
+Fibroblast	Ak|S137|null|1	-0.390648695836798	Size-matched random
+B	Ak|S137|null|1	-0.596569087414756	Size-matched random
+Hepatocyte	Ak|S138|null|1	0.841311233972013	Size-matched random
+Endothelial	Ak|S138|null|1	0.0667569914042822	Size-matched random
+Myeloid	Ak|S138|null|1	0.359905896410699	Size-matched random
+T/NK	Ak|S138|null|1	-0.933898349431314	Size-matched random
+Fibroblast	Ak|S138|null|1	1.10383528206357	Size-matched random
+B	Ak|S138|null|1	-1.43791105441924	Size-matched random
+Hepatocyte	Ak|S139|null|1	1.22255673925901	Size-matched random
+Endothelial	Ak|S139|null|1	-0.428765106481264	Size-matched random
+Myeloid	Ak|S139|null|1	-0.382597904719274	Size-matched random
+T/NK	Ak|S139|null|1	-0.86056022560644	Size-matched random
+Fibroblast	Ak|S139|null|1	1.30486964926369	Size-matched random
+B	Ak|S139|null|1	-0.855503151715728	Size-matched random
+Hepatocyte	Ak|S140|null|1	-0.60178658696498	Size-matched random
+Endothelial	Ak|S140|null|1	0.00342351007365104	Size-matched random
+Myeloid	Ak|S140|null|1	-0.444984630079266	Size-matched random
+T/NK	Ak|S140|null|1	1.69749051790913	Size-matched random
+Fibroblast	Ak|S140|null|1	0.492807974494134	Size-matched random
+B	Ak|S140|null|1	-1.14695078543267	Size-matched random
+Hepatocyte	Ak|S141|null|1	1.10390840822878	Size-matched random
+Endothelial	Ak|S141|null|1	-0.15471269758513	Size-matched random
+Myeloid	Ak|S141|null|1	0.498222882801874	Size-matched random
+T/NK	Ak|S141|null|1	0.146496388036282	Size-matched random
+Fibroblast	Ak|S141|null|1	0.256009861719889	Size-matched random
+B	Ak|S141|null|1	-1.84992484320169	Size-matched random
+Hepatocyte	Ak|S142|null|1	-0.562269507270342	Size-matched random
+Endothelial	Ak|S142|null|1	-0.771172854323322	Size-matched random
+Myeloid	Ak|S142|null|1	1.81263928453196	Size-matched random
+T/NK	Ak|S142|null|1	0.531360567258027	Size-matched random
+Fibroblast	Ak|S142|null|1	-0.432728827153513	Size-matched random
+B	Ak|S142|null|1	-0.577828663042807	Size-matched random
+Hepatocyte	Ak|S143|null|1	0.45488922140425	Size-matched random
+Endothelial	Ak|S143|null|1	0.765647561987526	Size-matched random
+Myeloid	Ak|S143|null|1	-0.0600407576758364	Size-matched random
+T/NK	Ak|S143|null|1	-0.486204309926438	Size-matched random
+Fibroblast	Ak|S143|null|1	1.03024681147793	Size-matched random
+B	Ak|S143|null|1	-1.70453852726743	Size-matched random
+Hepatocyte	Ak|S144|null|1	1.35121329864299	Size-matched random
+Endothelial	Ak|S144|null|1	-0.0702507916019901	Size-matched random
+Myeloid	Ak|S144|null|1	-0.44004830414566	Size-matched random
+T/NK	Ak|S144|null|1	-0.746816572923739	Size-matched random
+Fibroblast	Ak|S144|null|1	1.0514689960422	Size-matched random
+B	Ak|S144|null|1	-1.14556662601379	Size-matched random
+Hepatocyte	Ak|S145|null|1	-0.932462842188817	Size-matched random
+Endothelial	Ak|S145|null|1	0.809880733203972	Size-matched random
+Myeloid	Ak|S145|null|1	0.279385952555563	Size-matched random
+T/NK	Ak|S145|null|1	1.26861085361884	Size-matched random
+Fibroblast	Ak|S145|null|1	-0.0917110893325898	Size-matched random
+B	Ak|S145|null|1	-1.33370360785697	Size-matched random
+Hepatocyte	Ak|S146|null|1	1.98312729466237	Size-matched random
+Endothelial	Ak|S146|null|1	0.0063352450778431	Size-matched random
+Myeloid	Ak|S146|null|1	-0.359959329739814	Size-matched random
+T/NK	Ak|S146|null|1	-0.659605897632481	Size-matched random
+Fibroblast	Ak|S146|null|1	-0.35813197686417	Size-matched random
+B	Ak|S146|null|1	-0.611765335503744	Size-matched random
+Hepatocyte	Ak|S147|null|1	2.03841066960173	Size-matched random
+Endothelial	Ak|S147|null|1	-0.375508293890782	Size-matched random
+Myeloid	Ak|S147|null|1	-0.336074244250354	Size-matched random
+T/NK	Ak|S147|null|1	-0.469765714511128	Size-matched random
+Fibroblast	Ak|S147|null|1	-0.389984186405512	Size-matched random
+B	Ak|S147|null|1	-0.467078230543959	Size-matched random
+Hepatocyte	Ak|S148|null|1	-0.231487224906759	Size-matched random
+Endothelial	Ak|S148|null|1	-1.06186316318935	Size-matched random
+Myeloid	Ak|S148|null|1	0.313389258510945	Size-matched random
+T/NK	Ak|S148|null|1	1.55293045891918	Size-matched random
+Fibroblast	Ak|S148|null|1	-1.04309140650809	Size-matched random
+B	Ak|S148|null|1	0.470122077174083	Size-matched random
+Hepatocyte	Ak|S149|null|1	1.67308915943942	Size-matched random
+Endothelial	Ak|S149|null|1	-0.0490808369356131	Size-matched random
+Myeloid	Ak|S149|null|1	0.220295306644289	Size-matched random
+T/NK	Ak|S149|null|1	-0.34743757077326	Size-matched random
+Fibroblast	Ak|S149|null|1	-0.0743347982372135	Size-matched random
+B	Ak|S149|null|1	-1.42253126013762	Size-matched random
+Hepatocyte	Ak|S150|null|1	0.651072731293648	Size-matched random
+Endothelial	Ak|S150|null|1	-0.721608949786176	Size-matched random
+Myeloid	Ak|S150|null|1	1.60951512561815	Size-matched random
+T/NK	Ak|S150|null|1	-0.935600968519728	Size-matched random
+Fibroblast	Ak|S150|null|1	0.149677977796369	Size-matched random
+B	Ak|S150|null|1	-0.753055916402262	Size-matched random
+Hepatocyte	Ak|S151|null|1	1.45378321809019	Size-matched random
+Endothelial	Ak|S151|null|1	0.64450358183544	Size-matched random
+Myeloid	Ak|S151|null|1	-0.907975139662622	Size-matched random
+T/NK	Ak|S151|null|1	-0.490613058058286	Size-matched random
+Fibroblast	Ak|S151|null|1	0.412128518080834	Size-matched random
+B	Ak|S151|null|1	-1.11182712028555	Size-matched random
+Hepatocyte	Ak|S152|null|1	0.647808873349689	Size-matched random
+Endothelial	Ak|S152|null|1	0.337000846520713	Size-matched random
+Myeloid	Ak|S152|null|1	-0.0753153595128777	Size-matched random
+T/NK	Ak|S152|null|1	-1.08681321118701	Size-matched random
+Fibroblast	Ak|S152|null|1	1.36619959038702	Size-matched random
+B	Ak|S152|null|1	-1.18888073955754	Size-matched random

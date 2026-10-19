@@ -1,0 +1,6 @@
+check	value
+sig genes shared (excl. target)	TYROBP,AIF1
+sig genes official (excl. target)	TYROBP,AIF1
+top20 overlap shared vs official (ALAD)	20
+Spearman FC shared vs official (ALAD)	0.9932
+top20 overlap ALAD vs TINAGL1 (shared)	2

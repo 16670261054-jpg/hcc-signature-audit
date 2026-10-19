@@ -1,0 +1,13 @@
+grp	celltype	n_sig	median_z
+Published	Hepatocyte	148	1.22092444116947
+Size-matched random	Hepatocyte	148	1.15772997976866
+Published	Endothelial	148	-0.0873785302407214
+Size-matched random	Endothelial	148	-0.00735632090018424
+Published	Myeloid	148	0.137961913072151
+Size-matched random	Myeloid	148	-0.361194456812826
+Published	T/NK	148	-0.595486983363573
+Size-matched random	T/NK	148	-0.534882108538189
+Published	Fibroblast	148	-0.0263164140172378
+Size-matched random	Fibroblast	148	0.0616650207223242
+Published	B	148	-1.03109823192957
+Size-matched random	B	148	-0.929607477273022

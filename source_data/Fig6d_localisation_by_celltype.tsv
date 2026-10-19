@@ -1,0 +1,13 @@
+grp	celltype	n	frac
+Published	B	83	0.560810810810811
+Published	Endothelial	60	0.405405405405405
+Published	Fibroblast	40	0.27027027027027
+Published	Hepatocyte	114	0.77027027027027
+Published	Myeloid	63	0.425675675675676
+Published	T/NK	79	0.533783783783784
+Size-matched random	B	1468	0.396756756756757
+Size-matched random	Endothelial	1276	0.344864864864865
+Size-matched random	Fibroblast	921	0.248918918918919
+Size-matched random	Hepatocyte	2213	0.598108108108108
+Size-matched random	Myeloid	1021	0.275945945945946
+Size-matched random	T/NK	1396	0.377297297297297

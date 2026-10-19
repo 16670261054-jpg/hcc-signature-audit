@@ -1,0 +1,6 @@
+s1	s2	s3	N
+Pass	Pass	Fail	75
+Fail	Pass	Fail	64
+Pass	Pass	Pass	6
+Pass	Fail	Fail	1
+Fail	Fail	Fail	2

@@ -1,0 +1,25 @@
+module	lab	n_papers	n_fulltext	frac	audited
+timeROC/ROC	Time-dependent ROC	147	149	0.986577181208054	TRUE
+KM	Kaplan-Meier	145	149	0.973154362416107	TRUE
+CIBERSORT/immune	Immune infiltration	135	149	0.906040268456376	TRUE
+GSEA/GSVA	GSEA / GSVA	124	149	0.832214765100671	TRUE
+checkpoint	Immune checkpoints	115	149	0.771812080536913	TRUE
+nomogram	Nomogram	106	149	0.711409395973154	TRUE
+qPCR/IHC wet	qPCR / IHC (wet lab)	95	149	0.63758389261745	FALSE
+consensus clustering/subtype	Consensus clustering	85	149	0.570469798657718	TRUE
+calibration	Calibration curve	85	149	0.570469798657718	TRUE
+TMB/mutation	TMB / mutation	78	149	0.523489932885906	TRUE
+drug sens (oncoPredict/pRRophetic)	Drug sensitivity	75	149	0.503355704697987	TRUE
+TIDE/IPS	TIDE / IPS	53	149	0.355704697986577	FALSE
+HPA	Human Protein Atlas	49	149	0.328859060402685	FALSE
+CNV	Copy number	47	149	0.315436241610738	FALSE
+single-cell	Single-cell RNA-seq	34	149	0.228187919463087	TRUE
+methylation	Methylation	32	149	0.214765100671141	FALSE
+DCA	Decision curve	29	149	0.194630872483221	TRUE
+ceRNA/lncRNA	ceRNA / lncRNA	26	149	0.174496644295302	FALSE
+ML multi-algorithm	Multi-algorithm ML	19	149	0.12751677852349	TRUE
+spatial	Spatial transcriptomics	3	149	0.0201342281879195	FALSE
+CellChat	CellChat	3	149	0.0201342281879195	FALSE
+docking	Molecular docking	2	149	0.0134228187919463	FALSE
+pseudotime	Pseudotime	2	149	0.0134228187919463	FALSE
+MR	Mendelian randomisation	0	149	0	FALSE

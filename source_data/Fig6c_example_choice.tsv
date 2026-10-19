@@ -1,0 +1,2 @@
+example_src	rule	k_median	n_candidates	genes_published	genes_random
+S004	k == published median, both M8a-positive, full sc coverage, lowest src id	5	21	STC2;CCNA2;SERPINE1;PBK;SLC6A1	CEP55;TRIM36;FAM107A;MAST2

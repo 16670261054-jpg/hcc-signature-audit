@@ -1,0 +1,283 @@
+id	claim	fig	what	value	display	source	rule
+n_TCGA	Data	Fig1a	TCGA patients	365	365	N11_out/robust_v2/cohort_meta.tsv	n
+ev_TCGA	Data	Fig1a	TCGA deaths	130	130	N11_out/robust_v2/cohort_meta.tsv	events
+n_GSE14520	Data	Fig1a	GSE14520 patients	221	221	N11_out/robust_v2/cohort_meta.tsv	n
+ev_GSE14520	Data	Fig1a	GSE14520 deaths	85	85	N11_out/robust_v2/cohort_meta.tsv	events
+n_LIRI	Data	Fig1a	LIRI patients	203	203	N11_out/robust_v2/cohort_meta.tsv	n
+ev_LIRI	Data	Fig1a	LIRI deaths	35	35	N11_out/robust_v2/cohort_meta.tsv	events
+n_bulk_total	Data	Abstract	Patients in three bulk cohorts	789	789	N11_out/robust_v2/cohort_meta.tsv	sum(n)
+n_sig_scorable	Data	Fig1a	Published signatures scorable	148	148	Fig4c_landscape_per_signature_modules.tsv	nrow
+n_fulltext	Data	Fig1b	Full-text papers audited for downstream analyses	149	149	Fig1b_module_frequency.tsv	n_fulltext
+corpus_timeROCROC	Data	Fig1b	Share of papers using timeROC/ROC	0.98657718	147/149 (99%)	Fig1b_module_frequency.tsv	module == 'timeROC/ROC'
+corpus_KM	Data	Fig1b	Share of papers using KM	0.97315436	145/149 (97%)	Fig1b_module_frequency.tsv	module == 'KM'
+corpus_CIBERSORTimmune	Data	Fig1b	Share of papers using CIBERSORT/immune	0.90604027	135/149 (91%)	Fig1b_module_frequency.tsv	module == 'CIBERSORT/immune'
+corpus_nomogram	Data	Fig1b	Share of papers using nomogram	0.7114094	106/149 (71%)	Fig1b_module_frequency.tsv	module == 'nomogram'
+corpus_qPCRIHCwet	Data	Fig1b	Share of papers using qPCR/IHC wet	0.63758389	95/149 (64%)	Fig1b_module_frequency.tsv	module == 'qPCR/IHC wet'
+corpus_singlecell	Data	Fig1b	Share of papers using single-cell	0.22818792	34/149 (23%)	Fig1b_module_frequency.tsv	module == 'single-cell'
+sc_cells	Data	Fig6a	scRNA-seq cells after QC	67099	67,099	N28_fig/data/sc_umap.tsv.gz	nrow
+sc_patients	Data	Fig6a	scRNA-seq patients	10	10	N28_fig/data/sc_umap.tsv.gz	uniqueN(patient)
+D_n_splits	Design	Fig2a	TCGA train/test splits	50	50	N11_scripts/robust_proxy.R	N11_S default
+D_null_inner	Design	Fig2a	Random gene sets per split (internal null)	100	100	N11_scripts/robust_proxy.R	N11_NR default
+D_null_ext	Design	Fig2b-c	Random gene sets (external null)	200	200	N11_scripts/robust_proxy.R	N11_NE default
+D_train_frac	Design	Fig2a	Training fraction per split	0.66666667	two-thirds	N11_scripts/robust_proxy.R	round(nT * 2 / 3)
+D_universe	Design	Fig2	Genes in random-sampling pool	10651	10,651	N11_out/robust_v2/cohort_meta.tsv	n_genes_universe
+C1_inner_empP_min	C1	Fig2a	Median internal empirical P, lowest of 8 sets	0.23762376	0.24	Fig2a_inner_splits_summary.tsv	min(median_emp_p)
+C1_inner_empP_max	C1	Fig2a	Median internal empirical P, highest of 8 sets	0.81683168	0.82	Fig2a_inner_splits_summary.tsv	max(median_emp_p)
+C1_n_sets	C1	Fig2	Cell-death gene sets tested	8	8	Fig2a_inner_splits_summary.tsv	nrow
+C1_ext_above_p95	C1	Fig2b	Set x cohort pairs with external C above random 95th percentile	0	0/16	Fig2b_external.tsv	sum(c_ext > null_p95)
+C1_prolif_C_GSE14520	C1	Fig2b	Proliferation score alone, Harrell's C, GSE14520	0.58289968	0.58	Fig2b_proliferation_reference.tsv	cohort == 'GSE14520'
+C1_prolif_C_LIRI	C1	Fig2b	Proliferation score alone, Harrell's C, LIRI	0.69223068	0.69	Fig2b_proliferation_reference.tsv	cohort == 'LIRI'
+C1_sets_below_prolif_GSE14520	C1	Fig2b	Cell-death sets with external C below proliferation score alone, GSE14520	5	5/8	Fig2b_external.tsv + Fig2b_proliferation_reference.tsv	c_ext < prolif c
+C1_sets_below_prolif_LIRI	C1	Fig2b	Cell-death sets with external C below proliferation score alone, LIRI	5	5/8	Fig2b_external.tsv + Fig2b_proliferation_reference.tsv	c_ext < prolif c
+C1_adjnull_frac_min	C1	Fig2c	Random sets still P<0.05 after proxy adjustment, lowest cohort x set	0.055	5.5%	Fig2c_adjusted_null.tsv	min(null_frac_Padj_lt05)
+C1_adjnull_frac_max	C1	Fig2c	Random sets still P<0.05 after proxy adjustment, highest cohort x set	0.225	22.5%	Fig2c_adjusted_null.tsv	max(null_frac_Padj_lt05)
+C1_adj_specific	C1	Fig2c	Set x cohort pairs with residual signal beyond random (emp P<0.05)	2	2/16	Fig2c_adjusted_null.tsv	sum(emp_p_absz < 0.05)
+C2_R2_proxy_pub_TCGA	C2	Fig3a-b	Published median R2_proxy TCGA	0.32033512	0.32	Fig3ab_stats.tsv	median_pub
+C2_R2_proxy_Ak_TCGA	C2	Fig3a-b	Size-matched random median R2_proxy TCGA	0.51256092	0.51	Fig3ab_stats.tsv	median_null
+C2_R2_proxy_P_TCGA	C2	Fig3a-b	MWU P published vs size-matched, R2_proxy TCGA	3.0057938e-27	3.0e-27	Fig3ab_stats.tsv	P
+C2_rho_prolif_pub_TCGA	C2	Fig3a-b	Published median rho_prolif TCGA	0.43365073	0.43	Fig3ab_stats.tsv	median_pub
+C2_rho_prolif_Ak_TCGA	C2	Fig3a-b	Size-matched random median rho_prolif TCGA	0.65718506	0.66	Fig3ab_stats.tsv	median_null
+C2_rho_prolif_P_TCGA	C2	Fig3a-b	MWU P published vs size-matched, rho_prolif TCGA	6.6026009e-31	6.6e-31	Fig3ab_stats.tsv	P
+C2_R2_proxy_pub_GSE14520	C2	Fig3a-b	Published median R2_proxy GSE14520	0.28170238	0.28	Fig3ab_stats.tsv	median_pub
+C2_R2_proxy_Ak_GSE14520	C2	Fig3a-b	Size-matched random median R2_proxy GSE14520	0.42881629	0.43	Fig3ab_stats.tsv	median_null
+C2_R2_proxy_P_GSE14520	C2	Fig3a-b	MWU P published vs size-matched, R2_proxy GSE14520	6.0801892e-16	6.1e-16	Fig3ab_stats.tsv	P
+C2_rho_prolif_pub_GSE14520	C2	Fig3a-b	Published median rho_prolif GSE14520	0.4575589	0.46	Fig3ab_stats.tsv	median_pub
+C2_rho_prolif_Ak_GSE14520	C2	Fig3a-b	Size-matched random median rho_prolif GSE14520	0.60578118	0.61	Fig3ab_stats.tsv	median_null
+C2_rho_prolif_P_GSE14520	C2	Fig3a-b	MWU P published vs size-matched, rho_prolif GSE14520	1.7940711e-16	1.8e-16	Fig3ab_stats.tsv	P
+C2_R2_proxy_pub_LIRI	C2	Fig3a-b	Published median R2_proxy LIRI	0.47062971	0.47	Fig3ab_stats.tsv	median_pub
+C2_R2_proxy_Ak_LIRI	C2	Fig3a-b	Size-matched random median R2_proxy LIRI	0.63292873	0.63	Fig3ab_stats.tsv	median_null
+C2_R2_proxy_P_LIRI	C2	Fig3a-b	MWU P published vs size-matched, R2_proxy LIRI	9.8799245e-20	9.9e-20	Fig3ab_stats.tsv	P
+C2_rho_prolif_pub_LIRI	C2	Fig3a-b	Published median rho_prolif LIRI	0.57423017	0.57	Fig3ab_stats.tsv	median_pub
+C2_rho_prolif_Ak_LIRI	C2	Fig3a-b	Size-matched random median rho_prolif LIRI	0.74948071	0.75	Fig3ab_stats.tsv	median_null
+C2_rho_prolif_P_LIRI	C2	Fig3a-b	MWU P published vs size-matched, rho_prolif LIRI	3.4421255e-24	3.4e-24	Fig3ab_stats.tsv	P
+C2_R2_proxy_In_TCGA	C2	Fig3a-b	Input-matched random median R2_proxy TCGA	0.25993393	0.26	Fig3ab_stats.tsv	median_null, Input-matched
+C2_R2_proxy_InP_TCGA	C2	Fig3a-b	MWU P published vs input-matched, R2_proxy TCGA	0.00011601245	1.2e-04	Fig3ab_stats.tsv	P, Input-matched
+C2_rho_prolif_In_TCGA	C2	Fig3a-b	Input-matched random median rho_prolif TCGA	0.32806739	0.33	Fig3ab_stats.tsv	median_null, Input-matched
+C2_rho_prolif_InP_TCGA	C2	Fig3a-b	MWU P published vs input-matched, rho_prolif TCGA	3.1658143e-09	3.2e-09	Fig3ab_stats.tsv	P, Input-matched
+C2_R2_proxy_In_GSE14520	C2	Fig3a-b	Input-matched random median R2_proxy GSE14520	0.19723233	0.20	Fig3ab_stats.tsv	median_null, Input-matched
+C2_R2_proxy_InP_GSE14520	C2	Fig3a-b	MWU P published vs input-matched, R2_proxy GSE14520	1.0344479e-09	1.0e-09	Fig3ab_stats.tsv	P, Input-matched
+C2_rho_prolif_In_GSE14520	C2	Fig3a-b	Input-matched random median rho_prolif GSE14520	0.29091275	0.29	Fig3ab_stats.tsv	median_null, Input-matched
+C2_rho_prolif_InP_GSE14520	C2	Fig3a-b	MWU P published vs input-matched, rho_prolif GSE14520	2.2870594e-14	2.3e-14	Fig3ab_stats.tsv	P, Input-matched
+C2_R2_proxy_In_LIRI	C2	Fig3a-b	Input-matched random median R2_proxy LIRI	0.36368164	0.36	Fig3ab_stats.tsv	median_null, Input-matched
+C2_R2_proxy_InP_LIRI	C2	Fig3a-b	MWU P published vs input-matched, R2_proxy LIRI	7.4897866e-12	7.5e-12	Fig3ab_stats.tsv	P, Input-matched
+C2_rho_prolif_In_LIRI	C2	Fig3a-b	Input-matched random median rho_prolif LIRI	0.44986518	0.45	Fig3ab_stats.tsv	median_null, Input-matched
+C2_rho_prolif_InP_LIRI	C2	Fig3a-b	MWU P published vs input-matched, rho_prolif LIRI	6.4392935e-15	6.4e-15	Fig3ab_stats.tsv	P, Input-matched
+C2_resid_Published_base	C2	Fig3c	Residual signal in both external cohorts, Published Base: proliferation, stroma, immune, stage, age, sex	0.040540541	4.1% (6/148)	Fig3c_residual.tsv	pos/n
+C2_resid_Published_oxphos	C2	Fig3c	Residual signal in both external cohorts, Published Base + OXPHOS	0.040540541	4.1% (6/148)	Fig3c_residual.tsv	pos/n
+C2_resid_Sizematchedrandom_base	C2	Fig3c	Residual signal in both external cohorts, Size-matched random Base: proliferation, stroma, immune, stage, age, sex	0.065675676	6.6% (243/3700)	Fig3c_residual.tsv	pos/n
+C2_resid_P_Sizematchedrandom_base	C2	Fig3c	Fisher P vs published, Size-matched random Base: proliferation, stroma, immune, stage, age, sex	0.30408284	0.3	Fig3c_residual.tsv	fisher_P_vs_published
+C2_resid_Sizematchedrandom_oxphos	C2	Fig3c	Residual signal in both external cohorts, Size-matched random Base + OXPHOS	0.042162162	4.2% (156/3700)	Fig3c_residual.tsv	pos/n
+C2_resid_P_Sizematchedrandom_oxphos	C2	Fig3c	Fisher P vs published, Size-matched random Base + OXPHOS	1	1	Fig3c_residual.tsv	fisher_P_vs_published
+C2_resid_Inputmatchedrandom_base	C2	Fig3c	Residual signal in both external cohorts, Input-matched random Base: proliferation, stroma, immune, stage, age, sex	0.032972973	3.3% (122/3700)	Fig3c_residual.tsv	pos/n
+C2_resid_P_Inputmatchedrandom_base	C2	Fig3c	Fisher P vs published, Input-matched random Base: proliferation, stroma, immune, stage, age, sex	0.63575802	0.64	Fig3c_residual.tsv	fisher_P_vs_published
+C2_resid_Inputmatchedrandom_oxphos	C2	Fig3c	Residual signal in both external cohorts, Input-matched random Base + OXPHOS	0.023243243	2.3% (86/3700)	Fig3c_residual.tsv	pos/n
+C2_resid_P_Inputmatchedrandom_oxphos	C2	Fig3c	Fisher P vs published, Input-matched random Base + OXPHOS	0.16709172	0.17	Fig3c_residual.tsv	fisher_P_vs_published
+C2_absloghr_unadj_GSE14520	C2	Fig3d	Published median |log HR| unadjusted, GSE14520	0.26559211	0.27	Fig3d_HR_medians.tsv	u
+C2_absloghr_adj_GSE14520	C2	Fig3d	Published median |log HR| adjusted, GSE14520	0.20149075	0.20	Fig3d_HR_medians.tsv	a
+C2_absloghr_unadj_LIRIJP	C2	Fig3d	Published median |log HR| unadjusted, LIRI-JP	0.49430603	0.49	Fig3d_HR_medians.tsv	u
+C2_absloghr_adj_LIRIJP	C2	Fig3d	Published median |log HR| adjusted, LIRI-JP	0.22871014	0.23	Fig3d_HR_medians.tsv	a
+C2_attenuation_real_GSE14520	C2	Fig3d	Median per-signature attenuation of |log HR|, published, GSE14520	0.20181951	20%	N11_out/ring2/ring2_HR_attenuation.tsv	median_attenuation
+C2_attenuation_null_GSE14520	C2	Fig3d	Median per-signature attenuation of |log HR|, size-matched random, GSE14520	0.33275758	33%	N11_out/ring2/ring2_HR_attenuation.tsv	median_attenuation
+C2_attenuation_real_LIRI	C2	Fig3d	Median per-signature attenuation of |log HR|, published, LIRI	0.5057024	51%	N11_out/ring2/ring2_HR_attenuation.tsv	median_attenuation
+C2_attenuation_null_LIRI	C2	Fig3d	Median per-signature attenuation of |log HR|, size-matched random, LIRI	0.49825772	50%	N11_out/ring2/ring2_HR_attenuation.tsv	median_attenuation
+C3_M13_rand	C3	Fig4a	Size-matched random positive rate, Immune checkpoint expression differs	1	100.0% (95% CI 99.9%-100.0%)	Fig4a_module_rates.tsv	rate_null; lo; hi
+C3_M13_pub	C3	Fig4a	Published positive rate, Immune checkpoint expression differs	1	100.0%	Fig4a_module_rates.tsv	rate_real
+C3_M13_P	C3	Fig4a	Fisher P published vs size-matched, Immune checkpoint expression differs	1	1	Fig4a_module_rates.tsv	P
+C3_M15_rand	C3	Fig4a	Size-matched random positive rate, Decision curve shows net benefit	1	100.0% (95% CI 99.9%-100.0%)	Fig4a_module_rates.tsv	rate_null; lo; hi
+C3_M15_pub	C3	Fig4a	Published positive rate, Decision curve shows net benefit	1	100.0%	Fig4a_module_rates.tsv	rate_real
+C3_M15_P	C3	Fig4a	Fisher P published vs size-matched, Decision curve shows net benefit	1	1	Fig4a_module_rates.tsv	P
+C3_M3_rand	C3	Fig4a	Size-matched random positive rate, Drug sensitivity differs (oncoPredict)	1	100.0% (95% CI 99.9%-100.0%)	Fig4a_module_rates.tsv	rate_null; lo; hi
+C3_M3_pub	C3	Fig4a	Published positive rate, Drug sensitivity differs (oncoPredict)	0.99324324	99.3%	Fig4a_module_rates.tsv	rate_real
+C3_M3_P	C3	Fig4a	Fisher P published vs size-matched, Drug sensitivity differs (oncoPredict)	1	1	Fig4a_module_rates.tsv	P
+C3_M4_rand	C3	Fig4a	Size-matched random positive rate, GSEA Hallmark pathways enriched	1	100.0% (95% CI 99.9%-100.0%)	Fig4a_module_rates.tsv	rate_null; lo; hi
+C3_M4_pub	C3	Fig4a	Published positive rate, GSEA Hallmark pathways enriched	1	100.0%	Fig4a_module_rates.tsv	rate_real
+C3_M4_P	C3	Fig4a	Fisher P published vs size-matched, GSEA Hallmark pathways enriched	1	1	Fig4a_module_rates.tsv	P
+C3_M2_rand	C3	Fig4a	Size-matched random positive rate, Immune infiltration differs by risk group	0.99972973	100.0% (95% CI 99.8%-100.0%)	Fig4a_module_rates.tsv	rate_null; lo; hi
+C3_M2_pub	C3	Fig4a	Published positive rate, Immune infiltration differs by risk group	1	100.0%	Fig4a_module_rates.tsv	rate_real
+C3_M2_P	C3	Fig4a	Fisher P published vs size-matched, Immune infiltration differs by risk group	1	1	Fig4a_module_rates.tsv	P
+C3_M1_rand	C3	Fig4a	Size-matched random positive rate, Independent prognostic factor (multivariable Cox)	0.98432432	98.4% (95% CI 98.0%-98.8%)	Fig4a_module_rates.tsv	rate_null; lo; hi
+C3_M1_pub	C3	Fig4a	Published positive rate, Independent prognostic factor (multivariable Cox)	0.97972973	98.0%	Fig4a_module_rates.tsv	rate_real
+C3_M1_P	C3	Fig4a	Fisher P published vs size-matched, Independent prognostic factor (multivariable Cox)	1	1	Fig4a_module_rates.tsv	P
+C3_M5b_rand	C3	Fig4a	Size-matched random positive rate, TMB x risk groups separate survival	0.98243243	98.2% (95% CI 97.8%-98.6%)	Fig4a_module_rates.tsv	rate_null; lo; hi
+C3_M5b_pub	C3	Fig4a	Published positive rate, TMB x risk groups separate survival	0.83108108	83.1%	Fig4a_module_rates.tsv	rate_real
+C3_M5b_P	C3	Fig4a	Fisher P published vs size-matched, TMB x risk groups separate survival	4.3720683e-31	4.4e-31	Fig4a_module_rates.tsv	P
+C3_M8b_rand	C3	Fig4a	Size-matched random positive rate, Signature genes differ tumour vs normal (scRNA)	0.9672973	96.7% (95% CI 96.1%-97.3%)	Fig4a_module_rates.tsv	rate_null; lo; hi
+C3_M8b_pub	C3	Fig4a	Published positive rate, Signature genes differ tumour vs normal (scRNA)	0.9527027	95.3%	Fig4a_module_rates.tsv	rate_real
+C3_M8b_P	C3	Fig4a	Fisher P published vs size-matched, Signature genes differ tumour vs normal (scRNA)	1	1	Fig4a_module_rates.tsv	P
+C3_M14_rand	C3	Fig4a	Size-matched random positive rate, Consensus-clustering subtypes differ in survival	0.93974895	94.0% (95% CI 93.1%-94.7%)	Fig4a_module_rates.tsv	rate_null; lo; hi
+C3_M14_pub	C3	Fig4a	Published positive rate, Consensus-clustering subtypes differ in survival	0.76351351	76.4%	Fig4a_module_rates.tsv	rate_real
+C3_M14_P	C3	Fig4a	Fisher P published vs size-matched, Consensus-clustering subtypes differ in survival	2.7441942e-15	2.7e-15	Fig4a_module_rates.tsv	P
+C3_M7_rand	C3	Fig4a	Size-matched random positive rate, Multi-algorithm model selection	0.83716216	83.7% (95% CI 81.7%-85.6%)	Fig4a_module_rates.tsv	rate_null; lo; hi
+C3_M7_pub	C3	Fig4a	Published positive rate, Multi-algorithm model selection	0.68918919	68.9%	Fig4a_module_rates.tsv	rate_real
+C3_M7_P	C3	Fig4a	Fisher P published vs size-matched, Multi-algorithm model selection	0.00011171018	1.1e-04	Fig4a_module_rates.tsv	P
+C3_M8a_rand	C3	Fig4a	Size-matched random positive rate, Signature genes mark a cell type (scRNA)	0.76459459	76.5% (95% CI 75.1%-77.8%)	Fig4a_module_rates.tsv	rate_null; lo; hi
+C3_M8a_pub	C3	Fig4a	Published positive rate, Signature genes mark a cell type (scRNA)	0.87162162	87.2%	Fig4a_module_rates.tsv	rate_real
+C3_M8a_P	C3	Fig4a	Fisher P published vs size-matched, Signature genes mark a cell type (scRNA)	0.020980671	0.021	Fig4a_module_rates.tsv	P
+C3_M0_rand	C3	Fig4a	Size-matched random positive rate, External validation (C > 0.5, both cohorts)	0.70648649	70.6% (95% CI 69.2%-72.1%)	Fig4a_module_rates.tsv	rate_null; lo; hi
+C3_M0_pub	C3	Fig4a	Published positive rate, External validation (C > 0.5, both cohorts)	0.55405405	55.4%	Fig4a_module_rates.tsv	rate_real
+C3_M0_P	C3	Fig4a	Fisher P published vs size-matched, External validation (C > 0.5, both cohorts)	0.00081397079	8.1e-04	Fig4a_module_rates.tsv	P
+C3_M12_rand	C3	Fig4a	Size-matched random positive rate, Drugs enriched (DSigDB)	0.40702703	40.7% (95% CI 39.1%-42.3%)	Fig4a_module_rates.tsv	rate_null; lo; hi
+C3_M12_pub	C3	Fig4a	Published positive rate, Drugs enriched (DSigDB)	0.60810811	60.8%	Fig4a_module_rates.tsv	rate_real
+C3_M12_P	C3	Fig4a	Fisher P published vs size-matched, Drugs enriched (DSigDB)	1.0017438e-05	1.0e-05	Fig4a_module_rates.tsv	P
+C3_M6_rand	C3	Fig4a	Size-matched random positive rate, Nomogram adds to stage (nested LRT)	0.32891892	32.9% (95% CI 31.4%-34.4%)	Fig4a_module_rates.tsv	rate_null; lo; hi
+C3_M6_pub	C3	Fig4a	Published positive rate, Nomogram adds to stage (nested LRT)	0.29054054	29.1%	Fig4a_module_rates.tsv	rate_real
+C3_M6_P	C3	Fig4a	Fisher P published vs size-matched, Nomogram adds to stage (nested LRT)	1	1	Fig4a_module_rates.tsv	P
+C3_M5a_rand	C3	Fig4a	Size-matched random positive rate, TMB differs by risk group	0.16378378	16.4% (95% CI 15.2%-17.6%)	Fig4a_module_rates.tsv	rate_null; lo; hi
+C3_M5a_pub	C3	Fig4a	Published positive rate, TMB differs by risk group	0.26351351	26.4%	Fig4a_module_rates.tsv	rate_real
+C3_M5a_P	C3	Fig4a	Fisher P published vs size-matched, TMB differs by risk group	0.021390065	0.021	Fig4a_module_rates.tsv	P
+C3_M10_rand	C3	Fig4a	Size-matched random positive rate, Geneformer in silico deletion	0.022972973	2.3% (95% CI 1.8%-2.8%)	Fig4a_module_rates.tsv	rate_null; lo; hi
+C3_M10_pub	C3	Fig4a	Published positive rate, Geneformer in silico deletion	0.047297297	4.7%	Fig4a_module_rates.tsv	rate_real
+C3_M10_P	C3	Fig4a	Fisher P published vs size-matched, Geneformer in silico deletion	0.92544832	0.93	Fig4a_module_rates.tsv	P
+C3_n_modules_over_bradley	C3	Fig4a	Modules whose random positive-rate CI lower bound exceeds 7.5%	15	15/16	Fig4a_module_rates.tsv	sum(lo > 0.075)
+C3_n_modules_pub_higher	C3	Fig4a	Modules where published > random (P<0.05)	3	3	Fig4a_module_rates.tsv	P<0.05 & rate_real>rate_null
+C3_n_modules_pub_lower	C3	Fig4a	Modules where published < random (P<0.05)	4	4	Fig4a_module_rates.tsv	P<0.05 & rate_real<rate_null
+C3_n_modules_over_bradley_input	C3	Fig4a	Modules whose input-matched random positive-rate CI lower bound exceeds 7.5%	15	15/16	decision tables, A_vs_fitsig_k	sum(lo > 0.075)
+C3_M10_rand_input	C3	Fig4a	Input-matched random positive rate, Geneformer	0.011621622	1.2%	hiend_m10/m10_decision.tsv	A_vs_fitsig_k
+N4_robust_n	Sens	Supp	Cohort x metric combinations where order and P<0.05 hold after leave-signature-genes-out	6	6/6	N11_out/n4_loo/loo_summary.tsv	sum(robust)
+N4_R2_pub_TCGA	Sens	Supp	Published median proxy R2 after leave-out, TCGA	0.31923003	0.32	N11_out/n4_loo/loo_summary.tsv	pub
+N4_R2_size_TCGA	Sens	Supp	Size-matched median proxy R2 after leave-out, TCGA	0.51102281	0.51	N11_out/n4_loo/loo_summary.tsv	sizematched
+N4_R2_pub_GSE14520	Sens	Supp	Published median proxy R2 after leave-out, GSE14520	0.28089952	0.28	N11_out/n4_loo/loo_summary.tsv	pub
+N4_R2_size_GSE14520	Sens	Supp	Size-matched median proxy R2 after leave-out, GSE14520	0.42796599	0.43	N11_out/n4_loo/loo_summary.tsv	sizematched
+N4_R2_pub_LIRI	Sens	Supp	Published median proxy R2 after leave-out, LIRI	0.47063356	0.47	N11_out/n4_loo/loo_summary.tsv	pub
+N4_R2_size_LIRI	Sens	Supp	Size-matched median proxy R2 after leave-out, LIRI	0.63212327	0.63	N11_out/n4_loo/loo_summary.tsv	sizematched
+N1_null_T0	C6	Fig7b	Selected-null simulation positive rate, T0	0.41	41.0% (95% CI 34.1%-48.2%)	N11_out/ring4v2/sim_power.tsv	selected, beta 0, T0
+N1_null_FW	C6	Fig7b	Selected-null simulation positive rate, FW	0	0.0% (95% CI 0.0%-1.8%)	N11_out/ring4v2/sim_power.tsv	selected, beta 0, FW
+N1_null_FWp	C6	Fig7b	Selected-null simulation positive rate, FWp	0.02	2.0% (95% CI 0.5%-5.0%)	N11_out/ring4v2/sim_power.tsv	selected, beta 0, FWp
+N1_null_T1p	C6	Fig7b	Selected-null simulation positive rate, T1p	0.07	7.0% (95% CI 3.9%-11.5%)	N11_out/ring4v2/sim_power.tsv	selected, beta 0, T1p
+N1_null_T2p	C6	Fig7b	Selected-null simulation positive rate, T2p	0.075	7.5% (95% CI 4.3%-12.1%)	N11_out/ring4v2/sim_power.tsv	selected, beta 0, T2p
+N1_misspec_FWp	C6	Fig7b	OXPHOS-misspecified null positive rate, FWp	0.035	3.5% (95% CI 1.4%-7.1%)	N11_out/ring4v2/sim_power.tsv	misspec, beta 0, FWp
+N1_misspec_T2p	C6	Fig7b	OXPHOS-misspecified null positive rate, T2p	0.15	15.0% (95% CI 10.4%-20.7%)	N11_out/ring4v2/sim_power.tsv	misspec, beta 0, T2p
+N1_misspec_FW	C6	Fig7b	OXPHOS-misspecified null positive rate, FW	0	0.0% (95% CI 0.0%-1.8%)	N11_out/ring4v2/sim_power.tsv	misspec, beta 0, FW
+N1_power_T0_b02	C6	Fig7b	Selected simulation positive rate, T0, HR/SD 1.22	0.46	46.0%	N11_out/ring4v2/sim_power.tsv	selected, beta 0.2, T0
+N1_power_FW_b02	C6	Fig7b	Selected simulation positive rate, FW, HR/SD 1.22	0	0.0%	N11_out/ring4v2/sim_power.tsv	selected, beta 0.2, FW
+N1_power_FWp_b02	C6	Fig7b	Selected simulation positive rate, FWp, HR/SD 1.22	0.025	2.5%	N11_out/ring4v2/sim_power.tsv	selected, beta 0.2, FWp
+N1_power_T0_b04	C6	Fig7b	Selected simulation positive rate, T0, HR/SD 1.49	0.67	67.0%	N11_out/ring4v2/sim_power.tsv	selected, beta 0.4, T0
+N1_power_FW_b04	C6	Fig7b	Selected simulation positive rate, FW, HR/SD 1.49	0.015	1.5%	N11_out/ring4v2/sim_power.tsv	selected, beta 0.4, FW
+N1_power_FWp_b04	C6	Fig7b	Selected simulation positive rate, FWp, HR/SD 1.49	0.185	18.5%	N11_out/ring4v2/sim_power.tsv	selected, beta 0.4, FWp
+N1_power_T0_b06	C6	Fig7b	Selected simulation positive rate, T0, HR/SD 1.82	0.87	87.0%	N11_out/ring4v2/sim_power.tsv	selected, beta 0.6, T0
+N1_power_FW_b06	C6	Fig7b	Selected simulation positive rate, FW, HR/SD 1.82	0.085	8.5%	N11_out/ring4v2/sim_power.tsv	selected, beta 0.6, FW
+N1_power_FWp_b06	C6	Fig7b	Selected simulation positive rate, FWp, HR/SD 1.82	0.44	44.0%	N11_out/ring4v2/sim_power.tsv	selected, beta 0.6, FWp
+N2_template_T0	C6	Fig7c	Published signatures passing, template_T0	0.50675676	75/148 (50.7%)	N11_out/n2_gates/published_gates_summary.tsv	template_T0
+N2_gate1_separate	C6	Fig7c	Published signatures passing, gate1_separate	0	0/148 (0.0%)	N11_out/n2_gates/published_gates_summary.tsv	gate1_separate
+N2_gate2_separate	C6	Fig7c	Published signatures passing, gate2_separate	0.040540541	6/148 (4.1%)	N11_out/n2_gates/published_gates_summary.tsv	gate2_separate
+N2_both_separate	C6	Fig7c	Published signatures passing, both_separate	0	0/148 (0.0%)	N11_out/n2_gates/published_gates_summary.tsv	both_separate
+N2_gate1_pooled	C6	Fig7c	Published signatures passing, gate1_pooled	0.047297297	7/148 (4.7%)	N11_out/n2_gates/published_gates_summary.tsv	gate1_pooled
+N2_gate2_pooled	C6	Fig7c	Published signatures passing, gate2_pooled	0.46621622	69/148 (46.6%)	N11_out/n2_gates/published_gates_summary.tsv	gate2_pooled
+N2_both_pooled	C6	Fig7c	Published signatures passing, both_pooled	0.047297297	7/148 (4.7%)	N11_out/n2_gates/published_gates_summary.tsv	both_pooled
+N2_vs_null_P	C6	Fig7c	Fisher P, published passing both pooled gates vs selected-null simulation	0.21510503	0.22	n2_gates + ring4v2	fisher
+C3_funnel_M1	C3	Fig4b	Published passing independent prognostic factor	145	145/148	Fig4b_funnel_per_signature.tsv	sum(M1_pos)
+C3_funnel_M0	C3	Fig4b	Published passing external validation	82	82/148	Fig4b_funnel_per_signature.tsv	sum(M0_pos)
+C3_funnel_resid	C3	Fig4b	Published surviving proxy adjustment	6	6/148	Fig4b_funnel_per_signature.tsv	sum(resid)
+C3_funnel_all3	C3	Fig4b	Published passing all three	6	6/148	Fig4b_funnel_per_signature.tsv	all three
+C3_landscape_median_npos	C3	Fig4c	Median modules positive per published signature (of 16)	12	12	Fig4c_landscape_per_signature_modules.tsv	median(n_pos)
+C3_showcase_HR_TCGA	C3	Fig5a	Random signature, high vs low HR, TCGA	2.2115085	2.21 (1.54-3.17)	Fig5a_km_logrank.tsv	HR
+C3_showcase_P_TCGA	C3	Fig5a	Random signature, log-rank P, TCGA	8.7790673e-06	8.8e-06	Fig5a_km_logrank.tsv	logrank_P
+C3_showcase_HR_GSE14520	C3	Fig5a	Random signature, high vs low HR, GSE14520	2.3001483	2.30 (1.48-3.58)	Fig5a_km_logrank.tsv	HR
+C3_showcase_P_GSE14520	C3	Fig5a	Random signature, log-rank P, GSE14520	0.00015114703	1.5e-04	Fig5a_km_logrank.tsv	logrank_P
+C3_showcase_HR_LIRI	C3	Fig5a	Random signature, high vs low HR, LIRI	1.8804664	1.88 (0.94-3.74)	Fig5a_km_logrank.tsv	HR
+C3_showcase_P_LIRI	C3	Fig5a	Random signature, log-rank P, LIRI	0.067061721	0.067	Fig5a_km_logrank.tsv	logrank_P
+C3_showcase_AUC_1y	C3	Fig5b	Random signature, 1-year AUC (TCGA)	0.7199565	0.72	Fig5b_timeroc_auc.tsv	AUC
+C3_showcase_AUC_3y	C3	Fig5b	Random signature, 3-year AUC (TCGA)	0.70161104	0.70	Fig5b_timeroc_auc.tsv	AUC
+C3_showcase_AUC_5y	C3	Fig5b	Random signature, 5-year AUC (TCGA)	0.6921733	0.69	Fig5b_timeroc_auc.tsv	AUC
+C3_showcase_multiHR	C3	Fig5c	Random signature, multivariable HR per SD (TCGA)	1.5551027	1.56 (1.28-1.89)	Fig5c_multicox.tsv	term == 'Risk'
+C3_showcase_multiP	C3	Fig5c	Random signature, multivariable P (TCGA)	8.5970058e-06	8.6e-06	Fig5c_multicox.tsv	term == 'Risk'
+C3_showcase_n_candidates	C3	Fig5	Candidates meeting the example-selection rule	21	21	Fig6c_example_choice.tsv	n_candidates
+C3_showcase_k_median	C3	Fig5	Published median genes per signature used in example rule	5	5	Fig6c_example_choice.tsv	k_median
+C3_showcase_n_random	C3	FigS5	Size-matched random signatures compared with the example	3700	3,700	FigS5_typicality_summary.tsv	n
+C3_showcase_pctl_HR_TCGA	C3	FigS5	Example random signature, percentile among size-matched random, HR_TCGA	0.46432432	46	FigS5_typicality_summary.tsv	pct_rank
+C3_showcase_pctl_HR_GSE14520	C3	FigS5	Example random signature, percentile among size-matched random, HR_GSE14520	0.9627027	96	FigS5_typicality_summary.tsv	pct_rank
+C3_showcase_pctl_HR_LIRI	C3	FigS5	Example random signature, percentile among size-matched random, HR_LIRI	0.12378378	12	FigS5_typicality_summary.tsv	pct_rank
+C3_showcase_pctl_C_TCGA	C3	FigS5	Example random signature, percentile among size-matched random, C_TCGA	0.25810811	26	FigS5_typicality_summary.tsv	pct_rank
+C3_showcase_pctl_C_GSE14520	C3	FigS5	Example random signature, percentile among size-matched random, C_GSE14520	0.59351351	59	FigS5_typicality_summary.tsv	pct_rank
+C3_showcase_pctl_C_LIRI	C3	FigS5	Example random signature, percentile among size-matched random, C_LIRI	0.17945946	18	FigS5_typicality_summary.tsv	pct_rank
+C3_showcase_pctl_multiHR	C3	FigS5	Example random signature, percentile among size-matched random, multiHR	0.3127027	31	FigS5_typicality_summary.tsv	pct_rank
+C3_showcase_median_HR_TCGA	C3	FigS5	Size-matched random signatures, median, HR_TCGA	2.2507465	2.25	FigS5_typicality_summary.tsv	median_all
+C3_showcase_median_HR_GSE14520	C3	FigS5	Size-matched random signatures, median, HR_GSE14520	1.5952292	1.60	FigS5_typicality_summary.tsv	median_all
+C3_showcase_median_HR_LIRI	C3	FigS5	Size-matched random signatures, median, HR_LIRI	3.1170571	3.12	FigS5_typicality_summary.tsv	median_all
+C3_showcase_median_multiHR	C3	FigS5	Size-matched random signatures, median, multiHR	1.6332443	1.63	FigS5_typicality_summary.tsv	median_all
+C3_showcase_frac_TCGA_P05	C3	FigS5	Size-matched random signatures, frac_TCGA_P05	0.9827027	98.3%	FigS5_typicality_summary.tsv	median_all (= fraction)
+C3_showcase_frac_twoext_P05	C3	FigS5	Size-matched random signatures, frac_twoext_P05	0.51567568	51.6%	FigS5_typicality_summary.tsv	median_all (= fraction)
+C3_showcase_frac_all3_P05	C3	FigS5	Size-matched random signatures, frac_all3_P05	0.51513514	51.5%	FigS5_typicality_summary.tsv	median_all (= fraction)
+C3_showcase_frac_multiP05	C3	FigS5	Size-matched random signatures, frac_multiP05	0.98432432	98.4%	FigS5_typicality_summary.tsv	median_all (= fraction)
+C4_M8a_Published	C4	Fig6f	Cell-type marker Published	0.87162162	87.2%	Fig6f_M8_rates.tsv	rate
+C4_M8b_Published	C4	Fig6f	Tumour vs normal Published	0.9527027	95.3%	Fig6f_M8_rates.tsv	rate
+C4_M8a_Sizematchedrandom	C4	Fig6f	Cell-type marker Size-matched random	0.76459459	76.5%	Fig6f_M8_rates.tsv	rate
+C4_M8b_Sizematchedrandom	C4	Fig6f	Tumour vs normal Size-matched random	0.9672973	96.7%	Fig6f_M8_rates.tsv	rate
+C4_M8a_Inputmatchedrandom	C4	Fig6f	Cell-type marker Input-matched random	0.50378378	50.4%	Fig6f_M8_rates.tsv	rate
+C4_M8b_Inputmatchedrandom	C4	Fig6f	Tumour vs normal Input-matched random	0.68513514	68.5%	Fig6f_M8_rates.tsv	rate
+C4_gf_n_sig	C4	Fig6g	Geneformer genes FDR<0.05	83	83/14,426	Fig6g_geneformer_deciles.tsv	sum(n_sig)/sum(n)
+C4_gf_top_decile_share	C4	Fig6g	Share of significant genes in top abundance decile	0.85542169	86%	Fig6g_geneformer_deciles.tsv	share, decile 10
+C4_gf_zero_deciles	C4	Fig6g	Abundance deciles with zero significant genes	6	6	Fig6g_geneformer_deciles.tsv	sum(n_sig == 0)
+C4_gf_ndet_sig	C4	Fig6g	Median detections, significant genes	860	860	N11_out/hiend_m10/m10_abund_check1.tsv	N_Detections median_sig
+C4_gf_ndet_nonsig	C4	Fig6g	Median detections, non-significant genes	35	35	N11_out/hiend_m10/m10_abund_check1.tsv	N_Detections median_nonsig
+C4_gf_pub	C4	Fig6g	Geneformer positive, published	0.047297297	4.7%	Fig6g_geneformer_abundance_matched.tsv	rate
+C4_gf_matched	C4	Fig6g	Geneformer positive, abundance-matched random	0.049594595	5.0%	Fig6g_geneformer_abundance_matched.tsv	rate
+C4_gf_matched_P	C4	Fig6g	Fisher P published vs abundance-matched	1	1	Fig6g_geneformer_abundance_matched.tsv	P
+C4_knk_fc_rho	C4	Fig6h	scTenifoldKnk shared vs official network, FC Spearman (ALAD)	0.9932	0.9932	Fig6h_knk_official_equivalence.tsv	Spearman row
+C5_dsigdb_Published	C5	Fig4d	DSigDB positive, Published	0.60810811	60.8% (90/148)	Fig4d_dsigdb_rates.tsv	pos/n
+C5_dsigdb_Random	C5	Fig4d	DSigDB positive, Random	0.35540541	35.5% (1315/3700)	Fig4d_dsigdb_rates.tsv	pos/n
+C5_dsigdb_P_Random	C5	Fig4d	Fisher P published vs Random	1.4989737e-09	1.5e-09	Fig4d_dsigdb_rates.tsv	P
+C5_dsigdb_Annotationmatched	C5	Fig4d	DSigDB positive, Annotation- matched	0.45162162	45.2% (1671/3700)	Fig4d_dsigdb_rates.tsv	pos/n
+C5_dsigdb_P_Annotationmatched	C5	Fig4d	Fisher P published vs Annotation- matched	0.00019950728	2.0e-04	Fig4d_dsigdb_rates.tsv	P
+C5_ann_pub	C5	Fig4e	Median drugs annotated per gene, published signatures	23.215385	23.2	N11_out/hiend_m12_annot/m12_annotation_level.tsv	median_real
+C5_ann_pool	C5	Fig4e	Median drugs annotated per gene, sampling pool	8	8	N11_out/hiend_m12_annot/m12_annotation_level.tsv	median_U_gene
+C6_typeI_framework	C6	Fig7b	Framework false-positive rate at beta = 0	0	0.0% (0/200)	Fig7b_sim_verdict.tsv	typeI_framework_beta0
+C6_typeI_template	C6	Fig7b	Template univariable false-positive rate at beta = 0	0.065	6.5%	Fig7b_sim_verdict.tsv	typeI_template_beta0
+C6_power_max	C6	Fig7b	Framework power at HR/SD 1.82	0.545	54.5%	Fig7b_sim_power.tsv	framework, max beta
+C6_power_max_HR	C6	Fig7b	Largest simulated HR per SD	1.8221188	1.82	Fig7b_sim_power.tsv	max beta
+C6_power_gate1	C6	Fig7b	Gate 1 power at largest effect	0.575	57.5%	Fig7b_sim_power.tsv	T1, max beta
+C6_power_gate2	C6	Fig7b	Gate 2 power at largest effect	0.88	88.0%	Fig7b_sim_power.tsv	T2, max beta
+C6_pub_adjHR_GSE	C6	Fig7b	Published median adjusted HR, GSE14520	1.2232249	1.22	Fig7b_sim_verdict.tsv	published_adjHR_median_GSE
+C6_pub_adjHR_LIRI	C6	Fig7b	Published median adjusted HR, LIRI-JP	1.2569776	1.26	Fig7b_sim_verdict.tsv	published_adjHR_median_LIRI
+C6_power_HR122_framework	C6	Fig7b	Framework positive rate at HR/SD 1.22	0.01	1.0%	Fig7b_sim_power.tsv	framework, beta 0.2
+C6_power_HR122_template	C6	Fig7b	Template positive rate at HR/SD 1.22	0.3	30.0%	Fig7b_sim_power.tsv	T0, beta 0.2
+C6_example_R2	C6	Fig7c	Worked example, proxy R2 (TCGA)	0.53246282	0.53	Fig7c_example_5gene.tsv	R2_proxy_TCGA
+C6_example_empP_GSE	C6	Fig7c	Worked example, empP_GSE	0.14685315	0.15	Fig7c_example_5gene.tsv	empP_GSE
+C6_example_empP_LIRI	C6	Fig7c	Worked example, empP_LIRI	0.008991009	0.009	Fig7c_example_5gene.tsv	empP_LIRI
+C6_example_lrt_GSE	C6	Fig7c	Worked example, lrt_GSE	0.037543644	0.038	Fig7c_example_5gene.tsv	lrt_GSE
+C6_example_lrt_LIRI	C6	Fig7c	Worked example, lrt_LIRI	0.028836874	0.029	Fig7c_example_5gene.tsv	lrt_LIRI
+S1_n_same_verdict	Sens	FigS1b	Modules with same verdict at n = 148 and n = 95	15	15/16	FigS1b_148_vs_95_consistency.tsv	agree
+S2_raw_pub	Sens	FigS2b	Consensus subtypes positive, published, unadjusted	0.76351351	76.4%	FigS2b_m14_prolif_decision.tsv	raw_rate_pub
+S2_raw_Ak	Sens	FigS2b	Consensus subtypes positive, size-matched, unadjusted	0.93194444	93.2%	FigS2b_m14_prolif_decision.tsv	raw_rate_Ak
+S2_adj_pub	Sens	FigS2b	Consensus subtypes positive, published, proliferation-adjusted	0.5	50.0%	FigS2b_m14_prolif_decision.tsv	adj_rate_pub
+S2_adj_Ak	Sens	FigS2b	Consensus subtypes positive, size-matched, proliferation-adjusted	0.54583333	54.6%	FigS2b_m14_prolif_decision.tsv	adj_rate_Ak
+S2_adj_P	Sens	FigS2b	Fisher P after proliferation adjustment	0.32041732	0.32	FigS2b_m14_prolif_decision.tsv	adj_fisher_P
+S4_top25_prolif	Sens	FigS4a	Hallmark E2F/G2M genes among 25 most reused	5	5/25	FigS4a_gene_frequency.tsv	top 25 by n_sig
+S4_top_gene_n	Sens	FigS4a	Signatures containing G6PD	19	G6PD: 19 signatures, 5 death types	FigS4a_gene_frequency.tsv	top 1
+corp_dedup	Methods	Methods corpus	去重 PMID	575	575	N12_signatures/README.md	row: 去重 PMID
+corp_title	Methods	Methods corpus	标题过滤	473	473	N12_signatures/README.md	row: 标题过滤
+corp_cand	Methods	Methods corpus	→ 候选	281	281	N12_signatures/README.md	row: → 候选
+corp_rescue_total	Methods	Methods corpus	人工复核补回	294	294	N12_signatures/README.md	row: 人工复核补回
+corp_pmcid	Methods	Methods corpus	有 PMCID	260	260	N12_signatures/README.md	row: 有 PMCID
+corp_abs_only	Methods	Methods corpus	PMC 只有摘要	12	12	N12_signatures/README.md	row: PMC 只有摘要
+corp_fulltext	Methods	Methods corpus	读到全文	248	248	N12_signatures/README.md	row: 读到全文
+corp_coef	Methods	Methods corpus	抽到逐基因系数	152	152	N12_signatures/README.md	row: 抽到逐基因系数
+corp_primary	Methods	Methods corpus	主表可用	149	149	N12_signatures/README.md	row: 主表可用
+corp_nocoef	Methods	Methods corpus	没找到逐基因系数	87	87	N12_signatures/README.md	row: 没找到逐基因系数
+corp_rule_excl	Methods	Methods corpus	规则排除	9	9	N12_signatures/README.md	row: 规则排除
+corp_rescued	Methods	Methods corpus	Titles added after manual review	13	13	N12_signatures/README.md	294 - 281
+U_score	Methods	Methods genes	Genes measured in all three cohorts (scoring set)	11964	11,964	N11_out/ring3_full/cohort_meta.tsv	n_genes_all
+U_pool	Methods	Methods genes	Expressed genes in sampling pool (rings 2-4)	10651	10,651	N11_out/ring3_full/cohort_meta.tsv	n_genes_universe
+ncomplete_TCGA	Methods	Methods cohorts	TCGA patients with complete base covariates	341	341	N11_out/ring2/covariate_audit.tsv	complete_base
+ncomplete_GSE14520	Methods	Methods cohorts	GSE14520 patients with complete base covariates	219	219	N11_out/ring2/covariate_audit.tsv	complete_base
+ncomplete_LIRI	Methods	Methods cohorts	LIRI patients with complete base covariates	203	203	N11_out/ring2/covariate_audit.tsv	complete_base
+stageNA_TCGA	Methods	Methods cohorts	TCGA patients with missing stage	24	24	N11_out/robust_v2/cohort_meta.tsv	stage_NA
+stageNA_GSE14520	Methods	Methods cohorts	GSE14520 patients with missing stage	2	2	N11_out/robust_v2/cohort_meta.tsv	stage_NA
+stageNA_LIRI	Methods	Methods cohorts	LIRI patients with missing stage	0	0	N11_out/robust_v2/cohort_meta.tsv	stage_NA
+sig_k_median	Methods	Methods signatures	Published signature genes in scoring set, median	5	5	N11_out/ring3_full/published_coverage.tsv	median(n_in), n_in>=2
+sig_k_range	Methods	Methods signatures	Published signature genes in scoring set, range	24	2-24	N11_out/ring3_full/published_coverage.tsv	range(n_in)
+sig_full	Methods	Methods signatures	Published signatures with all genes in scoring set	95	95	N11_out/ring3_full/published_coverage.tsv	sum(full)
+rand_per_sig	Methods	Methods random	Random signatures per published signature per family	25	25	Fig4a_module_rates.tsv	n_null/n_real
+rand_per_sig_M7	Methods	Methods random	Random signatures per published signature, multi-algorithm module	10	10	Fig4a_module_rates.tsv	n_null/n_real
+proxy_prolif_n	Methods	Methods proxies	Proliferation proxy genes (E2F + G2M, in pool)	298	298	h.all.v2024.1 + hiend_m8/U_pool.txt	intersect
+proxy_oxphos_n	Methods	Methods proxies	OXPHOS proxy genes (in pool)	191	191	h.all.v2024.1 + hiend_m8/U_pool.txt	intersect
+n_null_default	N	Fig4a	Size-matched random signatures per module (default)	3700	3,700	Fig4a_module_rates.tsv	mode(n_null)
+n_null_M7	N	Fig4a	Size-matched random signatures, multi-algorithm module	1480	1,480	Fig4a_module_rates.tsv	M7 n_null
+n_null_M14	N	Fig4a	Size-matched random signatures, consensus clustering (clusterable)	3585	3,585	Fig4a_module_rates.tsv	M14 n_null
+n_fig3_Inputmatchedrandom	N	Fig3	Signatures per cohort, Input-matched random	3700	3,700	Fig3ab_per_signature.tsv	TCGA rows by grp
+n_fig3_Published	N	Fig3	Signatures per cohort, Published	148	148	Fig3ab_per_signature.tsv	TCGA rows by grp
+n_fig3_Sizematchedrandom	N	Fig3	Signatures per cohort, Size-matched random	3700	3,700	Fig3ab_per_signature.tsv	TCGA rows by grp
+n_fig6e_Published	N	Fig6e	Signatures scored in single cells, Published	148	148	Fig6e_sc_relative_localisation.tsv	uniqueN(sid)
+n_fig6e_Sizematchedrandom	N	Fig6e	Signatures scored in single cells, Size-matched random	148	148	Fig6e_sc_relative_localisation.tsv	uniqueN(sid)
+n_gf_matched	N	Fig6g	Abundance-matched random signatures	29600	29,600	Fig6g_geneformer_abundance_matched.tsv	n
+n_sim_runs	N	Fig7b	Simulation runs per effect size	200	200	Fig7b_sim_power.tsv	n

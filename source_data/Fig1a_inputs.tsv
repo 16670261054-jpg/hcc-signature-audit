@@ -1,0 +1,5 @@
+y	lab
+3	149 published HCC cell-death signatures (148 scorable)
+2	8 cell-death gene sets (cuproptosis, ferroptosis, ...)
+1	Random null signatures: size-matched / input-matched
+0	TCGA-LIHC 365 | GSE14520 221 LIRI-JP 203 | scRNA 67,099 cells
