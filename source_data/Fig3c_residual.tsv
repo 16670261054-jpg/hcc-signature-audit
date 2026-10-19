@@ -1,7 +1,7 @@
-grp	model	pos	n	rate	CP_lo	CP_hi	fisher_P_vs_published	star
-Published	Base: proliferation, stroma, immune, stage, age, sex	6	148	0.0405405405405405	0.0150207110428293	0.0861491459099053		
-Published	Base + OXPHOS	6	148	0.0405405405405405	0.0150207110428293	0.0861491459099053		
-Input-matched random	Base: proliferation, stroma, immune, stage, age, sex	122	3700	0.032972972972973	0.0274556638868292	0.0392431019410819	0.635758017139319	ns
-Input-matched random	Base + OXPHOS	86	3700	0.0232432432432432	0.018632629452643	0.0286265211916105	0.167091719155651	ns
-Size-matched random	Base: proliferation, stroma, immune, stage, age, sex	243	3700	0.0656756756756757	0.057904375017878	0.0741413197233909	0.304082844217567	ns
-Size-matched random	Base + OXPHOS	156	3700	0.0421621621621622	0.0359159358958418	0.0491439781863551	1	ns
+grp	model	pos	n	rate	CP_lo	CP_hi	P_vs_published	test	star
+Published	Base: proliferation, stroma, immune, stage, age, sex	6	148	0.0405405405405405	0.0150207110428293	0.0861491459099053			
+Published	Base + OXPHOS	6	148	0.0405405405405405	0.0150207110428293	0.0861491459099053			
+Input-matched random	Base: proliferation, stroma, immune, stage, age, sex	122	3700	0.032972972972973	0.0274556638868292	0.0392431019410819	0.787011371600705	Cochran-Mantel-Haenszel test stratified by matched set (published signature + its matched random signatures)	ns
+Input-matched random	Base + OXPHOS	86	3700	0.0232432432432432	0.018632629452643	0.0286265211916105	0.281010079589413	Cochran-Mantel-Haenszel test stratified by matched set (published signature + its matched random signatures)	ns
+Size-matched random	Base: proliferation, stroma, immune, stage, age, sex	243	3700	0.0656756756756757	0.057904375017878	0.0741413197233909	0.293552206793136	Cochran-Mantel-Haenszel test stratified by matched set (published signature + its matched random signatures)	ns
+Size-matched random	Base + OXPHOS	156	3700	0.0421621621621622	0.0359159358958418	0.0491439781863551	0.923025398307642	Cochran-Mantel-Haenszel test stratified by matched set (published signature + its matched random signatures)	ns

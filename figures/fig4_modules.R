@@ -121,6 +121,10 @@ dd <- data.table(grp = c("Published", "Random", "Annotation-\nmatched"),
                                AD[null == "N_annot"]$rate_null * AD[null == "N_annot"]$n_null)),
                  n = c(AD$n_real[1], AD[null == "N_plain"]$n_null, AD[null == "N_annot"]$n_null),
                  P = c(NA, AD[null == "N_plain"]$fisher_P, AD[null == "N_annot"]$fisher_P))
+## Between-group test: CMH stratified by matched set (P read from N35_paired_tests); positive rates and CIs unchanged
+PT <- fread(file.path(B, "N35_paired_tests/paired_tests_results.tsv"), sep = "	", quote = "")
+dd[, key := c(NA, "Fig4d|N_plain", "Fig4d|N_annot")][!is.na(key), `:=`(P = PT$new_P[match(key, PT$key)], test = PT$new_test[match(key, PT$key)])]
+stopifnot(!anyNA(dd$P[-1])); dd[, key := NULL]
 dd[, rate := pos / n][, c("lo", "hi") := as.list(binom.test(pos, n)$conf.int), by = grp][, star := stars(P)]
 dd[, grp := factor(grp, levels = grp)]
 write_sd(dd, "Fig4d_dsigdb_rates")

@@ -82,7 +82,11 @@ mk_rates <- function(D, mods, modlab) {
 }
 r8 <- mk_rates(D8, c("M8a_pos", "M8b_pos"), c(M8a_pos = "Cell-type\nmarker", M8b_pos = "Tumour vs\nnormal"))
 CMH <- fread(file.path(OUT, "cmh_modules.tsv"))   # size-matched comparison by stratified CMH + Holm (same as Fig 4a)
-r8[grp == "Size-matched random", P := CMH$CMH_P_holm[match(sub("_pos", "", module), CMH$module)]][, star := stars(P)]
+r8[grp == "Size-matched random", `:=`(P = CMH$CMH_P_holm[match(sub("_pos", "", module), CMH$module)], test = "CMH stratified by matched set, Holm across 16 modules (Fig 4a family)")][, star := stars(P)]
+## Input-matched comparison: CMH stratified by matched set (no correction, as in the original design; P read from N35_paired_tests); positive rates and CIs unchanged
+PT <- fread(file.path(B, "N35_paired_tests/paired_tests_results.tsv"), sep = "	", quote = "")
+r8[grp == "Input-matched random", `:=`(P = PT$new_P[match(paste("Fig6f", module, grp, sep = "|"), PT$key)], test = PT$new_test[match(paste("Fig6f", module, grp, sep = "|"), PT$key)])]
+stopifnot(!anyNA(r8[grp != "Published"]$P)); r8[, star := stars(P)]
 write_sd(r8, "Fig6f_M8_rates")
 rate_plot <- function(r, ttl) ggplot(r, aes(mod_l, rate, colour = grp)) +
   annotate("rect", xmin = -Inf, xmax = Inf, ymin = 0, ymax = BRADLEY, fill = "grey92") +
@@ -141,13 +145,15 @@ D10 <- fread(file.path(M10, "m10_decision.tsv"))
 f2 <- data.table(grp = c("Published", "Matched\nrandom"), rate = c(C2$rate_real, C2$rate_null),
                  n = c(C2$n_real, C2$n_null))
 f2[, c("lo", "hi") := as.list(cp(rate, n)), by = grp][, grp := factor(grp, levels = grp)]
-f2[, P := c(NA, C2$fisher_P)]
+## Between-group test: CMH stratified by matched set (P read from N35_paired_tests); positive rates and CIs unchanged
+PT <- fread(file.path(B, "N35_paired_tests/paired_tests_results.tsv"), sep = "	", quote = "")
+f2[, P := c(NA, PT[key == "Fig6g|abund_matched"]$new_P)][, test := c(NA, PT[key == "Fig6g|abund_matched"]$new_test)]; stopifnot(!is.na(f2$P[2]))
 write_sd(f2, "Fig6g_geneformer_abundance_matched")
 pf2 <- ggplot(f2, aes(grp, rate)) +
   annotate("rect", xmin = -Inf, xmax = Inf, ymin = 0, ymax = BRADLEY, fill = "grey92") +
   geom_linerange(aes(ymin = lo, ymax = hi, colour = grp), linewidth = 0.6) +
   geom_point(aes(fill = grp), shape = 21, size = 2, stroke = 0.25) +
-  annotate("text", x = 1.5, y = 0.19, label = stars(C2$fisher_P), size = 2.1) +
+  annotate("text", x = 1.5, y = 0.19, label = stars(f2$P[2]), size = 2.1) +
   annotate("segment", x = 1, xend = 2, y = 0.175, yend = 0.175, linewidth = 0.3) +
   scale_fill_manual(values = c(COL_GRP[["Published"]], COL_GRP[["Size-matched random"]]), guide = "none") +
   scale_colour_manual(values = c(COL_GRP[["Published"]], COL_GRP[["Size-matched random"]]), guide = "none") +

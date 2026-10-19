@@ -1,4 +1,4 @@
-# Supplementary Figs. S1-S4 (reads results on disk only, no new tests)
+# Supplementary Figs. S1-S4 (reads results on disk only, no new tests; S2 tests read from N35_paired_tests)
 #  S1 sensitivity: module audit repeated for the 95 signatures fully covered in all three cohorts (a dumbbell); b consistency of published positive rates, 148 vs 95
 #  S2 M14 consensus clustering: separation of subtypes by proliferation (a raincloud) and positive rates before and after adjustment for proliferation (b); exploratory
 #  S3 M8 single-cell "validation": positive rate under the template criterion by number of signature genes k (observed vs expectation 1-(1-p)^k from single-gene positive rates)
@@ -59,6 +59,13 @@ save_pub(pS1, "FigS1_fullcoverage_sensitivity", width_mm = 180, height_mm = 95)
 P14 <- fread(file.path(OUT, "hiend_m14_prolif/m14_prolif_rows.tsv"))
 P14 <- P14[arm %in% c("A", "Ak")][, grp := factor(fifelse(arm == "A", "Published", "Size-matched random"), levels = names(COL_GRP)[1:2])]
 D14 <- fread(file.path(OUT, "hiend_m14_prolif/m14_prolif_decision.tsv"))
+## Paired Wilcoxon signed-rank for separation; CMH stratified by matched set for positive rates before/after adjustment (P read from N35_paired_tests); proportions and medians unchanged
+PT <- fread(file.path(B, "N35_paired_tests/paired_tests_results.tsv"), sep = "	", quote = "")
+pk <- function(k, col = "new_P") { v <- PT[key == k][[col]]; stopifnot(length(v) == 1, !is.na(v)); v }
+D14[, `:=`(MWU_P = NULL, raw_fisher_P = NULL, adj_fisher_P = NULL, adj_OR = NULL)]
+D14[, `:=`(sep_P = pk("FigS2a|sep"), sep_test = pk("FigS2a|sep", "new_test"),
+           raw_P = pk("FigS2b|raw"), raw_test = pk("FigS2b|raw", "new_test"),
+           adj_P = pk("FigS2b|adj"), adj_CMH_OR = pk("FigS2b|adj", "CMH_OR"), adj_test = pk("FigS2b|adj", "new_test"))]
 write_sd(P14, "FigS2a_m14_prolif_rows"); write_sd(D14, "FigS2b_m14_prolif_decision")
 set.seed(SEED); P14[, xj := as.numeric(grp) - 0.2 + runif(.N, -0.06, 0.06)]
 s2a <- ggplot(P14, aes(grp, prolif_sep)) +
@@ -66,7 +73,7 @@ s2a <- ggplot(P14, aes(grp, prolif_sep)) +
   stat_slab(aes(fill = grp), side = "right", scale = 0.5, alpha = 0.85, colour = NA, density = "bounded", position = position_nudge(x = 0.03)) +
   geom_boxplot(aes(fill = grp), width = 0.12, outlier.shape = NA, linewidth = 0.25, position = position_nudge(x = -0.05)) +
   annotate("segment", x = 1, xend = 2, y = 1.04, yend = 1.04, linewidth = 0.3) +
-  annotate("text", x = 1.5, y = 1.06, label = stars(D14$MWU_P), size = 2.2, vjust = 0) +
+  annotate("text", x = 1.5, y = 1.06, label = stars(D14$sep_P), size = 2.2, vjust = 0) +
   scale_fill_manual(values = COL_GRP, guide = "none") + scale_colour_manual(values = COL_GRP, guide = "none") +
   scale_x_discrete(NULL, labels = c("Published", "Size-matched\nrandom")) +
   scale_y_continuous("Subtype separation by proliferation\n(|AUC - 0.5| x 2)", limits = c(0, 1.12), breaks = seq(0, 1, 0.25))
@@ -75,7 +82,7 @@ b2 <- data.table(state = rep(c("Unadjusted", "Adjusted for\nproliferation"), eac
                  n = rep(c(D14$n_pub, D14$n_Ak), 2))
 b2[, c("lo", "hi") := as.list(cp(round(rate * n), n)), by = .(state, grp)]
 b2[, state := factor(state, levels = unique(state))][, grp := factor(grp, levels = names(COL_GRP)[1:2])]
-st2 <- data.table(state = factor(levels(b2$state), levels = levels(b2$state)), lab = stars(c(D14$raw_fisher_P, D14$adj_fisher_P)))
+st2 <- data.table(state = factor(levels(b2$state), levels = levels(b2$state)), lab = stars(c(D14$raw_P, D14$adj_P)))
 s2b <- ggplot(b2, aes(state, rate, fill = grp)) +
   geom_col(position = position_dodge(0.7), width = 0.62, colour = "black", linewidth = 0.2) +
   geom_errorbar(aes(ymin = lo, ymax = hi), position = position_dodge(0.7), width = 0.15, linewidth = 0.3) +

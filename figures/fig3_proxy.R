@@ -1,7 +1,7 @@
 # Fig 3  template selection pulls signatures towards the proliferation axis; residual signal after proxy adjustment is not more frequent than for random signatures
 # Reads: N11_out/ring2/{ring2_rows,ring2_R2_summary,ring2_residual_summary}.tsv
-# Statistics: two-group comparisons by Mann-Whitney U (P for R² read from ring2_R2_summary; P for rho computed here with wilcox.test and written to disk);
-#       proportions by Fisher's exact test (read from ring2_residual_summary); random positive rate with Clopper-Pearson 95% CI.
+# Statistics: continuous outcomes = paired Wilcoxon signed-rank, proportions = CMH stratified by matched set; P read from N35_paired_tests/paired_tests_results.tsv (analysis/paired_tests.R);
+#       random positive rate with Clopper-Pearson 95% CI.
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 suppressPackageStartupMessages({ library(ggdist); library(ggh4x) })
 R2 <- file.path(OUT, "ring2")
@@ -23,7 +23,10 @@ stat <- rbind(S[, .(metric = "R2_proxy", cohort, grp2, P = MWU_P, median_pub = R
                     X[, .(median = median(rho_prolif)), by = .(cohort, grp)][, .(cohort, grp = as.character(grp), median)][
                       , .(median_pub = median[grp == "Published"], grp2 = grp, median_null = median), by = cohort][grp2 != "Published"],
                     by = c("cohort", "grp2"))[, .(metric = "rho_prolif", cohort, grp2, P, median_pub, median_null)])
-stat[, `:=`(test = "Mann-Whitney U, two-sided, Published vs group", star = stars(P))]
+## Between-group test: paired Wilcoxon signed-rank (each published signature vs the median of its matched random signatures), P read from N35_paired_tests; medians unchanged
+PT <- fread(file.path(B, "N35_paired_tests/paired_tests_results.tsv"), sep = "	", quote = "")
+stat[, P := PT$new_P[match(paste("Fig3ab", metric, cohort, grp2, sep = "|"), PT$key)]]; stopifnot(!anyNA(stat$P))
+stat[, `:=`(test = PT$new_test[match(paste("Fig3ab", metric, cohort, grp2, sep = "|"), PT$key)], star = stars(P))]
 write_sd(stat, "Fig3ab_stats")
 write_sd(X[, .(grp, src, rep, cohort, k_model, R2_proxy, rho_prolif)], "Fig3ab_per_signature")
 
@@ -63,8 +66,11 @@ cd <- rbind(Rs[comparison == "A_vs_Ak_sizematched", .(grp = "Published", model, 
             Rs[, .(grp = fifelse(comparison == "A_vs_Ak_sizematched", "Size-matched random", "Input-matched random"),
                    model, pos = pos_null, n = n_null, P = fisher_P)])
 cd[, rate := pos / n][, c("lo", "hi") := as.list(cp(pos, n)), by = .(grp, model)]
+## Between-group test: CMH stratified by matched set (P read from N35_paired_tests); positive rates and CIs unchanged
+cd[, key := paste("Fig3c", fifelse(model == ML[2], "lrt_p_oxphos", "lrt_p"), grp, sep = "|")]
+cd[grp != "Published", `:=`(P = PT$new_P[match(key, PT$key)], test = PT$new_test[match(key, PT$key)])]; stopifnot(!anyNA(cd[grp != "Published"]$P))
 cd[, star := stars(P)][, grp := factor(grp, levels = G3)]
-write_sd(cd[, .(grp, model, pos, n, rate, CP_lo = lo, CP_hi = hi, fisher_P_vs_published = P, star)], "Fig3c_residual")
+write_sd(cd[, .(grp, model, pos, n, rate, CP_lo = lo, CP_hi = hi, P_vs_published = P, test, star)], "Fig3c_residual")
 pc <- ggplot(cd, aes(grp, rate, colour = grp)) +
   geom_ref_h(0.05) +
   geom_linerange(aes(ymin = lo, ymax = hi), linewidth = 0.6) +

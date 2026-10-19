@@ -58,17 +58,17 @@ for (cn in c("TCGA", "GSE14520", "LIRI")) for (mt in c("R2_proxy", "rho_prolif")
   r <- ST[metric == mt & cohort == cn & grp2 == "Size-matched random"]
   add(sprintf("C2_%s_pub_%s", mt, cn), "C2", "Fig3a-b", paste("Published median", mt, cn), r$median_pub, f3(r$median_pub), "Fig3ab_stats.tsv", "median_pub")
   add(sprintf("C2_%s_Ak_%s", mt, cn), "C2", "Fig3a-b", paste("Size-matched random median", mt, cn), r$median_null, f3(r$median_null), "Fig3ab_stats.tsv", "median_null")
-  add(sprintf("C2_%s_P_%s", mt, cn), "C2", "Fig3a-b", paste("MWU P published vs size-matched,", mt, cn), r$P, pfmt(r$P), "Fig3ab_stats.tsv", "P") }
+  add(sprintf("C2_%s_P_%s", mt, cn), "C2", "Fig3a-b", paste("Paired Wilcoxon signed-rank P, published vs size-matched (median of matched random per published),", mt, cn), r$P, pfmt(r$P), "Fig3ab_stats.tsv", "P (paired Wilcoxon, N35)") }
 for (cn in c("TCGA", "GSE14520", "LIRI")) for (mt in c("R2_proxy", "rho_prolif")) {
   r <- ST[metric == mt & cohort == cn & grp2 == "Input-matched random"]
   add(sprintf("C2_%s_In_%s", mt, cn), "C2", "Fig3a-b", paste("Input-matched random median", mt, cn), r$median_null, f3(r$median_null), "Fig3ab_stats.tsv", "median_null, Input-matched")
-  add(sprintf("C2_%s_InP_%s", mt, cn), "C2", "Fig3a-b", paste("MWU P published vs input-matched,", mt, cn), r$P, pfmt(r$P), "Fig3ab_stats.tsv", "P, Input-matched") }
+  add(sprintf("C2_%s_InP_%s", mt, cn), "C2", "Fig3a-b", paste("Paired Wilcoxon signed-rank P, published vs input-matched (median of matched random per published),", mt, cn), r$P, pfmt(r$P), "Fig3ab_stats.tsv", "P, Input-matched (paired Wilcoxon, N35)") }
 RS <- rd("Fig3c_residual.tsv")
 for (g in names(COL_GRP)[1:3]) for (md in unique(RS$model)) { r <- RS[grp == g & model == md]; tag <- fifelse(grepl("OXPHOS", md), "oxphos", "base")
   add(sprintf("C2_resid_%s_%s", gsub("[^A-Za-z]", "", g), tag), "C2", "Fig3c", paste("Residual signal in both external cohorts,", g, md), r$rate,
       sprintf("%s (%d/%d)", pct(r$rate), r$pos, r$n), "Fig3c_residual.tsv", "pos/n")
-  if (!is.na(r$fisher_P_vs_published)) add(sprintf("C2_resid_P_%s_%s", gsub("[^A-Za-z]", "", g), tag), "C2", "Fig3c", paste("Fisher P vs published,", g, md),
-      r$fisher_P_vs_published, pfmt(r$fisher_P_vs_published), "Fig3c_residual.tsv", "fisher_P_vs_published") }
+  if (!is.na(r$P_vs_published)) add(sprintf("C2_resid_P_%s_%s", gsub("[^A-Za-z]", "", g), tag), "C2", "Fig3c", paste("CMH P stratified by matched set, published vs", g, md),
+      r$P_vs_published, pfmt(r$P_vs_published), "Fig3c_residual.tsv", "P_vs_published (CMH, N35)") }
 HM <- rd("Fig3d_HR_medians.tsv")
 for (cn in unique(HM$cohort_l)) { r <- HM[cohort_l == cn & grp == "Published"]
   add(paste0("C2_absloghr_unadj_", gsub("-", "", cn)), "C2", "Fig3d", paste("Published median |log HR| unadjusted,", cn), r$u, f3(r$u), "Fig3d_HR_medians.tsv", "u")
@@ -87,6 +87,7 @@ for (i in seq_len(nrow(M4))) { r <- M4[i]
   add(paste0("C3_", r$module, "_pub"), "C3", "Fig4a", paste("Published positive rate,", r$label), r$rate_real, pct(r$rate_real), "Fig4a_module_rates.tsv", "rate_real")
   add(paste0("C3_", r$module, "_P"), "C3", "Fig4a", paste("Holm-adjusted stratified CMH P, published vs size-matched,", r$label), r$P, pfmt(r$P), "Fig4a_module_rates.tsv", "P") }
 add("C3_n_modules_over_bradley", "C3", "Fig4a", "Modules whose random positive-rate CI lower bound exceeds 7.5%", sum(M4$lo > BRADLEY), sprintf("%d/%d", sum(M4$lo > BRADLEY), nrow(M4)), "Fig4a_module_rates.tsv", "sum(lo > 0.075)")
+add("C3_n_modules_over_half", "C3", "Fig4a", "Modules calling more than half of size-matched random signatures positive", sum(M4$rate_null > 0.5), sprintf("%d/%d", sum(M4$rate_null > 0.5), nrow(M4)), "Fig4a_module_rates.tsv", "sum(rate_null > 0.5)")
 add("C3_n_modules_pub_higher", "C3", "Fig4a", "Modules where published > random (P<0.05)", sum(M4$P < 0.05 & M4$rate_real > M4$rate_null), sum(M4$P < 0.05 & M4$rate_real > M4$rate_null), "Fig4a_module_rates.tsv", "P<0.05 & rate_real>rate_null")
 add("C3_n_modules_pub_lower", "C3", "Fig4a", "Modules where published < random (P<0.05)", sum(M4$P < 0.05 & M4$rate_real < M4$rate_null), sum(M4$P < 0.05 & M4$rate_real < M4$rate_null), "Fig4a_module_rates.tsv", "P<0.05 & rate_real<rate_null")
 ## Positive rates of input-matched random signatures in the 16 modules (non-specificity does not depend on size selection)
@@ -98,6 +99,7 @@ IM <- rbind(r3i, pk("hiend_m3_m12/m3_m12_decision.tsv", c("M3_pos", "M12_pos")),
 stopifnot(nrow(IM) == 16)
 add("C3_n_modules_over_bradley_input", "C3", "Fig4a", "Modules whose input-matched random positive-rate CI lower bound exceeds 7.5%", sum(IM$lo > BRADLEY), sprintf("%d/%d", sum(IM$lo > BRADLEY), nrow(IM)), "decision tables, A_vs_fitsig_k", "sum(lo > 0.075)")
 add("C3_M10_rand_input", "C3", "Fig4a", "Input-matched random positive rate, Geneformer", IM[module == "M10"]$rate, pct(IM[module == "M10"]$rate), "hiend_m10/m10_decision.tsv", "A_vs_fitsig_k")
+add("C3_n_modules_over_half_input", "C3", "Fig4a", "Modules calling more than half of input-matched random signatures positive", sum(IM$rate > 0.5), sprintf("%d/%d", sum(IM$rate > 0.5), nrow(IM)), "decision tables, A_vs_fitsig_k", "sum(rate > 0.5)")
 write_sd(IM, "Fig4a_input_matched_rates")
 ## Proxies recomputed after removing signature genes (n4_loo_proxy.R)
 LOO <- rd("loo_summary.tsv", file.path(OUT, "n4_loo")); LOC <- rd("loo_consistency_check.tsv", file.path(OUT, "n4_loo"))
@@ -115,6 +117,7 @@ for (cr in c("FWp", "T2p", "FW")) { r <- sv("misspec_oxphos", 0, cr)
   add(paste0("N1_misspec_", cr), "C6", "Fig7b", paste("OXPHOS-misspecified null positive rate,", cr), r$rate, sprintf("%s (95%% CI %s-%s)", pct(r$rate), pct(r$CP_lo), pct(r$CP_hi)), "N11_out/ring4v2/sim_power.tsv", paste("misspec, beta 0,", cr)) }
 for (bt in c(0.2, 0.4, 0.6)) for (cr in c("T0", "FW", "FWp")) { r <- sv("selected", bt, cr)
   add(sprintf("N1_power_%s_b%02d", cr, round(10 * bt)), "C6", "Fig7b", sprintf("Selected simulation positive rate, %s, HR/SD %.2f", cr, exp(bt)), r$rate, pct(r$rate), "N11_out/ring4v2/sim_power.tsv", sprintf("selected, beta %.1f, %s", bt, cr)) }
+for (bt in c(0.2, 0.4, 0.6)) add(sprintf("N1_HR_b%02d", round(10 * bt)), "C6", "Fig7c", "Simulated hazard ratio per s.d.", exp(bt), sprintf("%.2f", exp(bt)), "N11_out/ring4v2/sim_power.tsv", sprintf("exp(beta), beta %.1f", bt))   # effect sizes quoted in the text
 for (cr in P2$criterion) { r <- P2[criterion == cr]
   add(paste0("N2_", cr), "C6", "Fig7c", paste("Published signatures passing,", cr), r$rate, sprintf("%d/%d (%s)", r$positive, r$n, pct(r$rate)), "N11_out/n2_gates/published_gates_summary.tsv", cr) }
 fp <- fisher.test(matrix(c(P2[criterion == "both_pooled"]$positive, P2[criterion == "both_pooled"]$n - P2[criterion == "both_pooled"]$positive,
@@ -153,7 +156,8 @@ for (m in c("frac_TCGA_P05", "frac_twoext_P05", "frac_all3_P05", "frac_multiP05"
 ## ---- Single-cell level ----
 F8 <- rd("Fig6f_M8_rates.tsv")
 for (i in seq_len(nrow(F8))) { r <- F8[i]
-  add(sprintf("C4_%s_%s", sub("_pos", "", r$module), gsub("[^A-Za-z]", "", r$grp)), "C4", "Fig6f", paste(r$mod_l, r$grp), r$rate, pct(r$rate), "Fig6f_M8_rates.tsv", "rate") }
+  add(sprintf("C4_%s_%s", sub("_pos", "", r$module), gsub("[^A-Za-z]", "", r$grp)), "C4", "Fig6f", paste(r$mod_l, r$grp), r$rate, pct(r$rate), "Fig6f_M8_rates.tsv", "rate")
+  if (r$grp == "Input-matched random") add(sprintf("C4_%s_InP", sub("_pos", "", r$module)), "C4", "Fig6f", paste("CMH P stratified by matched set, published vs input-matched,", r$mod_l), r$P, pfmt(r$P), "Fig6f_M8_rates.tsv", "P, Input-matched (CMH, N35)") }
 DE <- rd("Fig6g_geneformer_deciles.tsv")
 add("C4_gf_n_sig", "C4", "Fig6g", "Geneformer genes FDR<0.05", sum(DE$n_sig), sprintf("%d/%s", sum(DE$n_sig), format(sum(DE$n), big.mark = ",")), "Fig6g_geneformer_deciles.tsv", "sum(n_sig)/sum(n)")
 add("C4_gf_top_decile_share", "C4", "Fig6g", "Share of significant genes in top abundance decile", DE[NDet_decile == 10]$share, pct(DE[NDet_decile == 10]$share, 0), "Fig6g_geneformer_deciles.tsv", "share, decile 10")
@@ -164,36 +168,25 @@ add("C4_gf_ndet_nonsig", "C4", "Fig6g", "Median detections, non-significant gene
 GM <- rd("Fig6g_geneformer_abundance_matched.tsv")
 add("C4_gf_pub", "C4", "Fig6g", "Geneformer positive, published", GM[grp == "Published"]$rate, pct(GM[grp == "Published"]$rate), "Fig6g_geneformer_abundance_matched.tsv", "rate")
 add("C4_gf_matched", "C4", "Fig6g", "Geneformer positive, abundance-matched random", GM[grp != "Published"]$rate, pct(GM[grp != "Published"]$rate), "Fig6g_geneformer_abundance_matched.tsv", "rate")
-add("C4_gf_matched_P", "C4", "Fig6g", "Fisher P published vs abundance-matched", GM[grp != "Published"]$P, pfmt(GM[grp != "Published"]$P), "Fig6g_geneformer_abundance_matched.tsv", "P")
+add("C4_gf_matched_P", "C4", "Fig6g", "CMH P stratified by matched set, published vs abundance-matched", GM[grp != "Published"]$P, pfmt(GM[grp != "Published"]$P), "Fig6g_geneformer_abundance_matched.tsv", "P (CMH, N35)")
 EQ <- rd("Fig6h_knk_official_equivalence.tsv")
 add("C4_knk_fc_rho", "C4", "Fig6h", "scTenifoldKnk shared vs official network, FC Spearman (ALAD)", as.numeric(EQ[grepl("Spearman", check)]$value), EQ[grepl("Spearman", check)]$value, "Fig6h_knk_official_equivalence.tsv", "Spearman row")
 
 ## ---- C5 ----
 DS <- rd("Fig4d_dsigdb_rates.tsv")
 for (g in DS$grp) { r <- DS[grp == g]; add(paste0("C5_dsigdb_", gsub("[^A-Za-z]", "", g)), "C5", "Fig4d", paste("DSigDB positive,", g), r$rate, sprintf("%s (%d/%d)", pct(r$rate), r$pos, r$n), "Fig4d_dsigdb_rates.tsv", "pos/n")
-  if (!is.na(r$P)) add(paste0("C5_dsigdb_P_", gsub("[^A-Za-z]", "", g)), "C5", "Fig4d", paste("Fisher P published vs", g), r$P, pfmt(r$P), "Fig4d_dsigdb_rates.tsv", "P") }
+  if (!is.na(r$P)) add(paste0("C5_dsigdb_P_", gsub("[^A-Za-z]", "", g)), "C5", "Fig4d", paste("CMH P stratified by matched set, published vs", g), r$P, pfmt(r$P), "Fig4d_dsigdb_rates.tsv", "P (CMH, N35)") }
 AL <- rd("m12_annotation_level.tsv", file.path(OUT, "hiend_m12_annot"))
 add("C5_ann_pub", "C5", "Fig4e", "Median drugs annotated per gene, published signatures", AL$median_real, sprintf("%.1f", AL$median_real), "N11_out/hiend_m12_annot/m12_annotation_level.tsv", "median_real")
 add("C5_ann_pool", "C5", "Fig4e", "Median drugs annotated per gene, sampling pool", AL$median_U_gene, AL$median_U_gene, "N11_out/hiend_m12_annot/m12_annotation_level.tsv", "median_U_gene")
 
 ## ---- C6 ----
 SV <- rd("Fig7b_sim_verdict.tsv"); SP <- rd("Fig7b_sim_power.tsv")
-add("C6_typeI_framework", "C6", "Fig7b", "Framework false-positive rate at beta = 0", SV$typeI_framework_beta0, sprintf("%s (0/200)", pct(SV$typeI_framework_beta0)), "Fig7b_sim_verdict.tsv", "typeI_framework_beta0")
-add("C6_typeI_template", "C6", "Fig7b", "Template univariable false-positive rate at beta = 0", SV$typeI_template_beta0, pct(SV$typeI_template_beta0), "Fig7b_sim_verdict.tsv", "typeI_template_beta0")
 r <- SP[criterion == "framework_T1andT2" & beta == max(beta)]
-add("C6_power_max", "C6", "Fig7b", sprintf("Framework power at HR/SD %.2f", r$HR_per_SD), r$rate, pct(r$rate), "Fig7b_sim_power.tsv", "framework, max beta")
-add("C6_power_max_HR", "C6", "Fig7b", "Largest simulated HR per SD", r$HR_per_SD, f3(r$HR_per_SD), "Fig7b_sim_power.tsv", "max beta")
 r1 <- SP[criterion == "T1_random_null" & beta == max(beta)]; r2 <- SP[criterion == "T2_proxy_LRT" & beta == max(beta)]
-add("C6_power_gate1", "C6", "Fig7b", "Gate 1 power at largest effect", r1$rate, pct(r1$rate), "Fig7b_sim_power.tsv", "T1, max beta")
-add("C6_power_gate2", "C6", "Fig7b", "Gate 2 power at largest effect", r2$rate, pct(r2$rate), "Fig7b_sim_power.tsv", "T2, max beta")
 add("C6_pub_adjHR_GSE", "C6", "Fig7b", "Published median adjusted HR, GSE14520", SV$published_adjHR_median_GSE, f3(SV$published_adjHR_median_GSE), "Fig7b_sim_verdict.tsv", "published_adjHR_median_GSE")
 add("C6_pub_adjHR_LIRI", "C6", "Fig7b", "Published median adjusted HR, LIRI-JP", SV$published_adjHR_median_LIRI, f3(SV$published_adjHR_median_LIRI), "Fig7b_sim_verdict.tsv", "published_adjHR_median_LIRI")
 r02 <- SP[criterion == "framework_T1andT2" & abs(HR_per_SD - 1.2214) < 0.01]; t02 <- SP[criterion == "T0_template_uni" & abs(HR_per_SD - 1.2214) < 0.01]
-add("C6_power_HR122_framework", "C6", "Fig7b", "Framework positive rate at HR/SD 1.22", r02$rate, pct(r02$rate), "Fig7b_sim_power.tsv", "framework, beta 0.2")
-add("C6_power_HR122_template", "C6", "Fig7b", "Template positive rate at HR/SD 1.22", t02$rate, pct(t02$rate), "Fig7b_sim_power.tsv", "T0, beta 0.2")
-E5 <- rd("Fig7c_example_5gene.tsv")[set == "main_TAF9"]
-add("C6_example_R2", "C6", "Fig7c", "Worked example, proxy R2 (TCGA)", E5$R2_proxy_TCGA, f3(E5$R2_proxy_TCGA), "Fig7c_example_5gene.tsv", "R2_proxy_TCGA")
-for (v in c("empP_GSE", "empP_LIRI", "lrt_GSE", "lrt_LIRI")) add(paste0("C6_example_", v), "C6", "Fig7c", paste("Worked example,", v), E5[[v]], pfmt(E5[[v]]), "Fig7c_example_5gene.tsv", v)
 
 ## ---- Sensitivity / supplementary figures ----
 CC <- rd("FigS1b_148_vs_95_consistency.tsv")
@@ -203,7 +196,7 @@ add("S2_raw_pub", "Sens", "FigS2b", "Consensus subtypes positive, published, una
 add("S2_raw_Ak", "Sens", "FigS2b", "Consensus subtypes positive, size-matched, unadjusted", D14$raw_rate_Ak, pct(D14$raw_rate_Ak), "FigS2b_m14_prolif_decision.tsv", "raw_rate_Ak")
 add("S2_adj_pub", "Sens", "FigS2b", "Consensus subtypes positive, published, proliferation-adjusted", D14$adj_rate_pub, pct(D14$adj_rate_pub), "FigS2b_m14_prolif_decision.tsv", "adj_rate_pub")
 add("S2_adj_Ak", "Sens", "FigS2b", "Consensus subtypes positive, size-matched, proliferation-adjusted", D14$adj_rate_Ak, pct(D14$adj_rate_Ak), "FigS2b_m14_prolif_decision.tsv", "adj_rate_Ak")
-add("S2_adj_P", "Sens", "FigS2b", "Fisher P after proliferation adjustment", D14$adj_fisher_P, pfmt(D14$adj_fisher_P), "FigS2b_m14_prolif_decision.tsv", "adj_fisher_P")
+add("S2_adj_P", "Sens", "FigS2b", "CMH P stratified by matched set, published vs size-matched, after proliferation adjustment", D14$adj_P, pfmt(D14$adj_P), "FigS2b_m14_prolif_decision.tsv", "adj_P (CMH, N35)")
 GF4 <- rd("FigS4a_gene_frequency.tsv")[order(-n_sig)][1:25]
 add("S4_top25_prolif", "Sens", "FigS4a", "Hallmark E2F/G2M genes among 25 most reused", sum(GF4$prolif), sprintf("%d/25", sum(GF4$prolif)), "FigS4a_gene_frequency.tsv", "top 25 by n_sig")
 add("S4_top_gene_n", "Sens", "FigS4a", paste("Signatures containing", GF4$gene[1]), GF4$n_sig[1], sprintf("%s: %d signatures, %d death types", GF4$gene[1], GF4$n_sig[1], GF4$n_mech[1]), "FigS4a_gene_frequency.tsv", "top 1")
@@ -215,8 +208,8 @@ add("S1_n_null_M7", "Sens", "FigS1a", "Size-matched random signatures, multi-alg
 add("S1_n_null_M14", "Sens", "FigS1a", "Size-matched random signatures, consensus clustering, full-coverage subset", S1A[module == "M14"]$n_null, format(S1A[module == "M14"]$n_null, big.mark = ","), "FigS1a_fullcoverage_module_rates.tsv", "M14 n_null")
 add("S2_n_pub", "Sens", "FigS2", "Published signatures in M14 proliferation check", D14$n_pub, D14$n_pub, "FigS2b_m14_prolif_decision.tsv", "n_pub")
 add("S2_n_Ak", "Sens", "FigS2", "Size-matched random signatures in M14 proliferation check", D14$n_Ak, D14$n_Ak, "FigS2b_m14_prolif_decision.tsv", "n_Ak")
-add("S2_raw_P", "Sens", "FigS2b", "Fisher P before proliferation adjustment", D14$raw_fisher_P, pfmt(D14$raw_fisher_P), "FigS2b_m14_prolif_decision.tsv", "raw_fisher_P")
-add("S2_sep_P", "Sens", "FigS2a", "Mann-Whitney P, subtype separation by proliferation", D14$MWU_P, pfmt(D14$MWU_P), "FigS2b_m14_prolif_decision.tsv", "MWU_P")
+add("S2_raw_P", "Sens", "FigS2b", "CMH P stratified by matched set, published vs size-matched, before proliferation adjustment", D14$raw_P, pfmt(D14$raw_P), "FigS2b_m14_prolif_decision.tsv", "raw_P (CMH, N35)")
+add("S2_sep_P", "Sens", "FigS2a", "Paired Wilcoxon signed-rank P, subtype separation by proliferation, published vs size-matched (median of matched random per published)", D14$sep_P, pfmt(D14$sep_P), "FigS2b_m14_prolif_decision.tsv", "sep_P (paired Wilcoxon, N35)")
 S3O <- rd("FigS3_m8_rate_by_k_observed.tsv")
 add("S3_min_n_per_k", "Sens", "FigS3", "Minimum random signatures per k shown", min(S3O$n), min(S3O$n), "FigS3_m8_rate_by_k_observed.tsv", "min n (k <= 12, n >= 20)")
 

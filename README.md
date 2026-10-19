@@ -132,7 +132,11 @@ Scripts are listed in the order of the Methods sections. Each script header stat
 - `analysis/n2_published_gates.R` - the 148 published signatures through both gates
 - `analysis/ring4_positive_control.R` - earlier simulation design superseded by `ring4v2_selected_sim.R` (see Methods)
 
-### 9. Figures, Source Data and supplementary tables (`figures/`)
+### 9. Matched-set tests for published versus random comparisons
+
+- `analysis/paired_tests.R` - between-group tests that respect the matching of each published signature to its own random signatures: Cochran-Mantel-Haenszel tests stratified by matched set for proportions and paired Wilcoxon signed-rank tests (each published signature vs the median of its matched random signatures) for continuous measures. It provides the tests for Fig. 3a-c, Fig. 4d, Fig. 6f (input-matched comparison), Fig. 6g and Supplementary Fig. S2, and writes `N35_paired_tests/paired_tests_results.tsv`. Run it after the module audit (sections 4-8) and `cmh_modules.R`, and before the figure scripts and `make_numbers.R`. Before testing, it checks that the recomputed descriptive values equal the earlier Source Data tables, which it reads from `N35_paired_tests/old_source_data/`.
+
+### 10. Figures, Source Data and supplementary tables (`figures/`)
 
 `00_config.R` holds shared settings and is sourced by every figure script.
 
@@ -152,7 +156,7 @@ Intermediate tables in `figures/data/` (written by the preparation scripts, incl
 
 R objects (`*.rds`) are not included. `fig5_singlecell.R` and `figCD_sc_extra.R` also need `figures/data/sc_sigscore.rds`, so run `prep_sc_embedding.R` (requires GSE149614) first. `assemble_main.R` needs the panel objects saved by `fig4_modules.R`, `fig5_singlecell.R`, `figX_landscape.R`, `figA_funnel.R` and `figCD_sc_extra.R`, and `figS_supp.R` needs the object saved by `figX_landscape.R`; run those scripts first.
 
-Script names follow the order in which panels were drafted, not the final figure numbers; the header of each script names the panels it produces. `fig6_framework.R` is an earlier version of `fig7_framework_v2.R`.
+Script names follow the order in which panels were drafted, not the final figure numbers; the header of each script names the panels it produces. `fig6_framework.R` is an earlier version of `fig7_framework_v2.R`; it is kept only because it writes `source_data/Fig7b_sim_power.tsv` and `Fig7b_sim_verdict.tsv`, which `make_numbers.R` still reads.
 
 ### Supplementary figure numbering
 
