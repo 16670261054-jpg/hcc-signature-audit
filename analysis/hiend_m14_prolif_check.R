@@ -1,4 +1,4 @@
-# M14 explanatory check (analysis plan fixed before running)
+# M14 explanatory check
 suppressPackageStartupMessages({ library(survival); library(data.table); library(parallel) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
 OUTD <- file.path(B, "N11_out/hiend_m14_prolif"); dir.create(OUTD, showWarnings = FALSE, recursive = TRUE)

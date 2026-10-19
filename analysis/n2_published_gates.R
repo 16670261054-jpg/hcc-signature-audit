@@ -1,4 +1,4 @@
-# The 148 published signatures through the two gates (analysis plan fixed before running)
+# The 148 published signatures through the two gates
 # Candidate signatures and gate-1 references are produced by the template pipeline on the simulated TCGA outcome; gates pooling the two external cohorts and a "missing proxy" scenario are added
 # R4_SMOKE=1 -> 3 runs per scenario, 10 references
 suppressPackageStartupMessages({ library(survival); library(data.table); library(parallel) })

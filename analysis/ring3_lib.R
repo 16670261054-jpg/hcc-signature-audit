@@ -34,7 +34,7 @@ prep_ring3 <- function(B, TG) {
 }
 
 ## ---- Modules ----
-# M0 external validation: external-cohort C-index significantly > 0.5 (survcomp::concordance.index, one-sided test)
+# M0 external validation: Noether P from survcomp::concordance.index (two-sided) in both external cohorts; the C > 0.5 direction check is applied downstream (fixM0 in ring3_analyze_armA_v3.R)
 m0_external <- function(b) {
   r <- lapply(c("GSE14520", "LIRI"), function(cn) { C <- cohorts[[cn]]; s <- score(b, C$z)
     ci <- concordance.index(s, C$time, C$event, method = "noether")

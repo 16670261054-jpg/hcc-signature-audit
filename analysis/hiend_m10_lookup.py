@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""M10 Geneformer lookup and calls (analysis plan fixed before running)
+"""M10 Geneformer lookup and calls
 Positive = >= 1 signature gene with Goal_end_FDR < 0.05 (template criterion); genes not tested count as non-positive.
 Sensitivity: signatures with test coverage >= 50% only. Real vs random: two-sided Fisher; random positive rate with Clopper-Pearson 95% CI, lower limit > 0.075 -> excess type I error.
 Signatures = N11_out/hiend_m8/signature_genes_all_arms.tsv (same set as proxy analysis / M8 / M3 / M12).

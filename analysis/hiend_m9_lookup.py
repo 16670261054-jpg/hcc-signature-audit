@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""M9 scTenifoldKnk lookup and calls (analysis plan fixed before running)
+"""M9 scTenifoldKnk lookup and calls
 Gene level: >= 1 gene other than the target with diffRegulation p.adj < 0.05 -> template-positive gene
 Signature level: >= 1 template-positive gene among signature genes in the network -> positive; signatures without genes in the network count as non-positive
 Sensitivity: signatures with >= 1 gene in the network only. Real vs random two-sided Fisher; random positive rate Clopper-Pearson 95% CI, lower limit > 0.075 -> excess type I error

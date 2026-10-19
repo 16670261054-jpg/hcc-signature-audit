@@ -1,4 +1,4 @@
-# Proxy analysis summary (analysis plan fixed before running; including the Ak amendment)
+# Proxy analysis summary (size-matched Ak reference added as an amendment)
 #   R²: real vs random, Mann-Whitney U per cohort (two-sided); per-signature Phipson-Smyth empirical P (random R² >= real)
 #   Residual: proportion with LRT < 0.05 in both external cohorts, real vs random Fisher (two-sided); random positive rate Clopper-Pearson 95% CI; OXPHOS sensitivity likewise
 #   Comparisons: A real vs A random (fitsig_k) / A real vs Ak (size-matched) / B real vs B random

@@ -14,12 +14,12 @@ corpus_CIBERSORTimmune	Data	Fig1b	Share of papers using CIBERSORT/immune	0.90604
 corpus_nomogram	Data	Fig1b	Share of papers using nomogram	0.7114094	106/149 (71%)	Fig1b_module_frequency.tsv	module == 'nomogram'
 corpus_qPCRIHCwet	Data	Fig1b	Share of papers using qPCR/IHC wet	0.63758389	95/149 (64%)	Fig1b_module_frequency.tsv	module == 'qPCR/IHC wet'
 corpus_singlecell	Data	Fig1b	Share of papers using single-cell	0.22818792	34/149 (23%)	Fig1b_module_frequency.tsv	module == 'single-cell'
-sc_cells	Data	Fig6a	scRNA-seq cells after QC	67099	67,099	N28_fig/data/sc_umap.tsv.gz	nrow
-sc_patients	Data	Fig6a	scRNA-seq patients	10	10	N28_fig/data/sc_umap.tsv.gz	uniqueN(patient)
-D_n_splits	Design	Fig2a	TCGA train/test splits	50	50	N11_scripts/robust_proxy.R	N11_S default
-D_null_inner	Design	Fig2a	Random gene sets per split (internal null)	100	100	N11_scripts/robust_proxy.R	N11_NR default
-D_null_ext	Design	Fig2b-c	Random gene sets (external null)	200	200	N11_scripts/robust_proxy.R	N11_NE default
-D_train_frac	Design	Fig2a	Training fraction per split	0.66666667	two-thirds	N11_scripts/robust_proxy.R	round(nT * 2 / 3)
+sc_cells	Data	Fig6a	scRNA-seq cells after QC	67099	67,099	figures/data/sc_umap.tsv.gz	nrow
+sc_patients	Data	Fig6a	scRNA-seq patients	10	10	figures/data/sc_umap.tsv.gz	uniqueN(patient)
+D_n_splits	Design	Fig2a	TCGA train/test splits	50	50	analysis/robust_proxy.R	N11_S default
+D_null_inner	Design	Fig2a	Random gene sets per split (internal null)	100	100	analysis/robust_proxy.R	N11_NR default
+D_null_ext	Design	Fig2b-c	Random gene sets (external null)	200	200	analysis/robust_proxy.R	N11_NE default
+D_train_frac	Design	Fig2a	Training fraction per split	0.66666667	two-thirds	analysis/robust_proxy.R	round(nT * 2 / 3)
 D_universe	Design	Fig2	Genes in random-sampling pool	10651	10,651	N11_out/robust_v2/cohort_meta.tsv	n_genes_universe
 C1_inner_empP_min	C1	Fig2a	Median internal empirical P, lowest of 8 sets	0.23762376	0.24	Fig2a_inner_splits_summary.tsv	min(median_emp_p)
 C1_inner_empP_max	C1	Fig2a	Median internal empirical P, highest of 8 sets	0.81683168	0.82	Fig2a_inner_splits_summary.tsv	max(median_emp_p)

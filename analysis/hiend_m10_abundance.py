@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""M10 Geneformer: detection-abundance bias check (analysis plan fixed before running)"""
+"""M10 Geneformer: detection-abundance bias check"""
 import os
 import gzip
 import random

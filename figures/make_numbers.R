@@ -256,6 +256,7 @@ add("n_gf_matched", "N", "Fig6g", "Abundance-matched random signatures", GM[grp 
 add("n_sim_runs", "N", "Fig7b", "Simulation runs per effect size", SP$n[1], SP$n[1], "Fig7b_sim_power.tsv", "n")
 T3 <- rbindlist(N)
 stopifnot(!anyDuplicated(T3$id))
+T3[, source := gsub("N28_fig/data/", "figures/data/", gsub("N11_scripts/", "analysis/", source, fixed = TRUE), fixed = TRUE)]
 fwrite(T3, file.path(FDIR, "TableS3_numbers.tsv"), sep = "\t")
 back <- fread(file.path(FDIR, "TableS3_numbers.tsv"), sep = "\t")
 stopifnot(nrow(back) == nrow(T3), isTRUE(all.equal(back$value, T3$value)))

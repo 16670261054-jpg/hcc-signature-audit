@@ -1,4 +1,4 @@
-# Additional modules M13 immune checkpoints / M14 consensus-clustering subtypes / M15 calibration (ICI) + DCA (analysis plan fixed before running)
+# Additional modules M13 immune checkpoints / M14 consensus-clustering subtypes / M15 calibration (ICI) + DCA
 # Environment: M1315_SMOKE=1 -> few signatures per group, timing; M1315_MAXREP=N -> only the first N reps per signature for random groups A/Ak (reduction allowed by the plan)
 suppressPackageStartupMessages({ library(survival); library(data.table); library(parallel) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")

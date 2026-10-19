@@ -1,4 +1,4 @@
-# Positive-control simulation, earlier design (analysis plan fixed before running)
+# Positive-control simulation, earlier design
 # Part 1, plasmode simulation: observed expression + Weibull PH simulated survival (LP0 from the observed-outcome fit + beta*S); criteria T0 template / T1 random null / T2 proxy-adjusted LRT
 # Part 2, Nault 5-gene score as a real example
 # R4_SMOKE=1 -> 4 simulations per beta and 10 random sets, to check that results are produced

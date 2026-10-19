@@ -1,4 +1,4 @@
-# M12 DSigDB annotation-matched null (analysis plan fixed before running)
+# M12 DSigDB annotation-matched null
 #   Real signatures (A published / B mechanism sets; genes = rows with kind "real" in signature_genes_all_arms.tsv)
 #   vs N_annot: size-matched random genes matched stratum by stratum on DSigDB annotation degree (one stratum for 0 + 10 deciles within pool U)
 #   vs N_plain: size-matched plain random genes (no annotation matching)

@@ -1,4 +1,4 @@
-# Proxy analysis: what do the signatures measure (analysis plan fixed before running)
+# Proxy analysis: what do the signatures measure
 # Each signature x each cohort: Spearman rho (proliferation/Stromal/Immune/OXPHOS), proxy R², nested Cox LRT in external cohorts (base = stage + proliferation + Stromal + Immune + age + sex)
 # Arm A published signatures (reported coefficient x TCGA sd) / arm B 8 mechanism sets (fitsig) vs size-matched random fitsig_k; written in chunks, resumable
 # R2_SMOKE=1 -> run a few tasks only (smoke test)
