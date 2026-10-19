@@ -34,44 +34,44 @@ C1_adjnull_frac_max	C1	Fig2c	Random sets still P<0.05 after proxy adjustment, hi
 C1_adj_specific	C1	Fig2c	Set x cohort pairs with residual signal beyond random (emp P<0.05)	2	2/16	Fig2c_adjusted_null.tsv	sum(emp_p_absz < 0.05)
 C2_R2_proxy_pub_TCGA	C2	Fig3a-b	Published median R2_proxy TCGA	0.32033512	0.32	Fig3ab_stats.tsv	median_pub
 C2_R2_proxy_Ak_TCGA	C2	Fig3a-b	Size-matched random median R2_proxy TCGA	0.51256092	0.51	Fig3ab_stats.tsv	median_null
-C2_R2_proxy_P_TCGA	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs size-matched (median of matched random per published), R2_proxy TCGA	1.9573708e-16	2.0e-16	Fig3ab_stats.tsv	P (paired Wilcoxon, N35)
+C2_R2_proxy_P_TCGA	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs size-matched (median of matched random per published), R2_proxy TCGA	1.9573708e-16	2.0e-16	Fig3ab_stats.tsv	P (paired Wilcoxon)
 C2_rho_prolif_pub_TCGA	C2	Fig3a-b	Published median rho_prolif TCGA	0.43365073	0.43	Fig3ab_stats.tsv	median_pub
 C2_rho_prolif_Ak_TCGA	C2	Fig3a-b	Size-matched random median rho_prolif TCGA	0.65718506	0.66	Fig3ab_stats.tsv	median_null
-C2_rho_prolif_P_TCGA	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs size-matched (median of matched random per published), rho_prolif TCGA	2.7707082e-18	2.8e-18	Fig3ab_stats.tsv	P (paired Wilcoxon, N35)
+C2_rho_prolif_P_TCGA	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs size-matched (median of matched random per published), rho_prolif TCGA	2.7707082e-18	2.8e-18	Fig3ab_stats.tsv	P (paired Wilcoxon)
 C2_R2_proxy_pub_GSE14520	C2	Fig3a-b	Published median R2_proxy GSE14520	0.28170238	0.28	Fig3ab_stats.tsv	median_pub
 C2_R2_proxy_Ak_GSE14520	C2	Fig3a-b	Size-matched random median R2_proxy GSE14520	0.42881629	0.43	Fig3ab_stats.tsv	median_null
-C2_R2_proxy_P_GSE14520	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs size-matched (median of matched random per published), R2_proxy GSE14520	7.9896691e-12	8.0e-12	Fig3ab_stats.tsv	P (paired Wilcoxon, N35)
+C2_R2_proxy_P_GSE14520	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs size-matched (median of matched random per published), R2_proxy GSE14520	7.9896691e-12	8.0e-12	Fig3ab_stats.tsv	P (paired Wilcoxon)
 C2_rho_prolif_pub_GSE14520	C2	Fig3a-b	Published median rho_prolif GSE14520	0.4575589	0.46	Fig3ab_stats.tsv	median_pub
 C2_rho_prolif_Ak_GSE14520	C2	Fig3a-b	Size-matched random median rho_prolif GSE14520	0.60578118	0.61	Fig3ab_stats.tsv	median_null
-C2_rho_prolif_P_GSE14520	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs size-matched (median of matched random per published), rho_prolif GSE14520	1.5325741e-13	1.5e-13	Fig3ab_stats.tsv	P (paired Wilcoxon, N35)
+C2_rho_prolif_P_GSE14520	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs size-matched (median of matched random per published), rho_prolif GSE14520	1.5325741e-13	1.5e-13	Fig3ab_stats.tsv	P (paired Wilcoxon)
 C2_R2_proxy_pub_LIRI	C2	Fig3a-b	Published median R2_proxy LIRI	0.47062971	0.47	Fig3ab_stats.tsv	median_pub
 C2_R2_proxy_Ak_LIRI	C2	Fig3a-b	Size-matched random median R2_proxy LIRI	0.63292873	0.63	Fig3ab_stats.tsv	median_null
-C2_R2_proxy_P_LIRI	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs size-matched (median of matched random per published), R2_proxy LIRI	4.262351e-16	4.3e-16	Fig3ab_stats.tsv	P (paired Wilcoxon, N35)
+C2_R2_proxy_P_LIRI	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs size-matched (median of matched random per published), R2_proxy LIRI	4.262351e-16	4.3e-16	Fig3ab_stats.tsv	P (paired Wilcoxon)
 C2_rho_prolif_pub_LIRI	C2	Fig3a-b	Published median rho_prolif LIRI	0.57423017	0.57	Fig3ab_stats.tsv	median_pub
 C2_rho_prolif_Ak_LIRI	C2	Fig3a-b	Size-matched random median rho_prolif LIRI	0.74948071	0.75	Fig3ab_stats.tsv	median_null
-C2_rho_prolif_P_LIRI	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs size-matched (median of matched random per published), rho_prolif LIRI	9.9106916e-18	9.9e-18	Fig3ab_stats.tsv	P (paired Wilcoxon, N35)
+C2_rho_prolif_P_LIRI	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs size-matched (median of matched random per published), rho_prolif LIRI	9.9106916e-18	9.9e-18	Fig3ab_stats.tsv	P (paired Wilcoxon)
 C2_R2_proxy_In_TCGA	C2	Fig3a-b	Input-matched random median R2_proxy TCGA	0.25993393	0.26	Fig3ab_stats.tsv	median_null, Input-matched
-C2_R2_proxy_InP_TCGA	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs input-matched (median of matched random per published), R2_proxy TCGA	7.7448129e-07	7.7e-07	Fig3ab_stats.tsv	P, Input-matched (paired Wilcoxon, N35)
+C2_R2_proxy_InP_TCGA	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs input-matched (median of matched random per published), R2_proxy TCGA	7.7448129e-07	7.7e-07	Fig3ab_stats.tsv	P, Input-matched (paired Wilcoxon)
 C2_rho_prolif_In_TCGA	C2	Fig3a-b	Input-matched random median rho_prolif TCGA	0.32806739	0.33	Fig3ab_stats.tsv	median_null, Input-matched
-C2_rho_prolif_InP_TCGA	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs input-matched (median of matched random per published), rho_prolif TCGA	1.4515066e-08	1.5e-08	Fig3ab_stats.tsv	P, Input-matched (paired Wilcoxon, N35)
+C2_rho_prolif_InP_TCGA	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs input-matched (median of matched random per published), rho_prolif TCGA	1.4515066e-08	1.5e-08	Fig3ab_stats.tsv	P, Input-matched (paired Wilcoxon)
 C2_R2_proxy_In_GSE14520	C2	Fig3a-b	Input-matched random median R2_proxy GSE14520	0.19723233	0.20	Fig3ab_stats.tsv	median_null, Input-matched
-C2_R2_proxy_InP_GSE14520	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs input-matched (median of matched random per published), R2_proxy GSE14520	1.0099765e-10	1.0e-10	Fig3ab_stats.tsv	P, Input-matched (paired Wilcoxon, N35)
+C2_R2_proxy_InP_GSE14520	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs input-matched (median of matched random per published), R2_proxy GSE14520	1.0099765e-10	1.0e-10	Fig3ab_stats.tsv	P, Input-matched (paired Wilcoxon)
 C2_rho_prolif_In_GSE14520	C2	Fig3a-b	Input-matched random median rho_prolif GSE14520	0.29091275	0.29	Fig3ab_stats.tsv	median_null, Input-matched
-C2_rho_prolif_InP_GSE14520	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs input-matched (median of matched random per published), rho_prolif GSE14520	9.1259222e-11	9.1e-11	Fig3ab_stats.tsv	P, Input-matched (paired Wilcoxon, N35)
+C2_rho_prolif_InP_GSE14520	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs input-matched (median of matched random per published), rho_prolif GSE14520	9.1259222e-11	9.1e-11	Fig3ab_stats.tsv	P, Input-matched (paired Wilcoxon)
 C2_R2_proxy_In_LIRI	C2	Fig3a-b	Input-matched random median R2_proxy LIRI	0.36368164	0.36	Fig3ab_stats.tsv	median_null, Input-matched
-C2_R2_proxy_InP_LIRI	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs input-matched (median of matched random per published), R2_proxy LIRI	6.8962613e-12	6.9e-12	Fig3ab_stats.tsv	P, Input-matched (paired Wilcoxon, N35)
+C2_R2_proxy_InP_LIRI	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs input-matched (median of matched random per published), R2_proxy LIRI	6.8962613e-12	6.9e-12	Fig3ab_stats.tsv	P, Input-matched (paired Wilcoxon)
 C2_rho_prolif_In_LIRI	C2	Fig3a-b	Input-matched random median rho_prolif LIRI	0.44986518	0.45	Fig3ab_stats.tsv	median_null, Input-matched
-C2_rho_prolif_InP_LIRI	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs input-matched (median of matched random per published), rho_prolif LIRI	1.4522827e-11	1.5e-11	Fig3ab_stats.tsv	P, Input-matched (paired Wilcoxon, N35)
+C2_rho_prolif_InP_LIRI	C2	Fig3a-b	Paired Wilcoxon signed-rank P, published vs input-matched (median of matched random per published), rho_prolif LIRI	1.4522827e-11	1.5e-11	Fig3ab_stats.tsv	P, Input-matched (paired Wilcoxon)
 C2_resid_Published_base	C2	Fig3c	Residual signal in both external cohorts, Published Base: proliferation, stroma, immune, stage, age, sex	0.040540541	4.1% (6/148)	Fig3c_residual.tsv	pos/n
 C2_resid_Published_oxphos	C2	Fig3c	Residual signal in both external cohorts, Published Base + OXPHOS	0.040540541	4.1% (6/148)	Fig3c_residual.tsv	pos/n
 C2_resid_Sizematchedrandom_base	C2	Fig3c	Residual signal in both external cohorts, Size-matched random Base: proliferation, stroma, immune, stage, age, sex	0.065675676	6.6% (243/3700)	Fig3c_residual.tsv	pos/n
-C2_resid_P_Sizematchedrandom_base	C2	Fig3c	CMH P stratified by matched set, published vs Size-matched random Base: proliferation, stroma, immune, stage, age, sex	0.29355221	0.29	Fig3c_residual.tsv	P_vs_published (CMH, N35)
+C2_resid_P_Sizematchedrandom_base	C2	Fig3c	CMH P stratified by matched set, published vs Size-matched random Base: proliferation, stroma, immune, stage, age, sex	0.29355221	0.29	Fig3c_residual.tsv	P_vs_published (CMH)
 C2_resid_Sizematchedrandom_oxphos	C2	Fig3c	Residual signal in both external cohorts, Size-matched random Base + OXPHOS	0.042162162	4.2% (156/3700)	Fig3c_residual.tsv	pos/n
-C2_resid_P_Sizematchedrandom_oxphos	C2	Fig3c	CMH P stratified by matched set, published vs Size-matched random Base + OXPHOS	0.9230254	0.92	Fig3c_residual.tsv	P_vs_published (CMH, N35)
+C2_resid_P_Sizematchedrandom_oxphos	C2	Fig3c	CMH P stratified by matched set, published vs Size-matched random Base + OXPHOS	0.9230254	0.92	Fig3c_residual.tsv	P_vs_published (CMH)
 C2_resid_Inputmatchedrandom_base	C2	Fig3c	Residual signal in both external cohorts, Input-matched random Base: proliferation, stroma, immune, stage, age, sex	0.032972973	3.3% (122/3700)	Fig3c_residual.tsv	pos/n
-C2_resid_P_Inputmatchedrandom_base	C2	Fig3c	CMH P stratified by matched set, published vs Input-matched random Base: proliferation, stroma, immune, stage, age, sex	0.78701137	0.79	Fig3c_residual.tsv	P_vs_published (CMH, N35)
+C2_resid_P_Inputmatchedrandom_base	C2	Fig3c	CMH P stratified by matched set, published vs Input-matched random Base: proliferation, stroma, immune, stage, age, sex	0.78701137	0.79	Fig3c_residual.tsv	P_vs_published (CMH)
 C2_resid_Inputmatchedrandom_oxphos	C2	Fig3c	Residual signal in both external cohorts, Input-matched random Base + OXPHOS	0.023243243	2.3% (86/3700)	Fig3c_residual.tsv	pos/n
-C2_resid_P_Inputmatchedrandom_oxphos	C2	Fig3c	CMH P stratified by matched set, published vs Input-matched random Base + OXPHOS	0.28101008	0.28	Fig3c_residual.tsv	P_vs_published (CMH, N35)
+C2_resid_P_Inputmatchedrandom_oxphos	C2	Fig3c	CMH P stratified by matched set, published vs Input-matched random Base + OXPHOS	0.28101008	0.28	Fig3c_residual.tsv	P_vs_published (CMH)
 C2_absloghr_unadj_GSE14520	C2	Fig3d	Published median |log HR| unadjusted, GSE14520	0.26559211	0.27	Fig3d_HR_medians.tsv	u
 C2_absloghr_adj_GSE14520	C2	Fig3d	Published median |log HR| adjusted, GSE14520	0.20149075	0.20	Fig3d_HR_medians.tsv	a
 C2_absloghr_unadj_LIRIJP	C2	Fig3d	Published median |log HR| unadjusted, LIRI-JP	0.49430603	0.49	Fig3d_HR_medians.tsv	u
@@ -209,9 +209,9 @@ C4_M8b_Published	C4	Fig6f	Tumour vs normal Published	0.9527027	95.3%	Fig6f_M8_ra
 C4_M8a_Sizematchedrandom	C4	Fig6f	Cell-type marker Size-matched random	0.76459459	76.5%	Fig6f_M8_rates.tsv	rate
 C4_M8b_Sizematchedrandom	C4	Fig6f	Tumour vs normal Size-matched random	0.9672973	96.7%	Fig6f_M8_rates.tsv	rate
 C4_M8a_Inputmatchedrandom	C4	Fig6f	Cell-type marker Input-matched random	0.50378378	50.4%	Fig6f_M8_rates.tsv	rate
-C4_M8a_InP	C4	Fig6f	CMH P stratified by matched set, published vs input-matched, Cell-type marker	1.497867e-18	1.5e-18	Fig6f_M8_rates.tsv	P, Input-matched (CMH, N35)
+C4_M8a_InP	C4	Fig6f	CMH P stratified by matched set, published vs input-matched, Cell-type marker	1.497867e-18	1.5e-18	Fig6f_M8_rates.tsv	P, Input-matched (CMH)
 C4_M8b_Inputmatchedrandom	C4	Fig6f	Tumour vs normal Input-matched random	0.68513514	68.5%	Fig6f_M8_rates.tsv	rate
-C4_M8b_InP	C4	Fig6f	CMH P stratified by matched set, published vs input-matched, Tumour vs normal	5.3734416e-12	5.4e-12	Fig6f_M8_rates.tsv	P, Input-matched (CMH, N35)
+C4_M8b_InP	C4	Fig6f	CMH P stratified by matched set, published vs input-matched, Tumour vs normal	5.3734416e-12	5.4e-12	Fig6f_M8_rates.tsv	P, Input-matched (CMH)
 C4_gf_n_sig	C4	Fig6g	Geneformer genes FDR<0.05	83	83/14,426	Fig6g_geneformer_deciles.tsv	sum(n_sig)/sum(n)
 C4_gf_top_decile_share	C4	Fig6g	Share of significant genes in top abundance decile	0.85542169	86%	Fig6g_geneformer_deciles.tsv	share, decile 10
 C4_gf_zero_deciles	C4	Fig6g	Abundance deciles with zero significant genes	6	6	Fig6g_geneformer_deciles.tsv	sum(n_sig == 0)
@@ -219,23 +219,23 @@ C4_gf_ndet_sig	C4	Fig6g	Median detections, significant genes	860	860	N11_out/hie
 C4_gf_ndet_nonsig	C4	Fig6g	Median detections, non-significant genes	35	35	N11_out/hiend_m10/m10_abund_check1.tsv	N_Detections median_nonsig
 C4_gf_pub	C4	Fig6g	Geneformer positive, published	0.047297297	4.7%	Fig6g_geneformer_abundance_matched.tsv	rate
 C4_gf_matched	C4	Fig6g	Geneformer positive, abundance-matched random	0.049594595	5.0%	Fig6g_geneformer_abundance_matched.tsv	rate
-C4_gf_matched_P	C4	Fig6g	CMH P stratified by matched set, published vs abundance-matched	0.89448562	0.89	Fig6g_geneformer_abundance_matched.tsv	P (CMH, N35)
+C4_gf_matched_P	C4	Fig6g	CMH P stratified by matched set, published vs abundance-matched	0.89448562	0.89	Fig6g_geneformer_abundance_matched.tsv	P (CMH)
 C4_knk_fc_rho	C4	Fig6h	scTenifoldKnk shared vs official network, FC Spearman (ALAD)	0.9932	0.9932	Fig6h_knk_official_equivalence.tsv	Spearman row
 C5_dsigdb_Published	C5	Fig4d	DSigDB positive, Published	0.60810811	60.8% (90/148)	Fig4d_dsigdb_rates.tsv	pos/n
 C5_dsigdb_Random	C5	Fig4d	DSigDB positive, Random	0.35540541	35.5% (1315/3700)	Fig4d_dsigdb_rates.tsv	pos/n
-C5_dsigdb_P_Random	C5	Fig4d	CMH P stratified by matched set, published vs Random	1.457713e-10	1.5e-10	Fig4d_dsigdb_rates.tsv	P (CMH, N35)
+C5_dsigdb_P_Random	C5	Fig4d	CMH P stratified by matched set, published vs Random	1.457713e-10	1.5e-10	Fig4d_dsigdb_rates.tsv	P (CMH)
 C5_dsigdb_Annotationmatched	C5	Fig4d	DSigDB positive, Annotation- matched	0.45162162	45.2% (1671/3700)	Fig4d_dsigdb_rates.tsv	pos/n
-C5_dsigdb_P_Annotationmatched	C5	Fig4d	CMH P stratified by matched set, published vs Annotation- matched	7.3088331e-05	7.3e-05	Fig4d_dsigdb_rates.tsv	P (CMH, N35)
+C5_dsigdb_P_Annotationmatched	C5	Fig4d	CMH P stratified by matched set, published vs Annotation- matched	7.3088331e-05	7.3e-05	Fig4d_dsigdb_rates.tsv	P (CMH)
 C5_ann_pub	C5	Fig4e	Median drugs annotated per gene, published signatures	23.215385	23.2	N11_out/hiend_m12_annot/m12_annotation_level.tsv	median_real
 C5_ann_pool	C5	Fig4e	Median drugs annotated per gene, sampling pool	8	8	N11_out/hiend_m12_annot/m12_annotation_level.tsv	median_U_gene
-C6_pub_adjHR_GSE	C6	Fig7b	Published median adjusted HR, GSE14520	1.2232249	1.22	Fig7b_sim_verdict.tsv	published_adjHR_median_GSE
-C6_pub_adjHR_LIRI	C6	Fig7b	Published median adjusted HR, LIRI-JP	1.2569776	1.26	Fig7b_sim_verdict.tsv	published_adjHR_median_LIRI
+C6_pub_adjHR_GSE	C6	Fig7c	Published median adjusted HR per s.d. (exp median |log HR|), GSE14520	1.2232249	1.22	N11_out/ring2/ring2_HR_attenuation.tsv	exp(median_abslogHR_adj), A_vs_fitsig_k real
+C6_pub_adjHR_LIRI	C6	Fig7c	Published median adjusted HR per s.d. (exp median |log HR|), LIRI-JP	1.2569776	1.26	N11_out/ring2/ring2_HR_attenuation.tsv	exp(median_abslogHR_adj), A_vs_fitsig_k real
 S1_n_same_verdict	Sens	FigS4b	Modules with same verdict at n = 148 and n = 95	15	15/16	FigS1b_148_vs_95_consistency.tsv	agree
 S2_raw_pub	Sens	FigS2b	Consensus subtypes positive, published, unadjusted	0.76351351	76.4%	FigS2b_m14_prolif_decision.tsv	raw_rate_pub
 S2_raw_Ak	Sens	FigS2b	Consensus subtypes positive, size-matched, unadjusted	0.93194444	93.2%	FigS2b_m14_prolif_decision.tsv	raw_rate_Ak
 S2_adj_pub	Sens	FigS2b	Consensus subtypes positive, published, proliferation-adjusted	0.5	50.0%	FigS2b_m14_prolif_decision.tsv	adj_rate_pub
 S2_adj_Ak	Sens	FigS2b	Consensus subtypes positive, size-matched, proliferation-adjusted	0.54583333	54.6%	FigS2b_m14_prolif_decision.tsv	adj_rate_Ak
-S2_adj_P	Sens	FigS2b	CMH P stratified by matched set, published vs size-matched, after proliferation adjustment	0.39354575	0.39	FigS2b_m14_prolif_decision.tsv	adj_P (CMH, N35)
+S2_adj_P	Sens	FigS2b	CMH P stratified by matched set, published vs size-matched, after proliferation adjustment	0.39354575	0.39	FigS2b_m14_prolif_decision.tsv	adj_P (CMH)
 S4_top25_prolif	Sens	FigS1a	Hallmark E2F/G2M genes among 25 most reused	5	5/25	FigS4a_gene_frequency.tsv	top 25 by n_sig
 S4_top_gene_n	Sens	FigS1a	Signatures containing G6PD	19	G6PD: 19 signatures, 5 death types	FigS4a_gene_frequency.tsv	top 1
 S1_n_null_default	Sens	FigS4a	Size-matched random signatures per module, full-coverage subset	2375	2,375	FigS1a_fullcoverage_module_rates.tsv	modal n_null
@@ -243,8 +243,8 @@ S1_n_null_M7	Sens	FigS4a	Size-matched random signatures, multi-algorithm module,
 S1_n_null_M14	Sens	FigS4a	Size-matched random signatures, consensus clustering, full-coverage subset	2308	2,308	FigS1a_fullcoverage_module_rates.tsv	M14 n_null
 S2_n_pub	Sens	FigS2	Published signatures in M14 proliferation check	148	148	FigS2b_m14_prolif_decision.tsv	n_pub
 S2_n_Ak	Sens	FigS2	Size-matched random signatures in M14 proliferation check	720	720	FigS2b_m14_prolif_decision.tsv	n_Ak
-S2_raw_P	Sens	FigS2b	CMH P stratified by matched set, published vs size-matched, before proliferation adjustment	1.3458895e-09	1.3e-09	FigS2b_m14_prolif_decision.tsv	raw_P (CMH, N35)
-S2_sep_P	Sens	FigS2a	Paired Wilcoxon signed-rank P, subtype separation by proliferation, published vs size-matched (median of matched random per published)	2.8256872e-12	2.8e-12	FigS2b_m14_prolif_decision.tsv	sep_P (paired Wilcoxon, N35)
+S2_raw_P	Sens	FigS2b	CMH P stratified by matched set, published vs size-matched, before proliferation adjustment	1.3458895e-09	1.3e-09	FigS2b_m14_prolif_decision.tsv	raw_P (CMH)
+S2_sep_P	Sens	FigS2a	Paired Wilcoxon signed-rank P, subtype separation by proliferation, published vs size-matched (median of matched random per published)	2.8256872e-12	2.8e-12	FigS2b_m14_prolif_decision.tsv	sep_P (paired Wilcoxon)
 S3_min_n_per_k	Sens	FigS3	Minimum random signatures per k shown	21	21	FigS3_m8_rate_by_k_observed.tsv	min n (k <= 12, n >= 20)
 corp_dedup	Methods	Methods corpus	Unique PMIDs after deduplication	575	575	N12_signatures/README.md	flow-count row: Unique PMIDs after deduplication
 corp_title	Methods	Methods corpus	Records after title screening	473	473	N12_signatures/README.md	flow-count row: Records after title screening
@@ -282,4 +282,4 @@ n_fig3_Sizematchedrandom	N	Fig3	Signatures per cohort, Size-matched random	3700	
 n_fig6e_Published	N	Fig6e	Signatures scored in single cells, Published	148	148	Fig6e_sc_relative_localisation.tsv	uniqueN(sid)
 n_fig6e_Sizematchedrandom	N	Fig6e	Signatures scored in single cells, Size-matched random	148	148	Fig6e_sc_relative_localisation.tsv	uniqueN(sid)
 n_gf_matched	N	Fig6g	Abundance-matched random signatures	29600	29,600	Fig6g_geneformer_abundance_matched.tsv	n
-n_sim_runs	N	Fig7b	Simulation runs per effect size	200	200	Fig7b_sim_power.tsv	n
+n_sim_runs	N	Fig7b	Simulation runs per effect size	200	200	N11_out/ring4v2/sim_power.tsv	n

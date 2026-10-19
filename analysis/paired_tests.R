@@ -1,11 +1,14 @@
 # Published vs matched random signatures: between-group tests that respect the matching structure (decision rules fixed before running)
 #   Binary outcomes: CMH stratified by src (mantelhaen.test, exact = FALSE, informative strata only; same construction as analysis/cmh_modules.R)
 #   Continuous outcomes: each published signature vs the median of its matched random signatures, paired Wilcoxon signed-rank (wilcox.test(paired = TRUE))
-#   No additional correction; descriptive statistics unchanged (the script first asserts that recomputed descriptive values equal the earlier source data)
+#   No additional correction; descriptive statistics unchanged (optional: if earlier source data exist in old_source_data/, recomputed descriptive values are checked against them)
 suppressPackageStartupMessages(library(data.table))
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); O <- file.path(B, "N11_out"); N35 <- file.path(B, "N35_paired_tests")
 OLD <- file.path(N35, "old_source_data")
-rd_old <- function(f) fread(file.path(OLD, f), sep = "\t", quote = "")
+HAVE_OLD <- dir.exists(OLD)   # earlier source data are optional; without them the comparisons with earlier tables are skipped
+rd_old <- function(f) { if (HAVE_OLD) fread(file.path(OLD, f), sep = intToUtf8(9), quote = "") else NULL }
+ov <- function(x) { if (HAVE_OLD) x else NULL }        # value from an earlier table (lazy; NULL without old_source_data)
+chk <- function(...) { if (HAVE_OLD) stopifnot(...) }  # check against an earlier table (skipped without old_source_data)
 stars <- function(p) fcase(is.na(p), "", p < 1e-4, "****", p < 1e-3, "***", p < 1e-2, "**", p < 0.05, "*", default = "ns")
 T_CMH <- "Cochran-Mantel-Haenszel test stratified by matched set (published signature + its matched random signatures)"
 T_WSR <- "Paired Wilcoxon signed-rank test (each published signature vs median of its matched random signatures)"
@@ -43,8 +46,9 @@ wsr <- function(P, N, what) {   # P: data.table(src, v); N: data.table(src, v)
 
 res <- list()
 put <- function(key, panel, comparison, old_test, old_P, r, new_test) {
+  if (!HAVE_OLD) { old_test <- NA_character_; old_P <- NA_real_ }
   res[[length(res) + 1]] <<- data.table(key, panel, comparison, old_test, old_P, new_test, new_P = r$P,
-    old_star = stars(old_P), new_star = stars(r$P), flip_0.05 = (old_P < 0.05) != (r$P < 0.05),
+    old_star = if (HAVE_OLD) stars(old_P) else NA_character_, new_star = stars(r$P), flip_0.05 = (old_P < 0.05) != (r$P < 0.05),
     n_pub = r$n_pub, n_null = r$n_null, n_strata_or_pairs = r$n_unit, unit = r$unit, CMH_OR = r$OR) }
 
 ## ================= Fig 3a-c (proxy analysis, ring2) =================
@@ -54,8 +58,8 @@ NULLS <- list("Size-matched random" = R[arm == "Ak"], "Input-matched random" = R
 ST_old <- rd_old("Fig3ab_stats.tsv")
 for (g in names(NULLS)) for (mt in c("R2_proxy", "rho_prolif")) for (cn in c("TCGA", "GSE14520", "LIRI")) {
   r <- wsr(rA[cohort == cn, .(src, v = get(mt))], NULLS[[g]][cohort == cn, .(src, v = get(mt))], paste("Fig3ab", mt, cn, g))
-  o <- ST_old[metric == mt & cohort == cn & grp2 == g]; stopifnot(nrow(o) == 1)
-  stopifnot(near(o$median_pub, r$median_pub), near(o$median_null, r$median_null))   # descriptive values equal those of the earlier figure
+  o <- ov(ST_old[metric == mt & cohort == cn & grp2 == g]); chk(nrow(o) == 1)
+  chk(near(o$median_pub, r$median_pub), near(o$median_null, r$median_null))   # descriptive values equal those of the earlier figure
   put(paste("Fig3ab", mt, cn, g, sep = "|"), ifelse(mt == "R2_proxy", "Fig3a", "Fig3b"),
       sprintf("%s, %s: published vs %s", mt, cn, tolower(g)), "Mann-Whitney U (independent samples)", o$P, r, T_WSR) }
 both <- function(d, col) { w <- dcast(d[cohort != "TCGA"], arm + src + kind + rep ~ cohort, value.var = col)
@@ -65,9 +69,9 @@ for (g in names(NULLS)) for (col in c("lrt_p", "lrt_p_oxphos")) {
   a <- both(rA, col); b <- both(NULLS[[g]], col)
   r <- cmh(a[, .(src, x = pos)], b[, .(src, x = pos)], paste("Fig3c", col, g))
   ml <- if (col == "lrt_p") "Base" else "+ OXPHOS"
-  o <- C3_old[grp == g & grepl(if (col == "lrt_p") "^Base: " else "OXPHOS$", model)]; stopifnot(nrow(o) == 1)
-  op <- C3_old[grp == "Published" & model == o$model]
-  stopifnot(o$n == r$n_null, near(o$rate, r$rate_null), op$n == r$n_pub, near(op$rate, r$rate_pub))
+  o <- ov(C3_old[grp == g & grepl(if (col == "lrt_p") "^Base: " else "OXPHOS$", model)]); chk(nrow(o) == 1)
+  op <- ov(C3_old[grp == "Published" & model == o$model])
+  chk(o$n == r$n_null, near(o$rate, r$rate_null), op$n == r$n_pub, near(op$rate, r$rate_pub))
   put(paste("Fig3c", col, g, sep = "|"), "Fig3c", sprintf("Residual signal (%s model): published vs %s", ml, tolower(g)),
       "Fisher exact (independent samples)", o$fisher_P_vs_published, r, T_CMH) }
 
@@ -75,12 +79,14 @@ for (g in names(NULLS)) for (col in c("lrt_p", "lrt_p_oxphos")) {
 AR <- fread(file.path(O, "hiend_m12_annot/m12_annot_rows.tsv"))[arm == "A"]
 AR[, src := sub("^A[|]", "", sid)]
 D4_old <- rd_old("Fig4d_dsigdb_rates.tsv")
-D4_old[, code := c("real", "N_plain", "N_annot")[match(gsub("[ ]+", " ", grp), c("Published", "Random", "Annotation- matched"))]]
-stopifnot(!anyNA(D4_old$code))
+if (HAVE_OLD) {
+  D4_old[, code := c("real", "N_plain", "N_annot")[match(gsub("[ ]+", " ", grp), c("Published", "Random", "Annotation- matched"))]]
+  stopifnot(!anyNA(D4_old$code))
+}
 for (nl in c("N_plain", "N_annot")) {
   r <- cmh(AR[type == "real", .(src, x = pos)], AR[type == nl, .(src, x = pos)], paste("Fig4d", nl))
-  o <- D4_old[code == nl]; op <- D4_old[code == "real"]
-  stopifnot(o$n == r$n_null, o$pos == round(r$rate_null * r$n_null), op$n == r$n_pub, near(op$rate, r$rate_pub))
+  o <- ov(D4_old[code == nl]); op <- ov(D4_old[code == "real"])
+  chk(o$n == r$n_null, o$pos == round(r$rate_null * r$n_null), op$n == r$n_pub, near(op$rate, r$rate_pub))
   put(paste("Fig4d", nl, sep = "|"), "Fig4d", paste("DSigDB positive: published vs", c(N_plain = "random", N_annot = "annotation-matched random")[[nl]]),
       "Fisher exact (independent samples)", o$P, r, T_CMH) }
 
@@ -90,12 +96,12 @@ F6_old <- rd_old("Fig6f_M8_rates.tsv")
 CMHmod <- fread(file.path(O, "cmh_modules.tsv"))
 for (m in c("M8a_pos", "M8b_pos")) {
   r <- cmh(M8[arm == "A" & kind == "real", .(src, x = get(m))], M8[arm == "A" & kind == "null", .(src, x = get(m))], paste("Fig6f", m))
-  o <- F6_old[module == m & grp == "Input-matched random"]; op <- F6_old[module == m & grp == "Published"]
-  stopifnot(o$n == r$n_null, near(o$rate, r$rate_null), near(op$rate, r$rate_pub))
+  o <- ov(F6_old[module == m & grp == "Input-matched random"]); op <- ov(F6_old[module == m & grp == "Published"])
+  chk(o$n == r$n_null, near(o$rate, r$rate_null), near(op$rate, r$rate_pub))
   put(paste("Fig6f", m, "Input-matched random", sep = "|"), "Fig6f", paste(sub("_pos", "", m), "positive: published vs input-matched random"),
       "Fisher exact (independent samples)", o$P, r, T_CMH)
-  os <- F6_old[module == m & grp == "Size-matched random"]; cm <- CMHmod[module == sub("_pos", "", m)]
-  stopifnot(near(os$P, cm$CMH_P_holm))
+  os <- ov(F6_old[module == m & grp == "Size-matched random"]); cm <- CMHmod[module == sub("_pos", "", m)]
+  chk(near(os$P, cm$CMH_P_holm))
   put(paste("Fig6f", m, "Size-matched random", sep = "|"), "Fig6f", paste(sub("_pos", "", m), "positive: published vs size-matched random (unchanged)"),
       "CMH stratified by matched set, Holm across 16 modules (Fig 4a family)", os$P,
       list(P = cm$CMH_P_holm, OR = cm$CMH_OR, n_pub = cm$n_pub, n_null = cm$n_rand, n_unit = cm$n_informative_strata, unit = "informative strata"),
@@ -105,8 +111,8 @@ for (m in c("M8a_pos", "M8b_pos")) {
 G <- fread(file.path(O, "hiend_m10/m10_abund_matched_rows.tsv"))
 r <- cmh(G[type == "real", .(src, x = pos)], G[type == "abund_matched", .(src, x = pos)], "Fig6g")
 G_old <- rd_old("Fig6g_geneformer_abundance_matched.tsv")
-stopifnot(G_old[grp != "Published"]$n == r$n_null, near(G_old[grp != "Published"]$rate, r$rate_null), near(G_old[grp == "Published"]$rate, r$rate_pub))
-put("Fig6g|abund_matched", "Fig6g", "Geneformer positive: published vs abundance-matched random", "Fisher exact (independent samples)", G_old[grp != "Published"]$P, r, T_CMH)
+chk(G_old[grp != "Published"]$n == r$n_null, near(G_old[grp != "Published"]$rate, r$rate_null), near(G_old[grp == "Published"]$rate, r$rate_pub))
+put("Fig6g|abund_matched", "Fig6g", "Geneformer positive: published vs abundance-matched random", "Fisher exact (independent samples)", ov(G_old[grp != "Published"]$P), r, T_CMH)
 
 ## ================= Fig S2 (hiend_m14_prolif) =================
 P14 <- fread(file.path(O, "hiend_m14_prolif/m14_prolif_rows.tsv"))
@@ -114,11 +120,11 @@ P14[, src := vapply(strsplit(sid, "|", fixed = TRUE), `[`, "", 2)]
 V <- P14[!is.na(prolif_sep)]; a <- V[arm == "A"]; k <- V[arm == "Ak"]   # same analysis set as hiend_m14_prolif_check.R
 D14_old <- rd_old("FigS2b_m14_prolif_decision.tsv")
 r <- wsr(a[, .(src, v = prolif_sep)], k[, .(src, v = prolif_sep)], "FigS2a")
-stopifnot(near(D14_old$prolif_sep_median_pub, r$median_pub), near(D14_old$prolif_sep_median_Ak, r$median_null), D14_old$n_Ak == nrow(k), D14_old$n_pub == nrow(a))
+chk(near(D14_old$prolif_sep_median_pub, r$median_pub), near(D14_old$prolif_sep_median_Ak, r$median_null), D14_old$n_Ak == nrow(k), D14_old$n_pub == nrow(a))
 put("FigS2a|sep", "FigS2a", "Subtype separation by proliferation: published vs size-matched random", "Mann-Whitney U (independent samples)", D14_old$MWU_P, r, T_WSR)
 for (st in c("raw", "adj")) { col <- c(raw = "M14_p", adj = "adj_p")[[st]]
   r <- cmh(a[, .(src, x = as.integer(get(col) < 0.05))], k[, .(src, x = as.integer(get(col) < 0.05))], paste("FigS2b", st))
-  stopifnot(near(D14_old[[paste0(st, "_rate_pub")]], r$rate_pub), near(D14_old[[paste0(st, "_rate_Ak")]], r$rate_null))
+  chk(near(D14_old[[paste0(st, "_rate_pub")]], r$rate_pub), near(D14_old[[paste0(st, "_rate_Ak")]], r$rate_null))
   put(paste("FigS2b", st, sep = "|"), "FigS2b", paste0("Consensus subtypes positive (", c(raw = "unadjusted", adj = "proliferation-adjusted")[[st]], "): published vs size-matched random"),
       "Fisher exact (independent samples)", D14_old[[paste0(st, "_fisher_P")]], r, T_CMH) }
 

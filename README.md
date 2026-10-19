@@ -134,7 +134,7 @@ Scripts are listed in the order of the Methods sections. Each script header stat
 
 ### 9. Matched-set tests for published versus random comparisons
 
-- `analysis/paired_tests.R` - between-group tests that respect the matching of each published signature to its own random signatures: Cochran-Mantel-Haenszel tests stratified by matched set for proportions and paired Wilcoxon signed-rank tests (each published signature vs the median of its matched random signatures) for continuous measures. It provides the tests for Fig. 3a-c, Fig. 4d, Fig. 6f (input-matched comparison), Fig. 6g and Supplementary Fig. S2, and writes `N35_paired_tests/paired_tests_results.tsv`. Run it after the module audit (sections 4-8) and `cmh_modules.R`, and before the figure scripts and `make_numbers.R`. Before testing, it checks that the recomputed descriptive values equal the earlier Source Data tables, which it reads from `N35_paired_tests/old_source_data/`.
+- `analysis/paired_tests.R` - between-group tests that respect the matching of each published signature to its own random signatures: Cochran-Mantel-Haenszel tests stratified by matched set for proportions and paired Wilcoxon signed-rank tests (each published signature vs the median of its matched random signatures) for continuous measures. It provides the tests for Fig. 3a-c, Fig. 4d, Fig. 6f (input-matched comparison), Fig. 6g and Supplementary Fig. S2, and writes `N35_paired_tests/paired_tests_results.tsv`. Run it after the module audit (sections 4-8) and `cmh_modules.R`, and before the figure scripts and `make_numbers.R`. Optional: if source data from an earlier version exist in `N35_paired_tests/old_source_data/`, the script additionally checks the descriptive statistics against them; otherwise the `old_*` and `flip_0.05` columns are written as NA.
 
 ### 10. Figures, Source Data and supplementary tables (`figures/`)
 
@@ -143,7 +143,7 @@ Scripts are listed in the order of the Methods sections. Each script header stat
 1. Preparation: `prep_sc_embedding.R`, `prep_fig4c_random_showcase.R`, `check_fig5_showcase_typicality.R`
 2. Panels: `fig1_design.R`, `fig2_celldeath_sets.R`, `fig3_proxy.R`, `fig4_modules.R`, `figA_funnel.R`, `figX_landscape.R`, `fig5_singlecell.R`, `figCD_sc_extra.R`, `fig7_framework_v2.R`, `figS_supp.R`, `figS5_showcase_typicality.R`
 3. Assembly: `assemble_main.R` (main Figs. 4-6)
-4. Numbers and tables: `make_numbers.R` (`source_data/TableS3_numbers.tsv`), `make_supp_tables.R` (Supplementary Tables S1-S3 and `source_data/per_signature/`)
+4. Numbers and tables: `make_numbers.R` (`source_data/TableS3_numbers.tsv`), `make_supp_tables.R` (Supplementary Tables S1-S3 and `source_data/per_signature/`). Besides `source_data/`, `make_numbers.R` reads analysis outputs under `N11_out/`, including `N11_out/ring2/ring2_HR_attenuation.tsv` (`ring2_analyze.R`) and `N11_out/ring4v2/sim_power.tsv` (`ring4v2_selected_sim.R`)
 5. `session_versions.R` - writes `env/` version files
 
 Intermediate tables in `figures/data/` (written by the preparation scripts, included so that the panel scripts can run without the raw data):
@@ -156,7 +156,7 @@ Intermediate tables in `figures/data/` (written by the preparation scripts, incl
 
 R objects (`*.rds`) are not included. `fig5_singlecell.R` and `figCD_sc_extra.R` also need `figures/data/sc_sigscore.rds`, so run `prep_sc_embedding.R` (requires GSE149614) first. `assemble_main.R` needs the panel objects saved by `fig4_modules.R`, `fig5_singlecell.R`, `figX_landscape.R`, `figA_funnel.R` and `figCD_sc_extra.R`, and `figS_supp.R` needs the object saved by `figX_landscape.R`; run those scripts first.
 
-Script names follow the order in which panels were drafted, not the final figure numbers; the header of each script names the panels it produces. `fig6_framework.R` is an earlier version of `fig7_framework_v2.R`; it is kept only because it writes `source_data/Fig7b_sim_power.tsv` and `Fig7b_sim_verdict.tsv`, which `make_numbers.R` still reads.
+Script names follow the order in which panels were drafted, not the final figure numbers; the header of each script names the panels it produces.
 
 ### Supplementary figure numbering
 

@@ -1,6 +1,6 @@
 # Fig 7: two-gate audit with pooled external cohorts
 #  a framework schematic (pooled version)  b selected null simulation: positive rate of each criterion (including the missing-OXPHOS scenario)  c power curves (selected true signal)  d 148 published signatures through the gates
-# Reads: N11_out/ring4v2/sim_power.tsv, N11_out/n2_gates/published_gates_summary.tsv; the earlier fig6_framework.R is kept
+# Reads: N11_out/ring4v2/sim_power.tsv, N11_out/n2_gates/published_gates_summary.tsv
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 SP <- fread(file.path(OUT, "ring4v2/sim_power.tsv")); PG <- fread(file.path(OUT, "n2_gates/published_gates_summary.tsv"))
 SV <- fread(file.path(OUT, "ring4/sim_verdict.tsv"))
