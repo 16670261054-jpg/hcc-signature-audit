@@ -1,4 +1,4 @@
-# 按 N14 预注册规则汇总第 3 环（只用标准函数：binom.test / fisher.test）
+# Module audit summary by the predefined rules (standard functions only: binom.test / fisher.test)
 suppressPackageStartupMessages({ library(data.table) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); O <- file.path(B, "N11_out/ring3_full")
 R <- fread(file.path(O, "results_m06.tsv")); R7 <- fread(file.path(O, "results_m7.tsv"))
@@ -30,10 +30,10 @@ fwrite(out, file.path(O, "ring3_decision.tsv"), sep = "\t")
 print(out[, .(analysis, module, rate_real = round(rate_real, 3), FPR_null = round(FPR_null, 3),
               CI = sprintf("%.3f-%.3f", FPR_CI_lo, FPR_CI_hi), RA_typeI_inflated, fisher_P = signif(fisher_P, 3), RB_real_no_advantage)])
 
-# 补充：M7 挑最优相对单用 LASSO 的乐观偏差（外部平均 C）
+# Supplementary: optimism of M7 best-model selection relative to LASSO alone (mean external C)
 bias <- R7[, .(n = .N, best_mean_c = mean(M7_best_mean_c, na.rm = TRUE), lasso_mean_c = mean(M7_lasso_mean_c, na.rm = TRUE)), by = .(arm, kind)]
 bias[, optimism := best_mean_c - lasso_mean_c]; fwrite(bias, file.path(O, "m7_selection_optimism.tsv"), sep = "\t"); print(bias)
-# 补充：已发表签名在外部的 C 分布（M0）
+# Supplementary: external C distribution of published signatures (M0)
 pc <- R[arm == "A" & src %in% full_ids, .(n = .N, med_c_GSE = median(M0_c_GSE), med_c_LIRI = median(M0_c_LIRI)), by = kind]
 fwrite(pc, file.path(O, "m0_c_distribution.tsv"), sep = "\t"); print(pc)
 cat("DONE\n")

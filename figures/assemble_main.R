@@ -1,8 +1,8 @@
-# 主图 4–6 拼版（v2，2026-10-18）：只读各脚本保存的面板对象，不碰数据
-#   Fig 4  模块审计：a 16 模块哑铃 | b 环形审计全景 | c 逐层过关桑基 | d,e DSigDB 反例
-#   Fig 5  一个尺寸匹配随机签名走完整套模板：KM×3 | 时间依赖 ROC | 多因素 Cox（单细胞投影见 Fig 6c）
-#   Fig 6  单细胞层：UMAP 图谱/组织来源 | 已发表 vs 随机评分投影 | 相对定位分半小提琴 | 定位热图 | scRNA 阳性率 | Geneformer×3 | scTenifoldKnk
-# 运行顺序：fig4_modules.R → fig5_singlecell.R → figX_landscape.R → figA_funnel.R → figCD_sc_extra.R → 本脚本
+# Assembly of main Figs. 4-6: reads only the panel objects saved by the panel scripts, no data
+#   Fig 4  module audit: a 16-module dumbbell | b circular audit landscape | c stage-by-stage Sankey | d,e DSigDB counterexample
+#   Fig 5  one size-matched random signature through the full template: KM x3 | time-dependent ROC | multivariable Cox (single-cell projection in Fig 6c)
+#   Fig 6  single-cell level: UMAP atlas/tissue origin | published vs random score projection | relative-localisation split violin | localisation heatmap | scRNA positive rate | Geneformer x3 | scTenifoldKnk
+# Run order: fig4_modules.R -> fig5_singlecell.R -> figX_landscape.R -> figA_funnel.R -> figCD_sc_extra.R -> this script
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 suppressPackageStartupMessages({ library(ggtree); library(ggtreeExtra); library(ggnewscale) })
 F4 <- readRDS(file.path(DAT, "obj_fig4.rds")); SCo <- readRDS(file.path(DAT, "obj_sc.rds"))
@@ -25,7 +25,7 @@ save_pub(p4, "Fig4_template_modules", width_mm = 180, height_mm = 215)
 ## ---- Fig 5 ----
 pk <- F4$pk
 r1 <- wrap_plots(list(tg(pk[[1]], "a"), pk[[2]], pk[[3]]), nrow = 1)
-r2 <- wrap_plots(list(tg(F4$pr, "b"), tg(F4$pf, "c")), nrow = 1, widths = c(0.9, 1.25))   # 10-19：删 d（与 Fig 6c 右图重复）
+r2 <- wrap_plots(list(tg(F4$pr, "b"), tg(F4$pf, "c")), nrow = 1, widths = c(0.9, 1.25))   # panel d removed (duplicate of the right part of Fig 6c)
 p5 <- wrap_plots(list(F4$klg, wrap_elements(full = r1), wrap_elements(full = r2)), ncol = 1, heights = c(0.07, 1, 1.15))
 save_pub(p5, "Fig5_random_signature_showcase", width_mm = 180, height_mm = 125)
 

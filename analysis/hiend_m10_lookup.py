@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""M10 Geneformer 查表判读（预注册 N19_m10_geneformer_prereg.md，结果出来后不改）
-阳性 = 签名中 >=1 个基因 Goal_end_FDR < 0.05（照抄模板）；未被检验到的基因按非阳性计。
-敏感性：只算检验覆盖率 >= 50% 的签名。真实 vs 随机 Fisher 双侧；随机阳性率 Clopper–Pearson 95% CI，下界 > 0.075 → I 类错误失控。
-签名 = N11_out/hiend_m8/signature_genes_all_arms.tsv（与第 2 环 / M8 / M3 / M12 同一批）。
+"""M10 Geneformer lookup and calls (analysis plan fixed before running)
+Positive = >= 1 signature gene with Goal_end_FDR < 0.05 (template criterion); genes not tested count as non-positive.
+Sensitivity: signatures with test coverage >= 50% only. Real vs random: two-sided Fisher; random positive rate with Clopper-Pearson 95% CI, lower limit > 0.075 -> excess type I error.
+Signatures = N11_out/hiend_m8/signature_genes_all_arms.tsv (same set as proxy analysis / M8 / M3 / M12).
 """
 import os
 import pandas as pd
@@ -15,7 +15,7 @@ st = pd.read_csv(os.path.join(O, "gf", "stats_delete_all_n1000", "all_genes_dele
 tested = set(st.loc[st["Goal_end_FDR"].notna(), "Gene_name"].astype(str))
 pos_genes = set(st.loc[st["Goal_end_FDR"] < 0.05, "Gene_name"].astype(str))
 
-# 坑：kind 列的字面值 "null" 会被 pandas 默认当成缺失值 → groupby 静默丢掉全部随机签名；必须 keep_default_na=False
+# Note: the literal "null" in column kind is read as missing by pandas by default -> groupby silently drops all random signatures; keep_default_na=False is required
 G = pd.read_csv(os.path.join(B, "N11_out", "hiend_m8", "signature_genes_all_arms.tsv"), sep="\t", keep_default_na=False, na_values=[""])
 assert G["kind"].isin(["real", "null"]).all() and G["kind"].eq("null").any(), G["kind"].value_counts(dropna=False)
 G["sid"] = G["arm"] + "|" + G["src"] + "|" + G["kind"] + "|" + G["rep"].astype(str)

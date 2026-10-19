@@ -1,4 +1,4 @@
-# N30-N3 按原文是否使用过外部队列分层的外部验证（预注册 N30_selfreview_prereg.md；只描述）
+# External validation stratified by whether the source article used an external cohort (descriptive only)
 suppressPackageStartupMessages(library(data.table))
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); O <- file.path(B, "N11_out"); OD <- file.path(O, "n3_cohort_use"); dir.create(OD, showWarnings = FALSE)
 I <- fread(file.path(B, "N12_signatures/signatures_index.tsv"), encoding = "UTF-8")

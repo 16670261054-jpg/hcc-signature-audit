@@ -1,8 +1,8 @@
-# M12 DSigDB 注释匹配对照（预注册 N18_m12_annotation_control_prereg.md，结果出来后不改）
-#   真实签名（A 已发表 / B 机制集，基因 = signature_genes_all_arms.tsv 中 real 行）
-#   vs N_annot：按 DSigDB 注释度（0 一层 + U 池内十分位 10 层）逐层匹配的同尺寸随机基因
-#   vs N_plain：同尺寸纯随机（不匹配注释）
-#   enricher 参数与阳性判据照抄 M12（课程 236/25.drugEnrich）
+# M12 DSigDB annotation-matched null (analysis plan fixed before running)
+#   Real signatures (A published / B mechanism sets; genes = rows with kind "real" in signature_genes_all_arms.tsv)
+#   vs N_annot: size-matched random genes matched stratum by stratum on DSigDB annotation degree (one stratum for 0 + 10 deciles within pool U)
+#   vs N_plain: size-matched plain random genes (no annotation matching)
+#   enricher parameters and positivity criterion as in M12 (template workflow)
 suppressPackageStartupMessages({ library(data.table); library(parallel) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", ".")
 O <- file.path(B, "N11_out/hiend_m12_annot"); dir.create(O, showWarnings = FALSE, recursive = TRUE)
@@ -18,7 +18,7 @@ acnt <- function(g) { v <- ann$n_drug[match(g, ann$Gene)]; v[is.na(v)] <- 0L; v 
 uc <- acnt(U)
 brk <- unique(quantile(uc[uc > 0], 0:10 / 10))
 layer <- function(v) ifelse(v == 0, 0L, as.integer(cut(v, brk, include.lowest = TRUE, labels = FALSE)))
-# 超出 U 池范围的注释度归到两端层
+# Annotation degrees outside the range of pool U go to the end strata
 layer2 <- function(v) { l <- layer(pmin(pmax(v, min(brk)), max(brk))); l[v == 0] <- 0L; l }
 uL <- layer2(uc); pool <- split(U, uL)
 fwrite(data.table(layer = names(pool), n_genes = lengths(pool), min_ann = sapply(split(uc, uL), min), max_ann = sapply(split(uc, uL), max)),

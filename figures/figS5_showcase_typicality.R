@@ -1,5 +1,5 @@
-# 补图 S5：Fig 5 示例随机签名（Ak|S004|rep1）在全部 3,700 个尺寸匹配随机签名中的位置
-# 只读盘：data/fig5_showcase_all_Ak.tsv、data/fig5_showcase_typicality.tsv（check_fig5_showcase_typicality.R）
+# Supplementary Fig. S5: position of the Fig. 5 example random signature (Ak|S004|rep1) among all 3,700 size-matched random signatures
+# Reads: figures/data/fig5_showcase_all_Ak.tsv, figures/data/fig5_showcase_typicality.tsv (check_fig5_showcase_typicality.R)
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 R  <- fread(file.path(DAT, "fig5_showcase_all_Ak.tsv")); stopifnot(nrow(R) == 3700)
 TY <- fread(file.path(DAT, "fig5_showcase_typicality.tsv"))

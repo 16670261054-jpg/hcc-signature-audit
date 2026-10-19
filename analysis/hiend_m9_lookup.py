@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""M9 scTenifoldKnk 查表判读（预注册 N20_m9_knk_prereg.md，结果出来后不改）
-基因级：去掉靶基因后 diffRegulation p.adj<0.05 的基因数 >=1 → 该基因模板阳性
-签名级：签名中网络内基因 >=1 个模板阳性 → 签名阳性；网络内无基因的签名按非阳性计
-敏感性：只算网络内至少 1 个基因的签名。真实 vs 随机 Fisher 双侧；随机阳性率 Clopper–Pearson 95% CI，下界 > 0.075 → I 类错误失控
+"""M9 scTenifoldKnk lookup and calls (analysis plan fixed before running)
+Gene level: >= 1 gene other than the target with diffRegulation p.adj < 0.05 -> template-positive gene
+Signature level: >= 1 template-positive gene among signature genes in the network -> positive; signatures without genes in the network count as non-positive
+Sensitivity: signatures with >= 1 gene in the network only. Real vs random two-sided Fisher; random positive rate Clopper-Pearson 95% CI, lower limit > 0.075 -> excess type I error
 """
 import os
 import glob

@@ -1,6 +1,6 @@
-# N30-N1 经筛选的模拟（预注册 N30_selfreview_prereg.md，结果出来后不改）
-# 候选签名与闸门 1 参照都由模板流程在模拟 TCGA 结局上产生；另加合并两外部队列的闸门与"代理漏设"情景
-# R4_SMOKE=1 → 每情景 3 次、10 个参照
+# Simulation with selected candidate signatures (analysis plan fixed before running)
+# Candidate signatures and gate-1 references are produced by the template pipeline on the simulated TCGA outcome; gates pooling the two external cohorts and a "missing proxy" scenario are added
+# R4_SMOKE=1 -> 3 runs per scenario, 10 references
 suppressPackageStartupMessages({ library(survival); library(data.table); library(parallel) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
 SMOKE <- Sys.getenv("R4_SMOKE", "0") == "1"
@@ -8,11 +8,11 @@ OUTD <- file.path(B, if (SMOKE) "N11_out/ring4v2_smoke" else "N11_out/ring4v2");
 NSIM <- if (SMOKE) 3L else 200L; NNULL <- if (SMOKE) 10L else 100L
 BETAS <- c(0, 0.2, 0.3, 0.4, 0.6); K <- 5L; NPOOL <- 100L; GAMMA_OX <- 0.3
 t0 <- Sys.time(); tm <- function(s) cat(sprintf("[%s | %5.1f min] %s\n", format(Sys.time(), "%H:%M"), as.numeric(difftime(Sys.time(), t0, units = "mins")), s))
-O <- OUTD   # load_cohorts.R 用 O 落盘 cohort_meta
+O <- OUTD   # load_cohorts.R writes cohort_meta to O
 source(file.path(B, "analysis/load_cohorts.R"), encoding = "UTF-8")
 O <- OUTD
 
-## ---- 协变量（照抄 ring2_proxy.R）----
+## ---- Covariates (as in ring2_proxy.R) ----
 ids <- lapply(cohorts, function(c) colnames(c$z))
 ph <- fread(file.path(TG, "TCGA-LIHC_phenotype.tsv"), data.table = FALSE)
 cohorts$TCGA$age <- as.numeric(ph$age_at_initial_pathologic_diagnosis[match(ids$TCGA, ph[[1]])])
@@ -40,10 +40,10 @@ BASE <- c("stage", "prolif", "stromal", "immune", "age", "sex")
 D <- lapply(cohorts, function(c) { sx <- ifelse(c$sex %in% c("M", "F"), c$sex, NA)
   data.frame(stage = factor(c$stage, levels = c("I-II", "III-IV")), prolif = as.numeric(scale(c$prolif)), oxphos = as.numeric(scale(c$oxphos)),
              stromal = c$stromal, immune = c$immune, age = c$age, sex = factor(sx, levels = c("F", "M"))) })
-CC <- lapply(D, function(d) complete.cases(d[, BASE]))     # 模拟与检验都只用基础协变量齐全的样本
+CC <- lapply(D, function(d) complete.cases(d[, BASE]))     # simulation and tests use only patients with complete base covariates
 tm("covariates ready")
 
-## ---- 基线 Weibull PH 参数（真实结局）----
+## ---- Baseline Weibull PH parameters (observed outcome) ----
 fitw <- function(k) { d <- D[[k]][CC[[k]], ]; y <- cohorts[[k]]$y[CC[[k]]]
   f <- survreg(as.formula(paste("y ~", paste(BASE, collapse = "+"))), data = d, dist = "weibull")
   X <- model.matrix(as.formula(paste("~", paste(BASE, collapse = "+"))), d)
@@ -69,7 +69,7 @@ uni_p <- function(s, y) summary(coxph(y ~ s))$coefficients[1, 5]
 EXT <- c("GSE14520", "LIRI")
 
 
-fitsig_cap <- function(g, Z, y, k) {   # 照抄 ring3_armA_null.R
+fitsig_cap <- function(g, Z, y, k) {   # as in ring3_armA_null.R
   X <- t(Z[g, , drop = FALSE])
   p <- apply(X, 2, function(v) { s <- tryCatch(summary(coxph(y ~ v))$coefficients[5], error = function(e) 1); s })
   kp <- names(p)[p < 0.05]
@@ -101,7 +101,7 @@ judge2 <- function(b, Y, refs) {
              T1p = empPp < 0.05, T2p = lp < 0.05, C_GSE = per$GSE14520[["C"]], C_LIRI = per$LIRI[["C"]], empP_GSE = per$GSE14520[["empP"]], empP_LIRI = per$LIRI[["empP"]],
              lrt_GSE = per$GSE14520[["lrt"]], lrt_LIRI = per$LIRI[["lrt"]], C_pooled = cp, empP_pooled = empPp, lrt_pooled = lp) }
 
-## ---- 模拟 ----
+## ---- Simulation ----
 jobs <- rbind(CJ(scen = "selected", b = seq_along(BETAS), sim = seq_len(NSIM)), CJ(scen = "misspec_oxphos", b = 1L, sim = seq_len(NSIM)))
 oxz <- lapply(names(cohorts), function(k) D[[k]]$oxphos[CC[[k]]]); names(oxz) <- names(cohorts)
 one <- function(i) { j <- jobs[i]; beta <- BETAS[j$b]; seed <- 21e6 + (j$scen == "misspec_oxphos") * 1e6 + 1e3 * j$b + j$sim; set.seed(seed)

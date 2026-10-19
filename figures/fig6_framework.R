@@ -1,6 +1,6 @@
-# Fig 6  双闸门审计框架（C6）：设计、模拟阳性对照的 I 类错误与功效、一个已发表签名的实例
-# 只读盘：N11_out/ring4/{sim_power,sim_verdict,nault_5gene}.tsv
-# 统计：阳性率 Clopper–Pearson 95% CI（读盘）；判据定义见 N23 预注册。
+# Earlier version of the two-gate audit figure: design, type I error and power of the simulated positive control, one published signature as example
+# Reads: N11_out/ring4/{sim_power,sim_verdict,nault_5gene}.tsv
+# Statistics: positive rates with Clopper-Pearson 95% CI (read from disk); criteria as defined in ring4_positive_control.R.
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 R4 <- file.path(OUT, "ring4")
 SP <- fread(file.path(R4, "sim_power.tsv")); SV <- fread(file.path(R4, "sim_verdict.tsv")); NA5 <- fread(file.path(R4, "nault_5gene.tsv"))
@@ -10,7 +10,7 @@ COL_CRIT <- c(T0_template_uni = "grey70", T1_random_null = RDBU[["b1"]], T2_prox
 LAB_CRIT <- c(T0_template_uni = "Template: univariable Cox P < 0.05", T1_random_null = "Gate 1: beats size-matched random",
               T2_proxy_LRT = "Gate 2: survives proxy adjustment", framework_T1andT2 = "Framework (gate 1 and gate 2)")
 
-## a 框架示意
+## a framework schematic
 bx <- data.table(x = c(1, 2.35, 2.35, 3.7), y = c(0, 0.62, -0.62, 0),
                  lab = c("Signature score\n(fixed before\nexternal data)",
                          "Gate 1\nEmpirical P vs 100 size-matched\nrandom signatures (Phipson-Smyth)",
@@ -25,7 +25,7 @@ pa <- ggplot() +
   scale_fill_identity() + xlim(0.45, 4.25) + ylim(-1, 1) + theme_void_pub() +
   labs(title = NULL)
 
-## b 模拟：I 类错误与功效
+## b simulation: type I error and power
 SP[, crit := factor(criterion, levels = names(COL_CRIT))]
 adj <- c(SV$published_adjHR_median_GSE, SV$published_adjHR_median_LIRI)
 pb <- ggplot(SP, aes(HR_per_SD, rate, colour = crit, fill = crit)) +
@@ -45,7 +45,7 @@ pb <- ggplot(SP, aes(HR_per_SD, rate, colour = crit, fill = crit)) +
   theme(legend.position = "bottom", legend.key.size = unit(2.6, "mm"), legend.text = element_text(size = 5.5),
         legend.margin = margin(0, 0, 0, 0)) + guides(colour = guide_legend(ncol = 2), fill = guide_legend(ncol = 2))
 
-## c 实例：一个已发表的 5 基因 HCC 评分（等权；系数原文未公开）
+## c example: a published 5-gene HCC score (equal weights; coefficients not published in the article)
 ex <- NA5[set == "main_TAF9"]
 cc <- data.table(gate = rep(c("Template", "Gate 1", "Gate 2"), each = 2), cohort = rep(c("GSE14520", "LIRI"), 3),
                  P = c(NA, NA, ex$empP_GSE, ex$empP_LIRI, ex$lrt_GSE, ex$lrt_LIRI))

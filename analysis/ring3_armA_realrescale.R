@@ -1,5 +1,5 @@
-# A 组真实签名权重校正：原文系数作用于 log 表达尺度 -> 在 z 尺度上等价权重 = coef × sd_gene（TCGA log 表达）
-# 主分析改用此权重；原 z 尺度权重（ring3_full 中的结果）作为敏感性分析保留。M7 每次重新拟合，不受影响，不重跑。
+# Arm A real-signature weights: reported coefficients act on log expression -> equivalent z-scale weight = coef x sd_gene (TCGA log expression)
+# Main analysis uses these weights; the original z-scale weights (ring3_full results) are kept as a sensitivity analysis. M7 refits each time and is not rerun.
 suppressPackageStartupMessages({ library(survival); library(glmnet); library(data.table) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
 O <- file.path(B, "N11_out/ring3_armA_realrescale"); dir.create(O, showWarnings = FALSE, recursive = TRUE)

@@ -1,7 +1,7 @@
-# 第 ④ 环阳性对照（预注册 N23_ring4_positive_control_prereg.md，结果出来后不改）
-# 一、plasmode 模拟：真实表达 + Weibull PH 模拟生存（LP0 来自真实结局拟合 + β·S），检验 T0 模板 / T1 随机零分布 / T2 代理调整 LRT
-# 二、Nault 5-gene score 真实实例
-# R4_SMOKE=1 → 每个 β 只 4 次模拟、10 个随机，用于确认能出结果
+# Positive-control simulation, earlier design (analysis plan fixed before running)
+# Part 1, plasmode simulation: observed expression + Weibull PH simulated survival (LP0 from the observed-outcome fit + beta*S); criteria T0 template / T1 random null / T2 proxy-adjusted LRT
+# Part 2, Nault 5-gene score as a real example
+# R4_SMOKE=1 -> 4 simulations per beta and 10 random sets, to check that results are produced
 suppressPackageStartupMessages({ library(survival); library(data.table); library(parallel) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
 SMOKE <- Sys.getenv("R4_SMOKE", "0") == "1"
@@ -9,11 +9,11 @@ OUTD <- file.path(B, if (SMOKE) "N11_out/ring4_smoke" else "N11_out/ring4"); dir
 NSIM <- if (SMOKE) 4L else 200L; NNULL <- if (SMOKE) 10L else 100L; NNULL_NAULT <- if (SMOKE) 20L else 1000L
 BETAS <- c(0, 0.1, 0.2, 0.3, 0.4, 0.6); K <- 5L
 t0 <- Sys.time(); tm <- function(s) cat(sprintf("[%s | %5.1f min] %s\n", format(Sys.time(), "%H:%M"), as.numeric(difftime(Sys.time(), t0, units = "mins")), s))
-O <- OUTD   # load_cohorts.R 用 O 落盘 cohort_meta
+O <- OUTD   # load_cohorts.R writes cohort_meta to O
 source(file.path(B, "analysis/load_cohorts.R"), encoding = "UTF-8")
 O <- OUTD
 
-## ---- 协变量（照抄 ring2_proxy.R）----
+## ---- Covariates (as in ring2_proxy.R) ----
 ids <- lapply(cohorts, function(c) colnames(c$z))
 ph <- fread(file.path(TG, "TCGA-LIHC_phenotype.tsv"), data.table = FALSE)
 cohorts$TCGA$age <- as.numeric(ph$age_at_initial_pathologic_diagnosis[match(ids$TCGA, ph[[1]])])
@@ -41,10 +41,10 @@ BASE <- c("stage", "prolif", "stromal", "immune", "age", "sex")
 D <- lapply(cohorts, function(c) { sx <- ifelse(c$sex %in% c("M", "F"), c$sex, NA)
   data.frame(stage = factor(c$stage, levels = c("I-II", "III-IV")), prolif = as.numeric(scale(c$prolif)), oxphos = as.numeric(scale(c$oxphos)),
              stromal = c$stromal, immune = c$immune, age = c$age, sex = factor(sx, levels = c("F", "M"))) })
-CC <- lapply(D, function(d) complete.cases(d[, BASE]))     # 模拟与检验都只用基础协变量齐全的样本
+CC <- lapply(D, function(d) complete.cases(d[, BASE]))     # simulation and tests use only patients with complete base covariates
 tm("covariates ready")
 
-## ---- 基线 Weibull PH 参数（真实结局）----
+## ---- Baseline Weibull PH parameters (observed outcome) ----
 fitw <- function(k) { d <- D[[k]][CC[[k]], ]; y <- cohorts[[k]]$y[CC[[k]]]
   f <- survreg(as.formula(paste("y ~", paste(BASE, collapse = "+"))), data = d, dist = "weibull")
   X <- model.matrix(as.formula(paste("~", paste(BASE, collapse = "+"))), d)
@@ -69,8 +69,8 @@ lrtp <- function(s, y, k) { d <- cbind(D[[k]][CC[[k]], ], s = s)
 uni_p <- function(s, y) summary(coxph(y ~ s))$coefficients[1, 5]
 EXT <- c("GSE14520", "LIRI")
 
-# 一个签名在（给定结局下）的三种判据
-# 方向：pergene=FALSE → 签名整体一个符号（模拟：真基因系数同号）；pergene=TRUE → 每个基因各取 TCGA 单因素 Cox 符号（Nault：含保护基因 RAMP3）
+# Three criteria for one signature (given an outcome)
+# Direction: pergene=FALSE -> one sign for the whole signature (simulation: true genes share the sign); pergene=TRUE -> each gene takes its TCGA univariable Cox sign (Nault: includes the protective gene RAMP3)
 gsign <- function(h, Y, pergene) { f <- function(s) { v <- sign(coef(coxph(Y$TCGA ~ s)))[[1]]; if (!is.finite(v) || v == 0) 1 else v }
   if (pergene) vapply(h, function(x) f(as.numeric(scale(Zc$TCGA[x, ]))), 1) else rep(f(eqscore(h, "TCGA", 1)), length(h)) }
 sscore <- function(h, k, w) as.numeric(scale(colMeans(Zc[[k]][h, , drop = FALSE] * w)))
@@ -86,7 +86,7 @@ judge <- function(g, Y, nnull, seed, pergene = FALSE) {
              C_GSE = r$GSE14520[["C"]], C_LIRI = r$LIRI[["C"]], empP_GSE = r$GSE14520[["empP"]], empP_LIRI = r$LIRI[["empP"]],
              lrt_GSE = r$GSE14520[["lrt"]], lrt_LIRI = r$LIRI[["lrt"]], sign_TCGA = sgn) }
 
-## ---- 一、模拟 ----
+## ---- Part 1: simulation ----
 jobs <- CJ(b = seq_along(BETAS), sim = seq_len(NSIM))
 one <- function(i) { j <- jobs[i]; beta <- BETAS[j$b]; seed <- 11e6 + 1e3 * j$b + j$sim; set.seed(seed)
   g <- sample(U, K)
@@ -113,14 +113,14 @@ fwrite(data.table(typeI_framework_beta0 = fw[beta == 0]$rate, typeI_CP_lo = fw[b
        file.path(O, "sim_verdict.tsv"), sep = "\t")
 tm("simulation summary written")
 
-## ---- 二、Nault 5-gene ----
+## ---- Part 2: Nault 5-gene ----
 nault <- list(main_TAF9 = c("JPT1", "RAN", "RAMP3", "KRT19", "TAF9"), sens_TAF9B = c("JPT1", "RAN", "RAMP3", "KRT19", "TAF9B"))
 Yreal <- lapply(setNames(names(cohorts), names(cohorts)), function(k) cohorts[[k]]$y[CC[[k]]])
 NR <- rbindlist(lapply(names(nault), function(nm) { g <- nault[[nm]]; stopifnot(all(g %in% rownames(Zc$TCGA)))
   r <- judge(g, Yreal, NNULL_NAULT, 12e6 + match(nm, names(nault)), pergene = TRUE)
   sgn <- sapply(g, function(x) sign(coef(coxph(Yreal$TCGA ~ as.numeric(scale(Zc$TCGA[x, ]))))))
   r2 <- sapply(names(cohorts), function(k) { s <- sscore(g, k, gsign(g, Yreal, TRUE)); d <- D[[k]][CC[[k]], ]
-    summary(lm(s ~ prolif + stromal + immune + oxphos, data = d))$r.squared })   # R² 定义同第 2 环
+    summary(lm(s ~ prolif + stromal + immune + oxphos, data = d))$r.squared })   # R² defined as in the proxy analysis
   data.table(set = nm, genes = paste(g, collapse = ","), per_gene_TCGA_sign = paste(sprintf("%s:%+d", g, sgn), collapse = ","), r,
              R2_proxy_TCGA = r2[["TCGA"]], R2_proxy_GSE = r2[["GSE14520"]], R2_proxy_LIRI = r2[["LIRI"]]) }))
 fwrite(NR, file.path(O, "nault_5gene.tsv"), sep = "\t")

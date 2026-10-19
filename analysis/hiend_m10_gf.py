@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""M10 Geneformer 全基因虚拟敲除（被审计模块）—— 2026-10-15
+"""M10 Geneformer genome-wide in silico deletion (audited module)
 
-被审计对象 = 课程 268 run_perturbation_pipeline.py 的配置（只抄参数与顺序，不抄文件：原文件第 310 行语法错）：
-  Pretrained V1-10M；TranscriptomeTokenizer(model_version="V1", custom_attr_name_dict={"Type": "Type"})；
-  EmbExtractor(emb_mode="cell", cell_emb_style="mean_pool", emb_layer=-1)；
-  InSilicoPerturber(perturb_type="delete", genes_to_perturb="all", start=Disease → goal=Control, max_ncells=1000, emb_layer=-1)；
-  InSilicoPerturberStats(mode="goal_state_shift") → Goal_end_FDR；模板阳性 = 签名中 ≥1 个基因 Goal_end_FDR<0.05
-本项目映射：Disease = 肿瘤肝细胞，Control = 癌旁肝细胞（GSE149614）。
-逐基因结果与基因属于哪个签名无关 → 全基因跑一次，签名查表。
+Audited configuration = the template Geneformer perturbation pipeline (parameters and order reproduced):
+  Pretrained V1-10M; TranscriptomeTokenizer(model_version="V1", custom_attr_name_dict={"Type": "Type"});
+  EmbExtractor(emb_mode="cell", cell_emb_style="mean_pool", emb_layer=-1);
+  InSilicoPerturber(perturb_type="delete", genes_to_perturb="all", start=Disease -> goal=Control, max_ncells=1000, emb_layer=-1);
+  InSilicoPerturberStats(mode="goal_state_shift") -> Goal_end_FDR; template positive = >= 1 signature gene with Goal_end_FDR < 0.05
+Mapping: Disease = tumour hepatocytes, Control = adjacent normal hepatocytes (GSE149614).
+Per-gene results do not depend on signature membership -> run once for all genes, then look up signatures.
 
-步骤：build / tokenize / check / embs / perturb / stats
-  perturb 读环境变量 GF_MAXN（试跑 50，正式 1000 = 模板值）、GF_TAG（输出子目录名）
-Windows：nproc=1，执行体在 __main__ 内。
+Steps: build / tokenize / check / embs / perturb / stats
+  perturb reads GF_MAXN (50 for a test run, 1000 = template value) and GF_TAG (output subdirectory)
+Windows: nproc=1, executable code inside __main__.
 """
 import os
 import sys
@@ -32,9 +32,9 @@ STATES = {"state_key": "Type", "start_state": "Disease", "goal_state": "Control"
 EMB_LAYER = -1
 EMB_DIR = os.path.join(GFD, "state_embs")
 STATE_PKL = os.path.join(EMB_DIR, "hcc_hep.pkl")
-FBS = int(os.environ.get("GF_FBS", "32"))      # 只影响显存/速度，不影响结果（模板 100）
+FBS = int(os.environ.get("GF_FBS", "32"))      # affects memory/speed only, not results (template 100)
 MAXN = int(os.environ.get("GF_MAXN", "50"))
-PTYPE = os.environ.get("GF_PTYPE", "delete")   # delete（模板）/ overexpress（扩展）
+PTYPE = os.environ.get("GF_PTYPE", "delete")   # delete (template) / overexpress (extension)
 TAG = os.environ.get("GF_TAG", f"{PTYPE}_all_n{MAXN}")
 ISP_DIR = os.path.join(GFD, f"isp_{TAG}")
 STATS_DIR = os.path.join(GFD, f"stats_{TAG}")
@@ -76,7 +76,7 @@ def build():
         say(f"collapsed duplicate ENSG -> {len(uniq)}")
     var = pd.DataFrame({"gene_symbol": sym, "ensembl_id": ensg}, index=pd.Index(ensg))
     obs = meta.copy()
-    obs["n_counts"] = obs["nCount"].astype(float).values   # 全转录组文库大小
+    obs["n_counts"] = obs["nCount"].astype(float).values   # whole-transcriptome library size
     obs["Type"] = obs["Type"].astype(str)
     os.makedirs(H5AD_DIR, exist_ok=True)
     ad = sc.AnnData(X=m, obs=obs, var=var)

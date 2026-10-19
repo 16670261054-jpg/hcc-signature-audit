@@ -1,9 +1,9 @@
-# Fig 5  单细胞层的"高端模块"同样区分不了已发表签名与随机签名（C4；M8 单细胞定位 / M10 Geneformer / M9 scTenifoldKnk）
-# 只读盘：N28_fig/data/{sc_umap,sc_sigscore,sc_sigscore_coverage}（prep_sc_embedding.R）
+# Single-cell figure: the single-cell and perturbation modules do not separate published from random signatures either (M8 single-cell localisation / M10 Geneformer / M9 scTenifoldKnk)
+# Reads: figures/data/{sc_umap,sc_sigscore,sc_sigscore_coverage} (prep_sc_embedding.R)
 #         N11_out/hiend_m8/{m8_decision,m8_per_signature,m8a_findallmarkers_all,signature_genes_all_arms}.tsv
 #         N11_out/hiend_m10/{m10_abund_gene_table,m10_abund_check2}.tsv
-#         N11_out/hiend_m9_hvg/ko_speedtest/{ALAD,TINAGL1}.tsv、equivalence_aligned_summary_ALAD.tsv
-# 统计：比例 Fisher 精确（读 decision 表）；随机阳性率 Clopper–Pearson 95% CI；其余为描述。
+#         N11_out/hiend_m9_hvg/ko_speedtest/{ALAD,TINAGL1}.tsv, equivalence_aligned_summary_ALAD.tsv
+# Statistics: proportions by Fisher's exact (read from decision tables); random positive rate Clopper-Pearson 95% CI; the rest descriptive.
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 suppressPackageStartupMessages({ library(scattermore); library(ggrepel); library(ggh4x) })
 M8 <- file.path(OUT, "hiend_m8"); M10 <- file.path(OUT, "hiend_m10"); M9 <- file.path(OUT, "hiend_m9_hvg")
@@ -11,16 +11,16 @@ M8 <- file.path(OUT, "hiend_m8"); M10 <- file.path(OUT, "hiend_m10"); M9 <- file
 U <- fread(file.path(DAT, "sc_umap.tsv.gz"))
 U[, celltype := factor(celltype, levels = names(COL_CELL))]
 stopifnot(!anyNA(U$celltype))
-umap_axes <- function(p, d = U) {     # v3：同乳酸化成品图，用标准坐标轴（UMAP 1 / UMAP 2）
+umap_axes <- function(p, d = U) {     # standard axes (UMAP 1 / UMAP 2)
   p + labs(x = "UMAP 1", y = "UMAP 2") + coord_cartesian(clip = "off") + theme_pub() +
     theme(legend.key.size = unit(3, "mm"))
 }
-## 细胞类型标签：25 格粗网格密度众数定位（pub-plotting §单细胞）
+## Cell-type labels placed at the density mode on a coarse 25-cell grid
 lab_pos <- U[, { gx <- cut(UMAP1, 25); gy <- cut(UMAP2, 25); t <- table(gx, gy); w <- which(t == max(t), arr.ind = TRUE)[1, ]
   sel <- as.integer(gx) == w[1] & as.integer(gy) == w[2]; .(x = median(UMAP1[sel]), y = median(UMAP2[sel]), n = .N) }, by = celltype]
 write_sd(U[, .N, by = .(celltype, site)][order(celltype, site)], "Fig6a_cells_by_type_site")
 
-## a 细胞图谱
+## a cell atlas
 pa <- ggplot(U, aes(UMAP1, UMAP2)) +
   geom_scattermore(aes(colour = celltype), pointsize = 1.6, pixels = c(1400, 1400), alpha = 0.85) +
   geom_text_repel(data = lab_pos, aes(x, y, label = celltype), size = 2.3, fontface = "bold", family = "Arial",
@@ -30,7 +30,7 @@ pa <- ggplot(U, aes(UMAP1, UMAP2)) +
   labs(title = NULL)
 pa <- umap_axes(pa) + theme(legend.position = "right", legend.key.size = unit(3, "mm"))
 
-## b 组织来源
+## b tissue origin
 U[, site := factor(site, levels = names(COL_SITE))]
 pb <- ggplot(U[sample(.N)], aes(UMAP1, UMAP2)) +
   geom_scattermore(aes(colour = site), pointsize = 1.2, pixels = c(900, 900), alpha = 0.8) +
@@ -39,8 +39,8 @@ pb <- ggplot(U[sample(.N)], aes(UMAP1, UMAP2)) +
 pb <- umap_axes(pb) + theme(legend.position = "right", legend.justification = "center",
                              legend.key.spacing.x = unit(0.5, "mm"), legend.text = element_text(size = 5.5))
 
-## c 一个已发表签名 vs 与之尺寸匹配的随机签名：逐细胞评分
-## 选例规则（写死）：已发表 k = 已发表中位数，且已发表与其 Ak 第 1 次重复都 M8a 阳性、单细胞覆盖 100%；取 src 编号最小者
+## c one published signature vs its size-matched random signature: per-cell scores
+## Example rule (fixed): published k = median k of published signatures, published signature and its first Ak replicate both M8a-positive, 100% single-cell coverage; lowest src identifier taken
 PS <- fread(file.path(M8, "m8_per_signature.tsv")); CV <- fread(file.path(DAT, "sc_sigscore_coverage.tsv"))
 kmed <- median(PS[arm == "A" & kind == "real"]$k)
 cand <- merge(PS[arm == "A" & kind == "real" & k == kmed & M8a_pos == 1, .(src)],
@@ -69,7 +69,7 @@ pc1 <- feat("s_pub", "Published signature", g_pub)
 pc2 <- feat("s_rnd", "Size-matched random signature", g_rnd)
 pc1 <- pc1 + theme(legend.position = "none")
 
-## d M8a / M8b 阳性率（模板判据）
+## d M8a / M8b positive rates (template criteria)
 D8 <- fread(file.path(M8, "m8_decision.tsv"))
 cp <- function(x, n) as.numeric(binom.test(round(x * n), n)$conf.int)
 mk_rates <- function(D, mods, modlab) {
@@ -81,7 +81,7 @@ mk_rates <- function(D, mods, modlab) {
   r
 }
 r8 <- mk_rates(D8, c("M8a_pos", "M8b_pos"), c(M8a_pos = "Cell-type\nmarker", M8b_pos = "Tumour vs\nnormal"))
-CMH <- fread(file.path(OUT, "cmh_modules.tsv"))   # 2026-10-18：尺寸匹配用分层 CMH + Holm（与 Fig 4a 同口径）
+CMH <- fread(file.path(OUT, "cmh_modules.tsv"))   # size-matched comparison by stratified CMH + Holm (same as Fig 4a)
 r8[grp == "Size-matched random", P := CMH$CMH_P_holm[match(sub("_pos", "", module), CMH$module)]][, star := stars(P)]
 write_sd(r8, "Fig6f_M8_rates")
 rate_plot <- function(r, ttl) ggplot(r, aes(mod_l, rate, colour = grp)) +
@@ -95,7 +95,7 @@ rate_plot <- function(r, ttl) ggplot(r, aes(mod_l, rate, colour = grp)) +
   theme(legend.position = "none", axis.text.x = element_text(size = 5.8))
 pd <- rate_plot(r8, "scRNA 'validation'")
 
-## e 签名落在哪个细胞类型（描述）：含 ≥1 个该类型 marker 基因的签名比例（M8a 同一判据）
+## e cell type where signatures localise (descriptive): proportion of signatures with >= 1 marker gene of that type (same criterion as M8a)
 MK <- fread(file.path(M8, "m8a_findallmarkers_all.tsv"))[abs(avg_log2FC) > 1 & p_val_adj < 0.05]
 GS <- GA[(arm == "A" & kind == "real") | arm == "Ak"]
 GS[, grp := fifelse(arm == "A", "Published", "Size-matched random")]
@@ -117,7 +117,7 @@ pe <- ggplot(E5, aes(grp, celltype)) +
   theme(axis.line = element_blank(), axis.ticks = element_blank(), axis.text.x = element_text(size = 6),
         legend.key.width = unit(1.6, "mm"), legend.key.height = unit(3, "mm"))
 
-## f Geneformer 虚拟删除：显著性由检出次数（丰度）决定
+## f Geneformer in silico deletion: significance is determined by detection count (abundance)
 GF <- fread(file.path(M10, "m10_abund_gene_table.tsv"))
 GF[, sig := as.logical(sig)][, nl := -log10(pmax(Goal_end_FDR, 1e-300))]
 lab_g <- GF[sig == TRUE][order(Goal_end_FDR)][1:6]
@@ -135,7 +135,7 @@ pf <- ggplot(GF, aes(N_Detections, nl)) +
   theme(legend.key.width = unit(1.4, "mm"), legend.key.height = unit(2.6, "mm"), legend.position = "inside",
         legend.position.inside = c(0.03, 0.97), legend.justification = c(0, 1), legend.background = element_blank())
 
-## f2 丰度匹配后
+## f2 after abundance matching
 C2 <- fread(file.path(M10, "m10_abund_check2.tsv"))
 D10 <- fread(file.path(M10, "m10_decision.tsv"))
 f2 <- data.table(grp = c("Published", "Matched\nrandom"), rate = c(C2$rate_real, C2$rate_null),
@@ -154,7 +154,7 @@ pf2 <- ggplot(f2, aes(grp, rate)) +
   scale_y_continuous("Signatures called positive", labels = scales::percent, limits = c(0, 0.2)) +
   scale_x_discrete(NULL) + labs(title = NULL) + theme(axis.text.x = element_text(size = 5, angle = 30, hjust = 1))
 
-## g scTenifoldKnk：敲 ALAD 与敲随机基因 TINAGL1 —— 同一批"显著"基因（共享网络版，描述性）
+## g scTenifoldKnk: knocking out ALAD and the random gene TINAGL1 gives the same "significant" genes (shared-network version, descriptive)
 KO <- rbindlist(lapply(c("ALAD", "TINAGL1"), function(g) fread(file.path(M9, "ko_speedtest", paste0(g, ".tsv")))[, ko := g]))
 KO <- KO[gene != ko][order(ko, -Z)][, rank := seq_len(.N), by = ko]
 KO[, sig := p.adj < 0.05]
@@ -173,7 +173,7 @@ pg <- ggplot(KO[rank <= 300], aes(rank, Z)) +
   scale_y_continuous("Perturbation Z") + labs(title = NULL) +
   theme(strip.text = element_text(size = 6), panel.spacing.x = unit(2, "mm"))
 
-## 组别图例
+## Group legend
 lg <- data.table(grp = factor(names(COL_GRP)[1:3], levels = names(COL_GRP)), x = c(1, 4, 7.4))
 pl <- ggplot(lg, aes(x, 1, fill = grp)) + geom_point(shape = 21, size = 2.2, stroke = 0.25) +
   geom_text(aes(x = x + 0.2, label = c("Published", "Size-matched random", "Input-matched random")), hjust = 0, size = 2.1, family = "Arial") +
@@ -182,7 +182,7 @@ pl <- ggplot(lg, aes(x, 1, fill = grp)) + geom_point(shape = 21, size = 2.2, str
   scale_fill_manual(values = COL_GRP, guide = "none") + xlim(0.5, 17.5) + ylim(0.7, 1.3) + theme_void()
 
 tg <- function(p, t) p + labs(tag = t)
-## patchwork design 需单字符区域名 → 改用字母映射
+## patchwork design needs single-character area names -> letter mapping
 pdd <- (tg(pc1, "c") | pc2)
 pbot <- (tg(pd, "e") | tg(pf, "f") | pf2 | tg(pg, "g")) + plot_layout(widths = c(1.05, 1.9, 0.75, 1.75))
 p <- wrap_plots(list(a = tg(pa, "a"), b = tg(pb, "b"), d = pdd, e = tg(pe, "d"), f = pbot, l = pl),
@@ -191,5 +191,5 @@ p <- wrap_plots(list(a = tg(pa, "a"), b = tg(pb, "b"), d = pdd, e = tg(pe, "d"),
 save_panel(pa, "Fig5a_umap_celltype", 105, 85); save_panel(pb, "Fig5b_umap_site", 95, 85); save_panel(pc1 + theme(legend.position = "right"), "Fig5c1_umap_published_score", 85, 75)
 save_panel(pc2, "Fig5c2_umap_random_score", 85, 75); save_panel(pe, "Fig5d_localisation", 75, 72); save_panel(pd, "Fig5e_sc_rates", 55, 68)
 save_panel(pf, "Fig5f1_geneformer", 85, 72); save_panel(pf2, "Fig5f2_geneformer_matched", 42, 68); save_panel(pg, "Fig5g_knk", 85, 68)
-saveRDS(list(pa = pa, pb = pb, pc1 = pc1, pc2 = pc2, pe = pe, pd = pd, pf = pf, pf2 = pf2, pg = pg, pl = pl), file.path(DAT, "obj_sc.rds"))  # 拼版见 assemble_main.R
+saveRDS(list(pa = pa, pb = pb, pc1 = pc1, pc2 = pc2, pe = pe, pd = pd, pf = pf, pf2 = pf2, pg = pg, pl = pl), file.path(DAT, "obj_sc.rds"))  # assembled in assemble_main.R
 cat("FIG5 OK  example =", ex, "\n")

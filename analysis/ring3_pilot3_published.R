@@ -1,4 +1,4 @@
-# 已发表签名路径试跑：①基因覆盖率（三队列共同基因宇宙）②用原文系数在 5 个签名上跑 M0–M6，检查无 NA
+# Exploratory run of the published-signature path: (1) gene coverage (common universe of the three cohorts) (2) M0-M6 on 5 signatures with reported coefficients, NA check
 suppressPackageStartupMessages({ library(survival); library(glmnet); library(data.table) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
 O <- file.path(B, "N11_out/ring3_pilot")

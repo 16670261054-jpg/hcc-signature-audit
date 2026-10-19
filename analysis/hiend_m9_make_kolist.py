@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""M9 KO 基因清单（预注册 N20 + 变更 2026-10-17）
-用法：python hiend_m9_make_kolist.py <网络目录名> pilot|formal
-  pilot ：已发表签名基因中随机 10 个 + U 池随机 10 个（都须在网络内），种子 20261017
-  formal：所有签名中落在网络内的全部基因，去重
+"""M9 KO gene list
+Usage: python hiend_m9_make_kolist.py <network directory> pilot|formal
+  pilot : 10 random published-signature genes + 10 random genes from pool U (all in the network), seed 20261017
+  formal: all genes of all signatures that are in the network, deduplicated
 """
 import os
 import sys

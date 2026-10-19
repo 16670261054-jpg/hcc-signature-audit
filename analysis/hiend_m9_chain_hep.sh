@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# M9 方案 A 运行链（2026-10-17，用户选 A）：同一时间只开一个 R，逐步串行
-#  0 等官方等价性验证（全组织网络，ALAD）结束
-#  1 全组织测速两个 KO 的判别性检查（留档）
-#  2 肿瘤肝细胞单独建网（BUILD_ONLY）
-#  3 试点 20 个基因 KO → 判别性检查；不 PASS 就停（用户要求），不跑正式
-#  4 PASS 才跑正式（网络内全部签名基因）→ 正式结果再做一次判别性检查
+# M9 run chain (hepatocyte network): one R process at a time, strictly sequential
+#  0 wait for the reference equivalence check (whole-tissue network, ALAD)
+#  1 discrimination check of the two whole-tissue timing KOs (archived)
+#  2 build the tumour-hepatocyte network (BUILD_ONLY)
+#  3 pilot KO of 20 genes -> discrimination check; stop without the formal run if not PASS
+#  4 formal run (all signature genes in the network) only if PASS -> discrimination check on the formal result
 ROOT="$(cd "${HCC_AUDIT_ROOT:-.}" && pwd)"; export HCC_AUDIT_ROOT="$ROOT"
 export HCC_AUDIT_DATA="${HCC_AUDIT_DATA:-$ROOT/data/raw}"
 L="$ROOT/analysis"

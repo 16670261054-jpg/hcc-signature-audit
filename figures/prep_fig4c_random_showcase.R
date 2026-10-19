@@ -1,13 +1,13 @@
-# Fig 4c 出图准备：一个尺寸匹配随机签名走一遍"模板论文"的标准展示（只为出图展示，不进任何判读）
-# 签名 = Fig 5 选出的同一个随机签名（Ak|S004|rep 1：CEP55 / TRIM36 / FAM107A / MAST2，系数取自 signature_genes_all_arms.tsv），
-#   选例规则在 fig5_singlecell.R 写死，此处不再挑选。
-# 模板展示内容与口径（照抄被审计模板）：
-#   KM：TCGA 训练集、GSE14520、LIRI-JP，按各自队列风险分中位数分高/低组，log-rank；
-#   时间依赖 ROC（timeROC，Kaplan–Meier 权重）：TCGA 1/3/5 年；
-#   多因素 Cox（TCGA）：风险分（标准化）+ 年龄 + 性别 + 分期（同 ring3_lib.R m1_indep）。
+# Fig 4c preparation: standard "template article" display for one size-matched random signature (display only, no calls)
+# Signature = the same random signature chosen for Fig 5 (Ak|S004|rep 1: CEP55 / TRIM36 / FAM107A / MAST2, coefficients from signature_genes_all_arms.tsv),
+#   chosen by the fixed rule in fig5_singlecell.R; not reselected here.
+# Display content and definitions (as in the audited template):
+#   KM: TCGA training set, GSE14520, LIRI-JP, high/low groups by the median risk score of each cohort, log-rank;
+#   time-dependent ROC (timeROC, Kaplan-Meier weights): TCGA 1/3/5 years;
+#   multivariable Cox (TCGA): risk score (standardized) + age + sex + stage (as m1_indep in ring3_lib.R).
 suppressPackageStartupMessages({ library(survival); library(data.table); library(timeROC) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
-OD <- file.path(B, "N28_fig/data"); O <- file.path(OD, "_load_cohorts"); dir.create(O, showWarnings = FALSE)  # load_cohorts.R 会往 O 写 cohort_meta
+OD <- file.path(B, "figures/data"); O <- file.path(OD, "_load_cohorts"); dir.create(O, showWarnings = FALSE)  # load_cohorts.R writes cohort_meta to O
 source(file.path(B, "analysis/load_cohorts.R"), encoding = "UTF-8")
 GA <- fread(file.path(B, "N11_out/hiend_m8/signature_genes_all_arms.tsv"))
 g <- GA[arm == "Ak" & src == "S004" & rep == 1]
@@ -28,7 +28,7 @@ for (cn in c("TCGA", "GSE14520", "LIRI")) {
 fwrite(rbindlist(km), file.path(OD, "fig4c_km_curves.tsv"), sep = "\t")
 fwrite(rbindlist(lr), file.path(OD, "fig4c_km_logrank.tsv"), sep = "\t")
 
-## timeROC（TCGA，月）
+## timeROC (TCGA, months)
 C <- cohorts$TCGA; s <- score(b, C$z)
 tr <- timeROC(T = C$time, delta = C$event, marker = s, cause = 1, weighting = "marginal", times = c(12, 36, 60), iid = FALSE)
 roc <- rbindlist(lapply(seq_along(tr$times), function(i) data.table(year = tr$times[i] / 12, FPR = tr$FP[, i], TPR = tr$TP[, i])))
@@ -36,7 +36,7 @@ fwrite(roc, file.path(OD, "fig4c_timeroc_curves.tsv"), sep = "\t")
 fwrite(data.table(year = tr$times / 12, AUC = tr$AUC, n_at_risk = vapply(tr$times, function(t) sum(C$time >= t), 1L)),
        file.path(OD, "fig4c_timeroc_auc.tsv"), sep = "\t")
 
-## 多因素 Cox（TCGA；与 m1_indep 同口径）
+## Multivariable Cox (TCGA; same definitions as m1_indep)
 ph <- fread(file.path(TG, "TCGA-LIHC_phenotype.tsv"), data.table = FALSE); ids <- colnames(C$z)
 d <- data.frame(Risk = as.numeric(scale(s)), Age = as.numeric(ph$age_at_initial_pathologic_diagnosis[match(ids, ph[[1]])]) / 10,
                 Sex = factor(ph$gender[match(ids, ph[[1]])]), Stage = factor(C$stage, levels = c("I-II", "III-IV")))

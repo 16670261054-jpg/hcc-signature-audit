@@ -1,18 +1,18 @@
-# Fig 3  模板挑选把签名推向增殖轴；调整代理后残余信号不比随机多（C2）
-# 只读盘：N11_out/ring2/{ring2_rows,ring2_R2_summary,ring2_residual_summary}.tsv
-# 统计：两组比较 Mann–Whitney U（R² 的 P 直接读 ring2_R2_summary；ρ 的 P 在此用 wilcox.test 计算并落盘）；
-#       比例 Fisher 精确检验（读 ring2_residual_summary）；随机阳性率 Clopper–Pearson 95% CI。
+# Fig 3  template selection pulls signatures towards the proliferation axis; residual signal after proxy adjustment is not more frequent than for random signatures
+# Reads: N11_out/ring2/{ring2_rows,ring2_R2_summary,ring2_residual_summary}.tsv
+# Statistics: two-group comparisons by Mann-Whitney U (P for R² read from ring2_R2_summary; P for rho computed here with wilcox.test and written to disk);
+#       proportions by Fisher's exact test (read from ring2_residual_summary); random positive rate with Clopper-Pearson 95% CI.
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 suppressPackageStartupMessages({ library(ggdist); library(ggh4x) })
 R2 <- file.path(OUT, "ring2")
 X <- fread(file.path(R2, "ring2_rows.tsv"))
 X[, grp := ARM2GRP[paste(arm, kind, sep = "_")]]
-X <- X[arm %in% c("A", "Ak")]   # 主分析：已发表 148 vs 两种随机
+X <- X[arm %in% c("A", "Ak")]   # main analysis: 148 published vs the random signatures
 G3 <- c("Published", "Size-matched random", "Input-matched random")
 X[, grp := factor(grp, levels = G3)][, cohort_l := factor(COH_LAB[cohort], levels = COH_LAB)]
 stopifnot(X[, .N, by = .(grp, cohort)][grp == "Published"]$N == 148)
 
-## 两组比较的 P：R² 读盘；ρ_prolif 现算（同口径 MWU，双侧）
+## P values of two-group comparisons: R² read from disk; rho_prolif computed here (same MWU, two-sided)
 S <- fread(file.path(R2, "ring2_R2_summary.tsv"))
 S <- S[comparison %in% c("A_vs_Ak_sizematched", "A_vs_fitsig_k")]
 S[, grp2 := fifelse(comparison == "A_vs_Ak_sizematched", "Size-matched random", "Input-matched random")]
@@ -53,7 +53,7 @@ pa <- rain("R2_proxy", expression("Variance explained by proxies ("*italic(R)^2*
 pb <- rain("rho_prolif", expression("Spearman "*rho*" with proliferation"),
            "Template selection pulls random signatures towards the proliferation axis", seq(-0.5, 1, 0.25))
 
-## c 调整代理后，两外部队列 LRT 仍 <0.05 的比例
+## c proportion with LRT < 0.05 in both external cohorts after proxy adjustment
 Rs <- fread(file.path(R2, "ring2_residual_summary.tsv"))
 Rs <- Rs[comparison %in% c("A_vs_Ak_sizematched", "A_vs_fitsig_k")]
 ML <- c("Base: proliferation, stroma,\nimmune, stage, age, sex", "Base + OXPHOS")
@@ -78,7 +78,7 @@ pc <- ggplot(cd, aes(grp, rate, colour = grp)) +
   labs(title = NULL) +
   theme(axis.text.x = element_text(size = 6))
 
-## d HR 衰减（描述性）：已发表签名调整前后 |log HR|，配对
+## d HR attenuation (descriptive): |log HR| of published signatures before and after adjustment, paired
 H <- X[grp == "Published" & cohort != "TCGA", .(src, cohort_l, cohort, u = abs(log(hr_unadj)), a = abs(log(hr_adj)))]
 Hn <- X[grp == "Size-matched random" & cohort != "TCGA", .(u = median(abs(log(hr_unadj)), na.rm = TRUE),
                                                           a = median(abs(log(hr_adj)), na.rm = TRUE)), by = cohort_l]
@@ -97,7 +97,7 @@ pd <- ggplot(Hl, aes(x, value)) +
   labs(title = NULL) +
   theme(axis.text.x = element_text(size = 6), panel.spacing.x = unit(3, "mm"))
 
-## 组别图例
+## Group legend
 lg <- data.table(grp = factor(G3, levels = G3), x = c(1, 4.2, 7.6), lab = c("Published (n = 148)", "Size-matched random", "Input-matched random"))
 pl <- ggplot(lg, aes(x, 1, fill = grp)) + geom_point(shape = 21, size = 2.3, stroke = 0.25) +
   geom_text(aes(x = x + 0.2, label = lab), hjust = 0, size = 2.2, family = "Arial") +

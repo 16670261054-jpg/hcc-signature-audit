@@ -1,12 +1,12 @@
-# Fig 7 v2（2026-10-18，N30 预注册 N1/N2）：合并外部队列的双闸门审计
-#  a 框架示意（合并版）  b 经筛选零模拟：各判据判阳性率（含 OXPHOS 漏设情景）  c 功效曲线（经筛选的真信号）  d 148 个已发表签名过闸门
-# 只读盘：N11_out/ring4v2/sim_power.tsv、N11_out/n2_gates/published_gates_summary.tsv；旧版 fig6_framework.R 保留不删
+# Fig 7: two-gate audit with pooled external cohorts
+#  a framework schematic (pooled version)  b selected null simulation: positive rate of each criterion (including the missing-OXPHOS scenario)  c power curves (selected true signal)  d 148 published signatures through the gates
+# Reads: N11_out/ring4v2/sim_power.tsv, N11_out/n2_gates/published_gates_summary.tsv; the earlier fig6_framework.R is kept
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 SP <- fread(file.path(OUT, "ring4v2/sim_power.tsv")); PG <- fread(file.path(OUT, "n2_gates/published_gates_summary.tsv"))
 SV <- fread(file.path(OUT, "ring4/sim_verdict.tsv"))
 write_sd(SP, "Fig7bc_selected_sim_power"); write_sd(PG, "Fig7d_published_gates")
 
-## a 示意
+## a schematic
 bx <- data.table(x = c(1, 2.35, 2.35, 3.7), y = c(0, 0.62, -0.62, 0),
                  lab = c("Signature score\n(fixed before\nexternal data)",
                          "Gate 1\nHarrell's C, both external cohorts\npooled, vs 100 size-matched random\nsignatures (empirical P)",
@@ -20,7 +20,7 @@ pa <- ggplot() +
              linewidth = 0.25, label.padding = unit(1.4, "mm"), label.r = unit(1, "mm")) +
   scale_fill_identity() + xlim(0.45, 4.25) + ylim(-1, 1) + theme_void_pub()
 
-## b 经筛选零：判阳性率
+## b selected null: positive rates
 CRL <- c(T0 = "Template criterion", T2p = "Gate 2 alone", T1p = "Gate 1 alone", FWp = "Both gates", FW = "Both gates,\ncohorts separately")
 nb <- SP[beta == 0 & criterion %in% names(CRL)]
 nb[, crit := factor(CRL[criterion], levels = rev(CRL))][, scen_l := factor(fifelse(scen == "selected", "Selected null", "Null with omitted\nOXPHOS effect"), levels = c("Selected null", "Null with omitted\nOXPHOS effect"))]
@@ -34,7 +34,7 @@ pb <- ggplot(nb, aes(rate, crit, colour = scen_l)) +
   scale_y_discrete(NULL) +
   theme(legend.position = "bottom", legend.key.size = unit(2.6, "mm"), legend.text = element_text(size = 5.5), axis.text.y = element_text(size = 6))
 
-## c 功效
+## c power
 COL_CR <- c("Template criterion" = "grey60", "Both gates" = RDBU[["r2"]], "Both gates,\ncohorts separately" = RDBU[["b1"]])
 pw <- SP[scen == "selected" & criterion %in% c("T0", "FWp", "FW")][, crit := factor(CRL[criterion], levels = names(COL_CR))]
 adj <- c(SV$published_adjHR_median_GSE, SV$published_adjHR_median_LIRI)
@@ -49,7 +49,7 @@ pc <- ggplot(pw, aes(HR_per_SD, rate, colour = crit, fill = crit)) +
   scale_y_continuous("Signatures declared prognostic", labels = scales::percent, limits = c(0, 1), breaks = seq(0, 1, 0.25)) +
   theme(legend.position = "bottom", legend.key.size = unit(2.6, "mm"), legend.text = element_text(size = 5.5))
 
-## d 已发表签名
+## d published signatures
 DL <- c(template_T0 = "Template criterion", gate2_pooled = "Gate 2", gate1_pooled = "Gate 1", both_pooled = "Both gates")
 pg <- PG[criterion %in% names(DL)][, lab := factor(DL[criterion], levels = rev(DL))]
 null_fwp <- SP[scen == "selected" & beta == 0 & criterion == "FWp"]

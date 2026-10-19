@@ -1,16 +1,16 @@
-# Table S3 数字总表（全局规则 3 / 12：正文、图注、摘要引用的每个数字只从这里取）
-# 每行 = 一个可引用的量：id、所属主张、图面板、含义、原始值、显示值、来源文件、提取规则
-# 所有值都在运行时从磁盘读出；显示值只在这里取整一次
+# Table S3 master table of numbers: every number quoted in the text, legends and abstract is taken from here
+# One row per citable quantity: id, claim, figure panel, meaning, raw value, displayed value, source file, extraction rule
+# All values are read from disk at run time; displayed values are rounded only here
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 rd <- function(f, dir = SD) fread(file.path(dir, f), sep = "\t", quote = "")
 pct <- function(x, d = 1) sprintf(paste0("%.", d, "f%%"), 100 * x)
 f3 <- function(x) sprintf("%.2f", x)
-pfmt <- function(p) ifelse(p < 1e-3, formatC(p, format = "e", digits = 1), sprintf("%.2g", p))   # 2026-10-18：正文统一两位有效数字
+pfmt <- function(p) ifelse(p < 1e-3, formatC(p, format = "e", digits = 1), sprintf("%.2g", p))   # two significant digits in the text
 N <- list(); add <- function(id, claim, fig, what, value, display, file, rule) {
   stopifnot(length(value) == 1, !is.na(value))
   N[[length(N) + 1]] <<- data.table(id, claim, fig, what, value = signif(value, 8), display, source = file, rule) }
 
-## ---- 语料与队列 ----
+## ---- Corpus and cohorts ----
 CM <- rd("cohort_meta.tsv", file.path(OUT, "robust_v2"))
 for (cn in CM$cohort) { add(paste0("n_", cn), "Data", "Fig1a", paste(cn, "patients"), CM[cohort == cn]$n, CM[cohort == cn]$n, "N11_out/robust_v2/cohort_meta.tsv", "n")
   add(paste0("ev_", cn), "Data", "Fig1a", paste(cn, "deaths"), CM[cohort == cn]$events, CM[cohort == cn]$events, "N11_out/robust_v2/cohort_meta.tsv", "events") }
@@ -26,7 +26,7 @@ UM <- fread(file.path(DAT, "sc_umap.tsv.gz"), select = c("patient"))
 add("sc_cells", "Data", "Fig6a", "scRNA-seq cells after QC", nrow(UM), format(nrow(UM), big.mark = ","), "N28_fig/data/sc_umap.tsv.gz", "nrow")
 add("sc_patients", "Data", "Fig6a", "scRNA-seq patients", uniqueN(UM$patient), uniqueN(UM$patient), "N28_fig/data/sc_umap.tsv.gz", "uniqueN(patient)")
 
-## ---- 设计参数（直接从分析脚本源码解析，避免手抄）----
+## ---- Design parameters (parsed directly from the analysis script source to avoid manual copying) ----
 RP <- readLines(file.path(B, "analysis/robust_proxy.R"), encoding = "UTF-8")
 gnum <- function(key) { m <- regmatches(RP, regexec(paste0(key, "\", \"([0-9]+)\""), RP)); m <- Filter(length, m); stopifnot(length(m) >= 1); as.numeric(m[[1]][2]) }
 add("D_n_splits", "Design", "Fig2a", "TCGA train/test splits", gnum('N11_S'), gnum('N11_S'), "N11_scripts/robust_proxy.R", "N11_S default")
@@ -74,7 +74,7 @@ for (cn in unique(HM$cohort_l)) { r <- HM[cohort_l == cn & grp == "Published"]
   add(paste0("C2_absloghr_unadj_", gsub("-", "", cn)), "C2", "Fig3d", paste("Published median |log HR| unadjusted,", cn), r$u, f3(r$u), "Fig3d_HR_medians.tsv", "u")
   add(paste0("C2_absloghr_adj_", gsub("-", "", cn)), "C2", "Fig3d", paste("Published median |log HR| adjusted,", cn), r$a, f3(r$a), "Fig3d_HR_medians.tsv", "a")
 }
-## 衰减口径唯一：逐签名衰减的中位数（第 2 环落盘值），不用"中位数之比"（两者不同：GSE 20% vs 24%）
+## Single definition of attenuation: median of per-signature attenuation (proxy-analysis values on disk), not the ratio of medians (they differ: GSE 20% vs 24%)
 HA <- rd("ring2_HR_attenuation.tsv", file.path(OUT, "ring2"))[comparison == "A_vs_Ak_sizematched"]
 for (cn in c("GSE14520", "LIRI")) for (g in c("real", "null")) { r <- HA[cohort == cn & group == g]
   add(sprintf("C2_attenuation_%s_%s", g, cn), "C2", "Fig3d", sprintf("Median per-signature attenuation of |log HR|, %s, %s", fifelse(g == "real", "published", "size-matched random"), cn),
@@ -89,7 +89,7 @@ for (i in seq_len(nrow(M4))) { r <- M4[i]
 add("C3_n_modules_over_bradley", "C3", "Fig4a", "Modules whose random positive-rate CI lower bound exceeds 7.5%", sum(M4$lo > BRADLEY), sprintf("%d/%d", sum(M4$lo > BRADLEY), nrow(M4)), "Fig4a_module_rates.tsv", "sum(lo > 0.075)")
 add("C3_n_modules_pub_higher", "C3", "Fig4a", "Modules where published > random (P<0.05)", sum(M4$P < 0.05 & M4$rate_real > M4$rate_null), sum(M4$P < 0.05 & M4$rate_real > M4$rate_null), "Fig4a_module_rates.tsv", "P<0.05 & rate_real>rate_null")
 add("C3_n_modules_pub_lower", "C3", "Fig4a", "Modules where published < random (P<0.05)", sum(M4$P < 0.05 & M4$rate_real < M4$rate_null), sum(M4$P < 0.05 & M4$rate_real < M4$rate_null), "Fig4a_module_rates.tsv", "P<0.05 & rate_real<rate_null")
-## 输入匹配随机签名在 16 个模块的阳性率（K1：非特异性不依赖尺寸挑选）
+## Positive rates of input-matched random signatures in the 16 modules (non-specificity does not depend on size selection)
 r3i <- fread(file.path(OUT, "ring3_armA_decision_v3_rescaled.tsv"))[analysis == "fitsig_k|all", .(module = sub("_pos", "", module), lo = FPR_CI_lo, rate = FPR_null)]
 pk <- function(f, mods) fread(file.path(OUT, f))[comparison == "A_vs_fitsig_k" & module %in% mods, .(module = sub("_pos$", "", module), lo = FPR_CP_lo, rate = FPR_null)]
 IM <- rbind(r3i, pk("hiend_m3_m12/m3_m12_decision.tsv", c("M3_pos", "M12_pos")), pk("hiend_m8/m8_decision.tsv", c("M8a_pos", "M8b_pos")),
@@ -99,14 +99,14 @@ stopifnot(nrow(IM) == 16)
 add("C3_n_modules_over_bradley_input", "C3", "Fig4a", "Modules whose input-matched random positive-rate CI lower bound exceeds 7.5%", sum(IM$lo > BRADLEY), sprintf("%d/%d", sum(IM$lo > BRADLEY), nrow(IM)), "decision tables, A_vs_fitsig_k", "sum(lo > 0.075)")
 add("C3_M10_rand_input", "C3", "Fig4a", "Input-matched random positive rate, Geneformer", IM[module == "M10"]$rate, pct(IM[module == "M10"]$rate), "hiend_m10/m10_decision.tsv", "A_vs_fitsig_k")
 write_sd(IM, "Fig4a_input_matched_rates")
-## N4 剔除签名基因后的代理（预注册 N30）
+## Proxies recomputed after removing signature genes (n4_loo_proxy.R)
 LOO <- rd("loo_summary.tsv", file.path(OUT, "n4_loo")); LOC <- rd("loo_consistency_check.tsv", file.path(OUT, "n4_loo"))
 stopifnot(LOC$n_matched == LOC$n_rows, LOC$max_abs_diff < 1e-6)
 add("N4_robust_n", "Sens", "Supp", "Cohort x metric combinations where order and P<0.05 hold after leave-signature-genes-out", sum(LOO$robust), sprintf("%d/%d", sum(LOO$robust), nrow(LOO)), "N11_out/n4_loo/loo_summary.tsv", "sum(robust)")
 for (cn in c("TCGA", "GSE14520", "LIRI")) { r <- LOO[cohort == cn & metric == "R2_proxy_loo"]
   add(paste0("N4_R2_pub_", cn), "Sens", "Supp", paste("Published median proxy R2 after leave-out,", cn), r$pub, f3(r$pub), "N11_out/n4_loo/loo_summary.tsv", "pub")
   add(paste0("N4_R2_size_", cn), "Sens", "Supp", paste("Size-matched median proxy R2 after leave-out,", cn), r$sizematched, f3(r$sizematched), "N11_out/n4_loo/loo_summary.tsv", "sizematched") }
-## N1 经筛选模拟 + N2 已发表签名过闸门（预注册 N30）
+## Selected simulation (ring4v2_selected_sim.R) + published signatures through the gates (n2_published_gates.R)
 S1 <- rd("sim_power.tsv", file.path(OUT, "ring4v2")); P2 <- rd("published_gates_summary.tsv", file.path(OUT, "n2_gates"))
 sv <- function(sc, bt, cr) S1[scen == sc & abs(beta - bt) < 1e-9 & criterion == cr]
 for (cr in c("T0", "FW", "FWp", "T1p", "T2p")) { r <- sv("selected", 0, cr)
@@ -135,10 +135,10 @@ for (y in AU$year) add(paste0("C3_showcase_AUC_", y, "y"), "C3", "Fig5b", paste0
 MC <- rd("Fig5c_multicox.tsv")[term == "Risk"]
 add("C3_showcase_multiHR", "C3", "Fig5c", "Random signature, multivariable HR per SD (TCGA)", MC$HR, sprintf("%.2f (%.2f-%.2f)", MC$HR, MC$lo, MC$hi), "Fig5c_multicox.tsv", "term == 'Risk'")
 add("C3_showcase_multiP", "C3", "Fig5c", "Random signature, multivariable P (TCGA)", MC$P, pfmt(MC$P), "Fig5c_multicox.tsv", "term == 'Risk'")
-## ---- Fig S5：示例随机签名在 3,700 个尺寸匹配随机签名中的位置（check_fig5_showcase_typicality.R）----
+## ---- Fig S5: position of the example random signature among 3,700 size-matched random signatures (check_fig5_showcase_typicality.R) ----
 TY <- rd("FigS5_typicality_summary.tsv"); ty <- function(m) TY[metric == m]
 stopifnot(abs(ty("HR_TCGA")$example - KM[cohort == "TCGA"]$HR_high_vs_low) < 1e-10,
-          abs(ty("multiHR")$example - MC$HR) < 1e-10)   # 与 Fig 5 同一签名、同一口径
+          abs(ty("multiHR")$example - MC$HR) < 1e-10)   # same signature and definitions as Fig 5
 EC <- rd("Fig6c_example_choice.tsv"); stopifnot(EC$example_src == "S004")
 add("C3_showcase_n_candidates", "C3", "Fig5", "Candidates meeting the example-selection rule", EC$n_candidates, EC$n_candidates, "Fig6c_example_choice.tsv", "n_candidates")
 add("C3_showcase_k_median", "C3", "Fig5", "Published median genes per signature used in example rule", EC$k_median, EC$k_median, "Fig6c_example_choice.tsv", "k_median")
@@ -150,7 +150,7 @@ for (m in c("HR_TCGA", "HR_GSE14520", "HR_LIRI", "multiHR"))
 for (m in c("frac_TCGA_P05", "frac_twoext_P05", "frac_all3_P05", "frac_multiP05"))
   add(paste0("C3_showcase_", m), "C3", "FigS5", paste("Size-matched random signatures,", m), ty(m)$median_all, pct(ty(m)$median_all), "FigS5_typicality_summary.tsv", "median_all (= fraction)")
 
-## ---- C4（单细胞层）----
+## ---- Single-cell level ----
 F8 <- rd("Fig6f_M8_rates.tsv")
 for (i in seq_len(nrow(F8))) { r <- F8[i]
   add(sprintf("C4_%s_%s", sub("_pos", "", r$module), gsub("[^A-Za-z]", "", r$grp)), "C4", "Fig6f", paste(r$mod_l, r$grp), r$rate, pct(r$rate), "Fig6f_M8_rates.tsv", "rate") }
@@ -195,7 +195,7 @@ E5 <- rd("Fig7c_example_5gene.tsv")[set == "main_TAF9"]
 add("C6_example_R2", "C6", "Fig7c", "Worked example, proxy R2 (TCGA)", E5$R2_proxy_TCGA, f3(E5$R2_proxy_TCGA), "Fig7c_example_5gene.tsv", "R2_proxy_TCGA")
 for (v in c("empP_GSE", "empP_LIRI", "lrt_GSE", "lrt_LIRI")) add(paste0("C6_example_", v), "C6", "Fig7c", paste("Worked example,", v), E5[[v]], pfmt(E5[[v]]), "Fig7c_example_5gene.tsv", v)
 
-## ---- 敏感性 / 补图 ----
+## ---- Sensitivity / supplementary figures ----
 CC <- rd("FigS1b_148_vs_95_consistency.tsv")
 add("S1_n_same_verdict", "Sens", "FigS1b", "Modules with same verdict at n = 148 and n = 95", sum(CC$agree == "Same verdict"), sprintf("%d/%d", sum(CC$agree == "Same verdict"), nrow(CC)), "FigS1b_148_vs_95_consistency.tsv", "agree")
 D14 <- rd("FigS2b_m14_prolif_decision.tsv")
@@ -208,14 +208,19 @@ GF4 <- rd("FigS4a_gene_frequency.tsv")[order(-n_sig)][1:25]
 add("S4_top25_prolif", "Sens", "FigS4a", "Hallmark E2F/G2M genes among 25 most reused", sum(GF4$prolif), sprintf("%d/25", sum(GF4$prolif)), "FigS4a_gene_frequency.tsv", "top 25 by n_sig")
 add("S4_top_gene_n", "Sens", "FigS4a", paste("Signatures containing", GF4$gene[1]), GF4$n_sig[1], sprintf("%s: %d signatures, %d death types", GF4$gene[1], GF4$n_sig[1], GF4$n_mech[1]), "FigS4a_gene_frequency.tsv", "top 1")
 
-## ---- Methods：语料流程（README 流程计数表逐行解析）与队列 ----
+## ---- Methods: corpus flow (parsed row by row from the count table in N12_signatures/README.md) and cohorts ----
+CORP_EN <- list(corp_dedup = "Unique PMIDs after deduplication", corp_title = "Records after title screening", corp_cand = "Candidate articles",
+                corp_rescue_total = "Candidates after manual review", corp_pmcid = "Articles with a PMCID", corp_abs_only = "PMC abstract only",
+                corp_fulltext = "Full text retrieved", corp_coef = "Signatures with per-gene coefficients", corp_primary = "Signatures in the primary analysis",
+                corp_nocoef = "Articles without per-gene coefficients", corp_rule_excl = "Excluded by prespecified rules")   # English labels for output; README rows are still matched by their original (Chinese) names
+
 RM <- readLines(file.path(B, "N12_signatures/README.md"), encoding = "UTF-8")
 rowv <- function(key) { l <- grep(key, RM, value = TRUE, fixed = TRUE)[1]; stopifnot(!is.na(l)); cells <- trimws(strsplit(l, "|", fixed = TRUE)[[1]])
   x <- gsub("[^0-9]", " ", sub("（.*", "", cells[3])); as.numeric(tail(strsplit(trimws(x), " +")[[1]], 1)) }
 for (kv in list(c("corp_dedup", "去重 PMID"), c("corp_title", "标题过滤"), c("corp_cand", "→ 候选"), c("corp_rescue_total", "人工复核补回"),
                 c("corp_pmcid", "有 PMCID"), c("corp_abs_only", "PMC 只有摘要"), c("corp_fulltext", "读到全文"), c("corp_coef", "抽到逐基因系数"),
                 c("corp_primary", "主表可用"), c("corp_nocoef", "没找到逐基因系数"), c("corp_rule_excl", "规则排除"))) {
-  v <- rowv(kv[2]); add(kv[1], "Methods", "Methods corpus", kv[2], v, v, "N12_signatures/README.md", paste("row:", kv[2])) }
+  v <- rowv(kv[2]); add(kv[1], "Methods", "Methods corpus", CORP_EN[[kv[1]]], v, v, "N12_signatures/README.md", paste("flow-count row:", CORP_EN[[kv[1]]])) }
 stopifnot(rowv("读到全文") == rowv("抽到逐基因系数") + rowv("没找到逐基因系数") + rowv("规则排除"))
 add("corp_rescued", "Methods", "Methods corpus", "Titles added after manual review", rowv("人工复核补回") - rowv("→ 候选"), rowv("人工复核补回") - rowv("→ 候选"), "N12_signatures/README.md", "294 - 281")
 CM3 <- rd("cohort_meta.tsv", file.path(OUT, "ring3_full"))
@@ -224,7 +229,7 @@ add("U_pool", "Methods", "Methods genes", "Expressed genes in sampling pool (rin
 CA <- rd("covariate_audit.tsv", file.path(OUT, "ring2"))
 for (cn in CA$cohort) add(paste0("ncomplete_", cn), "Methods", "Methods cohorts", paste(cn, "patients with complete base covariates"), CA[cohort == cn]$complete_base, CA[cohort == cn]$complete_base, "N11_out/ring2/covariate_audit.tsv", "complete_base")
 for (cn in CM$cohort) add(paste0("stageNA_", cn), "Methods", "Methods cohorts", paste(cn, "patients with missing stage"), CM[cohort == cn]$stage_NA, CM[cohort == cn]$stage_NA, "N11_out/robust_v2/cohort_meta.tsv", "stage_NA")
-## ---- Methods：签名尺寸与随机签名数量 ----
+## ---- Methods: signature sizes and numbers of random signatures ----
 PC <- rd("published_coverage.tsv", file.path(OUT, "ring3_full"))[n_in >= 2]
 stopifnot(nrow(PC) == 148)
 add("sig_k_median", "Methods", "Methods signatures", "Published signature genes in scoring set, median", median(PC$n_in), median(PC$n_in), "N11_out/ring3_full/published_coverage.tsv", "median(n_in), n_in>=2")
@@ -233,13 +238,13 @@ add("sig_full", "Methods", "Methods signatures", "Published signatures with all 
 add("rand_per_sig", "Methods", "Methods random", "Random signatures per published signature per family", M4[module == "M0"]$n_null / M4[module == "M0"]$n_real, M4[module == "M0"]$n_null / M4[module == "M0"]$n_real, "Fig4a_module_rates.tsv", "n_null/n_real")
 add("rand_per_sig_M7", "Methods", "Methods random", "Random signatures per published signature, multi-algorithm module", M4[module == "M7"]$n_null / M4[module == "M7"]$n_real, M4[module == "M7"]$n_null / M4[module == "M7"]$n_real, "Fig4a_module_rates.tsv", "n_null/n_real")
 H <- { s0 <- strsplit(readLines(file.path(B, "N11_geneset/h.all.v2024.1.Hs.symbols.gmt"), warn = FALSE), "	"); setNames(lapply(s0, function(x) x[-(1:2)]), vapply(s0, `[`, "", 1)) }
-Upool <- NULL  # 代理集大小在抽样池内的交集需要 U；从 hiend_m8/U_pool.txt 读
+Upool <- NULL  # the intersection of proxy sets with the sampling pool needs U; read from hiend_m8/U_pool.txt
 Upool <- readLines(file.path(OUT, "hiend_m8/U_pool.txt")); stopifnot(length(Upool) == CM3$n_genes_universe[1])
 add("proxy_prolif_n", "Methods", "Methods proxies", "Proliferation proxy genes (E2F + G2M, in pool)", length(intersect(union(H$HALLMARK_E2F_TARGETS, H$HALLMARK_G2M_CHECKPOINT), Upool)),
     length(intersect(union(H$HALLMARK_E2F_TARGETS, H$HALLMARK_G2M_CHECKPOINT), Upool)), "h.all.v2024.1 + hiend_m8/U_pool.txt", "intersect")
 add("proxy_oxphos_n", "Methods", "Methods proxies", "OXPHOS proxy genes (in pool)", length(intersect(H$HALLMARK_OXIDATIVE_PHOSPHORYLATION, Upool)),
     length(intersect(H$HALLMARK_OXIDATIVE_PHOSPHORYLATION, Upool)), "h.all.v2024.1 + hiend_m8/U_pool.txt", "intersect")
-## ---- 图注用样本量 ----
+## ---- Sample sizes for legends ----
 add("n_null_default", "N", "Fig4a", "Size-matched random signatures per module (default)", as.numeric(names(which.max(table(M4$n_null)))), format(as.numeric(names(which.max(table(M4$n_null)))), big.mark = ","), "Fig4a_module_rates.tsv", "mode(n_null)")
 add("n_null_M7", "N", "Fig4a", "Size-matched random signatures, multi-algorithm module", M4[module == "M7"]$n_null, format(M4[module == "M7"]$n_null, big.mark = ","), "Fig4a_module_rates.tsv", "M7 n_null")
 add("n_null_M14", "N", "Fig4a", "Size-matched random signatures, consensus clustering (clusterable)", M4[module == "M14"]$n_null, format(M4[module == "M14"]$n_null, big.mark = ","), "Fig4a_module_rates.tsv", "M14 n_null")

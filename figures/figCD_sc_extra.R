@@ -1,6 +1,6 @@
-# 新增面板 C / D（描述性，不新增检验）
-#  C 单细胞：每个签名在 6 个细胞类型中的平均评分，签名内跨细胞类型 z 化（"相对定位"），已发表 vs 尺寸匹配随机（Ak 第 1 次重复）分半小提琴
-#  D Geneformer：按检出次数十分位的显著基因比例（m10_abund_deciles.tsv）
+# Additional panels C / D (descriptive, no new tests)
+#  C single cell: mean score of each signature in 6 cell types, z-scored across cell types within each signature ("relative localisation"), published vs size-matched random (first Ak replicate), split violin
+#  D Geneformer: proportion of significant genes by decile of detection count (m10_abund_deciles.tsv)
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 suppressPackageStartupMessages(library(ggdist))
 
@@ -10,7 +10,7 @@ SC <- readRDS(file.path(DAT, "sc_sigscore.rds")); stopifnot(identical(rownames(S
 keep <- grep("^(A\\|.*\\|real\\|0|Ak\\|.*\\|null\\|1)$", colnames(SC), value = TRUE)
 ct <- factor(U$celltype, levels = names(COL_CELL))
 M <- rowsum(SC[, keep], ct, na.rm = TRUE) / as.vector(table(ct))
-Z <- scale(M)                                      # 每个签名（列）跨细胞类型 z 化
+Z <- scale(M)                                      # z-score each signature (column) across cell types
 D <- as.data.table(as.table(Z)); setnames(D, c("celltype", "sid", "z"))
 D <- D[!is.na(z)][, grp := fifelse(grepl("^A\\|", sid), "Published", "Size-matched random")]
 D[, celltype := factor(celltype, levels = names(COL_CELL))]

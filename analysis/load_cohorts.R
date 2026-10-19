@@ -1,4 +1,4 @@
-# 共用：读三队列 + 基因集 + 代理评分 + 模板流程函数（由 robust_proxy.R / adj_null.R source）
+# Shared: loads the three cohorts + gene sets + proxy scores + template pipeline functions (sourced by the analysis scripts)
 GE <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "GEO_bulk")
 
 stage2 <- function(x) ifelse(grepl("IV|III", x), "III-IV", ifelse(grepl("^I$|^II$|Stage I[A-C]?$|Stage II[A-C]?$|^I[A-C]?$|^II[A-C]?$", x), "I-II", NA))
@@ -57,10 +57,10 @@ okl <- !is.na(lt) & lt > 0 & !is.na(le)
 smp <- smp[okl, ]; pi <- pi[okl]
 l1 <- list(x = lm[, smp$sid], time = lt[okl], event = le[okl], stage = stage2(lp$TNM_STAGE_T1[pi]))
 
-## ---- 共同基因宇宙 + 表达过滤 + 队列内 z ----
+## ---- Common gene universe + expression filter + within-cohort z ----
 cohorts <- list(TCGA = tc, GSE14520 = g1, LIRI = l1)
-Uall <- Reduce(intersect, lapply(cohorts, function(c) rownames(c$x)))   # 已发表签名打分用：三队列都测到
-U <- Uall[rowMeans(tc$x[Uall, ] > 1) > 0.5]                          # 随机抽样池：TCGA 表达过滤
+Uall <- Reduce(intersect, lapply(cohorts, function(c) rownames(c$x)))   # for scoring published signatures: measured in all three cohorts
+U <- Uall[rowMeans(tc$x[Uall, ] > 1) > 0.5]                          # random sampling pool: TCGA expression filter
 for (k in names(cohorts)) {
   x <- cohorts[[k]]$x[Uall, ]; x <- x[, colSums(is.na(x)) == 0]
   sdv <- apply(x, 1, sd); x[sdv == 0, ] <- 0
@@ -71,7 +71,7 @@ meta <- rbindlist(lapply(names(cohorts), function(k) data.table(cohort = k, n = 
   events = sum(cohorts[[k]]$event), stage_NA = sum(is.na(cohorts[[k]]$stage)), n_genes_universe = length(U), n_genes_all = length(Uall))))
 fwrite(meta, file.path(O, "cohort_meta.tsv"), sep = "\t"); print(meta)
 
-## ---- 基因集 ----
+## ---- Gene sets ----
 rg <- function(f) { s <- strsplit(readLines(file.path(B, "N11_geneset", f)), "\t"); setNames(lapply(s, function(x) x[-(1:2)]), vapply(s, `[`, "", 1)) }
 H <- rg("h.all.v2024.1.Hs.symbols.gmt")
 C2 <- c(rg("c2.cp.reactome.v2024.1.Hs.symbols.gmt"), rg("c2.cp.wikipathways.v2024.1.Hs.symbols.gmt"))
@@ -88,7 +88,7 @@ prox_genes <- list(prolif = intersect(union(H$HALLMARK_E2F_TARGETS, H$HALLMARK_G
                    oxphos = intersect(H$HALLMARK_OXIDATIVE_PHOSPHORYLATION, U))
 for (k in names(cohorts)) for (p in names(prox_genes)) cohorts[[k]][[p]] <- colMeans(cohorts[[k]]$z[prox_genes[[p]], ])
 
-## ---- 模板流程：单因素 Cox P<0.05 -> LASSO-Cox -> 系数；无入选则全集均值并按训练方向定号 ----
+## ---- Template pipeline: univariable Cox P<0.05 -> LASSO-Cox -> coefficients; if none selected, mean of the full set signed by the training direction ----
 fitsig <- function(g, Z, y) {
   X <- t(Z[g, , drop = FALSE])
   p <- apply(X, 2, function(v) { s <- tryCatch(summary(coxph(y ~ v))$coefficients[5], error = function(e) 1); s })

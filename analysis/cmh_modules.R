@@ -1,5 +1,5 @@
-# N30 统计口径更新：16 个模块 已发表 vs 尺寸匹配随机 —— 按匹配组（每个已发表签名 + 其随机签名）分层的 CMH 检验，Holm 校正
-# 预注册 N30_selfreview_prereg.md「统计口径」；阳性率与 CI 不变，只替换组间检验
+# 16 modules, published vs size-matched random: Cochran-Mantel-Haenszel test stratified by matched group (each published signature + its random signatures), Holm correction
+# Positive rates and CIs are unchanged; only the between-group test is replaced
 suppressPackageStartupMessages(library(data.table))
 O <- file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "N11_out")
 fixM0 <- function(d) { if ("M0_c_GSE" %in% names(d)) d[, M0_pos := as.integer(M0_p_GSE < 0.05 & M0_p_LIRI < 0.05 & M0_c_GSE > 0.5 & M0_c_LIRI > 0.5)]; d }

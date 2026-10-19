@@ -1,15 +1,15 @@
-# v3（2026-10-15）：加入尺寸匹配对照 fitsig_pool100_k；输出另存 ring3_armA_decision_v3_<权重>.tsv
-# A 组按预注册对照重新判读：真实已发表签名（来自 ring3_full）vs 两种模板流程随机对照（fitsig_k 主分析 / fitsig_pool100 敏感性）
+# v3: adds the size-matched control fitsig_pool100_k; output written to ring3_armA_decision_v3_<weight>.tsv
+# Arm A calls against the predefined controls: real published signatures (from ring3_full) vs template-pipeline random controls
 suppressPackageStartupMessages({ library(data.table) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); O <- file.path(B, "N11_out")
 cov <- fread(file.path(O, "ring3_full/published_coverage.tsv")); full_ids <- cov[full == TRUE]$sig_id
 mods <- c("M0_pos", "M1_pos", "M2_pos", "M4_pos", "M5a_pos", "M5b_pos", "M6_pos")
-# 2026-10-18（用户同意）：M0 加方向要求——两外部队列 C > 0.5 且双侧 Noether P < 0.05（survcomp 默认双侧，原判据未查方向）
+# M0 requires direction: C > 0.5 and two-sided Noether P < 0.05 in both external cohorts (survcomp default is two-sided)
 fixM0 <- function(d) { if (all(c("M0_c_GSE", "M0_c_LIRI", "M0_p_GSE", "M0_p_LIRI") %in% names(d)))
   d[, M0_pos := as.integer(M0_p_GSE < 0.05 & M0_p_LIRI < 0.05 & M0_c_GSE > 0.5 & M0_c_LIRI > 0.5)]; d }
 lng <- function(R, R7) { R <- fixM0(copy(R)); x <- rbind(melt(R, id.vars = c("arm", "src", "kind", "rep", "k"), measure.vars = mods, variable.name = "module", value.name = "pos"),
                                     R7[, .(arm, src, kind, rep, k, module = "M7_pos", pos = M7_pos)]); x[, module := as.character(module)]; x }
-WS <- Sys.getenv("R3_WEIGHT", "rescaled")   # rescaled = coef × sd（主分析）；z = 原 z 尺度权重（敏感性）
+WS <- Sys.getenv("R3_WEIGHT", "rescaled")   # rescaled = coef x sd (main); z = original z-scale weights (sensitivity)
 m06 <- if (WS == "rescaled") fread(file.path(O, "ring3_armA_realrescale/results_m06_real_rescaled.tsv")) else fread(file.path(O, "ring3_full/results_m06.tsv"))
 real <- lng(m06, fread(file.path(O, "ring3_full/results_m7.tsv")))[arm == "A" & kind == "real"]
 summ <- function(d, label) d[, {

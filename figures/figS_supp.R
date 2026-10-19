@@ -1,8 +1,8 @@
-# 补充图 S1–S4（v3 版式；只读已落盘结果，不新增检验）
-#  S1 敏感性：三队列全覆盖的 95 个签名重复模块审计（a 哑铃）；b 148 vs 95 口径下已发表阳性率一致性
-#  S2 M14 共识聚类：亚型与增殖的分离度（a 雨云）与调整增殖前后阳性率（b）——探索性，预注册 N25
-#  S3 M8 单细胞"验证"：模板判据下阳性率随签名基因数 k 的变化（观测 vs 单基因阳性率推得的期望 1-(1-p)^k）
-#  S4 基因复用：前 25 基因棒棒糖 + 前 20 基因 × 死亡类型弦图（弦图为 base 图，按 pub-plotting 规则以位图嵌入）
+# Supplementary Figs. S1-S4 (reads results on disk only, no new tests)
+#  S1 sensitivity: module audit repeated for the 95 signatures fully covered in all three cohorts (a dumbbell); b consistency of published positive rates, 148 vs 95
+#  S2 M14 consensus clustering: separation of subtypes by proliferation (a raincloud) and positive rates before and after adjustment for proliferation (b); exploratory
+#  S3 M8 single-cell "validation": positive rate under the template criterion by number of signature genes k (observed vs expectation 1-(1-p)^k from single-gene positive rates)
+#  S4 gene reuse: lollipop of the top 25 genes + chord diagram of the top 20 genes x cell-death type (the chord diagram is a base graphic embedded as a bitmap)
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 suppressPackageStartupMessages({ library(ggdist) })
 cp <- function(x, n) as.numeric(binom.test(x, n)$conf.int)

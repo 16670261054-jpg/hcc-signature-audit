@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# M9 正式运行链（预注册 N20）：等官方等价性验证结束 → 只有 WT_identical 且 DR_identical 都为 TRUE 才开跑 2124 个基因
-# 同一时间只开一个 R：等待期间不启动任何 R
+# M9 formal run chain: wait for the reference-implementation equivalence check -> start the 2,124-gene run only if WT_identical and DR_identical are both TRUE
+# Only one R process at a time: no R is started while waiting
 ROOT="$(cd "${HCC_AUDIT_ROOT:-.}" && pwd)"; export HCC_AUDIT_ROOT="$ROOT"
 export HCC_AUDIT_DATA="${HCC_AUDIT_DATA:-$ROOT/data/raw}"
 L="$ROOT/analysis"

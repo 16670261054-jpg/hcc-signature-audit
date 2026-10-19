@@ -1,18 +1,18 @@
-# 高端模块 M8 单细胞定位 —— 正式查表（2026-10-15 夜）
-# 逐基因结果来自 hiend_m8_sc_pilot.R（课程 265 12.Seurat 写法，判据照抄被审计模板）：
-#   M8a：FindAllMarkers |avg_log2FC|>1 & p_val_adj<0.05，签名 ≥1 个基因命中即阳性
-#   M8b：各细胞类型 Tumor vs Normal，|avg_log2FC|>1 & p_val_adj<0.05，≥1 个基因、≥1 个类型即阳性
-# 签名清单与第 2 环完全相同（同 getsig、同种子）：A 真实 / A 随机 fitsig_k / Ak 尺寸匹配 / B 真实 / B 随机
-#   签名基因 = 最终模型中系数非零的基因（已发表签名 = 原文全部基因）
-# 判读（第 3 环已定规则）：随机阳性率 Clopper–Pearson 95% CI 下界 > 0.075 → I 类错误失控（Bradley 1978 宽松标准）；真实 vs 随机 Fisher 双侧
-# 另落盘全部签名基因清单（后续 M3 / DSigDB / 对接复用）
+# Module M8 single-cell localisation: formal lookup
+# Per-gene results from hiend_m8_sc_pilot.R (template Seurat workflow; criteria reproduced from the audited template):
+#   M8a: FindAllMarkers |avg_log2FC|>1 & p_val_adj<0.05; positive if >= 1 signature gene is a marker
+#   M8b: Tumor vs Normal within each cell type, |avg_log2FC|>1 & p_val_adj<0.05; positive if >= 1 gene in >= 1 cell type
+# Signature list identical to the proxy analysis (same getsig, same seeds): A real / A random fitsig_k / Ak size-matched / B real / B random
+#   Signature genes = genes with non-zero coefficients in the final model (published signatures = all genes in the article)
+# Calls: random positive rate Clopper-Pearson 95% CI lower limit > 0.075 -> excess type I error (Bradley 1978 liberal criterion); real vs random two-sided Fisher
+# Also writes the full list of signature genes (reused by M3 / DSigDB modules)
 suppressPackageStartupMessages({ library(survival); library(glmnet); library(data.table); library(parallel) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
 O <- file.path(B, "N11_out/hiend_m8"); M8 <- O
 source(file.path(B, "analysis/load_cohorts.R"), encoding = "UTF-8")
-O <- M8   # load_cohorts.R 会改写 O
+O <- M8   # load_cohorts.R overwrites O
 
-## ---- 签名（照抄 ring2_proxy.R）----
+## ---- Signatures (as in ring2_proxy.R) ----
 L <- fread(file.path(B, "N12_signatures/signatures_long.tsv"), encoding = "UTF-8"); L[, coef := suppressWarnings(as.numeric(coef))]
 I <- fread(file.path(B, "N12_signatures/signatures_index.tsv"), encoding = "UTF-8")
 L <- L[sig_id %in% I[group_primary == "是" & 是否有完整系数 == "是"]$sig_id & !is.na(coef)]
@@ -50,7 +50,7 @@ G <- rbindlist(parLapply(cl, seq_len(nrow(jobs)), function(i) { j <- jobs[i]; b 
 stopCluster(cl)
 fwrite(G, file.path(O, "signature_genes_all_arms.tsv"), sep = "\t")
 
-## ---- 查表 ----
+## ---- Lookup ----
 mk <- fread(file.path(O, "m8a_findallmarkers_all.tsv")); gd <- fread(file.path(O, "m8b_tumor_vs_normal_all.tsv"))
 pos_a <- unique(mk[abs(avg_log2FC) > 1 & p_val_adj < 0.05]$gene); pos_b <- unique(gd[abs(avg_log2FC) > 1 & p_val_adj < 0.05]$gene)
 sc_genes <- unique(c(mk$gene, gd$gene))

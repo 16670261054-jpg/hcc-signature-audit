@@ -4,17 +4,20 @@ Code and source data for "Random signatures reproduce the prognostic findings of
 
 Citation: [to be added]
 
+Several downstream modules re-implement analysis steps of the template workflow commonly used in the audited literature (see Methods).
+
 ## Repository layout
 
 ```
 analysis/              bulk, single-cell and simulation analyses (R, Python, shell)
 corpus/                literature search, full-text retrieval and coefficient extraction (Python, R)
 figures/               figure, Source Data and supplementary-table scripts (R)
+  data/                small intermediate tables read by the figure scripts (see "Figures" below)
+data/genesets/         immune gene sets used by modules M2 and M13
 source_data/           Source Data for every main and supplementary figure panel (TSV)
   TableS3_numbers.tsv  every number quoted in the text, with its source file and extraction rule
   per_signature/       per-signature module calls and gate results for the 148 scorable signatures
 supplementary_tables/  Supplementary Tables S1-S3 (xlsx)
-prereg/                analysis plan for the proxy analysis, written before the full run
 env/                   R package versions, R sessionInfo(), Python package versions
 ```
 
@@ -44,16 +47,21 @@ All data are public. Place them under `$HCC_AUDIT_DATA` as follows.
 | GSE149614 scRNA-seq | GEO (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE149614) | `GSE149614/GSE149614_HCC.metadata.updated.txt.gz`; `GSE149614/GSE149614_counts_sparse.rds` (the GEO count matrix stored as a sparse genes x cells `dgCMatrix`) |
 | GDSC2 training data for oncoPredict | oncoPredict data files (OSF repository linked from the oncoPredict documentation; `DataFiles.zip`) | `external/oncoPredict_osf/DataFiles.zip` |
 | DSigDB | https://dsigdb.tanlab.org | `external/DSigDB/DSigDB_All_detailed.txt` |
-| Immune checkpoint genes | gene list used for module M13 | `immune_checkpoint_genes.txt` (one symbol per line) |
 
 Files read from `$HCC_AUDIT_ROOT`:
 
 | File | Source |
 |---|---|
 | `N11_geneset/h.all.v2024.1.Hs.symbols.gmt`, `c2.cp.reactome.v2024.1.Hs.symbols.gmt`, `c2.cp.wikipathways.v2024.1.Hs.symbols.gmt`, `c5.go.bp.v2024.1.Hs.symbols.gmt` | MSigDB v2024.1 (https://www.gsea-msigdb.org) |
-| `N11_geneset/immune29_course126.gmt` | 29 immune cell and immune function gene sets used for ssGSEA (module M2) |
 | `N12_signatures/ref/hgnc.txt` | HGNC complete set (https://www.genenames.org/download/archive/) |
 | `N12_signatures/signatures_long.tsv`, `signatures_index.tsv` | produced by `corpus/` (contents are in Supplementary Table S1) |
+
+Gene sets included in this repository (`data/genesets/`):
+
+| File | Content |
+|---|---|
+| `immune29_ssgsea.gmt` | the 29 immune signatures (immune cell types and immune functions) commonly used for ssGSEA immune-infiltration scoring, from He et al. 2018, *J Exp Clin Cancer Res* 37:327, "Classification of triple-negative breast cancers based on immunogenomic profiling" (PMID 30594216; doi:10.1186/s13046-018-1002-1); used by module M2 |
+| `immune_checkpoint_genes.txt` | 47 immune checkpoint genes, one symbol per line, used by module M13 (C10orf54 recorded under its current HGNC symbol VSIR) |
 
 ## Software
 
@@ -87,7 +95,7 @@ Scripts are listed in the order of the Methods sections. Each script header stat
 
 ### 4. Proxy analysis (Fig. 3)
 
-- `analysis/ring2_proxy.R` - per-signature proxy correlations, R² and residual likelihood-ratio tests (plan in `prereg/N17_ring2_preregistration.md`)
+- `analysis/ring2_proxy.R` - per-signature proxy correlations, R² and residual likelihood-ratio tests
 - `analysis/ring2_analyze.R` - published versus random comparisons
 - `analysis/n4_loo_proxy.R` - proxies recomputed without the signature genes
 
@@ -132,6 +140,16 @@ Scripts are listed in the order of the Methods sections. Each script header stat
 3. Assembly: `assemble_main.R` (main Figs. 4-6)
 4. Numbers and tables: `make_numbers.R` (`source_data/TableS3_numbers.tsv`), `make_supp_tables.R` (Supplementary Tables S1-S3 and `source_data/per_signature/`)
 5. `session_versions.R` - writes `env/` version files
+
+Intermediate tables in `figures/data/` (written by the preparation scripts, included so that the panel scripts can run without the raw data):
+
+| Files | Written by | Read by |
+|---|---|---|
+| `fig4c_km_curves.tsv`, `fig4c_km_logrank.tsv`, `fig4c_multicox.tsv`, `fig4c_timeroc_auc.tsv`, `fig4c_timeroc_curves.tsv` | `prep_fig4c_random_showcase.R` | `fig4_modules.R` |
+| `fig5_showcase_all_Ak.tsv`, `fig5_showcase_typicality.tsv` | `check_fig5_showcase_typicality.R` | `figS5_showcase_typicality.R` |
+| `sc_umap.tsv.gz`, `sc_sigscore_coverage.tsv` | `prep_sc_embedding.R` | `fig1_design.R`, `fig5_singlecell.R`, `figCD_sc_extra.R`, `make_numbers.R` |
+
+R objects (`*.rds`) are not included. `fig5_singlecell.R` and `figCD_sc_extra.R` also need `figures/data/sc_sigscore.rds`, so run `prep_sc_embedding.R` (requires GSE149614) first. `assemble_main.R` needs the panel objects saved by `fig4_modules.R`, `fig5_singlecell.R`, `figX_landscape.R`, `figA_funnel.R` and `figCD_sc_extra.R`, and `figS_supp.R` needs the object saved by `figX_landscape.R`; run those scripts first.
 
 Script names follow the order in which panels were drafted, not the final figure numbers; the header of each script names the panels it produces. `fig6_framework.R` is an earlier version of `fig7_framework_v2.R`.
 

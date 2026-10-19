@@ -1,19 +1,19 @@
-# 新增面板 A：148 个已发表签名逐层"过关"桑基图（描述性重排，不新增检验）
-# 三层判据全部是已落盘的逐签名结果，且同一批 148 个签名：
-#   1 外部验证（模板 M0：两外部队列 C 显著 > 0.5）      ← ring3_armA_realrescale/results_m06_real_rescaled.tsv
-#   2 独立预后（模板 M1：TCGA 多因素 Cox P < 0.05）       ← 同上
-#   3 代理调整后仍显著（第 2 环：两外部队列嵌套 LRT 均 < 0.05，基础模型 = 分期+增殖+基质+免疫+年龄+性别）← ring2/ring2_rows.tsv
-# 每层旁标注尺寸匹配随机签名在该层的阳性率（各自落盘的 decision 表；随机签名批次与已发表不同，只作参照，不连线）
+# Panel: Sankey of the 148 published signatures passing successive criteria (descriptive rearrangement, no new tests)
+# All three criteria are per-signature results already on disk, for the same 148 signatures:
+#   1 external validation (template M0: C significantly > 0.5 in both external cohorts)      <- ring3_armA_realrescale/results_m06_real_rescaled.tsv
+#   2 independent prognostic factor (template M1: TCGA multivariable Cox P < 0.05)       <- same file
+#   3 still significant after proxy adjustment (proxy analysis: nested LRT < 0.05 in both external cohorts, base model = stage + proliferation + stromal + immune + age + sex) <- ring2/ring2_rows.tsv
+# Each stage is annotated with the positive rate of size-matched random signatures at that stage (from the respective decision tables; random batches differ from the published ones, shown for reference only, not connected)
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 r6 <- fread(file.path(OUT, "ring3_armA_realrescale/results_m06_real_rescaled.tsv"))[arm == "A" & kind == "real"]
-# 2026-10-18（用户同意）：M0 加方向要求——两外部队列 C > 0.5 且双侧 Noether P < 0.05（survcomp 默认双侧，原判据未查方向）
+# M0 requires direction: C > 0.5 and two-sided Noether P < 0.05 in both external cohorts (survcomp default is two-sided)
 fixM0 <- function(d) { if (all(c("M0_c_GSE", "M0_c_LIRI", "M0_p_GSE", "M0_p_LIRI") %in% names(d)))
   d[, M0_pos := as.integer(M0_p_GSE < 0.05 & M0_p_LIRI < 0.05 & M0_c_GSE > 0.5 & M0_c_LIRI > 0.5)]; d }
 r6 <- fixM0(r6)[, .(src, M0_pos, M1_pos)]
 r2 <- fread(file.path(OUT, "ring2/ring2_rows.tsv"))[arm == "A" & kind == "real" & cohort != "TCGA"]
 res <- r2[, .(resid = as.integer(all(lrt_p < 0.05) & .N == 2)), by = src]
 W <- merge(r6, res, by = "src"); stopifnot(nrow(W) == 148)
-## 与已落盘汇总逐项核对
+## Item-by-item check against the summaries on disk
 RS <- fread(file.path(OUT, "ring2/ring2_residual_summary.tsv"))[comparison == "A_vs_Ak_sizematched" & base_model != "+oxphos"]
 stopifnot(sum(W$resid) == RS$pos_real)
 D3 <- fread(file.path(OUT, "ring3_armA_decision_v3_rescaled.tsv"))[analysis == "fitsig_pool100_k|all"]
@@ -26,20 +26,20 @@ write_sd(W, "Fig4b_funnel_per_signature"); write_sd(fl, "Fig4b_funnel_flows")
 rnd <- data.table(stage = factor(ST, levels = ST), rate = c(D3[module == "M0_pos"]$FPR_null, D3[module == "M1_pos"]$FPR_null, RS$rate_null),
                   pub = c(mean(W$M0_pos), mean(W$M1_pos), mean(W$resid)))
 write_sd(rnd, "Fig4b_stage_rates")
-## 层顺序按模板文章的报告顺序：独立预后 → 外部验证 → 代理调整
+## Stage order follows the reporting order of template articles: independent prognosis -> external validation -> proxy adjustment
 ST <- c("Independent\nprognostic factor", "External\nvalidation", "Survives proxy\nadjustment")
 rnd[, stage := factor(c(ST[2], ST[1], ST[3]), levels = ST)]
 fl[, path := fcase(s2 == "Pass" & s1 == "Pass" & s3 == "Pass", "All three", s2 == "Pass" & s1 == "Pass", "Prognostic + external", default = "Other")]
 COL_PATH <- c("All three" = RDBU[["r3"]], "Prognostic + external" = RDBU[["r1"]], "Other" = "grey80")
 COL_ST <- c(Pass = COL_GRP[["Published"]], Fail = "#D1E5F0")
-## 节点（每层 Pass 在上、Fail 在下）与流线（手工 sigmoid，见 00_config.R sankey_polys）
+## Nodes (Pass above, Fail below at each stage) and flows (hand-drawn sigmoid, see sankey_polys in 00_config.R)
 ax <- list(s2 = 1, s1 = 2, s3 = 3)
 nodes <- rbindlist(lapply(names(ax), function(v) fl[, .(n = sum(N)), by = .(st = get(v))][, x := ax[[v]]]))
 nodes[, st := factor(st, levels = c("Pass", "Fail"))]; setorder(nodes, x, st)
 nodes[, `:=`(ymax = 148 - cumsum(n) + n, ymin = 148 - cumsum(n)), by = x]
 lk <- rbind(fl[, .(x0 = 1, x1 = 2, from = s2, to = s1, n = N, fill = path)], fl[, .(x0 = 2, x1 = 3, from = s1, to = s3, n = N, fill = path)])
 lk <- lk[, .(n = sum(n)), by = .(x0, x1, from, to, fill)]
-## 同一 from→to 内再按路径拆开时保持路径顺序稳定
+## Keep path order stable when splitting by path within the same from -> to
 lk[, fill := factor(fill, levels = names(COL_PATH))]; setorder(lk, x0, from, to, fill)
 PP <- sankey_polys(lk, c("Pass", "Fail"), w = 0.3)
 pA <- ggplot() +

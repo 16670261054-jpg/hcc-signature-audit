@@ -1,9 +1,9 @@
-# M9 判别性检查（预注册 N20 变更记录 2026-10-17；用户要求"结果都一样或毫不相关就停"）—— 运行停止规则，不是论文判据
-# 输入：KNK_OUT 目录下 WT_network.rds + KNK_KODIR 里的逐基因 diffRegulation（.rds 全精度）
-# D1 "都是同一个结果"：在有 ≥1 个显著基因的 KO 中，任一非靶基因出现在 ≥50% 的 KO 里 → 触发（无判别性）；另报两两 Jaccard 中位数
-# D2 "毫不相关"：每个有显著基因的 KO，显著基因与靶基因的网络边权 |WT[g,s]|+|WT[s,g]| vs 其余基因，Wilcoxon 单侧(greater)；
-#     P<0.05 的 KO 占比 ≥ 50% → 相关性成立；有显著基因的 KO 少于 3 个时 D2 不可评估（照实标注）
-# PASS = D1 未触发 且（D2 成立 或 D2 不可评估）
+# M9 discrimination check: a run-stopping rule (stop if all KOs give the same result or results are unrelated to the target), not a study criterion
+# Input: WT_network.rds in KNK_OUT + per-gene diffRegulation in KNK_KODIR (.rds, full precision)
+# D1 "all the same": among KOs with >= 1 significant gene, any non-target gene present in >= 50% of KOs -> triggered (not discriminative); median pairwise Jaccard also reported
+# D2 "unrelated": for each KO with significant genes, network edge weight |WT[g,s]|+|WT[s,g]| of significant genes to the target vs other genes, one-sided Wilcoxon (greater);
+#     relatedness holds if >= 50% of KOs have P < 0.05; D2 not assessable when fewer than 3 KOs have significant genes (reported as such)
+# PASS = D1 not triggered and (D2 holds or D2 not assessable)
 suppressPackageStartupMessages(library(data.table))
 B <- Sys.getenv("HCC_AUDIT_ROOT", ".")
 O <- file.path(B, "N11_out", Sys.getenv("KNK_OUT", "hiend_m9_hvg")); KD <- file.path(O, Sys.getenv("KNK_KODIR", "ko_speedtest"))

@@ -1,21 +1,21 @@
-# 高端模块 M9 虚拟敲除（scTenifoldKnk）—— 共享野生型网络版（2026-10-15）
-# 被审计对象 = 课程 265 `37.scTenifoldKnk` 写法：只留疾病组（= Tumor）→ vst 5000 HVG + 靶基因
-#   → scTenifoldKnk(qc_mtThreshold=0.1, qc_minLSize=500, nc_nNet=10, nc_nCells=500) → 去靶基因后 p.adj<0.05 的基因数 ≥1 = 阳性
-# 为什么能共享：scTenifoldKnk() 函数体里 makeNetworks → tensorDecomposition → strictDirection 与 gKO 无关，
-#   gKO 只出现在 `KO[gKO, ] <- 0` 及之后的 manifoldAlignment / dRegulation。下面逐行照抄函数体（scTenifoldKnk 1.0.3），
-#   野生型网络建一次落盘，每个 KO 基因只做后半段。
-# 与模板唯一的差别：模板是 HVG 5000 + 单个靶基因；这里是 HVG 5000 + 全部 KO 基因（已发表签名 KO 基因 + 随机基因）一起建网。
-# KO 基因规则（模板是作者手挑，这里定成可复现规则）：签名内 |coef × TCGA sd| 最大、且过 QC 的基因
+# Module M9 virtual knockout (scTenifoldKnk): shared wild-type network version
+# Audited = template scTenifoldKnk workflow: disease group only (= Tumor) -> vst 5000 HVG + target
+#   -> scTenifoldKnk(qc_mtThreshold=0.1, qc_minLSize=500, nc_nNet=10, nc_nCells=500) -> positive if >= 1 gene other than the target has p.adj < 0.05
+# Why sharing works: in scTenifoldKnk(), makeNetworks -> tensorDecomposition -> strictDirection do not depend on gKO;
+#   gKO appears only in `KO[gKO, ] <- 0` and the subsequent manifoldAlignment / dRegulation. The function body (scTenifoldKnk 1.0.3) is reproduced line by line below;
+#   the wild-type network is built once and saved, and each KO gene runs only the second half.
+# Only difference from the template: template = 5000 HVG + a single target; here = 5000 HVG + all KO genes (published-signature KO genes + random genes) in one network.
+# KO gene rule (chosen by hand in the template; made reproducible here): the gene with the largest |coef x TCGA sd| in the signature that passes QC
 suppressPackageStartupMessages({ library(Seurat); library(Matrix); library(data.table); library(survival)
   library(scTenifoldKnk); library(scTenifoldNet) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", ".")
 D <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "GSE149614")
 O <- file.path(B, "N11_out/hiend_m9"); dir.create(file.path(O, "ko"), showWarnings = FALSE, recursive = TRUE)
 NRAND <- as.integer(Sys.getenv("KNK_NRAND", "200"))
-KNK_CORES <- as.integer(Sys.getenv("KNK_CORES", "4"))   # 10-16：默认 detectCores()=24 时每个 worker 复制约 1 GiB 全局变量 → 32 GB 内存爆掉；核数不影响抽样（抽样在主进程串行）
+KNK_CORES <- as.integer(Sys.getenv("KNK_CORES", "4"))   # with the default detectCores()=24 each worker copies ~1 GiB of globals -> 32 GB memory exhausted; core number does not affect sampling (sampling is serial in the main process)
 t0 <- Sys.time(); tm <- function(s) cat(sprintf("[%s | %6.1f min] %s\n", format(Sys.time(), "%H:%M"), as.numeric(difftime(Sys.time(), t0, units = "mins")), s))
 
-## ---- 1. KO 基因清单 ----
+## ---- 1. KO gene list ----
 fk <- file.path(O, "ko_genes.tsv")
 if (!file.exists(fk)) {
   TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
@@ -31,7 +31,7 @@ if (!file.exists(fk)) {
   rm(cohorts); gc()
 }
 
-## ---- 2. 肿瘤细胞计数矩阵 + HVG（照抄模板） ----
+## ---- 2. Tumour-cell count matrix + HVG (as in the template) ----
 map <- fread(file.path(B, "N11_out/hiend_m8/gene_symbol_map.tsv"))
 M <- fread(file.path(D, "GSE149614_HCC.metadata.updated.txt.gz"), data.table = FALSE)
 X <- readRDS(file.path(D, "GSE149614_counts_sparse.rds")); stopifnot(identical(rownames(X), map$orig))
@@ -41,11 +41,11 @@ so <- FindVariableFeatures(so, selection.method = "vst", nfeatures = 5000); hvgs
 cm <- GetAssayData(so, layer = "counts"); rm(so); gc()
 tm(sprintf("tumor cells %d, genes %d", ncol(cm), nrow(cm)))
 
-## ---- 3. 野生型网络（建一次） ----
+## ---- 3. Wild-type network (built once) ----
 fw <- file.path(O, "WT_network.rds")
 if (!file.exists(fk) || !file.exists(fw)) {
   pubko <- fread(file.path(O, "published_gene_weights.tsv")); U <- readLines(file.path(O, "U_pool.txt"))
-  # 候选 KO 基因必须过 scQC 后仍在矩阵里：先按模板 QC 过滤细胞，再要求 ≥25 个细胞检出（qc_minCells 默认值）
+  # Candidate KO genes must remain after scQC: filter cells with the template QC first, then require detection in >= 25 cells (qc_minCells default)
   cq <- scTenifoldKnk:::scQC(cm[unique(c(hvgs, intersect(c(pubko$gene, U), rownames(cm)))), ], mtThreshold = 0.1, minLSize = 500)
   ok <- rownames(cq)[Matrix::rowSums(cq != 0) >= 25]
   pk <- pubko[gene %in% ok][, .SD[1], by = sig_id]
@@ -57,7 +57,7 @@ if (!file.exists(fk) || !file.exists(fw)) {
   netg <- unique(c(hvgs, ko$gene))
   tm(sprintf("network genes %d (HVG %d + KO extra %d); KO genes: published %d, random %d",
              length(netg), length(hvgs), length(netg) - length(hvgs), sum(ko$kind == "published"), sum(ko$kind == "random")))
-  # 以下逐行照抄 scTenifoldKnk() 函数体（默认参数照抄）
+  # The following reproduces the scTenifoldKnk() function body line by line (default parameters)
   countMatrix <- as.matrix(cm[netg, ]); rm(cq); gc()
   countMatrix <- scTenifoldKnk:::scQC(countMatrix, mtThreshold = 0.1, minLSize = 500)
   tm(sprintf("QC: %d genes x %d cells", nrow(countMatrix), ncol(countMatrix)))
@@ -73,8 +73,8 @@ if (!file.exists(fk) || !file.exists(fw)) {
 WT <- readRDS(fw); ko <- fread(fk)
 ko <- ko[gene %in% rownames(WT)]
 
-## ---- 4. 逐基因敲除（可续跑） ----
-# 测速（2026-10-16）：KNK_MAXKO=N 只敲前 N 个；KNK_KODIR 指定输出子目录（测速用 ko_speedtest，与正式结果分开）
+## ---- 4. Per-gene knockout (resumable) ----
+# Timing: KNK_MAXKO=N knocks out only the first N genes; KNK_KODIR sets the output subdirectory (ko_speedtest for timing, separate from formal results)
 MAXKO <- as.integer(Sys.getenv("KNK_MAXKO", "0")); KODIR <- file.path(O, Sys.getenv("KNK_KODIR", "ko")); dir.create(KODIR, showWarnings = FALSE)
 if (MAXKO > 0) ko <- rbind(ko[kind == "published"][1:ceiling(MAXKO / 2)], ko[kind == "random"][1:floor(MAXKO / 2)])
 for (i in seq_len(nrow(ko))) {
@@ -88,7 +88,7 @@ for (i in seq_len(nrow(ko))) {
              as.numeric(difftime(Sys.time(), t1, units = "mins")), sum(DR[gene != g]$p.adj < 0.05)))
 }
 
-## ---- 5. 汇总 ----
+## ---- 5. Summary ----
 S <- rbindlist(lapply(seq_len(nrow(ko)), function(i) { g <- ko$gene[i]; f <- file.path(KODIR, paste0(g, ".tsv"))
   if (!file.exists(f)) return(NULL); d <- fread(f)[gene != g]
   data.table(ko[i], n_tested = nrow(d), n_sig = sum(d$p.adj < 0.05), pos = as.integer(sum(d$p.adj < 0.05) >= 1)) }))

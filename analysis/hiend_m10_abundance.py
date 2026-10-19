@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""M10 Geneformer 丰度偏倚检查（预注册 N22_m10_abundance_prereg.md，结果出来后不改）"""
+"""M10 Geneformer: detection-abundance bias check (analysis plan fixed before running)"""
 import os
 import gzip
 import random
@@ -15,7 +15,7 @@ st = st[st["Goal_end_FDR"].notna()].copy()
 st["sig"] = st["Goal_end_FDR"] < 0.05
 st = st.drop_duplicates("Gene_name")
 
-# 辅助丰度：全部 Disease 细胞
+# Auxiliary abundance: all Disease cells
 feats = pd.read_csv(os.path.join(GF, "features.tsv"), sep="\t")["gene_symbol"].astype(str).values
 meta = pd.read_csv(os.path.join(GF, "cell_meta.tsv"), sep="\t", index_col=0)
 with gzip.open(os.path.join(GF, "counts.mtx.gz"), "rb") as fh:
@@ -27,7 +27,7 @@ ab = pd.DataFrame({"Gene_name": feats, "mean_log1p_cpm": np.asarray(cpm.mean(axi
                    "detect_rate": np.asarray((md > 0).mean(axis=1)).ravel()}).drop_duplicates("Gene_name")
 st = st.merge(ab, on="Gene_name", how="left")
 
-# ---- 检查 1 ----
+# ---- Check 1 ----
 rows = []
 for col in ["N_Detections", "mean_log1p_cpm", "detect_rate"]:
     a = st.loc[st.sig, col].dropna(); b = st.loc[~st.sig, col].dropna()
@@ -43,7 +43,7 @@ dec = st.groupby("NDet_decile").agg(n=("sig", "size"), n_sig=("sig", "sum"), fra
 dec.to_csv(os.path.join(O, "m10_abund_deciles.tsv"), sep="\t", index=False)
 st.to_csv(os.path.join(O, "m10_abund_gene_table.tsv"), sep="\t", index=False)
 
-# ---- 检查 2 ----
+# ---- Check 2 ----
 G = pd.read_csv(os.path.join(B, "N11_out", "hiend_m8", "signature_genes_all_arms.tsv"), sep="\t", keep_default_na=False, na_values=[""])
 assert G["kind"].isin(["real", "null"]).all() and G["kind"].eq("null").any()
 U = [g for g in open(os.path.join(B, "N11_out", "hiend_m8", "U_pool.txt")).read().split()]

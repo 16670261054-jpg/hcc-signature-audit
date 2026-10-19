@@ -1,6 +1,6 @@
-# M9 等价性验证：官方 scTenifoldKnk() 原样调用 1 个基因，与 HVG 等价版（hiend_m9_knk_hvg.R）逐位比对
-# 判据（不设近似阈值）：WT 邻接矩阵与 diffRegulation 全部列 identical()；若不 identical，报告最大绝对差并判"不等价"
-# 输入与模板一致：as.data.frame(countMat[unique(c(target, hvgs)), ])；靶基因在 HVG 内 → 与等价版输入相同
+# M9 equivalence check: reference scTenifoldKnk() called unchanged for one gene, compared bit-wise with the HVG-equivalent version (hiend_m9_knk_hvg.R)
+# Criterion (no tolerance): WT adjacency matrix and all diffRegulation columns identical(); otherwise report the maximum absolute difference and call "not equivalent"
+# Input as in the template: as.data.frame(countMat[unique(c(target, hvgs)), ]); target within the HVGs -> same input as the equivalent version
 suppressPackageStartupMessages({ library(Matrix); library(data.table); library(scTenifoldKnk) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); O <- file.path(B, "N11_out/hiend_m9_hvg")
 KNK_CORES <- as.integer(Sys.getenv("KNK_CORES", "4")); KODIR <- file.path(O, Sys.getenv("KNK_KODIR", "ko"))

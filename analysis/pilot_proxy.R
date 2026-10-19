@@ -1,7 +1,7 @@
-# N11 试跑：HCC 细胞死亡签名 vs 随机基因集 vs 增殖/OXPHOS 代理（TCGA-LIHC，单队列，只给用户看，不进稿）
-# 预设判读规则（跑之前定）：
-#   R1 签名测试集 C-index 低于随机同尺寸基因集零分布的第 95 百分位 -> "不比随机强"
-#   R2 全队列多因素 Cox（签名 + 增殖 + OXPHOS + 分期）中签名 Wald P >= 0.05 -> "被代理解释"
+# Exploratory pilot: HCC cell-death signatures vs random gene sets vs proliferation/OXPHOS proxies (TCGA-LIHC, single cohort; not used for reported results)
+# Decision rules (fixed before running):
+#   R1 signature test-set C-index below the 95th percentile of the null distribution of size-matched random gene sets -> "not better than random"
+#   R2 signature Wald P >= 0.05 in full-cohort multivariable Cox (signature + proliferation + OXPHOS + stage) -> "explained by proxies"
 suppressPackageStartupMessages({ library(survival); library(glmnet); library(data.table) })
 set.seed(20261015)
 T <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
@@ -39,7 +39,7 @@ tr <- sample(seq_len(ncol(z)), round(ncol(z) * 2 / 3)); te <- setdiff(seq_len(nc
 y <- Surv(sv$OS.time, sv$OS)
 cidx <- function(score, idx) unname(concordance(y[idx] ~ score, reverse = TRUE)$concordance)
 
-# 模板流程：训练集单因素 Cox P<0.05 预筛 -> LASSO-Cox(cv) -> 风险分；若无基因入选则用全集均值 z
+# Template pipeline: univariable Cox P<0.05 pre-screen in the training set -> LASSO-Cox (cv) -> risk score; if no gene is selected, mean z of the full set
 pipe <- function(g) {
   g <- intersect(g, rownames(z)); X <- t(z[g, , drop = FALSE])
   p <- apply(X[tr, , drop = FALSE], 2, function(v) summary(coxph(y[tr] ~ v))$coefficients[5])
@@ -77,7 +77,7 @@ for (nm in names(sets)) {
     R2_explained_by_proxy = s2["sig", 5] >= 0.05,
     cor_sig_prolif = cor(d$sig, d$prolif), cor_sig_oxphos = cor(d$sig, d$oxphos))
 }
-# 代理本身在测试集的 C-index（不经任何训练，方向按训练集定）
+# C-index of the proxies themselves in the test set (no training; direction set in the training set)
 px <- data.table(proxy = c("proliferation", "oxphos"),
   c_test = c(cidx(prolif[te] * sign(coef(coxph(y[tr] ~ prolif[tr]))), te),
              cidx(oxphos[te] * sign(coef(coxph(y[tr] ~ oxphos[tr]))), te)))

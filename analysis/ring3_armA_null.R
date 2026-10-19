@@ -1,10 +1,10 @@
-# 第 3 环 A 组随机对照补跑：按预注册改为模板流程（fitsig）。原 ring3_full.R 中 A 组 null 用 coxfit（不筛选）= 偏离预注册
-# R3_NULLMODE=fitsig_k（预注册主分析：k 个随机基因走 fitsig） | fitsig_pool100（敏感性：100 个随机基因走 fitsig）
-# 判读规则见 N14_ring3_preregistration.md（已定稿，结果出来后不改）
-# 设计：
-#   A 已发表签名（149 个，原文系数）  vs  每个签名 25 个同尺寸随机集（随机基因 + TCGA 多因素 Cox 系数），M7 每个 10 个
-#   B 8 个机制基因集（模板流程 fitsig） vs  每个 200 个同尺寸随机集（同样走 fitsig），M7 每个 25 个
-# 分块落盘、可续跑：已存在的块文件直接跳过
+# Module audit, arm A random controls built with the template pipeline (fitsig); replaces the coxfit null (no selection) used in ring3_full.R
+# R3_NULLMODE=fitsig_k (k random genes through fitsig) | fitsig_pool100 (100 random genes through fitsig) | fitsig_pool100_k (size-matched)
+# Decision rules predefined (see Methods)
+# Design:
+#   A published signatures (149, reported coefficients)  vs  25 random sets of the same size per signature (random genes + TCGA multivariable Cox coefficients), 10 for M7
+#   B 8 mechanism gene sets (template pipeline fitsig) vs  200 random sets of the same size per set (also through fitsig), 25 for M7
+# Written in chunks, resumable: existing chunk files are skipped
 suppressPackageStartupMessages({ library(survival); library(glmnet); library(data.table); library(parallel) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
 O <- file.path(B, Sys.getenv("R3_OUT", paste0("N11_out/ring3_armA_", Sys.getenv("R3_NULLMODE", "fitsig_k")))); CH <- file.path(O, "chunks"); dir.create(CH, showWarnings = FALSE, recursive = TRUE)
@@ -13,8 +13,8 @@ RA <- as.integer(Sys.getenv("R3_RA", "25")); RA7 <- as.integer(Sys.getenv("R3_RA
 RB <- as.integer(Sys.getenv("R3_RB", "200")); RB7 <- as.integer(Sys.getenv("R3_RB7", "25"))
 NM <- Sys.getenv("R3_NULLMODE", "fitsig_k"); stopifnot(NM %in% c("fitsig_k", "fitsig_pool100", "fitsig_pool100_k"))
 POOL <- NM %in% c("fitsig_pool100", "fitsig_pool100_k")
-# fitsig_pool100_k（2026-10-15 尺寸匹配）：同 pool100 的 100 基因池与种子；lambda.min 模型超过 k 个基因时，
-#   沿同一 LASSO 路径取非零系数数 <= k 的最小 lambda（glmnet 路径按自由度截断）；<= k 时与模板完全相同
+# fitsig_pool100_k (size-matched): same 100-gene pool and seeds as pool100; if the lambda.min model has more than k genes,
+#   take the smallest lambda on the same LASSO path with <= k non-zero coefficients (glmnet path truncated by degrees of freedom); identical to the template when <= k
 fitsig_cap <- function(g, Z, y, k) {
   X <- t(Z[g, , drop = FALSE])
   p <- apply(X, 2, function(v) { s <- tryCatch(summary(coxph(y ~ v))$coefficients[5], error = function(e) 1); s })
@@ -30,7 +30,7 @@ fitsig_cap <- function(g, Z, y, k) {
 }
 P <- prep_ring3(B, TG)
 
-## ---- 签名清单 ----
+## ---- Signature list ----
 L <- fread(file.path(B, "N12_signatures/signatures_long.tsv"), encoding = "UTF-8"); L[, coef := suppressWarnings(as.numeric(coef))]
 I <- fread(file.path(B, "N12_signatures/signatures_index.tsv"), encoding = "UTF-8")
 keep_ids <- I[group_primary == "是" & 是否有完整系数 == "是"]$sig_id
@@ -41,7 +41,7 @@ pub <- lapply(split(L, L$sig_id), function(d) { d <- d[gene_hgnc %in% Uall]; d <
 pub <- pub[vapply(pub, length, 1L) >= 2]
 fwrite(cov, file.path(O, "published_coverage.tsv"), sep = "\t")
 
-## ---- 任务表 ----
+## ---- Task table ----
 coxfit <- function(g) { X <- t(cohorts$TCGA$z[g, , drop = FALSE]); f <- tryCatch(coxph(cohorts$TCGA$y ~ X), error = function(e) NULL)
   b <- if (is.null(f)) rep(NA, length(g)) else unname(coef(f)); b[is.na(b)] <- 0; setNames(b, g) }
 jobs <- CJ(arm = "A", src = names(pub), kind = "null", rep = seq_len(RA))
@@ -51,7 +51,7 @@ jobs7 <- CJ(arm = "A", src = names(pub), kind = "null", rep = seq_len(RA7))
 jobs7[, id := .I]; jobs7[, chunk := (id - 1L) %/% 20L + 1L]
 cat("jobs M0-M6:", nrow(jobs), " chunks:", max(jobs$chunk), " | jobs M7:", nrow(jobs7), " chunks:", max(jobs7$chunk), "\n")
 
-# 每个任务的签名：确定性种子 -> 可复现、可续跑
+# Signature for each task: deterministic seed -> reproducible and resumable
 getsig <- function(j) {
   seed <- 5e6 + 1e6 * POOL + 1e6 * (j$arm == "B") + 1e3 * match(j$src, if (j$arm == "A") names(pub) else names(sets)) + j$rep
   set.seed(seed)

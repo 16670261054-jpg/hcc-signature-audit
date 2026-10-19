@@ -1,14 +1,14 @@
-# 高端模块 M3 药敏 + M12 DSigDB 药物富集 —— 正式（2026-10-15 夜）
-# 被审计对象 = 课程模板写法，判据照抄模板（不是我们的判据）：
-#   M3（课程 161/209/225 40.oncoPredict + 41.boxplot；已逐行对照 161Anoikis/40.oncoPredict/Anoikis40.oncoPredict.R）：
-#       GDSC2_Res=exp(GDSC2_Res)；测试矩阵 rowMeans>0.5；calcPhenotype(batchCorrect='eb', powerTransformPhenotype=TRUE,
-#       removeLowVaryingGenes=0.2, minNumSamples=10, removeLowVaringGenesFrom='rawData')，set.seed(12345)；高/低风险组逐药 Wilcoxon。
-#       阳性判据按第 3 环预注册 N14：≥1 个药 BH-FDR<0.05（模板原文 p<0.001 未校正，另报）。
-#       修坑145：测试矩阵若非 log 尺度先 log2(x+1)；修坑146：保留 DRUG_ID 列名，不去后缀；数值是预测 IC50（越高越耐药）。
-#   M12（课程 236 25.drugEnrich / 228 34.drugEnrich）：enricher(genes, TERM2GENE=DSigDB[,1:2], minGSSize=10, maxGSSize=500,
-#       pvalueCutoff=1, qvalueCutoff=1)，阳性 = ≥1 个药 pvalue<0.05 & p.adjust<0.05（模板原文）。
-# 签名 = hiend_m8_formal.R 落盘的 signature_genes_all_arms.tsv（与第 2 环同一批）
-# 判读：随机阳性率 Clopper–Pearson 95% CI 下界 > 0.075 → I 类错误失控；真实 vs 随机 Fisher 双侧
+# Modules M3 drug sensitivity + M12 DSigDB drug enrichment
+# Audited = template workflow; criteria reproduced from the template (not our criteria):
+#   M3 (template oncoPredict + boxplot steps):
+#       GDSC2_Res=exp(GDSC2_Res); test matrix rowMeans>0.5; calcPhenotype(batchCorrect='eb', powerTransformPhenotype=TRUE,
+#       removeLowVaryingGenes=0.2, minNumSamples=10, removeLowVaringGenesFrom='rawData'), set.seed(12345); per-drug Wilcoxon between high/low risk groups.
+#       Positive: >= 1 drug with BH-FDR < 0.05 (the template's uncorrected p < 0.001 is reported separately).
+#       Fixes: log2(x+1) if the test matrix is not on log scale; keep DRUG_ID column names without stripping suffixes; values are predicted IC50 (higher = more resistant).
+#   M12 (template drug-enrichment step): enricher(genes, TERM2GENE=DSigDB[,1:2], minGSSize=10, maxGSSize=500,
+#       pvalueCutoff=1, qvalueCutoff=1), positive = >= 1 drug with pvalue < 0.05 & p.adjust < 0.05 (template criterion).
+# Signatures = signature_genes_all_arms.tsv written by hiend_m8_formal.R (same set as proxy analysis)
+# Calls: random positive rate Clopper-Pearson 95% CI lower limit > 0.075 -> excess type I error; real vs random two-sided Fisher
 suppressPackageStartupMessages({ library(survival); library(data.table); library(parallel) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
 O <- file.path(B, "N11_out/hiend_m3_m12"); dir.create(O, showWarnings = FALSE, recursive = TRUE)
@@ -31,19 +31,19 @@ if (!file.exists(pred_f)) {
       stopifnot(file.exists(file.path(ex_dir, n))) }
   }
   trainExpr <- readRDS(file.path(ex_dir, "GDSC2_Expr (RMA Normalized and Log Transformed).rds"))
-  trainRes <- readRDS(file.path(ex_dir, "GDSC2_Res.rds")); trainRes <- exp(trainRes)   # 模板写法：GDSC2_Res 为 ln(IC50)，模板先 exp 再交给 powerTransform
+  trainRes <- readRDS(file.path(ex_dir, "GDSC2_Res.rds")); trainRes <- exp(trainRes)   # template: GDSC2_Res is ln(IC50); exp() before powerTransform
   X <- cohorts$TCGA$x[, colnames(cohorts$TCGA$z)]
   scale_note <- sprintf("TCGA max=%.2f", max(X, na.rm = TRUE))
-  if (max(X, na.rm = TRUE) > 50) X <- log2(X + 1)                                       # 坑145
-  X <- X[rowMeans(X) > 0.5, ]                                                            # 模板 L(data[rowMeans(data)>0.5,])
+  if (max(X, na.rm = TRUE) > 50) X <- log2(X + 1)                                       # ensure log scale
+  X <- X[rowMeans(X) > 0.5, ]                                                            # template: data[rowMeans(data)>0.5,]
   fwrite(data.table(note = scale_note, logged = max(cohorts$TCGA$x, na.rm = TRUE) > 50, train_max = max(trainExpr)), file.path(O, "m3_scale_check.tsv"), sep = "\t")
-  # oncoPredict 1.3.1：默认 folder=FALSE 不写 DrugPredictions.csv（课程旧版会写），结果只在返回值里 → 直接接返回值
+  # oncoPredict 1.3.1: default folder=FALSE does not write DrugPredictions.csv (older versions did); results are only in the return value
   set.seed(12345)
   pm <- oncoPredict::calcPhenotype(trainingExprData = trainExpr, trainingPtype = trainRes, testExprData = X,
                              batchCorrect = "eb", powerTransformPhenotype = TRUE, removeLowVaryingGenes = 0.2,
                              minNumSamples = 10, printOutput = FALSE, removeLowVaringGenesFrom = "rawData")
   if (is.list(pm)) pm <- pm$DrugPredictions
-  stopifnot(is.matrix(pm), nrow(pm) == ncol(X), !anyDuplicated(colnames(pm)))           # 坑146
+  stopifnot(is.matrix(pm), nrow(pm) == ncol(X), !anyDuplicated(colnames(pm)))           # keep DRUG_ID names
   pr <- data.table(sample = rownames(pm), pm)
   fwrite(pr, pred_f, sep = "\t"); tm(sprintf("calcPhenotype done: %d samples x %d drugs", nrow(pr), ncol(pr) - 1))
 }
@@ -70,7 +70,7 @@ invisible(clusterEvalQ(cl, suppressPackageStartupMessages({ library(data.table);
 R12 <- rbindlist(parLapply(cl, sigs, m12_one)); stopCluster(cl)
 tm("M12 per-signature done")
 
-## ================= 判读 =================
+## ================= Calls =================
 S <- Reduce(function(a, b) merge(a, b, by = "sid"), list(meta, R3, R12))
 fwrite(S, file.path(O, "m3_m12_per_signature.tsv"), sep = "\t")
 full_ids <- fread(file.path(B, "N11_out/ring3_full/published_coverage.tsv"))[full == TRUE]$sig_id

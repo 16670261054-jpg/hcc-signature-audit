@@ -1,9 +1,9 @@
-# 语料下游模块使用频率（2026-10-18 固化版，替代 10-17 无脚本的旧表）
-# 旧表 module_frequency_fulltext.tsv（分母 151）未存生成脚本，且按现有全文无法复现（单模块差值最大 37 篇）→ 弃用，改名 *_UNREPRODUCIBLE_20261017.tsv
-# 本版口径（写死）：
-#   语料 = signatures_index.tsv 中主分析签名（group_primary == "是" & 是否有完整系数 == "是"）对应的 PMID，每篇一次
-#   文本 = raw/txt/<PMID>.txt 正文，截到第一行 "References" 之前（不计参考文献标题里的词）
-#   判据 = 旧表 regex 列原样、大小写不敏感
+# Use of downstream modules in the corpus (fixed version; replaces an earlier table without a generating script)
+# The earlier table module_frequency_fulltext.tsv (denominator 151) had no generating script and could not be reproduced from the full texts -> discarded and renamed *_UNREPRODUCIBLE_20261017.tsv
+# Definitions (fixed):
+#   Corpus = PMIDs of the primary signatures in signatures_index.tsv (group_primary == yes & complete coefficients == yes), each article once
+#   Text = main text in raw/txt/<PMID>.txt, truncated before the first line "References" (words in reference titles not counted)
+#   Criterion = regex column of the earlier table unchanged, case-insensitive
 suppressPackageStartupMessages(library(data.table))
 B <- file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "N12_signatures")
 old_f <- file.path(B, "module_frequency_fulltext.tsv")

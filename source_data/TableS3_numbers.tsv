@@ -244,17 +244,17 @@ S2_adj_Ak	Sens	FigS2b	Consensus subtypes positive, size-matched, proliferation-a
 S2_adj_P	Sens	FigS2b	Fisher P after proliferation adjustment	0.32041732	0.32	FigS2b_m14_prolif_decision.tsv	adj_fisher_P
 S4_top25_prolif	Sens	FigS4a	Hallmark E2F/G2M genes among 25 most reused	5	5/25	FigS4a_gene_frequency.tsv	top 25 by n_sig
 S4_top_gene_n	Sens	FigS4a	Signatures containing G6PD	19	G6PD: 19 signatures, 5 death types	FigS4a_gene_frequency.tsv	top 1
-corp_dedup	Methods	Methods corpus	去重 PMID	575	575	N12_signatures/README.md	row: 去重 PMID
-corp_title	Methods	Methods corpus	标题过滤	473	473	N12_signatures/README.md	row: 标题过滤
-corp_cand	Methods	Methods corpus	→ 候选	281	281	N12_signatures/README.md	row: → 候选
-corp_rescue_total	Methods	Methods corpus	人工复核补回	294	294	N12_signatures/README.md	row: 人工复核补回
-corp_pmcid	Methods	Methods corpus	有 PMCID	260	260	N12_signatures/README.md	row: 有 PMCID
-corp_abs_only	Methods	Methods corpus	PMC 只有摘要	12	12	N12_signatures/README.md	row: PMC 只有摘要
-corp_fulltext	Methods	Methods corpus	读到全文	248	248	N12_signatures/README.md	row: 读到全文
-corp_coef	Methods	Methods corpus	抽到逐基因系数	152	152	N12_signatures/README.md	row: 抽到逐基因系数
-corp_primary	Methods	Methods corpus	主表可用	149	149	N12_signatures/README.md	row: 主表可用
-corp_nocoef	Methods	Methods corpus	没找到逐基因系数	87	87	N12_signatures/README.md	row: 没找到逐基因系数
-corp_rule_excl	Methods	Methods corpus	规则排除	9	9	N12_signatures/README.md	row: 规则排除
+corp_dedup	Methods	Methods corpus	Unique PMIDs after deduplication	575	575	N12_signatures/README.md	flow-count row: Unique PMIDs after deduplication
+corp_title	Methods	Methods corpus	Records after title screening	473	473	N12_signatures/README.md	flow-count row: Records after title screening
+corp_cand	Methods	Methods corpus	Candidate articles	281	281	N12_signatures/README.md	flow-count row: Candidate articles
+corp_rescue_total	Methods	Methods corpus	Candidates after manual review	294	294	N12_signatures/README.md	flow-count row: Candidates after manual review
+corp_pmcid	Methods	Methods corpus	Articles with a PMCID	260	260	N12_signatures/README.md	flow-count row: Articles with a PMCID
+corp_abs_only	Methods	Methods corpus	PMC abstract only	12	12	N12_signatures/README.md	flow-count row: PMC abstract only
+corp_fulltext	Methods	Methods corpus	Full text retrieved	248	248	N12_signatures/README.md	flow-count row: Full text retrieved
+corp_coef	Methods	Methods corpus	Signatures with per-gene coefficients	152	152	N12_signatures/README.md	flow-count row: Signatures with per-gene coefficients
+corp_primary	Methods	Methods corpus	Signatures in the primary analysis	149	149	N12_signatures/README.md	flow-count row: Signatures in the primary analysis
+corp_nocoef	Methods	Methods corpus	Articles without per-gene coefficients	87	87	N12_signatures/README.md	flow-count row: Articles without per-gene coefficients
+corp_rule_excl	Methods	Methods corpus	Excluded by prespecified rules	9	9	N12_signatures/README.md	flow-count row: Excluded by prespecified rules
 corp_rescued	Methods	Methods corpus	Titles added after manual review	13	13	N12_signatures/README.md	294 - 281
 U_score	Methods	Methods genes	Genes measured in all three cohorts (scoring set)	11964	11,964	N11_out/ring3_full/cohort_meta.tsv	n_genes_all
 U_pool	Methods	Methods genes	Expressed genes in sampling pool (rings 2-4)	10651	10,651	N11_out/ring3_full/cohort_meta.tsv	n_genes_universe

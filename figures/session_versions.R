@@ -1,4 +1,4 @@
-# 软件版本落盘（投稿用；Methods "Software" 段只从这里取版本号）
+# Writes software versions (the Methods "Software" section takes version numbers from here)
 pk <- c("survival", "glmnet", "survcomp", "randomForestSRC", "gbm", "superpc", "MASS", "rms", "dcurves", "GSVA", "estimate",
         "fgsea", "limma", "clusterProfiler", "ConsensusClusterPlus", "oncoPredict", "Seurat", "SeuratObject", "scTenifoldKnk",
         "scTenifoldNet", "harmony", "data.table", "ggplot2", "patchwork", "ggtree", "ggtreeExtra", "circlize", "ggdist", "timeROC")

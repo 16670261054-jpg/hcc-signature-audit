@@ -1,6 +1,6 @@
-# N30-N4 剔除签名基因后的代理（预注册 N30_selfreview_prereg.md，判读规则写于运行前）
-# 候选签名与闸门 1 参照都由模板流程在模拟 TCGA 结局上产生；另加合并两外部队列的闸门与"代理漏设"情景
-# R4_SMOKE=1 → 每情景 3 次、10 个参照
+# Proxies recomputed after removing signature genes (decision rule written before running)
+# Candidate signatures and gate-1 references are produced by the template pipeline on the simulated TCGA outcome; gates pooling the two external cohorts and a "missing proxy" scenario are added
+# R4_SMOKE=1 -> 3 runs per scenario, 10 references
 suppressPackageStartupMessages({ library(survival); library(data.table); library(parallel) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
 SMOKE <- Sys.getenv("R4_SMOKE", "0") == "1"
@@ -8,11 +8,11 @@ OUTD <- file.path(B, if (SMOKE) "N11_out/n4_loo_smoke" else "N11_out/n4_loo"); d
 NSIM <- if (SMOKE) 3L else 200L; NNULL <- if (SMOKE) 10L else 100L
 BETAS <- c(0, 0.2, 0.3, 0.4, 0.6); K <- 5L; NPOOL <- 100L; GAMMA_OX <- 0.3
 t0 <- Sys.time(); tm <- function(s) cat(sprintf("[%s | %5.1f min] %s\n", format(Sys.time(), "%H:%M"), as.numeric(difftime(Sys.time(), t0, units = "mins")), s))
-O <- OUTD   # load_cohorts.R 用 O 落盘 cohort_meta
+O <- OUTD   # load_cohorts.R writes cohort_meta to O
 source(file.path(B, "analysis/load_cohorts.R"), encoding = "UTF-8")
 O <- OUTD
 
-## ---- 协变量（照抄 ring2_proxy.R）----
+## ---- Covariates (as in ring2_proxy.R) ----
 ids <- lapply(cohorts, function(c) colnames(c$z))
 ph <- fread(file.path(TG, "TCGA-LIHC_phenotype.tsv"), data.table = FALSE)
 cohorts$TCGA$age <- as.numeric(ph$age_at_initial_pathologic_diagnosis[match(ids$TCGA, ph[[1]])])

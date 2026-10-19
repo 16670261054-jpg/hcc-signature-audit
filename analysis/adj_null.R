@@ -1,8 +1,8 @@
-# N11 第 1 步补：调整代理后的随机零分布（外部队列）
-# 预设判读规则（开跑前写定）：
-#   R3 某集合在某外部队列中，签名调整后 Wald |z|（Cox: sig + prolif + oxphos + stage）
-#      < 同尺寸随机集同样调整后 |z| 的第 95 百分位 -> 该队列"残余信号不特异"
-#   仅当签名在 >=1 个外部队列 R3 不成立时，才把该集合列为"可能有特异残余信号"的候选，进下游机制分析
+# Cell-death gene sets: proxy-adjusted random null distribution (external cohorts)
+# Decision rule (fixed before running):
+#   R3 For a gene set in an external cohort, adjusted Wald |z| of the signature (Cox: sig + prolif + oxphos + stage)
+#      < 95th percentile of the same adjusted |z| for size-matched random sets -> "residual signal not specific" in that cohort
+#   A set is flagged as a candidate with specific residual signal only if R3 fails in >= 1 external cohort
 suppressPackageStartupMessages({ library(survival); library(glmnet); library(data.table); library(parallel) })
 set.seed(20261016)
 B <- Sys.getenv("HCC_AUDIT_ROOT", ".")

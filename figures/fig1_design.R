@@ -1,9 +1,9 @@
-# Fig 1  研究设计与语料
-# 只读盘：N12_signatures/{signatures_index,module_frequency_fulltext}.tsv、N11_out/robust/cohort_meta.tsv、N28_fig/data/sc_umap.tsv.gz
+# Fig 1  study design and corpus
+# Reads: N12_signatures/{signatures_index,module_frequency_fulltext}.tsv, N11_out/robust/cohort_meta.tsv, figures/data/sc_umap.tsv.gz
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 S12 <- file.path(B, "N12_signatures")
 
-## a 设计示意（四环）
+## a design schematic (four stages)
 CM <- fread(file.path(OUT, "robust/cohort_meta.tsv"))
 UM <- fread(file.path(DAT, "sc_umap.tsv.gz"), select = c("patient"))
 IX <- fread(file.path(S12, "signatures_index.tsv"), encoding = "UTF-8")
@@ -33,7 +33,7 @@ pa <- ggplot() +
   scale_fill_identity() + coord_cartesian(xlim = c(-0.7, 5.75), ylim = c(0.0, 2.05), clip = "off") +
   theme_void_pub() + labs(title = NULL)
 
-## b 151 篇全文中下游模块的使用频率（被本文审计的标深色）
+## b use of downstream modules in the full texts (modules audited here shown dark)
 MF <- fread(file.path(S12, "module_frequency_fulltext.tsv"))
 aud <- c("timeROC/ROC", "KM", "CIBERSORT/immune", "GSEA/GSVA", "checkpoint", "nomogram", "consensus clustering/subtype",
          "calibration", "TMB/mutation", "drug sens (oncoPredict/pRRophetic)", "single-cell", "ML multi-algorithm", "DCA")
@@ -61,7 +61,7 @@ pb <- ggplot(MF, aes(frac, lab)) +
   theme(axis.text.y = element_text(size = 5.6), legend.position = "inside", legend.position.inside = c(0.98, 0.04),
         legend.justification = c(1, 0), legend.key.size = unit(2.4, "mm"), legend.background = element_blank())
 
-## c 签名按年份与机制（流线堆积）
+## c signatures by year and mechanism (stacked streams)
 mech_map <- function(m) fcase(m == "pyroptosis", "Pyroptosis", m == "cuproptosis", "Cuproptosis", m == "ferroptosis", "Ferroptosis",
                               m == "necroptosis", "Necroptosis", m == "anoikis", "Anoikis", m == "autophagy", "Autophagy",
                               m == "disulfidptosis", "Disulfidptosis", default = "Multiple / other")

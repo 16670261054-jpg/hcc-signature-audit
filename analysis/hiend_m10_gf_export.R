@@ -1,13 +1,13 @@
-# 高端模块 M10 Geneformer —— 输入导出（2026-10-15）
-# 被审计对象 = 课程 268 `run_perturbation_pipeline.py`：Pretrained V1-10M，全基因 delete，start=Disease → goal=Control，
-#   max_ncells=1000，emb_layer=-1，InSilicoPerturberStats(mode="goal_state_shift") 出 Goal_end_FDR
-# 本项目映射：Disease = 肿瘤肝细胞（Tumor_Hepatocyte），Control = 癌旁肝细胞（Normal_Hepatocyte）
-# 硬性写法（bioinfo-hub geneformer.md §2）：全转录组 counts（不截 HVG）；供者均衡抽样；n_counts = 全转录组文库大小
+# Module M10 Geneformer: input export
+# Audited configuration = template Geneformer perturbation pipeline: Pretrained V1-10M, delete all genes, start=Disease -> goal=Control,
+#   max_ncells=1000, emb_layer=-1, InSilicoPerturberStats(mode="goal_state_shift") -> Goal_end_FDR
+# Mapping: Disease = tumour hepatocytes (Tumor_Hepatocyte), Control = adjacent normal hepatocytes (Normal_Hepatocyte)
+# Whole-transcriptome counts (no HVG truncation); donor-balanced sampling; n_counts = whole-transcriptome library size
 suppressPackageStartupMessages({ library(Matrix); library(data.table) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", ".")
 D <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "GSE149614")
 O <- file.path(B, "N11_out/hiend_m10/gf"); dir.create(O, showWarnings = FALSE, recursive = TRUE)
-CAP <- 150L   # 每组每供者上限
+CAP <- 150L   # max cells per group per donor
 
 map <- fread(file.path(B, "N11_out/hiend_m8/gene_symbol_map.tsv"))
 M <- fread(file.path(D, "GSE149614_HCC.metadata.updated.txt.gz"))
@@ -16,7 +16,7 @@ X <- readRDS(file.path(D, "GSE149614_counts_sparse.rds")); stopifnot(identical(r
 X <- X[!map$dropped_dup, M$Cell]; rownames(X) <- map$hgnc[!map$dropped_dup]
 M[, nCount := Matrix::colSums(X)]; M[, nFeature := Matrix::colSums(X > 0)]
 M[, mt := Matrix::colSums(X[grepl("^MT-", rownames(X)), ]) / nCount]
-M <- M[nFeature > 100 & mt < 0.1]          # 与 M8 同一 QC
+M <- M[nFeature > 100 & mt < 0.1]          # same QC as M8
 
 set.seed(20261015)
 S <- M[, .SD[sample(.N, min(.N, CAP))], by = .(site, patient)]

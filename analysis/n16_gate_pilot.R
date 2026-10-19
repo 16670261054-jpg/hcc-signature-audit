@@ -1,14 +1,14 @@
-# N16 方案 1 预跑：全基因组门禁（方案见 N16_gate_pilot_plan.md，2026-10-15 用户签收；继续/停止规则结果出来后不改）
-# 逐基因多因素 Cox（Wald）；门 1 = TCGA 调整后 P 全基因组 BH-FDR<0.05；门 2 = GSE14520 与 LIRI-JP 同方向且 P<0.05
-# 协变量：分期 + 增殖(E2F∪G2M 平均 z) + ESTIMATE Stromal/Immune（TumorPurity 仅 affymetrix 平台可算 → 三队列统一用两个分数）+ 年龄 + 性别
-# 模型：main；S1 去免疫；S2 加 OXPHOS；S3 只调分期
+# Exploratory pilot: genome-wide gating (continue/stop rule fixed before running)
+# Per-gene multivariable Cox (Wald); gate 1 = TCGA adjusted P genome-wide BH-FDR < 0.05; gate 2 = same direction and P < 0.05 in GSE14520 and LIRI-JP
+# Covariates: stage + proliferation (mean z of E2F and G2M) + ESTIMATE Stromal/Immune (TumorPurity only for Affymetrix -> two scores in all cohorts) + age + sex
+# Models: main; S1 without immune; S2 with OXPHOS; S3 stage only
 suppressPackageStartupMessages({ library(survival); library(data.table); library(parallel) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
 O <- file.path(B, "N11_out/n16_gate"); dir.create(O, showWarnings = FALSE, recursive = TRUE)
 source(file.path(B, "analysis/load_cohorts.R"), encoding = "UTF-8")
 t0 <- Sys.time(); tm <- function(s) cat(sprintf("[%s | %5.1f min] %s\n", format(Sys.time(), "%H:%M"), as.numeric(difftime(Sys.time(), t0, units = "mins")), s))
 
-## ---- 年龄 / 性别 ----
+## ---- Age / sex ----
 ids <- lapply(cohorts, function(c) colnames(c$z))
 for (k in names(cohorts)) stopifnot(length(cohorts[[k]]$time) == ncol(cohorts[[k]]$z), length(cohorts[[k]]$stage) == ncol(cohorts[[k]]$z),
   identical(colnames(cohorts[[k]]$z), colnames(cohorts[[k]]$x)))
@@ -24,7 +24,7 @@ pid <- ls2$PATIENT_ID[match(ids$LIRI, ls2$SAMPLE_ID)]
 cohorts$LIRI$age <- as.numeric(lp2$AGE[match(pid, lp2$PATIENT_ID)])
 cohorts$LIRI$sex <- toupper(substr(lp2$GENDER[match(pid, lp2$PATIENT_ID)], 1, 1))
 
-## ---- ESTIMATE（每队列各算各的）----
+## ---- ESTIMATE (computed within each cohort) ----
 suppressPackageStartupMessages(library(estimate)); utils::data("common_genes", package = "estimate", envir = environment())
 plat <- c(TCGA = "illumina", GSE14520 = "affymetrix", LIRI = "illumina")
 for (k in names(cohorts)) {
@@ -41,7 +41,7 @@ cov <- rbindlist(lapply(names(cohorts), function(k) { c <- cohorts[[k]]
              sex_NA = sum(!c$sex %in% c("M", "F")), r_prolif_immune = cor(c$prolif, c$immune), r_prolif_stromal = cor(c$prolif, c$stromal)) }))
 fwrite(cov, file.path(O, "covariate_audit.tsv"), sep = "\t"); print(cov); tm("covariates ready")
 
-## ---- 逐基因 Cox ----
+## ---- Per-gene Cox ----
 mods <- list(main = c("stage", "prolif", "stromal", "immune", "age", "sex"), S1_noimmune = c("stage", "prolif", "stromal", "age", "sex"),
              S2_plusoxphos = c("stage", "prolif", "stromal", "immune", "age", "sex", "oxphos"), S3_stageonly = c("stage"))
 D <- lapply(cohorts, function(c) { sx <- ifelse(c$sex %in% c("M", "F"), c$sex, NA)
@@ -61,7 +61,7 @@ R <- rbindlist(parLapply(cl, U, fit1)); stopCluster(cl)
 fwrite(R, file.path(O, "gene_cox_all.tsv.tmp"), sep = "\t"); file.rename(file.path(O, "gene_cox_all.tsv.tmp"), file.path(O, "gene_cox_all.tsv"))
 tm(sprintf("cox done: %d rows, NA %d", nrow(R), sum(is.na(R$P))))
 
-## ---- 门禁 ----
+## ---- Gates ----
 W <- dcast(R, gene + model ~ cohort, value.var = c("logHR", "se", "P"))
 W[, FDR_TCGA := p.adjust(P_TCGA, "BH"), by = model]
 W[, gate1 := FDR_TCGA < 0.05]
@@ -75,7 +75,7 @@ cnt <- W[, .(n_genes = .N, gate1 = sum(gate1, na.rm = TRUE), gate2_given_gate1 =
              pass = sum(pass, na.rm = TRUE), pass_risk = sum(pass & logHR_TCGA > 0, na.rm = TRUE), pass_protective = sum(pass & logHR_TCGA < 0, na.rm = TRUE)), by = model]
 fwrite(cnt, file.path(O, "gate_counts.tsv"), sep = "\t"); print(cnt)
 
-## ---- 过门基因：PH 假设检验（main 模型）----
+## ---- Genes passing the gates: PH assumption test (main model) ----
 P1 <- W[model == "main" & pass == TRUE][order(P_TCGA)]
 if (nrow(P1)) {
   zph <- rbindlist(lapply(P1$gene, function(g) rbindlist(lapply(names(D), function(k) { d <- D[[k]]; d$g <- Z[[k]][g, ]

@@ -1,4 +1,4 @@
-# A 组按预注册对照重新判读：真实已发表签名（来自 ring3_full）vs 两种模板流程随机对照（fitsig_k 主分析 / fitsig_pool100 敏感性）
+# Arm A calls against the predefined controls: real published signatures (from ring3_full) vs two template-pipeline random controls (fitsig_k / fitsig_pool100)
 suppressPackageStartupMessages({ library(data.table) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); O <- file.path(B, "N11_out")
 cov <- fread(file.path(O, "ring3_full/published_coverage.tsv")); full_ids <- cov[full == TRUE]$sig_id

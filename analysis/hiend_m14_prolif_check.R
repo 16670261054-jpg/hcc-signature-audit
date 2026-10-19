@@ -1,4 +1,4 @@
-# M14 解释检查（预注册 N25_m14_prolif_check_prereg.md，结果出来后不改）
+# M14 explanatory check (analysis plan fixed before running)
 suppressPackageStartupMessages({ library(survival); library(data.table); library(parallel) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
 OUTD <- file.path(B, "N11_out/hiend_m14_prolif"); dir.create(OUTD, showWarnings = FALSE, recursive = TRUE)

@@ -1,11 +1,11 @@
-# A 组按预注册对照重新判读：真实已发表签名（来自 ring3_full）vs 两种模板流程随机对照（fitsig_k 主分析 / fitsig_pool100 敏感性）
+# Arm A calls against the predefined controls: real published signatures (from ring3_full) vs two template-pipeline random controls (fitsig_k / fitsig_pool100)
 suppressPackageStartupMessages({ library(data.table) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); O <- file.path(B, "N11_out")
 cov <- fread(file.path(O, "ring3_full/published_coverage.tsv")); full_ids <- cov[full == TRUE]$sig_id
 mods <- c("M0_pos", "M1_pos", "M2_pos", "M4_pos", "M5a_pos", "M5b_pos", "M6_pos")
 lng <- function(R, R7) { x <- rbind(melt(R, id.vars = c("arm", "src", "kind", "rep", "k"), measure.vars = mods, variable.name = "module", value.name = "pos"),
                                     R7[, .(arm, src, kind, rep, k, module = "M7_pos", pos = M7_pos)]); x[, module := as.character(module)]; x }
-WS <- Sys.getenv("R3_WEIGHT", "rescaled")   # rescaled = coef × sd（主分析）；z = 原 z 尺度权重（敏感性）
+WS <- Sys.getenv("R3_WEIGHT", "rescaled")   # rescaled = coef x sd (main); z = original z-scale weights (sensitivity)
 m06 <- if (WS == "rescaled") fread(file.path(O, "ring3_armA_realrescale/results_m06_real_rescaled.tsv")) else fread(file.path(O, "ring3_full/results_m06.tsv"))
 real <- lng(m06, fread(file.path(O, "ring3_full/results_m7.tsv")))[arm == "A" & kind == "real"]
 summ <- function(d, label) d[, {

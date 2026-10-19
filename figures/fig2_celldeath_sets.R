@@ -1,15 +1,15 @@
-# Fig 2  细胞死亡基因集不比同尺寸随机基因集强（C1）
-# 只读盘：N11_out/robust/{inner_splits,external,proxy_external,adjusted_null,cohort_meta}.tsv
+# Fig 2  cell-death gene sets are not better than random gene sets of the same size
+# Reads: N11_out/robust_v2/{inner_splits,external,proxy_external,adjusted_null,cohort_meta}.tsv
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 suppressPackageStartupMessages({ library(ggdist); library(ggh4x) })
-R <- file.path(OUT, "robust_v2")   # 2026-10-18 用户同意：第1环改用统一基因池（10,651）；旧版留 N11_out/robust/
+R <- file.path(OUT, "robust_v2")   # common gene pool (10,651 genes); the earlier version is in N11_out/robust/
 SET_LAB <- c(cuproptosis_Tsvetkov19 = "Cuproptosis", disulfidptosis_10 = "Disulfidptosis",
              WP_FERROPTOSIS = "Ferroptosis (WP)", GOBP_FERROPTOSIS = "Ferroptosis (GO)",
              REACTOME_PYROPTOSIS = "Pyroptosis", GOBP_NECROPTOTIC_PROCESS = "Necroptosis",
              REACTOME_REGULATED_NECROSIS = "Regulated necrosis", GOBP_ANOIKIS = "Anoikis")
 lab_set <- function(x) { m <- SET_LAB[x]; m[is.na(m)] <- x[is.na(m)]; unname(m) }
 
-## a 内部 50 次拆分：经验 P 的分布（零假设下应为均匀分布）
+## a 50 internal splits: distribution of empirical P (uniform under the null)
 I <- fread(file.path(R, "inner_splits.tsv"))
 I[, set_l := lab_set(set)]
 stopifnot(I[, .N, by = set]$N == 50)
@@ -34,7 +34,7 @@ pa <- ggplot(I, aes(emp_p, as.numeric(set_l))) +
   scale_y_discrete(NULL) + labs(title = "TCGA-LIHC, 50 splits") +
   theme(axis.text.y = element_text(size = 6.5))
 
-## b 外部队列：观测 C 与随机零分布（中位 → p95）；增殖评分（不训练）作参照
+## b external cohorts: observed C and random null (median -> p95); proliferation score (untrained) as reference
 E <- fread(file.path(R, "external.tsv")); P <- fread(file.path(R, "proxy_external.tsv"))
 E[, set_l := factor(lab_set(set), levels = ord)]
 E[, cohort_l := factor(COH_LAB[cohort], levels = COH_LAB[c("GSE14520", "LIRI")])]
@@ -51,7 +51,7 @@ pb <- ggplot(E, aes(y = set_l)) +
   scale_y_discrete(NULL) + labs(title = NULL) +
   theme(axis.text.y = element_text(size = 6.5), panel.spacing.x = unit(3, "mm"))
 
-## c 调整增殖 + OXPHOS + 分期后：|z| 与随机集同样调整后的 p95
+## c after adjustment for proliferation + OXPHOS + stage: |z| vs p95 of random sets adjusted the same way
 A <- fread(file.path(R, "adjusted_null.tsv"))
 A[, set_l := factor(lab_set(set), levels = ord)][, cohort_l := factor(COH_LAB[cohort], levels = levels(E$cohort_l))]
 write_sd(A[, .(set_l, cohort, k, z_adj, P_adj, null_absz_p95, null_frac_Padj_lt05, emp_p_absz)], "Fig2c_adjusted_null")
@@ -65,7 +65,7 @@ pc <- ggplot(A, aes(y = set_l)) +
   scale_y_discrete(NULL) + labs(title = NULL) +
   theme(axis.text.y = element_text(size = 6.5), panel.spacing.x = unit(3, "mm"))
 
-## 图例（手工小图例，避免三个面板各自一套）
+## Legend (one hand-made legend instead of one per panel)
 lg <- data.table(x = c(1, 2.2, 3.6, 5.2), lab = c("Cell-death gene set", "Random null (to 95th percentile)",
                                               "Proliferation score alone", "Nominal P = 0.05 (a, c)"))
 pl <- ggplot() +

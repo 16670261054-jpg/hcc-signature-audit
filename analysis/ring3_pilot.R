@@ -1,4 +1,4 @@
-# 第 3 环可行性试跑：每个模块都在 1 个真实集 + 3 个随机集上跑通，记录耗时，检查输出不是 NA；不做任何判读
+# Exploratory feasibility run of the module audit: each module on 1 real set + 3 random sets, timing recorded, outputs checked for NA; no calls made
 suppressPackageStartupMessages({ library(survival); library(glmnet); library(data.table) })
 set.seed(20261017)
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")

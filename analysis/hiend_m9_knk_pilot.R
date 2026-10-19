@@ -1,9 +1,9 @@
-# 高端模块 M9 虚拟敲除（scTenifoldKnk）—— 试跑（2026-10-15）
-# 被审计对象 = 课程 265 `37.scTenifoldKnk` 写法（判据照抄被审计模板）：
-#   只留疾病组（这里 = Tumor）→ vst 5000 HVG + 靶基因 → scTenifoldKnk(qc_mtThreshold=0.1, qc_minLSize=500, nc_nNet=10, nc_nCells=500)
-#   → diffRegulation 去掉靶基因后 p.adj<0.05 的基因数 ≥1 即"敲除有下游效应"（阳性）
-# KO 基因选取规则（模板是作者手挑，这里定成可复现规则）：签名内 |coef × TCGA sd| 最大、且在肿瘤细胞里检出的基因
-# 试跑：1 个已发表签名（S001）的 KO 基因 + 2 个随机基因（U 池，固定种子，要求肿瘤细胞检出率 ≥1%），记录耗时
+# Module M9 virtual knockout (scTenifoldKnk): pilot
+# Audited = template scTenifoldKnk workflow (criteria reproduced from the audited template):
+#   disease group only (here = Tumor) -> vst 5000 HVG + target -> scTenifoldKnk(qc_mtThreshold=0.1, qc_minLSize=500, nc_nNet=10, nc_nCells=500)
+#   -> positive ("knockout has downstream effects") if >= 1 gene other than the target has p.adj < 0.05 in diffRegulation
+# KO gene rule (chosen by hand in the template; made reproducible here): the gene with the largest |coef x TCGA sd| in the signature that is detected in tumour cells
+# Pilot: KO gene of one published signature (S001) + 2 random genes (pool U, fixed seed, detected in >= 1% of tumour cells); timing recorded
 suppressPackageStartupMessages({ library(Seurat); library(Matrix); library(data.table); library(scTenifoldKnk) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", ".")
 D <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "GSE149614")
@@ -22,7 +22,7 @@ tm(sprintf("tumor cells %d, genes %d", ncol(cm), nrow(cm)))
 
 L <- fread(file.path(B, "N12_signatures/signatures_long.tsv"), encoding = "UTF-8")[sig_id == "S001"]
 L <- unique(L[, .(gene_hgnc, coef = as.numeric(coef))])
-# 试跑只用 |coef| 排序（S001 各基因 sd 量级相近）；正式阶段改 |coef × TCGA sd|
+# Pilot ranks by |coef| only (genes of S001 have similar sd); the formal stage uses |coef x TCGA sd|
 L <- L[gene_hgnc %in% rownames(cm)][order(-abs(coef))]
 U <- readLines(file.path(B, "N11_out/hiend_m8/U_pool.txt")); U <- U[U %in% rownames(cm) & det[match(U, rownames(cm))] >= 0.01]
 set.seed(20261015); ko <- data.table(kind = c("real_S001", "null_1", "null_2"), gene = c(L$gene_hgnc[1], sample(U, 2)))

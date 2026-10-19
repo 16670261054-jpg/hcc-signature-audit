@@ -1,14 +1,14 @@
-# 新增面板（10-18 v2，用户要求"多出图"）：全部为已落盘结果的描述性重排，不新增任何检验
-#  L1 审计全景环形热图：148 个已发表签名 × 15 个模板模块（阳性/阴性），按阳性谱聚类；外圈 = 死亡类型（模板：乳酸化 Fig8b，ggtree fan + geom_fruit）
-#  L2 基因复用弦图：最常被不同死亡类型签名使用的基因 ↔ 死亡类型；基因扇区标注是否属 Hallmark E2F/G2M（增殖）
-#  L3 基因使用频次棒棒糖（前 25），按是否属增殖基因着色
+# Additional panels: descriptive rearrangements of results on disk, no new tests
+#  L1 circular audit-landscape heatmap: 148 published signatures x 15 template modules (positive/negative), clustered by positivity profile; outer ring = cell-death type (ggtree fan + geom_fruit)
+#  L2 gene-reuse chord diagram: genes most often used by signatures of different cell-death types <-> cell-death type; gene sectors marked by membership of Hallmark E2F/G2M (proliferation)
+#  L3 lollipop of gene usage counts (top 25), coloured by proliferation-gene membership
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 suppressPackageStartupMessages({ library(ggtree); library(ggtreeExtra); library(ggnewscale); library(circlize) })
 S12 <- file.path(B, "N12_signatures")
 
-## ---- 逐签名模块结果（已发表 148）----
+## ---- Per-signature module results (148 published) ----
 r6 <- fread(file.path(OUT, "ring3_armA_realrescale/results_m06_real_rescaled.tsv"))[arm == "A" & kind == "real"]
-# 2026-10-18（用户同意）：M0 加方向要求——两外部队列 C > 0.5 且双侧 Noether P < 0.05（survcomp 默认双侧，原判据未查方向）
+# M0 requires direction: C > 0.5 and two-sided Noether P < 0.05 in both external cohorts (survcomp default is two-sided)
 fixM0 <- function(d) { if (all(c("M0_c_GSE", "M0_c_LIRI", "M0_p_GSE", "M0_p_LIRI") %in% names(d)))
   d[, M0_pos := as.integer(M0_p_GSE < 0.05 & M0_p_LIRI < 0.05 & M0_c_GSE > 0.5 & M0_c_LIRI > 0.5)]; d }
 r6 <- fixM0(r6)
@@ -21,7 +21,7 @@ W <- Reduce(function(a, b) merge(a, b, by = "src", all = TRUE),
             list(r6[, .(src, k, M0_pos, M1_pos, M2_pos, M4_pos, M5a_pos, M5b_pos, M6_pos)], r7, m3, m8, m10, m13))
 stopifnot(nrow(W) == 148)
 mods <- setdiff(names(W), c("src", "k"))
-## 一致性核对：逐签名阳性率必须等于 Fig 4a 落盘的已发表阳性率（M14 的跳过签名按 per_signature 原样 NA 处理）
+## Consistency check: per-signature positive rates must equal the published positive rates of Fig 4a on disk (signatures skipped in M14 kept as NA as in per_signature)
 F4 <- fread(file.path(SD, "Fig4a_module_rates.tsv"))
 chk <- data.table(module = sub("_pos", "", mods), rate_here = vapply(mods, function(m) mean(W[[m]], na.rm = TRUE), 1))
 chk <- merge(chk, F4[, .(module, rate_real)], by = "module")
@@ -37,11 +37,11 @@ W <- merge(W, IX[, .(src = sig_id, mech = mech_map(机制), year)], by = "src")
 W[, n_pos := rowSums(.SD, na.rm = TRUE), .SDcols = mods]
 write_sd(W, "Fig4c_landscape_per_signature_modules")
 
-## ---- L1 环形热图 ----（10-19：环号与柱轴刻度改竖排，避免挤成一串）
+## ---- L1 circular heatmap ---- (ring numbers and bar-axis ticks drawn vertically to avoid overlap)
 X <- as.matrix(W[, ..mods]); X[is.na(X)] <- 0; rownames(X) <- W$src
 hc <- hclust(dist(X, method = "binary"), method = "ward.D2")
 F4[, mlab := paste0(module, "  ", label)]
-mod_ord <- F4[order(-rate_null)]$module            # 内圈 → 外圈：随机阳性率从高到低
+mod_ord <- F4[order(-rate_null)]$module            # inner -> outer ring: random positive rate from high to low
 long <- melt(W[, c("src", mods), with = FALSE], id.vars = "src", variable.name = "module", value.name = "pos")
 SHORT <- c(M0 = "External val.", M1 = "Indep. Cox", M2 = "Immune infil.", M3 = "Drug sens.", M4 = "GSEA", M5a = "TMB diff.", M5b = "TMB x risk",
            M6 = "Nomogram", M7 = "Multi-ML", M8a = "scRNA marker", M8b = "scRNA T vs N", M10 = "Geneformer", M12 = "DSigDB",
@@ -73,7 +73,7 @@ pL1 <- tr +
 save_panel(pL1, "FigL1_audit_landscape_circular", 150, 135); saveRDS(pL1, file.path(DAT, "panel_landscape.rds"))
 write_sd(F4[, .(module, label, rate_null)][order(-rate_null)], "Fig4c_landscape_ring_order")
 
-## ---- L2 / L3 基因复用 ----
+## ---- L2 / L3 gene reuse ----
 L <- fread(file.path(S12, "signatures_long.tsv"), encoding = "UTF-8")
 L <- merge(L[sig_id %in% W$src, .(src = sig_id, gene = gene_hgnc)], W[, .(src, mech)], by = "src")
 L <- unique(L)
@@ -96,7 +96,7 @@ pL3 <- ggplot(top, aes(n_sig, gene)) +
   theme(axis.text.y = element_text(face = "italic", size = 6), legend.key.size = unit(2.6, "mm"))
 save_panel(pL3, "FigL3_gene_reuse_lollipop", 85, 95); saveRDS(pL3, file.path(DAT, "panel_lollipop.rds"))
 
-## 弦图：前 20 个基因 × 死亡类型
+## Chord diagram: top 20 genes x cell-death type
 tg <- GF[1:20]$gene
 lk <- L[gene %in% tg, .N, by = .(mech, gene)]
 write_sd(lk, "FigS4b_chord_links")

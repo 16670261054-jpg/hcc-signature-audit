@@ -1,5 +1,5 @@
-# 补充模块 M13 免疫检查点 / M14 共识聚类分型 / M15 校准(ICI) + DCA（预注册 N24_extra_modules_prereg.md，结果出来后不改）
-# 环境变量：M1315_SMOKE=1 → 每组少量签名，计时；M1315_MAXREP=N → A/Ak 随机组每签名只取前 N 个 rep（预注册允许的缩减）
+# Additional modules M13 immune checkpoints / M14 consensus-clustering subtypes / M15 calibration (ICI) + DCA (analysis plan fixed before running)
+# Environment: M1315_SMOKE=1 -> few signatures per group, timing; M1315_MAXREP=N -> only the first N reps per signature for random groups A/Ak (reduction allowed by the plan)
 suppressPackageStartupMessages({ library(survival); library(data.table); library(parallel) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
 SMOKE <- Sys.getenv("M1315_SMOKE", "0") == "1"; MAXREP <- as.integer(Sys.getenv("M1315_MAXREP", "0"))
@@ -7,7 +7,7 @@ OUTD <- file.path(B, if (SMOKE) "N11_out/hiend_m13_m15_smoke" else "N11_out/hien
 t0 <- Sys.time(); tm <- function(s) cat(sprintf("[%s | %6.1f min] %s\n", format(Sys.time(), "%H:%M"), as.numeric(difftime(Sys.time(), t0, units = "mins")), s))
 O <- OUTD; source(file.path(B, "analysis/load_cohorts.R"), encoding = "UTF-8"); O <- OUTD
 
-## ---- TCGA 临床（年龄 / 性别 / 分期）----
+## ---- TCGA clinical (age / sex / stage) ----
 C <- cohorts$TCGA; ids <- colnames(C$z)
 ph <- fread(file.path(TG, "TCGA-LIHC_phenotype.tsv"), data.table = FALSE)
 age <- as.numeric(ph$age_at_initial_pathologic_diagnosis[match(ids, ph[[1]])])
@@ -15,15 +15,15 @@ sex <- toupper(substr(ph$gender[match(ids, ph[[1]])], 1, 1)); sex[!sex %in% c("M
 CL <- data.frame(time = C$time, event = C$event, age = age, sex = factor(sex, levels = c("F", "M")), stage = factor(C$stage, levels = c("I-II", "III-IV")))
 ok_cl <- complete.cases(CL); tm(sprintf("TCGA n=%d, complete clinical n=%d", nrow(CL), sum(ok_cl)))
 
-## ---- 检查点基因（模板 gene.txt）----
-gf <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "immune_checkpoint_genes.txt")
+## ---- Checkpoint genes ----
+gf <- file.path(B, "data/genesets/immune_checkpoint_genes.txt")
 cp <- trimws(gsub("\r", "", readLines(gf))); cp <- cp[nzchar(cp)]
 cp[cp == "C10orf54"] <- "VSIR"
 cp_use <- intersect(cp, rownames(C$x)); fwrite(data.table(gene = cp, in_data = cp %in% rownames(C$x)), file.path(O, "checkpoint_genes.tsv"), sep = "\t")
 tm(sprintf("checkpoint genes %d listed, %d in data", length(cp), length(cp_use)))
 XCP <- C$x[cp_use, ids]
 
-## ---- 签名 ----
+## ---- Signatures ----
 G <- fread(file.path(B, "N11_out/hiend_m8/signature_genes_all_arms.tsv"), na.strings = "")
 stopifnot(all(G$kind %in% c("real", "null")), any(G$kind == "null"))
 if (MAXREP > 0) G <- G[!(arm %in% c("A", "Ak") & kind == "null" & rep > MAXREP)]
@@ -57,7 +57,7 @@ one <- function(d) {
     fn <- coxph(y ~ risk + age + sex + stage, data = dd)
     p_n <- pr(fn); p_r <- pr(coxph(y ~ risk, data = dd)); p_a <- pr(coxph(y ~ age, data = dd))
     p_s <- pr(coxph(y ~ sex, data = dd)); p_t <- pr(coxph(y ~ stage, data = dd))
-    # ICI（Austin 2020）
+    # ICI (Austin 2020)
     cll <- log(-log(1 - pmin(pmax(p_n, 1e-8), 1 - 1e-8)))
     fc <- rms::cph(y ~ rms::rcs(cll, 3), x = TRUE, y = TRUE, surv = TRUE)
     obs <- 1 - rms::survest(fc, times = u, newdata = data.frame(cll = cll))$surv
@@ -86,7 +86,7 @@ R <- rbindlist(lapply(list.files(file.path(OUTD, "chunks"), "^c_.*\\.tsv$", full
 S <- merge(meta, R, by = "sid"); fwrite(S, file.path(OUTD, "m13_m15_per_signature.tsv"), sep = "\t")
 tm(sprintf("rows %d, errors %d", nrow(S), if ("err" %in% names(S)) sum(!is.na(S$err)) else 0))
 
-## ---- 判读 ----
+## ---- Calls ----
 full_ids <- fread(file.path(B, "N11_out/ring3_full/published_coverage.tsv"))[full == TRUE]$sig_id
 comps <- list(A_vs_fitsig_k = list(S[arm == "A" & kind == "real"], S[arm == "A" & kind == "null"]),
               A_vs_Ak_sizematched = list(S[arm == "A" & kind == "real"], S[arm == "Ak"]),

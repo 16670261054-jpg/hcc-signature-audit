@@ -1,9 +1,9 @@
-# M9 共享网络法的小规模验证（2026-10-15）：在缩小的基因集上回答三件事
-#  V1 代码路径：同一输入、同一种子，官方 scTenifoldKnk() 与"共享 WT + 后半段"是否逐位一致
-#  V2 官方模板实际做法：课程 265 每次脚本开头 set.seed(12345)、输入 = HVG + 该靶基因 → 不同靶基因之间 WT 网络有多像
-#  V3 结果会不会"敲谁都一样"：6 个 KO 基因的显著基因集两两 Jaccard、FC Spearman；官方逐基因版 vs 共享版各算一遍
-#  另做 V4 种子噪声：同一基因、官方函数、换种子 → 官方自身的波动（参照系）
-# 缩小处：网络基因 = top NG 个 HVG + 6 个 KO 基因；其余参数照抄模板（nNet=10, nCells=500, qc_minLSize=500）
+# Small-scale validation of the M9 shared-network approach on a reduced gene set, answering three questions
+#  V1 code path: same input and seed, are reference scTenifoldKnk() and "shared WT + second half" bit-identical
+#  V2 actual template practice: set.seed(12345) at the start of each run, input = HVG + that target -> how similar are WT networks across targets
+#  V3 is the result "the same whatever is knocked out": pairwise Jaccard of significant-gene sets and FC Spearman for 6 KO genes; reference per-gene and shared versions
+#  V4 seed noise: same gene, reference function, different seeds -> variability of the reference itself
+# Reduction: network genes = top NG HVGs + 6 KO genes; other parameters as in the template (nNet=10, nCells=500, qc_minLSize=500)
 suppressPackageStartupMessages({ library(Seurat); library(Matrix); library(data.table); library(scTenifoldKnk); library(scTenifoldNet) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", ".")
 D <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "GSE149614")
@@ -37,7 +37,7 @@ sig <- function(d, g) d[gene != g & p.adj < 0.05]$gene
 jac <- function(a, b) if (length(union(a, b)) == 0) NA_real_ else length(intersect(a, b)) / length(union(a, b))
 fcr <- function(d1, d2, g1, g2) { m <- merge(d1[!gene %in% c(g1, g2), .(gene, a = FC)], d2[!gene %in% c(g1, g2), .(gene, b = FC)], by = "gene"); cor(m$a, m$b, method = "spearman") }
 
-## V1：逐位一致性（官方 vs 共享路径，同输入 HVG+全部 6 个 KO 基因，同种子）
+## V1: bit-wise identity (reference vs shared path, same input HVG + all 6 KO genes, same seed)
 gall <- unique(c(hv, kg))
 o1 <- official(gall, kg[1], 12345); tm("V1 official done")
 W1 <- buildWT(gall, 12345); d1 <- koDR(W1, kg[1]); tm("V1 shared done")
@@ -47,12 +47,12 @@ v1 <- data.table(check = c("WT_max_abs_diff", "DR_FC_max_abs_diff", "DR_padj_max
             as.numeric(setequal(sig(o1$DR, kg[1]), sig(d1, kg[1])))))
 fwrite(v1, file.path(O, "V1_code_path_identity.tsv"), sep = "\t"); print(v1)
 
-## V3-shared：共享 WT 上敲 6 个基因
+## V3-shared: knock out 6 genes on the shared WT
 DS <- setNames(lapply(kg, function(g) koDR(W1, g)), kg); tm("V3 shared KOs done")
-## V2 + V3-official：模板实际做法（每个基因单独：HVG + 该基因，set.seed(12345)）
+## V2 + V3-official: actual template practice (each gene separately: HVG + that gene, set.seed(12345))
 DO <- list(); WO <- list()
 for (g in kg) { r <- official(unique(c(hv, g)), g, 12345); DO[[g]] <- r$DR; WO[[g]] <- r$WT; tm(paste("official", g)) }
-## V4：同一基因、官方、换种子
+## V4: same gene, reference function, different seeds
 r4 <- official(unique(c(hv, kg[1])), kg[1], 2026); tm("V4 done")
 
 pairs <- CJ(a = kg, b = kg)[a < b]
@@ -62,7 +62,7 @@ v3 <- rbind(
   pairs[, .(arm = "official_per_gene", a, b, jaccard = mapply(function(x, y) jac(sig(DO[[x]], x), sig(DO[[y]], y)), a, b),
             fc_spearman = mapply(function(x, y) fcr(DO[[x]], DO[[y]], x, y), a, b))])
 fwrite(v3, file.path(O, "V3_between_KO_similarity.tsv"), sep = "\t")
-# 同一基因：共享 vs 官方逐基因；官方 种子12345 vs 种子2026
+# Same gene: shared vs reference per-gene; reference seed 12345 vs seed 2026
 v34 <- rbind(
   data.table(compare = "shared_vs_official_same_gene", gene = kg,
              jaccard = sapply(kg, function(g) jac(sig(DS[[g]], g), sig(DO[[g]], g))),
@@ -73,11 +73,11 @@ v34 <- rbind(
              fc_spearman = fcr(DO[[kg[1]]], r4$DR, kg[1], kg[1]), pos_shared = NA, pos_official = length(sig(r4$DR, kg[1])) > 0,
              nsig_shared = NA, nsig_official = length(sig(r4$DR, kg[1]))))
 fwrite(v34, file.path(O, "V34_same_gene_agreement.tsv"), sep = "\t")
-# V2：官方逐基因做法下，不同靶基因的 WT 网络相关（共同基因上）
+# V2: correlation of WT networks between targets under the reference per-gene practice (on common genes)
 cg <- Reduce(intersect, lapply(WO, rownames))
 v2 <- pairs[, .(a, b, wt_cor = mapply(function(x, y) cor(as.vector(WO[[x]][cg, cg]), as.vector(WO[[y]][cg, cg])), a, b))]
 fwrite(v2, file.path(O, "V2_official_WT_between_targets.tsv"), sep = "\t")
-# 每个 KO 的显著基因清单（看是否总是同一批）
+# Significant genes of each KO (is it always the same set)
 fwrite(rbind(rbindlist(lapply(kg, function(g) data.table(arm = "shared_WT", ko = g, gene = sig(DS[[g]], g)))),
              rbindlist(lapply(kg, function(g) data.table(arm = "official_per_gene", ko = g, gene = sig(DO[[g]], g))))),
        file.path(O, "sig_genes_long.tsv"), sep = "\t")

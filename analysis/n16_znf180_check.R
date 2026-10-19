@@ -1,4 +1,4 @@
-# N16 唯一过门基因 ZNF180 的快速描述：与代理的相关、单细胞检出率（只作标注，不作门）
+# Exploratory: quick description of ZNF180, the only gene passing the genome-wide gates: correlation with proxies, single-cell detection (annotation only, not a gate)
 suppressPackageStartupMessages({ library(survival); library(data.table); library(Matrix) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
 O <- file.path(B, "N11_out/n16_gate")

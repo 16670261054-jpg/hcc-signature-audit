@@ -1,14 +1,14 @@
-# 补充表 S1–S3（xlsx）：只读已落盘文件
-#  S1 149 个签名（来源 + 逐基因系数 + 原文片段）；逐篇模块调用/闸门结果改落 repo_source_data/（只进 GitHub）
-#  S2 检索式与命中数、语料模块关键词正则、16 模块判据与参数、8 个细胞死亡基因集
-#  S3 = TableS3_numbers.tsv（全部数字）
+# Supplementary Tables S1-S3 (xlsx): reads files on disk only
+#  S1 149 signatures (source + per-gene coefficients + source sentences); per-article module calls / gate results go to repo_source_data/ (code repository only)
+#  S2 search queries and hit counts, corpus module keyword regexes, criteria and parameters of the 16 modules, 8 cell-death gene sets
+#  S3 = TableS3_numbers.tsv (all numbers)
 suppressPackageStartupMessages({ library(data.table); library(openxlsx) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); S12 <- file.path(B, "N12_signatures"); OUT <- file.path(B, "N11_out"); FD <- file.path(B, "N28_fig")
 SUP <- file.path(FD, "supplementary"); dir.create(SUP, showWarnings = FALSE)
 I <- fread(file.path(S12, "signatures_index.tsv"), encoding = "UTF-8")[group_primary == "是" & 是否有完整系数 == "是"]
 stopifnot(nrow(I) == 149)
 L <- fread(file.path(S12, "signatures_long.tsv"), encoding = "UTF-8")[sig_id %in% I$sig_id]
-## S1a 签名级
+## S1a signature level
 S1a <- I[, .(signature_id = sig_id, PMID, PMCID, first_author, year, journal, cell_death_type = 机制, outcome, n_genes = 基因数, source_of_coefficients = source)]
 LS <- fread(file.path(FD, "source_data/Fig4c_landscape_per_signature_modules.tsv"))
 G2 <- fread(file.path(OUT, "n2_gates/published_gates.tsv"))
@@ -16,16 +16,23 @@ S1a <- merge(S1a, LS[, !c("mech", "year")], by.x = "signature_id", by.y = "src",
 S1a <- merge(S1a, G2[, .(signature_id = src, template_criterion = T0, gate1_pooled = T1p, gate2_pooled = T2p, both_gates = T1p & T2p,
                          C_GSE14520 = C_GSE, C_LIRI = C_LIRI, empirical_P_pooled = empP_pooled, LRT_P_pooled = lrt_pooled)], by = "signature_id", all.x = TRUE)
 setnames(S1a, "k", "genes_in_scoring_set", skip_absent = TRUE)
-## 用户 2026-10-18 定 (b)：逐篇模块判定与闸门结果不进补充表，只进代码仓库 Source Data（复现用）
+## Per-article module calls and gate results are not in the supplementary tables; they are provided as Source Data in the code repository
 REPO <- file.path(FD, "repo_source_data"); dir.create(REPO, showWarnings = FALSE)
 src_cols <- c("signature_id", "PMID", "PMCID", "first_author", "year", "journal", "cell_death_type", "outcome", "n_genes", "source_of_coefficients")
+## English display labels (display text only, content unchanged)
+EN_SRC <- c("正文公式(Results/Methods段)" = "Risk-score formula in main text (Results/Methods)", "正文公式(人工抄录)" = "Risk-score formula in main text (manually transcribed)")
+en_src <- function(x) { y <- unname(EN_SRC[x]); ifelse(is.na(y), x, y) }
+S1a[, source_of_coefficients := en_src(source_of_coefficients)]
 fwrite(S1a, file.path(REPO, "per_signature_module_calls_and_gates.tsv"), sep = "	")
 stopifnot(nrow(fread(file.path(REPO, "per_signature_module_calls_and_gates.tsv"))) == 149)
 S1a <- S1a[, ..src_cols]
-## S1b 基因级
+## S1b gene level
 S1b <- L[, .(signature_id = sig_id, PMID, gene_as_reported = gene_original, gene_HGNC = gene_hgnc, HGNC_mapping = hgnc_status, coefficient = coef, coefficient_source = coef_source, source_sentence = evidence_quote)]
+S1b[, coefficient_source := en_src(coefficient_source)]
 ## S2
 SL <- fread(file.path(S12, "search_log.tsv"), encoding = "UTF-8")
+EN_SL <- "Manual review of title-screening misses: 13 articles using spellings such as hepatic cancer, hepatocarcinoma, cuprotosis, RCD, entosis or cell-in-cell were added to the candidates (PMIDs 41611937, 38737687, 37608927, 36110946, 36248857, 36909185, 38799554, 37014321, 38197309, 38662757, 39528670, 39937284, 40794333)"
+for (j in names(SL)) if (is.character(SL[[j]])) set(SL, which(startsWith(SL[[j]], "人工复核标题过滤漏检")), j, EN_SL)
 MF <- fread(file.path(S12, "module_frequency_fulltext.tsv"))[, .(analysis = module, articles = n_papers, of = n_fulltext, regex)]
 MOD <- fread(file.path(FD, "source_data/Fig4a_module_rates.tsv"))[, .(module, label, category)]
 CRIT <- data.table(module = c("M0", "M1", "M2", "M3", "M4", "M5a", "M5b", "M6", "M7", "M8a", "M8b", "M10", "M12", "M13", "M14", "M15"),

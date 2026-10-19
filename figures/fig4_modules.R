@@ -1,11 +1,11 @@
-# Fig 4  模板下游链对随机签名普遍给出"阳性"（C3）+ 一个随机签名的完整模板展示 + DSigDB 反例（C5）
-# 只读盘：ring3_armA_decision_v3_rescaled.tsv（M0–M7，analysis = fitsig_pool100_k|all）、hiend_m3_m12/、hiend_m8/、
-#         hiend_m13_m15/、hiend_m10/（均取 A_vs_Ak_sizematched 行）、hiend_m12_annot/、N28_fig/data/fig4c_*.tsv
-# 统计：真实 vs 随机 Fisher 精确（读盘）；随机阳性率 Clopper–Pearson 95% CI；KM log-rank（读盘）。
+# Fig 4  template downstream modules call most random signatures "positive" + full template display of one random signature + DSigDB counterexample
+# Reads: ring3_armA_decision_v3_rescaled.tsv (M0-M7, analysis = fitsig_pool100_k|all), hiend_m3_m12/, hiend_m8/,
+#         hiend_m13_m15/, hiend_m10/ (rows A_vs_Ak_sizematched), hiend_m12_annot/, figures/data/fig4c_*.tsv
+# Statistics: real vs random Fisher's exact (read from disk); random positive rate Clopper-Pearson 95% CI; KM log-rank (read from disk).
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "figures/00_config.R"), encoding = "UTF-8")
 suppressPackageStartupMessages({ library(ggh4x); library(ggrepel) })
 
-## ---- a 模块总表 ----
+## ---- a module summary ----
 r3 <- fread(file.path(OUT, "ring3_armA_decision_v3_rescaled.tsv"))[analysis == "fitsig_pool100_k|all"]
 r3 <- r3[, .(module = sub("_pos", "", module), rate_real, n_real, rate_null = FPR_null, n_null, lo = FPR_CI_lo, hi = FPR_CI_hi, P = fisher_P)]
 pick <- function(f, mods, cols = c("FPR_CP_lo", "FPR_CP_hi")) {
@@ -37,7 +37,7 @@ M8a|Signature genes mark a cell type (scRNA)|Single cell
 M8b|Signature genes differ tumour vs normal (scRNA)|Single cell
 M10|Geneformer in silico deletion|Single cell", sep = "|")
 M <- merge(M, lab, by = "module"); stopifnot(nrow(M) == 16)
-## 2026-10-18（N30）：组间检验改为按匹配组分层的 CMH + 16 模块 Holm 校正；阳性率与 CI 不变
+## Between-group test: CMH stratified by matched group + Holm correction across 16 modules; positive rates and CIs unchanged
 CMH <- fread(file.path(OUT, "cmh_modules.tsv"))
 stopifnot(all(M$module %in% CMH$module), max(abs(merge(M, CMH, by = "module")[, rate_real - rate_pub])) < 1e-9)
 M <- merge(M[, !"P"], CMH[, .(module, P = CMH_P_holm, P_unadj = CMH_P, CMH_OR)], by = "module")
@@ -65,7 +65,7 @@ pa <- ggplot(M, aes(y = label)) +
         plot.margin = margin(12, 4, 2, 2)) +
   guides(fill = guide_legend(nrow = 3, byrow = TRUE))
 
-## ---- c 一个随机签名的模板展示 ----
+## ---- c template display of one random signature ----
 KM <- fread(file.path(DAT, "fig4c_km_curves.tsv")); LR <- fread(file.path(DAT, "fig4c_km_logrank.tsv"))
 AUC <- fread(file.path(DAT, "fig4c_timeroc_auc.tsv")); ROC <- fread(file.path(DAT, "fig4c_timeroc_curves.tsv"))
 MC <- fread(file.path(DAT, "fig4c_multicox.tsv"))
@@ -114,7 +114,7 @@ klg <- ggplot(data.table(x = c(1, 2.6), s = names(COL_RISK)), aes(x, 1, colour =
   scale_colour_manual(values = COL_RISK, guide = "none") + xlim(0.9, 7.5) + theme_void()
 pc <- wrap_plots(list(klg, pk[[1]], pk[[2]], pk[[3]], pr, pf),
                  design = "AAAAA\nBCDEF", heights = c(0.1, 1), widths = c(1, 1, 1, 0.95, 1.3))
-## ---- d DSigDB：唯一的反例 ----
+## ---- d DSigDB: the only counterexample ----
 AD <- fread(file.path(OUT, "hiend_m12_annot/m12_annot_decision.tsv"))[group == "A_published"]
 dd <- data.table(grp = c("Published", "Random", "Annotation-\nmatched"),
                  pos = round(c(AD$rate_real[1] * AD$n_real[1], AD[null == "N_plain"]$rate_null * AD[null == "N_plain"]$n_null,
@@ -144,7 +144,7 @@ pd2 <- ggplot(AR, aes(grp, mean_ann)) +
   scale_y_log10("Drugs annotated per gene\n(signature mean, log scale)") + scale_x_discrete(NULL) +
   labs(title = NULL) + theme(axis.text.x = element_text(size = 5.5))
 
-## ---- 图例 + 拼版 ----
+## ---- Legend + assembly ----
 lg <- ggplot(data.table(x = c(1, 4.6), g = c("Published", "Size-matched random")), aes(x, 1, fill = g)) +
   geom_point(shape = 21, size = 2.2, stroke = 0.25) +
   geom_text(aes(x = x + 0.15, label = c("Published signatures (n = 148)", "Size-matched random (95% CI)")), hjust = 0, size = 2, family = "Arial") +
@@ -158,5 +158,5 @@ ttl <- ggplot() + annotate("text", x = 0, y = 0, hjust = 0, size = 2.6, fontface
 p <- wrap_plots(list(lg, top, wrap_elements(full = ttl), wrap_elements(full = pc) + labs(tag = "b")), ncol = 1, heights = c(0.05, 1, 0.04, 0.42))
 save_panel(pa, "Fig4a_module_dumbbell", 115, 105); for (i in 1:3) save_panel(pk[[i]], paste0("Fig4b", i, "_KM_", c("TCGA", "GSE14520", "LIRI")[i]), 55, 55)
 save_panel(pr, "Fig4b4_timeROC", 55, 55); save_panel(pf, "Fig4b5_multicox", 70, 55); save_panel(pd1, "Fig4c1_dsigdb_rates", 65, 62); save_panel(pd2, "Fig4c2_dsigdb_annotation", 65, 62)
-saveRDS(list(pa = pa, pk = pk, pr = pr, pf = pf, pd1 = pd1, pd2 = pd2, lg = lg, klg = klg), file.path(DAT, "obj_fig4.rds"))  # 拼版见 assemble_main.R
+saveRDS(list(pa = pa, pk = pk, pr = pr, pf = pf, pd1 = pd1, pd2 = pd2, lg = lg, klg = klg), file.path(DAT, "obj_fig4.rds"))  # assembled in assemble_main.R
 cat("FIG4 OK\n")

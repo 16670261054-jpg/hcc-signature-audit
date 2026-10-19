@@ -1,11 +1,11 @@
-# N11 稳健性检验：8 个细胞死亡基因集 × 50 次 TCGA 拆分 × 随机零分布 + GSE14520 / LIRI-JP 外部验证 + 增殖/OXPHOS 代理调整
-# 只做可行性判断，不进稿。
-# ---- 预设判读规则（开跑前写定，结果出来后不改）----
-#   R1  内部：50 次拆分中，签名测试集 C-index 相对同尺寸随机零分布的经验 P，取中位数；中位 P >= 0.05 -> "内部不比随机强"
-#   R1e 外部：全 TCGA 训练的签名在外部队列的 C-index < 外部随机零分布第 95 百分位 -> 该队列"不比随机强"
-#   R2  外部：Cox(签名 + 增殖 + OXPHOS + 分期) 中签名 Wald P >= 0.05 -> 该队列"被代理解释"
-#   去留：8 个集合中 >= 5 个满足 R1，且其中多数在两个外部队列里也满足 R1e 或 R2 -> "代理"故事成立，值得做；
-#         否则（混合/摇摆）-> 收手
+# Cell-death gene sets: 8 gene sets x 50 TCGA splits x random null + external validation in GSE14520 / LIRI-JP + proliferation/OXPHOS proxy adjustment
+# Initially written as a feasibility check; its outputs are used for Fig. 2.
+# ---- Decision rules (fixed before running) ----
+#   R1  internal: median over 50 splits of the empirical P of the signature test-set C-index against the size-matched random null; median P >= 0.05 -> "internally not better than random"
+#   R1e external: C-index in an external cohort of the signature trained on full TCGA < 95th percentile of the external random null -> "not better than random" in that cohort
+#   R2  external: signature Wald P >= 0.05 in Cox(signature + proliferation + OXPHOS + stage) -> "explained by proxies" in that cohort
+#   Continue/stop: >= 5 of the 8 sets meet R1 and most of them also meet R1e or R2 in both external cohorts -> the proxy hypothesis holds and is pursued;
+#         otherwise (mixed) -> stop
 suppressPackageStartupMessages({ library(survival); library(glmnet); library(data.table); library(parallel) })
 set.seed(20261015)
 B <- Sys.getenv("HCC_AUDIT_ROOT", ".")
@@ -13,7 +13,7 @@ O <- file.path(B, Sys.getenv("N11_OUT", "N11_out/robust")); dir.create(O, showWa
 TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
 source(file.path(Sys.getenv("HCC_AUDIT_ROOT", "."), "analysis/load_cohorts.R"), encoding = "UTF-8")
 
-## ---- 1) 内部：50 次拆分 × (签名 + 100 随机) ----
+## ---- 1) Internal: 50 splits x (signature + 100 random) ----
 S <- as.integer(Sys.getenv("N11_S", "50")); NR <- as.integer(Sys.getenv("N11_NR", "100"))
 Zt <- cohorts$TCGA$z; yt <- cohorts$TCGA$y; nT <- ncol(Zt)
 splits <- lapply(seq_len(S), function(i) sample(nT, round(nT * 2 / 3)))
@@ -32,7 +32,7 @@ inner <- parLapply(cl, seq_len(nrow(jobs)), function(j) {
 })
 inner <- rbindlist(inner); fwrite(inner, file.path(O, "inner_splits.tsv"), sep = "\t")
 
-## ---- 2) 外部：全 TCGA 训练 -> GSE14520 / LIRI；外部零分布 200 随机 ----
+## ---- 2) External: train on full TCGA -> GSE14520 / LIRI; external null of 200 random sets ----
 NE <- as.integer(Sys.getenv("N11_NE", "200"))
 clusterExport(cl, c("cohorts", "NE"))
 ext <- parLapply(cl, names(sets), function(nm) {
@@ -56,14 +56,14 @@ ext <- parLapply(cl, names(sets), function(nm) {
 stopCluster(cl)
 ext <- rbindlist(ext); fwrite(ext, file.path(O, "external.tsv"), sep = "\t")
 
-## ---- 3) 代理本身的外部 C-index（方向按全 TCGA 定）----
+## ---- 3) External C-index of the proxies themselves (direction set on full TCGA) ----
 px <- rbindlist(lapply(c("prolif", "oxphos"), function(p) {
   sg <- sign(coef(coxph(yt ~ cohorts$TCGA[[p]])))
   rbindlist(lapply(c("GSE14520", "LIRI"), function(cn) data.table(proxy = p, cohort = cn, c = cidx(sg * cohorts[[cn]][[p]], cohorts[[cn]]$y))))
 }))
 fwrite(px, file.path(O, "proxy_external.tsv"), sep = "\t")
 
-## ---- 4) 按预设规则汇总 ----
+## ---- 4) Summary by the predefined rules ----
 sm <- inner[, .(k = k[1], c_obs_median = median(c_obs), null_med_median = median(null_med),
                 frac_beat_p95 = mean(c_obs > null_p95), emp_p_median = median(emp_p)), by = set]
 sm[, R1_inner_not_better := emp_p_median >= 0.05]

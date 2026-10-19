@@ -1,7 +1,7 @@
-# 第 2 环：签名在测什么（预注册 N17_ring2_preregistration.md，结果出来后不改）
-# 每个签名 × 每个队列：Spearman ρ（增殖/Stromal/Immune/OXPHOS）、代理 R²、外部队列嵌套 Cox LRT（基础 = 分期+增殖+Stromal+Immune+年龄+性别）
-# A 组已发表签名（原文系数 × TCGA sd）/ B 组 8 个机制集（fitsig）vs 同尺寸随机 fitsig_k；分块落盘、可续跑
-# R2_SMOKE=1 -> 只跑少量任务做冒烟测试
+# Proxy analysis: what do the signatures measure (analysis plan fixed before running)
+# Each signature x each cohort: Spearman rho (proliferation/Stromal/Immune/OXPHOS), proxy R², nested Cox LRT in external cohorts (base = stage + proliferation + Stromal + Immune + age + sex)
+# Arm A published signatures (reported coefficient x TCGA sd) / arm B 8 mechanism sets (fitsig) vs size-matched random fitsig_k; written in chunks, resumable
+# R2_SMOKE=1 -> run a few tasks only (smoke test)
 suppressPackageStartupMessages({ library(survival); library(glmnet); library(data.table); library(parallel) })
 B <- Sys.getenv("HCC_AUDIT_ROOT", "."); TG <- file.path(Sys.getenv("HCC_AUDIT_DATA", "data/raw"), "TCGA")
 SMOKE <- Sys.getenv("R2_SMOKE", "0") == "1"
@@ -9,7 +9,7 @@ O <- file.path(B, if (SMOKE) "N11_out/ring2_smoke" else "N11_out/ring2"); CH <- 
 source(file.path(B, "analysis/load_cohorts.R"), encoding = "UTF-8")
 RA <- if (SMOKE) 2L else 25L; RB <- if (SMOKE) 3L else 200L
 
-## ---- 年龄 / 性别 / ESTIMATE（照抄 n16_gate_pilot.R）----
+## ---- Age / sex / ESTIMATE (as in n16_gate_pilot.R) ----
 ids <- lapply(cohorts, function(c) colnames(c$z))
 ph <- fread(file.path(TG, "TCGA-LIHC_phenotype.tsv"), data.table = FALSE)
 cohorts$TCGA$age <- as.numeric(ph$age_at_initial_pathologic_diagnosis[match(ids$TCGA, ph[[1]])])
@@ -39,7 +39,7 @@ D <- lapply(cohorts, function(c) { sx <- ifelse(c$sex %in% c("M", "F"), c$sex, N
 fwrite(rbindlist(lapply(names(D), function(k) data.table(cohort = k, n = nrow(D[[k]]), events = sum(cohorts[[k]]$event),
   complete_base = sum(complete.cases(D[[k]]))))), file.path(O, "covariate_audit.tsv"), sep = "\t")
 
-## ---- 签名 ----
+## ---- Signatures ----
 L <- fread(file.path(B, "N12_signatures/signatures_long.tsv"), encoding = "UTF-8"); L[, coef := suppressWarnings(as.numeric(coef))]
 I <- fread(file.path(B, "N12_signatures/signatures_index.tsv"), encoding = "UTF-8")
 L <- L[sig_id %in% I[group_primary == "是" & 是否有完整系数 == "是"]$sig_id & !is.na(coef)]
@@ -56,7 +56,7 @@ jobs[, id := .I]; jobs[, chunk := (id - 1L) %/% 100L + 1L]
 fwrite(jobs, file.path(O, "jobs.tsv"), sep = "\t")
 cat("jobs:", nrow(jobs), " chunks:", max(jobs$chunk), "\n")
 
-# Ak（预注册变更 10-15）：尺寸匹配对照，照抄 ring3_armA_null.R 的 fitsig_cap
+# Ak: size-matched control, using fitsig_cap from ring3_armA_null.R
 fitsig_cap <- function(g, Z, y, k) {
   X <- t(Z[g, , drop = FALSE])
   p <- apply(X, 2, function(v) { s <- tryCatch(summary(coxph(y ~ v))$coefficients[5], error = function(e) 1); s })
